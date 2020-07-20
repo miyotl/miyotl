@@ -1,4 +1,4 @@
-package com.example.lenguas
+package proyecto.miyotl
 
 import io.flutter.embedding.android.FlutterActivity
 

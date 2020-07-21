@@ -15,15 +15,26 @@ ListTile buildListTile(
     subtitle = '${entry.originalWord}';
   }
   return ListTile(
-      title: Text(title),
-      subtitle: Text(subtitle),
-      onTap: () {
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => WordDetails(entry: entry),
+    title: Text(title),
+    subtitle: Text(subtitle),
+    onTap: () {
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => WordDetails(entry: entry),
+        ),
+      );
+    },
+    trailing: IconButton(
+      icon: Icon(Icons.favorite_border),
+      onPressed: () {
+        Scaffold.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Funcionalidad no implementada'),
           ),
         );
-      });
+      },
+    ),
+  );
 }
 
 class DictionaryPage extends StatelessWidget {
@@ -56,12 +67,7 @@ class DictionaryPage extends StatelessWidget {
                 ? Center(
                     child: CircularProgressIndicator(),
                   )
-                : ListView.builder(
-                    padding: EdgeInsets.only(
-                      left: 14,
-                      right: 14,
-                      bottom: 14,
-                    ),
+                : WordList(
                     itemCount: state.dictionary.entries.length,
                     itemBuilder: (context, index) {
                       return buildListTile(
@@ -73,6 +79,29 @@ class DictionaryPage extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+}
+
+class WordList extends StatelessWidget {
+  final int itemCount;
+  final IndexedWidgetBuilder itemBuilder;
+
+  const WordList({
+    this.itemCount,
+    this.itemBuilder,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      padding: EdgeInsets.only(
+        left: 14,
+        right: 14,
+        bottom: 14,
+      ),
+      itemCount: itemCount,
+      itemBuilder: itemBuilder,
     );
   }
 }

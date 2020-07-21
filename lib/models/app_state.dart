@@ -38,6 +38,9 @@ class AppState extends ChangeNotifier {
   /// The name of the current language, where the first letter is a capital
   String get languageName => capitalize(language);
 
+  /// Favorite words
+  List<DictionaryEntry> favorites;
+
   AppState() {
     getData();
   }

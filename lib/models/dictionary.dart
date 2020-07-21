@@ -26,18 +26,63 @@ class Sources {
   Source getSource(String id) => _sources[id];
 }
 
-class DictionaryEntry {
-  String sourceId;
-  String originalWord;
-  String translatedWord;
+class Variant {
+  final String word;
+  final String sourceId;
 
-  DictionaryEntry({this.sourceId, this.originalWord, this.translatedWord});
+  const Variant({this.word, this.sourceId});
+}
+
+class DictionaryEntry {
+  final String sourceId;
+  final String originalWord;
+  final String translatedWord;
+  final String partOfSpeech;
+  final String category;
+  final String originalExample; // TODO: hacer un enum o una clase?
+  final String translatedExample;
+  final String ipa;
+  final List<Variant> variants;
+
+  /// Número máximo de variantes que puede haber.
+  /// Es una limitación por la forma en que está estructurado
+  /// Google Sheets
+  static const max_variants = 4;
+
+  const DictionaryEntry({
+    this.sourceId,
+    this.originalWord,
+    this.translatedWord,
+    this.partOfSpeech,
+    this.category,
+    this.originalExample,
+    this.translatedExample,
+    this.ipa,
+    this.variants,
+  });
 
   factory DictionaryEntry.fromJson(dynamic json) {
+    final List<Variant> variants = [];
+
+    for (int i = 1; i <= max_variants; i++) {
+      if (json['var$i'] != null) {
+        variants.add(Variant(
+          word: json['var$i'],
+          sourceId: json['source$i'],
+        ));
+      }
+    }
+
     return DictionaryEntry(
       sourceId: json['source'],
       originalWord: json['word'],
       translatedWord: json['translation'],
+      ipa: json['ipa'],
+      originalExample: json['example'],
+      translatedExample: json['example_translated'],
+      partOfSpeech: json['grammatical_category'],
+      category: json['category'],
+      variants: variants,
     );
   }
 }
@@ -71,6 +116,10 @@ class Dictionary {
   // TODO: improve efficiency
   List<DictionaryEntry> search(String query) {
     query = query.toLowerCase();
-    return entries.where((entry) => entry.originalWord.toLowerCase().contains(query) || entry.translatedWord.toLowerCase().contains(query)).toList();
+    return entries
+        .where((entry) =>
+            entry.originalWord.toLowerCase().contains(query) ||
+            entry.translatedWord.toLowerCase().contains(query))
+        .toList();
   }
 }

@@ -14,7 +14,7 @@ String capitalize(String string) {
 
 class AppState extends ChangeNotifier {
   /// Current language for dictionary, learning and culture
-  String language = 'tzotzil';
+  String language = 'Tzotzil';
 
   /// The mode to sort and lookup words
   LookupMode lookupMode = LookupMode.spanishToLanguage;
@@ -61,17 +61,17 @@ class AppState extends ChangeNotifier {
     // no se decodifican correctamente
     // TODO: implement some exception handling
     data = json.decode(utf8.decode(response.bodyBytes));
-    sources = Sources.fromJson(data['fuentes']);
+    sources = Sources.fromJson(data['Referencias']);
     dictionaries = {};
     for (var entry in data.entries) {
       // ignore sources, as they are combined in the same JSON
-      if (entry.key == 'fuentes') continue;
+      if (entry.key == 'Referencias' || entry.key == 'Gramática') {
+        continue;
+      }
       dictionaries[entry.key] = Dictionary.fromJson(entry.value);
     }
     dictionary.sort(lookupMode);
     loading = false;
     notifyListeners();
   }
-
-  
 }

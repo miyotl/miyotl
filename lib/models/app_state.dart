@@ -16,7 +16,7 @@ String capitalize(String string) {
 
 class AppState extends ChangeNotifier {
   /// Current language for dictionary, learning and culture
-  String language = 'Tzotzil';
+  String language = 'Mazateco';
 
   /// The mode to sort and lookup words
   LookupMode lookupMode = LookupMode.spanishToLanguage;
@@ -76,7 +76,10 @@ class AppState extends ChangeNotifier {
     dictionaries = {};
     for (var entry in data.entries) {
       // ignore sources, as they are combined in the same JSON
-      if (entry.key == 'Referencias' || entry.key == 'Gramática' || entry.key == 'Idiomas' || entry.key == 'Cultura') {
+      if (entry.key == 'Referencias' ||
+          entry.key == 'Gramática' ||
+          entry.key == 'Idiomas' ||
+          entry.key == 'Cultura') {
         continue;
       }
       cultures[entry.key] = [];

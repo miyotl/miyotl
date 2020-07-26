@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../models/app_state.dart';
 import 'variant_details.dart';
+import 'package:share/share.dart';
 
 class WordDetails extends StatelessWidget {
   final DictionaryEntry entry;
@@ -18,7 +19,13 @@ class WordDetails extends StatelessWidget {
           IconButton(
             icon: Icon(Icons.share),
             tooltip: 'Compartir',
-            onPressed: () => null,
+            onPressed: () {
+              Share.share('''*${entry.originalWord} (en ${state.language})*
+${entry.translatedWord}
+(Fuente: ${source.author} de ${source.region})
+
+Compartido desde Miyotl. Descárgalo en proyecto-miyotl.web.app''');
+            },
           ),
         ],
       ),

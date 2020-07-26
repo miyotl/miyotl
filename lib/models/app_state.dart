@@ -4,9 +4,11 @@ import 'package:flutter/widgets.dart';
 import 'package:http/http.dart';
 import 'constants.dart';
 import 'dictionary.dart';
+import 'culture.dart';
 
 export 'dictionary.dart';
 export 'constants.dart';
+export 'culture.dart';
 
 String capitalize(String string) {
   return '${string[0].toUpperCase()}${string.substring(1)}';
@@ -31,6 +33,12 @@ class AppState extends ChangeNotifier {
   /// All dictionaries for all languages
   /// TODO: only the current language(s) should be downloaded
   Map<String, Dictionary> dictionaries;
+
+  /// Cultures for each language
+  Map<String, List<CultureEntry>> cultures = {};
+
+  /// The culture for the current language
+  List<CultureEntry> get culture => cultures[language];
 
   /// The dictionary for the current language
   Dictionary get dictionary => dictionaries[language];
@@ -68,10 +76,14 @@ class AppState extends ChangeNotifier {
     dictionaries = {};
     for (var entry in data.entries) {
       // ignore sources, as they are combined in the same JSON
-      if (entry.key == 'Referencias' || entry.key == 'Gramática') {
+      if (entry.key == 'Referencias' || entry.key == 'Gramática' || entry.key == 'Idiomas' || entry.key == 'Cultura') {
         continue;
       }
+      cultures[entry.key] = [];
       dictionaries[entry.key] = Dictionary.fromJson(entry.value);
+    }
+    for (Map<String, dynamic> cultureJson in data['Cultura']) {
+      cultures[cultureJson['language']].add(CultureEntry.fromJson(cultureJson));
     }
     dictionary.sort(lookupMode);
     loading = false;

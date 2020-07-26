@@ -75,8 +75,8 @@ class DictionaryEntry {
 
     return DictionaryEntry(
       sourceId: json['source'],
-      originalWord: json['word'],
-      translatedWord: json['translation'],
+      originalWord: json['word'] ?? 'En blanco',
+      translatedWord: json['translation'] ?? 'En blanco',
       ipa: json['ipa'],
       originalExample: json['example'],
       translatedExample: json['example_translated'],

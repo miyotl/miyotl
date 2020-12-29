@@ -62,15 +62,15 @@ class _HomePageState extends State<HomePage> {
         items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.import_contacts),
-            title: Text('Diccionario'),
+            label: 'Diccionario',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.school),
-            title: Text('Aprende'),
+            label: 'Aprende',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.account_balance),
-            title: Text('Cultura'),
+            label: 'Cultura',
           ),
         ],
         onTap: (index) => setState(() {

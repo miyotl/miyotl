@@ -13,7 +13,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int page = 0;
+  int page = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -57,9 +57,13 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ),
-      body: [DictionaryPage(), LearnPage(), CulturePage()][page],
+      body: [LearnPage(), DictionaryPage(), CulturePage()][page],
       bottomNavigationBar: BottomNavigationBar(
         items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.school),
+            label: 'Aprende',
+          ),
           BottomNavigationBarItem(
             icon: Icon(Icons.import_contacts),
             label: 'Diccionario',

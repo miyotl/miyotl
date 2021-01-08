@@ -90,7 +90,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                     ),
                   ),
                   SizedBox(height: 16),
-                  RaisedButton(
+                  ElevatedButton(
                     child: Text(
                       'Empieza ahora',
                       style: Theme.of(context)
@@ -98,7 +98,6 @@ class _OnboardingPageState extends State<OnboardingPage> {
                           .button
                           .copyWith(color: Colors.white),
                     ),
-                    color: Colors.indigo,
                     onPressed: nextPage,
                   ),
                 ],

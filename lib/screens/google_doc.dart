@@ -1,11 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
+import '../models/culture.dart';
+import 'culture_details.dart';
+
+void openDoc(BuildContext context, String url, CultureEntry entry) {
+  Navigator.of(context).push(
+    MaterialPageRoute(
+      builder: (context) => GoogleDocPreview(
+        url: url.replaceAll('edit', 'mobilebasic'),
+        title: 'Cargando...',
+        entry: entry,
+      ),
+    ),
+  );
+}
 
 class GoogleDocPreview extends StatefulWidget {
   final String url;
   final String title;
+  final CultureEntry entry;
 
-  GoogleDocPreview({this.url, this.title});
+  GoogleDocPreview({this.url, this.title, this.entry});
 
   @override
   _GoogleDocPreviewState createState() => _GoogleDocPreviewState();
@@ -44,71 +59,71 @@ class _GoogleDocPreviewState extends State<GoogleDocPreview> {
         }
         ''',
     );
-    /*webView.evaluateJavascript(
-      source: '''
-        document.getElementById("docs-ml-header-id").remove();
-        document.getElementsByClassName("doc")[0].style.paddingTop = 0;
-        document.getElementsByClassName("app-container")[0].style.marginTop = 0;
-        document.getElementsByClassName("docs-ml-promotion")[0].remove();
-        ''',
-    );*/
+  }
+
+  Widget getWebView(String url) {
+    return Expanded(
+      child: Container(
+        child: InAppWebView(
+          initialUrl: url,
+          initialHeaders: {},
+          onWebViewCreated: (InAppWebViewController controller) {
+            webView = controller;
+            //webView.clearCache();
+          },
+          onLoadStart: (InAppWebViewController controller, String url) {
+            setState(() {
+              this.url = url;
+            });
+            cleanUp();
+          },
+          onLoadStop: (InAppWebViewController controller, String url) async {
+            setState(() {
+              this.url = url;
+            });
+            cleanUp();
+          },
+          onProgressChanged: (InAppWebViewController controller, int progress) {
+            setState(() {
+              this.progress = progress / 100;
+            });
+            cleanUp();
+          },
+          onTitleChanged: (controller, title) {
+            setState(() {
+              print(title);
+              this.title = title;
+            });
+          },
+        ),
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text(title),
-          leading: IconButton(
-            icon: Icon(Icons.arrow_back),
-            onPressed: () => Navigator.of(context).pop(),
-          ),
-        ),
-        body: Container(
-          child: Column(
-            children: <Widget>[
-              Expanded(
-                child: Container(
-                  child: InAppWebView(
-                    initialUrl: widget.url,
-                    initialHeaders: {},
-                    onWebViewCreated: (InAppWebViewController controller) {
-                      webView = controller;
-                      //webView.clearCache();
-                    },
-                    onLoadStart:
-                        (InAppWebViewController controller, String url) {
-                      setState(() {
-                        this.url = url;
-                      });
-                      cleanUp();
-                    },
-                    onLoadStop:
-                        (InAppWebViewController controller, String url) async {
-                      setState(() {
-                        this.url = url;
-                      });
-                      cleanUp();
-                    },
-                    onProgressChanged:
-                        (InAppWebViewController controller, int progress) {
-                      setState(() {
-                        this.progress = progress / 100;
-                      });
-                      cleanUp();
-                    },
-                    onTitleChanged: (controller, title) {
-                      setState(() {
-                        print(title);
-                        this.title = title;
-                      });
-                    },
-                  ),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(title),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.more_horiz),
+            onPressed: () {
+              Navigator.of(context).pop();
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => CultureDetails(entry: widget.entry),
                 ),
-              ),
-            ],
+              );
+            },
           ),
+        ],
+      ),
+      body: Container(
+        child: Column(
+          children: <Widget>[
+            getWebView(widget.url),
+          ],
         ),
       ),
     );

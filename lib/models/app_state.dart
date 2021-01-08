@@ -5,10 +5,12 @@ import 'package:http/http.dart';
 import 'constants.dart';
 import 'dictionary.dart';
 import 'culture.dart';
+import 'language.dart';
 
 export 'dictionary.dart';
 export 'constants.dart';
 export 'culture.dart';
+export 'language.dart';
 
 String capitalize(String string) {
   return '${string[0].toUpperCase()}${string.substring(1)}';
@@ -49,6 +51,9 @@ class AppState extends ChangeNotifier {
   /// Favorite words
   List<DictionaryEntry> favorites;
 
+  /// List of languages
+  List<Language> languages = [];
+
   AppState() {
     getData();
   }
@@ -73,6 +78,9 @@ class AppState extends ChangeNotifier {
     // TODO: implement some exception handling
     data = json.decode(utf8.decode(response.bodyBytes));
     sources = Sources.fromJson(data['Referencias']);
+    for (var language in data['Idiomas']) {
+      languages.add(Language.fromJson(language));
+    }
     dictionaries = {};
     for (var entry in data.entries) {
       // ignore sources, as they are combined in the same JSON

@@ -1,4 +1,6 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:lenguas/screens/google_doc.dart';
 import 'package:provider/provider.dart';
 import '../models/app_state.dart';
 import 'culture_details.dart';
@@ -11,13 +13,9 @@ class CultureCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      /// TODO: mostrar el efecto de tinta de material design bien
+      // TODO: mostrar el efecto de tinta de material design bien
       onTap: () {
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => CultureDetails(entry: entry),
-          ),
-        );
+        openDoc(context, entry.linkOriginal, entry);
       },
       child: Card(
         clipBehavior: Clip.antiAlias,
@@ -26,22 +24,54 @@ class CultureCard extends StatelessWidget {
           children: <Widget>[
             ListTile(
               title: Text(entry.titleOriginal),
-              subtitle: Text(entry.titleTranslated),
+              subtitle: Text('${entry.titleTranslated}'),
+              leading: CircleAvatar(),
+              trailing: IconButton(
+                icon: Icon(Icons.more_horiz),
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => CultureDetails(entry: entry),
+                    ),
+                  );
+                },
+              ),
             ),
 
-            /// TODO: hacer cache a la imagen (CachedNetworkImage)
             /// TODO: arreglar overflow
             if (entry.imageUrl != null)
               SizedBox(
                 width: double.infinity,
-                height: 100,
+                // height: 100,
                 child: Container(
-                  child: Image.network(
-                    entry.imageUrl,
+                  child: CachedNetworkImage(
+                    imageUrl: entry.imageUrl,
                     fit: BoxFit.fitWidth,
+                    errorWidget: (context, url, error) => Image.asset(
+                      'img/miyotl.png',
+                      fit: BoxFit.fitWidth,
+                    ),
                   ),
                 ),
               ),
+            ButtonBar(
+              children: [
+                Consumer<AppState>(
+                  builder: (context, state, child) => FlatButton(
+                    child: Text('Leer en ${state.language}'),
+                    onPressed: () {
+                      openDoc(context, entry.linkOriginal, entry);
+                    },
+                  ),
+                ),
+                FlatButton(
+                  child: Text('Leer en español'),
+                  onPressed: () {
+                    openDoc(context, entry.linkTranslated, entry);
+                  },
+                ),
+              ],
+            ),
           ],
         ),
       ),
@@ -61,7 +91,7 @@ class CulturePage extends StatelessWidget {
         } else {
           return GridView.count(
             primary: true,
-            crossAxisCount: 2,
+            crossAxisCount: 1,
             crossAxisSpacing: 10,
             mainAxisSpacing: 10,
             padding: EdgeInsets.all(10),

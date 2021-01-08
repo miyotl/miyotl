@@ -10,7 +10,7 @@ class CultureDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    AppState state = Provider.of<AppState>(context);
+    AppState state = Provider.of<AppState>(context, listen: false);
     Source source = state.sources.getSource(entry.sourceId);
     return Scaffold(
       /// TODO: mostrar imagen como sliver appbar
@@ -24,14 +24,7 @@ class CultureDetails extends StatelessWidget {
             subtitle: Text('Toca para abrir ${entry.titleOriginal}'),
             trailing: Icon(Icons.launch),
             onTap: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => GoogleDocPreview(
-                    url: entry.linkOriginal.replaceAll('edit', 'mobilebasic'),
-                    title: 'Cargando...',
-                  ),
-                ),
-              );
+              openDoc(context, entry.linkOriginal, entry);
             },
           ),
           ListTile(
@@ -39,14 +32,7 @@ class CultureDetails extends StatelessWidget {
             subtitle: Text('Toca para abrir ${entry.titleTranslated}'),
             trailing: Icon(Icons.launch),
             onTap: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => GoogleDocPreview(
-                    url: entry.linkTranslated,
-                    title: entry.titleTranslated,
-                  ),
-                ),
-              );
+              openDoc(context, entry.linkTranslated, entry);
             },
           ),
           ListTile(

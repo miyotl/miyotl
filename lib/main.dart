@@ -16,7 +16,7 @@ class App extends StatelessWidget {
       child: MaterialApp(
         title: app_name,
         theme: ThemeData(
-          primarySwatch: Colors.red,
+          primarySwatch: Colors.indigo,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
         home: HomePage(),

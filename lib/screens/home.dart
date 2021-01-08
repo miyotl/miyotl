@@ -26,7 +26,7 @@ class _HomePageState extends State<HomePage> {
               Text('$app_name: ${state.languageName}'),
         ),
         actions: <Widget>[
-          if (page == 0) ...[
+          if (page == 1) ...[
             IconButton(
               icon: Icon(Icons.refresh),
               onPressed: () {

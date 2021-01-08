@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'dictionary.dart';
 import 'learn.dart';
 import 'culture.dart';
+import 'developer_menu.dart';
 import '../models/app_state.dart';
 import '../widgets/drawer.dart';
 import 'search.dart';
@@ -43,6 +44,15 @@ class _HomePageState extends State<HomePage> {
               },
             ),
           ],
+          IconButton(
+            icon: Icon(Icons.bug_report),
+            tooltip: 'Menú del desarrollador',
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => DeveloperPage(),
+              ));
+            },
+          ),
         ],
         flexibleSpace: Container(
           decoration: BoxDecoration(
@@ -67,10 +77,6 @@ class _HomePageState extends State<HomePage> {
           BottomNavigationBarItem(
             icon: Icon(Icons.import_contacts),
             label: 'Diccionario',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.school),
-            label: 'Aprende',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.account_balance),

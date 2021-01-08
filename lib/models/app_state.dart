@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart';
 import 'constants.dart';
@@ -17,6 +18,12 @@ String capitalize(String string) {
 }
 
 class AppState extends ChangeNotifier {
+  UserCredential firebaseCredential;
+
+  String get givenName =>
+      firebaseCredential?.additionalUserInfo?.profile['given_name'] ??
+      'Ajolote anónimo';
+
   /// Current language for dictionary, learning and culture
   String language = 'Mazateco';
 
@@ -101,3 +108,4 @@ class AppState extends ChangeNotifier {
     notifyListeners();
   }
 }
+  

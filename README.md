@@ -1,6 +1,4 @@
-# lenguas
-
-A new Flutter project.
+# Miyotl
 
 ## Getting Started
 

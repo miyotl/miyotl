@@ -10,7 +10,7 @@ class DeveloperPage extends StatelessWidget {
       ),
       body: ListView(
         children: [
-          RaisedButton(
+          ElevatedButton(
             child: Text('Abrir pantalla inicial'),
             onPressed: () {
               Navigator.of(context).push(MaterialPageRoute(

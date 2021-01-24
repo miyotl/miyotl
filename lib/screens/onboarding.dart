@@ -146,13 +146,17 @@ class _OnboardingPageState extends State<OnboardingPage> {
                               Buttons.GoogleDark,
                               text: 'Iniciar sesión con Google',
                               onPressed: () async {
-                                var credential = await signInWithGoogle();
-                                AppState state = Provider.of<AppState>(
-                                  context,
-                                  listen: false,
-                                );
-                                state.firebaseCredential = credential;
-                                nextPage();
+                                try {
+                                  var credential = await signInWithGoogle();
+                                  AppState state = Provider.of<AppState>(
+                                    context,
+                                    listen: false,
+                                  );
+                                  state.firebaseCredential = credential;
+                                  nextPage();
+                                } catch (e) {
+                                  /// TODO: do something if sign in failed
+                                }
                               },
                             ),
                           ],

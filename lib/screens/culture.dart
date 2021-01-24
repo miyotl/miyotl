@@ -57,14 +57,14 @@ class CultureCard extends StatelessWidget {
             ButtonBar(
               children: [
                 Consumer<AppState>(
-                  builder: (context, state, child) => FlatButton(
+                  builder: (context, state, child) => TextButton(
                     child: Text('Leer en ${state.language}'),
                     onPressed: () {
                       openDoc(context, entry.linkOriginal, entry);
                     },
                   ),
                 ),
-                FlatButton(
+                TextButton(
                   child: Text('Leer en español'),
                   onPressed: () {
                     openDoc(context, entry.linkTranslated, entry);

@@ -39,14 +39,7 @@ class AppDrawer extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
               ),
               decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [
-                    Colors.indigo[600],
-                    Colors.indigo,
-                  ],
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                ),
+                color: Theme.of(context).accentColor,
               ),
             ),
             if (state.dictionaries == null)
@@ -54,7 +47,14 @@ class AppDrawer extends StatelessWidget {
             else
               for (var language in state.dictionaries.keys)
                 ListTile(
-                  title: Text(capitalize(language)),
+                  title: Text(
+                    capitalize(language),
+                    style: Theme.of(context).textTheme.bodyText1.copyWith(
+                          color: language == state.language
+                              ? Theme.of(context).accentColor
+                              : Theme.of(context).textTheme.bodyText1.color,
+                        ),
+                  ),
                   selected: language == state.language,
                   onTap: () => state.changeLanguage(language),
                 ),

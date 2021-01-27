@@ -172,7 +172,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
             ),
           ),
           Container(
-            color: AppColors.guinda,
+            color: AppColors.darkBlue,
             alignment: Alignment.topCenter,
             child: Column(
               children: [

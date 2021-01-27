@@ -1,4 +1,4 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 
 const String dictionary_url =
     'https://drive.google.com/uc?export=download&id=1A2_SIrvbM8P9vwHfju7ZYiN3twO9OTp4';
@@ -18,3 +18,29 @@ class AppColors {
   static Color lightPink = Color(0xFFFF7A92);
   static Color yellow = Color(0xFFECC730);
 }
+
+/// TODO: constant
+ThemeData dark_theme = ThemeData(
+  visualDensity: VisualDensity.adaptivePlatformDensity,
+  brightness: Brightness.dark,
+  accentColor: AppColors.pink,
+  primaryColor: AppColors.teal,
+  appBarTheme: AppBarTheme(
+    iconTheme: IconThemeData(
+      color: AppColors.darkBlue,
+    ),
+  ),
+  scaffoldBackgroundColor: AppColors.darkBlue,
+  canvasColor: AppColors.darkBlue,
+);
+ThemeData light_theme = ThemeData(
+  visualDensity: VisualDensity.adaptivePlatformDensity,
+  primarySwatch: Colors.teal,
+  primaryColor: AppColors.lightBlue,
+  accentColor: AppColors.lightPink,
+  bottomNavigationBarTheme: BottomNavigationBarThemeData(
+    selectedItemColor: AppColors.pink,
+  ),
+  selectedRowColor: AppColors.lightPink,
+  textSelectionColor: AppColors.lightPink,
+);

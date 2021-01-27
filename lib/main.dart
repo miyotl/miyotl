@@ -15,11 +15,10 @@ class App extends StatelessWidget {
       create: (context) => AppState(),
       child: MaterialApp(
         title: app_name,
-        theme: ThemeData(
-          primarySwatch: Colors.indigo,
-          visualDensity: VisualDensity.adaptivePlatformDensity,
-        ),
+        theme: light_theme,
+        darkTheme: dark_theme,
         home: HomePage(),
+        debugShowCheckedModeBanner: false,
       ),
     );
   }

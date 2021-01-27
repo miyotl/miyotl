@@ -5,5 +5,16 @@ const String dictionary_url =
 const String app_name = 'Miyotl';
 
 class AppColors {
-  static Color guinda = Color(0xFFA12042);
+  // From dark illustration
+  static Color darkBlue = Color(0xFF05001E);
+  static Color pink = Color(0xFFEC1C58);
+  static Color purple = Color(0xCB9FC3);
+  static Color teal = Color(0xFF85CDC1);
+
+  // From light illustration
+  static Color lightBrown = Color(0xFF7C6764);
+  static Color darkBrown = Color(0xFF4C3F46);
+  static Color lightBlue = Color(0xFFACD2DB);
+  static Color lightPink = Color(0xFF7A92);
+  static Color yellow = Color(0xFFECC730);
 }

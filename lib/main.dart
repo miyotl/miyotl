@@ -15,7 +15,7 @@ class App extends StatelessWidget {
       create: (context) => AppState(),
       child: MaterialApp(
         title: app_name,
-        theme: light_theme,
+        theme: new_light_theme,
         darkTheme: dark_theme,
         home: HomePage(),
         debugShowCheckedModeBanner: false,

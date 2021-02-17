@@ -49,11 +49,11 @@ class AppDrawer extends StatelessWidget {
                 ListTile(
                   title: Text(
                     capitalize(language),
-                    style: Theme.of(context).textTheme.bodyText1.copyWith(
-                          color: language == state.language
-                              ? Theme.of(context).accentColor
-                              : Theme.of(context).textTheme.bodyText1.color,
-                        ),
+                    // style: Theme.of(context).textTheme.bodyText1.copyWith(
+                    //       color: language == state.language
+                    //           ? Theme.of(context).accentColor
+                    //           : Theme.of(context).textTheme.bodyText1.color,
+                    //     ),
                   ),
                   selected: language == state.language,
                   onTap: () => state.changeLanguage(language),

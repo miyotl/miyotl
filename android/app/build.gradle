@@ -46,7 +46,7 @@ android {
     defaultConfig {
         applicationId "proyecto.miyotl"
         minSdkVersion 17 //16 // for webview
-        targetSdkVersion 28
+        targetSdkVersion 29
         multiDexEnabled true // Fix compile error after adding Firebase
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName

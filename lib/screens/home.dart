@@ -73,18 +73,6 @@ class _HomePageState extends State<HomePage> {
             },
           ),
         ],
-        // flexibleSpace: Container(
-        //   decoration: BoxDecoration(
-        //     gradient: LinearGradient(
-        //       colors: [
-        //         Colors.blueGrey,
-        //         Colors.redAccent,
-        //       ],
-        //       begin: Alignment.topLeft,
-        //       end: Alignment.bottomRight,
-        //     ),
-        //   ),
-        // ),
       ),
       body: [LearnPage(), DictionaryPage(), CulturePage()][page],
       bottomNavigationBar: BottomNavigationBar(

@@ -38,6 +38,7 @@ dependencies:
   flutter_signin_button: ^1.1.0
   google_sign_in: ^4.5.1
   uuid: ^2.0.2
+  google_fonts: ^1.1.2
   
   # Firebase plugins
   firebase_core: ^0.5.3

@@ -10,6 +10,7 @@ import '../widgets/empty_state.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
 import '../models/constants.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class OnboardingPage extends StatefulWidget {
   @override
@@ -54,6 +55,72 @@ class _OnboardingPageState extends State<OnboardingPage> {
     return await FirebaseAuth.instance.signInWithCredential(credential);
   }
 
+  Function doGoogleSignIn(BuildContext context) {
+    return () async {
+      try {
+        var credential = await signInWithGoogle();
+        if (credential == null) {
+          showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+              title: Text(
+                'Cancelaste el inicio de sesión',
+              ),
+              content: Text(
+                'No especificaste ninguna cuenta de Google para iniciar sesión; vuelve a intentarlo.',
+              ),
+              actions: [
+                FlatButton(
+                  child: Text('DE ACUERDO'),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            ),
+          );
+        } else {
+          AppState state = Provider.of<AppState>(
+            context,
+            listen: false,
+          );
+          state.firebaseCredential = credential;
+          nextPage();
+        }
+      } catch (e) {
+        if (e is PlatformException && e.code == 'sign_in_failed') {
+          showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+              title: Text('Inicio de sesión fallido'),
+              content: Text(
+                'Falló el inicio de sesión. Intenta otra vez, o utiliza otra de las opciones para iniciar sesión.',
+              ),
+              actions: [
+                FlatButton(
+                  child: Text('DE ACUERDO'),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            ),
+          );
+        } else {
+          /// TODO: report errors in a more automatic way
+          showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+              title: Text('Error desconocido'),
+              content: Text(
+                  'Ocurrió un error desconocido. Por favor toma captura de pantalla y reporta con los desarrolladores.\n\nEl error es:\n\n$e'),
+            ),
+          );
+        }
+      }
+    };
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,7 +130,11 @@ class _OnboardingPageState extends State<OnboardingPage> {
         disableUserGesture: true,
         liquidController: controller,
         pages: [
-          SafeArea(
+          /// PAGE 1
+          /// Welcome screen
+
+          Theme(
+            data: new_light_theme,
             child: Container(
               alignment: Alignment.center,
               child: Column(
@@ -77,20 +148,20 @@ class _OnboardingPageState extends State<OnboardingPage> {
                   SizedBox(height: 16),
                   Text(
                     'Miyotl',
-                    style: Theme.of(context)
-                        .textTheme
-                        .headline1
-                        .copyWith(fontSize: 64),
+                    style: GoogleFonts.fredokaOne().copyWith(
+                      fontSize: 64,
+                      color: AppColors.azulMorado,
+                    ),
                   ),
                   SizedBox(height: 16),
                   SizedBox(
                     width: MediaQuery.of(context).size.width * 0.75,
                     child: Text(
                       'Nuestras lenguas prehispánicas son hoy raíz y vuelo luminoso de unión y paz.',
-                      style: Theme.of(context)
-                          .textTheme
-                          .caption
-                          .copyWith(fontSize: 16),
+                      style: GoogleFonts.rubik().copyWith(
+                        fontSize: 16,
+                        color: Colors.black,
+                      ),
                       textAlign: TextAlign.center,
                     ),
                   ),
@@ -110,123 +181,93 @@ class _OnboardingPageState extends State<OnboardingPage> {
               color: Colors.white,
             ),
           ),
-          Theme(
-            data: ThemeData(
-              primarySwatch: Colors.grey,
-              appBarTheme: AppBarTheme(
-                brightness: Brightness.dark,
-                color: Colors.black,
-              ),
-              brightness: Brightness.dark,
-              canvasColor: Colors.indigo[800],
-              accentIconTheme: IconThemeData(color: Colors.white),
-            ),
-            child: Scaffold(
-              body: SafeArea(
-                child: Container(
-                  alignment: Alignment.center,
-                  child: FutureBuilder<FirebaseApp>(
-                    future: _initialization,
-                    builder: (context, snapshot) {
-                      if (snapshot.hasError) {
-                        return EmptyState('${snapshot.error}');
-                      }
-                      if (snapshot.connectionState == ConnectionState.done) {
-                        return Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(16),
-                              child: SizedBox(
-                                width: MediaQuery.of(context).size.width * 0.75,
-                                child: Text(
-                                  'Inicia sesión o crea una cuenta',
-                                  style: Theme.of(context).textTheme.headline4,
-                                  textAlign: TextAlign.center,
-                                ),
+
+          /// PAGE 2
+          /// Sign in screen
+
+          Scaffold(
+            body: SafeArea(
+              child: Container(
+                alignment: Alignment.center,
+                child: FutureBuilder<FirebaseApp>(
+                  future: _initialization,
+                  builder: (context, snapshot) {
+                    if (snapshot.hasError) {
+                      return EmptyState('${snapshot.error}');
+                    }
+                    if (snapshot.connectionState == ConnectionState.done) {
+                      return Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(16),
+                            child: SizedBox(
+                              width: MediaQuery.of(context).size.width * 0.75,
+                              child: Text(
+                                'Inicia sesión o crea una cuenta',
+                                style: GoogleFonts.fredokaOne()
+                                    .copyWith(fontSize: 32),
+                                textAlign: TextAlign.center,
                               ),
                             ),
-                            SignInButton(
-                              Buttons.GoogleDark,
-                              text: 'Iniciar sesión con Google',
-                              onPressed: () async {
-                                try {
-                                  var credential = await signInWithGoogle();
-                                  if (credential == null) {
-                                    showDialog(
-                                      context: context,
-                                      builder: (context) => AlertDialog(
-                                        title: Text(
-                                          'Cancelaste el inicio de sesión',
-                                        ),
-                                        content: Text(
-                                          'No especificaste ninguna cuenta de Google para iniciar sesión; vuelve a intentarlo.',
-                                        ),
-                                        actions: [
-                                          FlatButton(
-                                            child: Text('DE ACUERDO'),
-                                            onPressed: () {
-                                              Navigator.of(context).pop();
-                                            },
-                                          ),
-                                        ],
-                                      ),
-                                    );
-                                  } else {
-                                    AppState state = Provider.of<AppState>(
-                                      context,
-                                      listen: false,
-                                    );
-                                    state.firebaseCredential = credential;
-                                    nextPage();
-                                  }
-                                } catch (e) {
-                                  if (e is PlatformException &&
-                                      e.code == 'sign_in_failed') {
-                                    showDialog(
-                                      context: context,
-                                      builder: (context) => AlertDialog(
-                                        title: Text('Inicio de sesión fallido'),
-                                        content: Text(
-                                          'Falló el inicio de sesión. Intenta otra vez, o utiliza otra de las opciones para iniciar sesión.',
-                                        ),
-                                        actions: [
-                                          FlatButton(
-                                            child: Text('DE ACUERDO'),
-                                            onPressed: () {
-                                              Navigator.of(context).pop();
-                                            },
-                                          ),
-                                        ],
-                                      ),
-                                    );
-                                  } else {
-                                    /// TODO: report errors in a more automatic way
-                                    showDialog(
-                                      context: context,
-                                      builder: (context) => AlertDialog(
-                                        title: Text('Error desconocido'),
-                                        content: Text(
-                                            'Ocurrió un error desconocido. Por favor toma captura de pantalla y reporta con los desarrolladores.\n\nEl error es:\n\n$e'),
-                                      ),
-                                    );
-                                  }
-                                }
-                              },
-                            ),
-                          ],
-                        );
-                      }
-                      return Center(
-                        child: CircularProgressIndicator(),
+                          ),
+                          SignInButton(
+                            Buttons.GoogleDark,
+                            text: 'Inicia sesión con Google',
+                            onPressed: doGoogleSignIn(context),
+                          ),
+                          SignInButton(
+                            Buttons.Email,
+                            text: 'Con correo y contraseña',
+                            onPressed: () {
+                              Scaffold.of(context).showSnackBar(
+                                SnackBar(
+                                  content:
+                                      Text('Funcionalidad no implementada'),
+                                ),
+                              );
+                            },
+                          ),
+                          SignInButton(
+                            Buttons.Facebook,
+                            text: 'Inicia sesión con Facebook',
+                            onPressed: () {
+                              Scaffold.of(context).showSnackBar(
+                                SnackBar(
+                                  content:
+                                      Text('Funcionalidad no implementada'),
+                                ),
+                              );
+                            },
+                          ),
+                          SignInButton(
+                            Buttons.AppleDark,
+                            text: 'Inicia sesión con Apple',
+                            onPressed: () {
+                              Scaffold.of(context).showSnackBar(
+                                SnackBar(
+                                  content:
+                                      Text('Funcionalidad no implementada'),
+                                ),
+                              );
+                            },
+                          ),
+                        ],
                       );
-                    },
-                  ),
+                    }
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  },
                 ),
               ),
             ),
           ),
+
+          /// PAGE 3
+          /// Language select
+
           Container(
             color: AppColors.azulMorado,
             alignment: Alignment.topCenter,

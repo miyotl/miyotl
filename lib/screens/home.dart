@@ -95,10 +95,6 @@ class _HomePageState extends State<HomePage> {
         }),
         currentIndex: page,
       ),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.public_sharp),
-        onPressed: () {},
-      ),
     );
   }
 }

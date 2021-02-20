@@ -66,7 +66,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Image.asset(
-                    'img/miyotl.png',
+                    'img/icon-round-new.png',
                     width: MediaQuery.of(context).size.width * 0.66,
                   ),
                   SizedBox(height: 16),

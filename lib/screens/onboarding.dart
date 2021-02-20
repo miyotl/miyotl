@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_signin_button/button_view.dart';
 import 'package:lenguas/models/app_state.dart';
 import 'package:liquid_swipe/liquid_swipe.dart';
@@ -35,6 +36,10 @@ class _OnboardingPageState extends State<OnboardingPage> {
 
     // Trigger the authentication flow
     final GoogleSignInAccount googleUser = await GoogleSignIn().signIn();
+
+    if (googleUser == null) {
+      return null;
+    }
 
     // Obtain the auth details from the request
     final GoogleSignInAuthentication googleAuth =
@@ -148,14 +153,65 @@ class _OnboardingPageState extends State<OnboardingPage> {
                               onPressed: () async {
                                 try {
                                   var credential = await signInWithGoogle();
-                                  AppState state = Provider.of<AppState>(
-                                    context,
-                                    listen: false,
-                                  );
-                                  state.firebaseCredential = credential;
-                                  nextPage();
+                                  if (credential == null) {
+                                    showDialog(
+                                      context: context,
+                                      builder: (context) => AlertDialog(
+                                        title: Text(
+                                          'Cancelaste el inicio de sesión',
+                                        ),
+                                        content: Text(
+                                          'No especificaste ninguna cuenta de Google para iniciar sesión; vuelve a intentarlo.',
+                                        ),
+                                        actions: [
+                                          FlatButton(
+                                            child: Text('DE ACUERDO'),
+                                            onPressed: () {
+                                              Navigator.of(context).pop();
+                                            },
+                                          ),
+                                        ],
+                                      ),
+                                    );
+                                  } else {
+                                    AppState state = Provider.of<AppState>(
+                                      context,
+                                      listen: false,
+                                    );
+                                    state.firebaseCredential = credential;
+                                    nextPage();
+                                  }
                                 } catch (e) {
-                                  /// TODO: do something if sign in failed
+                                  if (e is PlatformException &&
+                                      e.code == 'sign_in_failed') {
+                                    showDialog(
+                                      context: context,
+                                      builder: (context) => AlertDialog(
+                                        title: Text('Inicio de sesión fallido'),
+                                        content: Text(
+                                          'Falló el inicio de sesión. Intenta otra vez, o utiliza otra de las opciones para iniciar sesión.',
+                                        ),
+                                        actions: [
+                                          FlatButton(
+                                            child: Text('DE ACUERDO'),
+                                            onPressed: () {
+                                              Navigator.of(context).pop();
+                                            },
+                                          ),
+                                        ],
+                                      ),
+                                    );
+                                  } else {
+                                    /// TODO: report errors in a more automatic way
+                                    showDialog(
+                                      context: context,
+                                      builder: (context) => AlertDialog(
+                                        title: Text('Error desconocido'),
+                                        content: Text(
+                                            'Ocurrió un error desconocido. Por favor toma captura de pantalla y reporta con los desarrolladores.\n\nEl error es:\n\n$e'),
+                                      ),
+                                    );
+                                  }
                                 }
                               },
                             ),

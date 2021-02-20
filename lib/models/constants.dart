@@ -27,6 +27,7 @@ class AppColors {
 #occ3fb (azul claro) */
   static Color morado = Color(0xFF732484);
   static Color amarillo = Color(0xFFECFCAC);
+  static Color amarilloAjolote = Color(0xFFFCFFAC);
   static Color azulMorado = Color(0xFF34347C);
   static Color rosa = Color(0xFFCC3C74);
   static Color azulVerdoso = Color(0xFF146484);
@@ -48,6 +49,7 @@ ThemeData dark_theme = ThemeData(
   scaffoldBackgroundColor: AppColors.darkBlue,
   canvasColor: AppColors.darkBlue,
 );
+
 ThemeData new_light_theme = ThemeData(
   visualDensity: VisualDensity.adaptivePlatformDensity,
   primarySwatch: Colors.indigo,

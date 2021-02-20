@@ -22,8 +22,27 @@ class _HomePageState extends State<HomePage> {
       drawer: AppDrawer(),
       appBar: AppBar(
         title: Consumer<AppState>(
-          builder: (context, state, child) =>
-              Text('$app_name: ${state.languageName}'),
+          builder: (context, state, child) {
+            /// For small screens, only display the  language name
+            /// https://stackoverflow.com/questions/51114778/how-to-check-if-flutter-text-widget-was-overflowed
+            return LayoutBuilder(builder: (context, size) {
+              final tp = TextPainter(
+                text: TextSpan(
+                  text: '$app_name: ${state.languageName}',
+                ),
+                textDirection: TextDirection.ltr,
+              );
+              tp.layout(maxWidth: size.maxWidth);
+
+              /// This weird substraction is pretty arbitrary,
+              /// but I couldn't find a better solution for the moment
+              if (tp.maxIntrinsicWidth <= size.maxWidth - 22) {
+                return Text('$app_name: ${state.languageName}');
+              } else {
+                return Text('${state.languageName}');
+              }
+            });
+          },
         ),
         actions: <Widget>[
           if (page == 1) ...[

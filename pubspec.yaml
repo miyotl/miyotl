@@ -53,7 +53,7 @@ dev_dependencies:
 flutter_icons:
   android: true
   ios: true
-  image_path_android: "img/icon-round-new.png"
+  image_path_android: "img/icon-round-new-trimmed.png"
   image_path_ios: "img/icon-full-new.png"
   adaptive_icon_background: "img/icon-bg-padded.png"
   adaptive_icon_foreground: "img/icon-fg-new-padded.png"

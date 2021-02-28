@@ -328,6 +328,15 @@ class _OnboardingPageState extends State<OnboardingPage> {
                                     subtitle:
                                         Text('${language.speakers} hablantes'),
                                     leading: Icon(Icons.language),
+                                    onTap: () {
+                                      state.changeLanguage(language.name);
+                                      Navigator.of(context).pushAndRemoveUntil(
+                                        MaterialPageRoute(
+                                          builder: (context) => HomePage(),
+                                        ),
+                                        (route) => false,
+                                      );
+                                    },
                                   ),
                                 ),
                             ],

@@ -11,7 +11,10 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
 import '../models/constants.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../widgets/status_bar_colors.dart';
 // import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+
+typedef SignInFunction = Future<UserCredential> Function();
 
 class OnboardingPage extends StatefulWidget {
   @override
@@ -56,94 +59,14 @@ class _OnboardingPageState extends State<OnboardingPage> {
     return await FirebaseAuth.instance.signInWithCredential(credential);
   }
 
-  Future<UserCredential> signInWithFacebook() async {
-    /*/// https://firebase.flutter.dev/docs/auth/social/
-
-    // Trigger the sign-in flow
-    final AccessToken result = await FacebookAuth.instance.login();
-
-    // Create a credential from the access token
-    final FacebookAuthCredential facebookAuthCredential =
-        FacebookAuthProvider.credential(result.token);
-
-    // Once signed in, return the UserCredential
-    return await FirebaseAuth.instance
-        .signInWithCredential(facebookAuthCredential);*/
-
+  Future<UserCredential> signInAnonymously() async {
     return await FirebaseAuth.instance.signInAnonymously();
   }
 
-  Function doGoogleSignIn(BuildContext context) {
+  Function doSignIn(BuildContext context, SignInFunction signInFunction) {
     return () async {
       try {
-        var credential = await signInWithGoogle();
-        if (credential == null) {
-          showDialog(
-            context: context,
-            builder: (context) => AlertDialog(
-              title: Text(
-                'Cancelaste el inicio de sesión',
-              ),
-              content: Text(
-                'No especificaste ninguna cuenta de Google para iniciar sesión; vuelve a intentarlo.',
-              ),
-              actions: [
-                FlatButton(
-                  child: Text('DE ACUERDO'),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                ),
-              ],
-            ),
-          );
-        } else {
-          AppState state = Provider.of<AppState>(
-            context,
-            listen: false,
-          );
-          state.firebaseCredential = credential;
-          nextPage();
-        }
-      } catch (e) {
-        if (e is PlatformException && e.code == 'sign_in_failed') {
-          showDialog(
-            context: context,
-            builder: (context) => AlertDialog(
-              title: Text('Inicio de sesión fallido'),
-              content: Text(
-                'Falló el inicio de sesión. Intenta otra vez, o utiliza otra de las opciones para iniciar sesión.',
-              ),
-              actions: [
-                FlatButton(
-                  child: Text('DE ACUERDO'),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                ),
-              ],
-            ),
-          );
-        } else {
-          /// TODO: report errors in a more automatic way
-          showDialog(
-            context: context,
-            builder: (context) => AlertDialog(
-              title: Text('Error desconocido'),
-              content: Text(
-                  'Ocurrió un error desconocido. Por favor toma captura de pantalla y reporta con los desarrolladores.\n\nEl error es:\n\n$e'),
-            ),
-          );
-        }
-      }
-    };
-  }
-
-  // Copy-paste in case more changes are needed :P
-  Function doFacebookSignIn(BuildContext context) {
-    return () async {
-      try {
-        var credential = await signInWithFacebook();
+        var credential = await signInFunction();
         if (credential == null) {
           showDialog(
             context: context,
@@ -272,8 +195,8 @@ class _OnboardingPageState extends State<OnboardingPage> {
 
           Theme(
             data: dark_theme,
-            child: Scaffold(
-              body: SafeArea(
+            child: DarkStatusBar(
+              child: SafeArea(
                 child: Container(
                   alignment: Alignment.center,
                   child: FutureBuilder<FirebaseApp>(
@@ -302,7 +225,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                             SignInButton(
                               Buttons.GoogleDark,
                               text: 'Inicia sesión con Google',
-                              onPressed: doGoogleSignIn(context),
+                              onPressed: doSignIn(context, signInWithGoogle),
                             ),
                             SignInButton(
                               Buttons.Email,
@@ -319,7 +242,14 @@ class _OnboardingPageState extends State<OnboardingPage> {
                             SignInButton(
                               Buttons.Facebook,
                               text: 'Inicia sesión con Facebook',
-                              onPressed: doFacebookSignIn(context),
+                              onPressed: () {
+                                Scaffold.of(context).showSnackBar(
+                                  SnackBar(
+                                    content:
+                                        Text('Funcionalidad no implementada'),
+                                  ),
+                                );
+                              },
                             ),
                             SignInButton(
                               Buttons.AppleDark,
@@ -332,6 +262,12 @@ class _OnboardingPageState extends State<OnboardingPage> {
                                   ),
                                 );
                               },
+                            ),
+                            SignInButtonBuilder(
+                              text: 'Inicio de sesión anónimo',
+                              icon: Icons.face,
+                              backgroundColor: AppColors.darkBlue,
+                              onPressed: doSignIn(context, signInAnonymously),
                             ),
                           ],
                         );

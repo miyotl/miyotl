@@ -45,6 +45,7 @@ dependencies:
   firebase_analytics: ^5.0.2
   firebase_auth: ^0.18.4+1
   cloud_firestore: ^0.14.4
+  url_launcher: ^5.7.10
   # flutter_facebook_auth: ^1.0.0
 
 dev_dependencies:

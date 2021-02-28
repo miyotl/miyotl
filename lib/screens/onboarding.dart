@@ -273,7 +273,33 @@ class _OnboardingPageState extends State<OnboardingPage> {
                               text: 'Inicio de sesión anónimo',
                               icon: Icons.face,
                               backgroundColor: AppColors.darkBlue,
-                              onPressed: doSignIn(context, signInAnonymously),
+                              onPressed: () {
+                                showDialog(
+                                  context: context,
+                                  builder: (context) => AlertDialog(
+                                    title: Text('Pregunta'),
+                                    content: Text(
+                                        '¿Estás seguro que quieres iniciar sesión de forma anónima? No podremos enviarte correos con actualizaciones sobre el proyecto...'),
+                                    actions: [
+                                      TextButton(
+                                        child: Text('Sí, estoy seguro'),
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                          doSignIn(
+                                              context, signInAnonymously)();
+                                        },
+                                      ),
+                                      TextButton(
+                                        child: Text(
+                                            'No, déjame iniciar sesión...'),
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              },
                             ),
                           ],
                         );

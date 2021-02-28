@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_signin_button/button_view.dart';
@@ -13,6 +14,7 @@ import 'package:provider/provider.dart';
 import '../models/constants.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../widgets/status_bar_colors.dart';
+import 'package:url_launcher/url_launcher.dart';
 // import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 
 typedef SignInFunction = Future<UserCredential> Function();
@@ -231,10 +233,34 @@ class _OnboardingPageState extends State<OnboardingPage> {
                                     SizedBox(
                                       height: 8,
                                     ),
-                                    Text(
-                                      'Al iniciar sesión aceptas nuestros términos y condiciones y política de privacidad, y aceptas recibir correos electrónicos con actualizaciones sobre el proyecto.',
-                                      style:
-                                          Theme.of(context).textTheme.caption,
+                                    RichText(
+                                      text: TextSpan(
+                                        style:
+                                            Theme.of(context).textTheme.caption,
+                                        children: [
+                                          TextSpan(
+                                            text: 'Al iniciar sesión aceptas ',
+                                          ),
+
+                                          /// https://stackoverflow.com/questions/43583411/how-to-create-a-hyperlink-in-flutter-widget
+                                          TextSpan(
+                                            text:
+                                                'nuestros términos y condiciones y política de privacidad',
+                                            style: TextStyle(
+                                              color: Colors.blue,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                            recognizer: TapGestureRecognizer()
+                                              ..onTap = () => launch(
+                                                    'https://proyecto-miyotl.web.app/privacidad/',
+                                                    forceWebView: true,
+                                                  ),
+                                          ),
+                                          TextSpan(
+                                              text:
+                                                  ', y aceptas recibir correos electrónicos con actualizaciones sobre el proyecto.'),
+                                        ],
+                                      ),
                                       textAlign: TextAlign.center,
                                     ),
                                   ],

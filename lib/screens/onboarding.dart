@@ -218,13 +218,26 @@ class _OnboardingPageState extends State<OnboardingPage> {
                               padding: const EdgeInsets.all(16),
                               child: SizedBox(
                                 width: MediaQuery.of(context).size.width * 0.75,
-                                child: Text(
-                                  'Inicia sesión o crea una cuenta',
-                                  style: GoogleFonts.fredokaOne().copyWith(
-                                    fontSize: 32,
-                                    color: Colors.white,
-                                  ),
-                                  textAlign: TextAlign.center,
+                                child: Column(
+                                  children: [
+                                    Text(
+                                      'Inicia sesión o crea una cuenta',
+                                      style: GoogleFonts.fredokaOne().copyWith(
+                                        fontSize: 32,
+                                        color: Colors.white,
+                                      ),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                    SizedBox(
+                                      height: 8,
+                                    ),
+                                    Text(
+                                      'Al iniciar sesión aceptas nuestros términos y condiciones y política de privacidad, y aceptas recibir correos electrónicos con actualizaciones sobre el proyecto.',
+                                      style:
+                                          Theme.of(context).textTheme.caption,
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ],
                                 ),
                               ),
                             ),

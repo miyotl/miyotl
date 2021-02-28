@@ -315,106 +315,24 @@ class _OnboardingPageState extends State<OnboardingPage> {
                           ),
                     ),
                     Expanded(
-                      child: ListView(
-                        padding: EdgeInsets.all(8),
-                        shrinkWrap: true,
-                        children: [
-                          Card(
-                            child: ListTile(
-                              title: Text('Chinanteco'),
-                              subtitle: Text('125,726 hablantes'),
-                              leading: Icon(Icons.language),
-                            ),
-                          ),
-                          Card(
-                            child: ListTile(
-                              title: Text('Chocholteco'),
-                              subtitle: Text('814 hablantes'),
-                              leading: Icon(Icons.language),
-                            ),
-                          ),
-                          Card(
-                            child: ListTile(
-                                title: Text('Mazateco'),
-                                subtitle: Text('230,124 hablantes'),
-                                leading: Icon(Icons.language),
-                                onTap: () {
-                                  while (Navigator.of(context).canPop()) {
-                                    Navigator.of(context).pop();
-                                  }
-                                }),
-                          ),
-                          Card(
-                            child: ListTile(
-                              title: Text('Maya'),
-                              subtitle: Text('859,607 hablantes'),
-                              leading: Icon(Icons.language),
-                            ),
-                          ),
-                          Card(
-                            child: ListTile(
-                              title: Text('Mazahua'),
-                              subtitle: Text('151,897 hablantes'),
-                              leading: Icon(Icons.language),
-                            ),
-                          ),
-                          Card(
-                            child: ListTile(
-                              title: Text('Mixe'),
-                              subtitle: Text('136,736 hablantes'),
-                              leading: Icon(Icons.language),
-                            ),
-                          ),
-                          Card(
-                            child: ListTile(
-                              title: Text('Mizteco'),
-                              subtitle: Text('496,038 hablantes'),
-                              leading: Icon(Icons.language),
-                            ),
-                          ),
-                          Card(
-                            child: ListTile(
-                              title: Text('Náhuatl'),
-                              subtitle: Text('1,568,884 hablantes'),
-                              leading: Icon(Icons.language),
-                            ),
-                          ),
-                          Card(
-                            child: ListTile(
-                              title: Text('Hña Hñu'),
-                              subtitle: Text('307,928 hablantes'),
-                              leading: Icon(Icons.language),
-                            ),
-                          ),
-                          Card(
-                            child: ListTile(
-                              title: Text('Tzeltal'),
-                              subtitle: Text('476,628 hablantes'),
-                              leading: Icon(Icons.language),
-                            ),
-                          ),
-                          Card(
-                            child: ListTile(
-                              title: Text('Tzotzil'),
-                              subtitle: Text('417,462 hablantes'),
-                              leading: Icon(Icons.language),
-                            ),
-                          ),
-                          Card(
-                            child: ListTile(
-                              title: Text('Zapoteco'),
-                              subtitle: Text('460,695 hablantes'),
-                              leading: Icon(Icons.language),
-                            ),
-                          ),
-                          Card(
-                            child: ListTile(
-                              title: Text('Tutunaku'),
-                              subtitle: Text('250,252 hablantes'),
-                              leading: Icon(Icons.language),
-                            ),
-                          ),
-                        ],
+                      child: Consumer<AppState>(
+                        builder: (context, state, child) {
+                          return ListView(
+                            padding: EdgeInsets.all(8),
+                            shrinkWrap: true,
+                            children: [
+                              for (var language in state.languages)
+                                Card(
+                                  child: ListTile(
+                                    title: Text('${language.name}'),
+                                    subtitle:
+                                        Text('${language.speakers} hablantes'),
+                                    leading: Icon(Icons.language),
+                                  ),
+                                ),
+                            ],
+                          );
+                        },
                       ),
                     ),
                   ],

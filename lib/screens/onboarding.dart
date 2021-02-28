@@ -79,8 +79,8 @@ class _OnboardingPageState extends State<OnboardingPage> {
                 'No especificaste ninguna cuenta de Google para iniciar sesión; vuelve a intentarlo.',
               ),
               actions: [
-                FlatButton(
-                  child: Text('DE ACUERDO'),
+                TextButton(
+                  child: Text('De acuerdo'),
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
@@ -106,8 +106,8 @@ class _OnboardingPageState extends State<OnboardingPage> {
                 'Falló el inicio de sesión. Intenta otra vez, o utiliza otra de las opciones para iniciar sesión.',
               ),
               actions: [
-                FlatButton(
-                  child: Text('DE ACUERDO'),
+                TextButton(
+                  child: Text('De acuerdo'),
                   onPressed: () {
                     Navigator.of(context).pop();
                   },

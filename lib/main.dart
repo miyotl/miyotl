@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'screens/home.dart';
+import 'screens/onboarding.dart';
 import 'package:provider/provider.dart';
 import 'models/app_state.dart';
 import 'models/constants.dart';
@@ -17,7 +18,7 @@ class App extends StatelessWidget {
         title: app_name,
         theme: new_light_theme,
         darkTheme: dark_theme,
-        home: HomePage(),
+        home: OnboardingPage(),
         debugShowCheckedModeBanner: false,
       ),
     );

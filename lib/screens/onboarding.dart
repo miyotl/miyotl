@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_signin_button/button_view.dart';
 import 'package:lenguas/models/app_state.dart';
+import 'package:lenguas/screens/home.dart';
 import 'package:liquid_swipe/liquid_swipe.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -198,9 +199,10 @@ class _OnboardingPageState extends State<OnboardingPage> {
           Theme(
             data: dark_theme,
             child: DarkStatusBar(
-              child: SafeArea(
-                child: Container(
-                  alignment: Alignment.center,
+              child: Container(
+                color: AppColors.darkBlue,
+                alignment: Alignment.center,
+                child: SafeArea(
                   child: FutureBuilder<FirebaseApp>(
                     future: _initialization,
                     builder: (context, snapshot) {
@@ -218,8 +220,10 @@ class _OnboardingPageState extends State<OnboardingPage> {
                                 width: MediaQuery.of(context).size.width * 0.75,
                                 child: Text(
                                   'Inicia sesión o crea una cuenta',
-                                  style: GoogleFonts.fredokaOne()
-                                      .copyWith(fontSize: 32),
+                                  style: GoogleFonts.fredokaOne().copyWith(
+                                    fontSize: 32,
+                                    color: Colors.white,
+                                  ),
                                   textAlign: TextAlign.center,
                                 ),
                               ),

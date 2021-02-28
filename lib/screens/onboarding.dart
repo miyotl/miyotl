@@ -272,42 +272,42 @@ class _OnboardingPageState extends State<OnboardingPage> {
                               text: 'Inicia sesión con Google',
                               onPressed: doSignIn(context, signInWithGoogle),
                             ),
-                            SignInButton(
-                              Buttons.Email,
-                              text: 'Con correo y contraseña',
-                              onPressed: () {
-                                Scaffold.of(context).showSnackBar(
-                                  SnackBar(
-                                    content:
-                                        Text('Funcionalidad no implementada'),
-                                  ),
-                                );
-                              },
-                            ),
-                            SignInButton(
-                              Buttons.Facebook,
-                              text: 'Inicia sesión con Facebook',
-                              onPressed: () {
-                                Scaffold.of(context).showSnackBar(
-                                  SnackBar(
-                                    content:
-                                        Text('Funcionalidad no implementada'),
-                                  ),
-                                );
-                              },
-                            ),
-                            SignInButton(
-                              Buttons.AppleDark,
-                              text: 'Inicia sesión con Apple',
-                              onPressed: () {
-                                Scaffold.of(context).showSnackBar(
-                                  SnackBar(
-                                    content:
-                                        Text('Funcionalidad no implementada'),
-                                  ),
-                                );
-                              },
-                            ),
+                            // SignInButton(
+                            //   Buttons.Email,
+                            //   text: 'Con correo y contraseña',
+                            //   onPressed: () {
+                            //     Scaffold.of(context).showSnackBar(
+                            //       SnackBar(
+                            //         content:
+                            //             Text('Funcionalidad no implementada'),
+                            //       ),
+                            //     );
+                            //   },
+                            // ),
+                            // SignInButton(
+                            //   Buttons.Facebook,
+                            //   text: 'Inicia sesión con Facebook',
+                            //   onPressed: () {
+                            //     Scaffold.of(context).showSnackBar(
+                            //       SnackBar(
+                            //         content:
+                            //             Text('Funcionalidad no implementada'),
+                            //       ),
+                            //     );
+                            //   },
+                            // ),
+                            // SignInButton(
+                            //   Buttons.AppleDark,
+                            //   text: 'Inicia sesión con Apple',
+                            //   onPressed: () {
+                            //     Scaffold.of(context).showSnackBar(
+                            //       SnackBar(
+                            //         content:
+                            //             Text('Funcionalidad no implementada'),
+                            //       ),
+                            //     );
+                            //   },
+                            // ),
                             SignInButtonBuilder(
                               text: 'Inicio de sesión anónimo',
                               icon: Icons.face,

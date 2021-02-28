@@ -143,50 +143,52 @@ class _OnboardingPageState extends State<OnboardingPage> {
 
           Theme(
             data: new_light_theme,
-            child: Container(
-              alignment: Alignment.center,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Image.asset(
-                    'img/icon-round-new-outline.png',
-                    width: MediaQuery.of(context).size.width * 0.66,
-                  ),
-                  SizedBox(height: 16),
-                  Text(
-                    'Miyotl',
-                    style: GoogleFonts.fredokaOne().copyWith(
-                      fontSize: 64,
-                      color: AppColors.azulMorado,
+            child: LightStatusBar(
+              child: Container(
+                alignment: Alignment.center,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      'img/icon-round-new-outline.png',
+                      width: MediaQuery.of(context).size.width * 0.66,
                     ),
-                  ),
-                  SizedBox(height: 16),
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.75,
-                    child: Text(
-                      'Nuestras lenguas prehispánicas son hoy raíz y vuelo luminoso de unión y paz.',
-                      style: GoogleFonts.rubik().copyWith(
-                        fontSize: 16,
-                        color: Colors.black,
+                    SizedBox(height: 16),
+                    Text(
+                      'Miyotl',
+                      style: GoogleFonts.fredokaOne().copyWith(
+                        fontSize: 64,
+                        color: AppColors.azulMorado,
                       ),
-                      textAlign: TextAlign.center,
                     ),
-                  ),
-                  SizedBox(height: 16),
-                  ElevatedButton(
-                    child: Text(
-                      'Empieza ahora',
-                      style: Theme.of(context)
-                          .textTheme
-                          .button
-                          .copyWith(color: Colors.white),
+                    SizedBox(height: 16),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.75,
+                      child: Text(
+                        'Nuestras lenguas prehispánicas son hoy raíz y vuelo luminoso de unión y paz.',
+                        style: GoogleFonts.rubik().copyWith(
+                          fontSize: 16,
+                          color: Colors.black,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
                     ),
-                    onPressed: nextPage,
-                  ),
-                ],
+                    SizedBox(height: 16),
+                    ElevatedButton(
+                      child: Text(
+                        'Empieza ahora',
+                        style: Theme.of(context)
+                            .textTheme
+                            .button
+                            .copyWith(color: Colors.white),
+                      ),
+                      onPressed: nextPage,
+                    ),
+                  ],
+                ),
+                color: Colors.white,
               ),
-              color: Colors.white,
             ),
           ),
 
@@ -285,136 +287,138 @@ class _OnboardingPageState extends State<OnboardingPage> {
           /// PAGE 3
           /// Language select
 
-          Container(
-            color: AppColors.morado,
-            alignment: Alignment.topCenter,
-            child: SafeArea(
-              child: Column(
-                children: [
-                  // SizedBox(height: 16),
-                  Consumer<AppState>(
-                    builder: (context, state, child) => Padding(
-                      padding: const EdgeInsets.all(16),
-                      child: Text(
-                        'Hola, ${state.givenName}.',
-                        style: Theme.of(context).textTheme.headline1.copyWith(
-                              fontSize: 32,
-                              color: Colors.white,
-                            ),
+          DarkStatusBar(
+            child: Container(
+              color: AppColors.morado,
+              alignment: Alignment.topCenter,
+              child: SafeArea(
+                child: Column(
+                  children: [
+                    // SizedBox(height: 16),
+                    Consumer<AppState>(
+                      builder: (context, state, child) => Padding(
+                        padding: const EdgeInsets.all(16),
+                        child: Text(
+                          'Hola, ${state.givenName}.',
+                          style: Theme.of(context).textTheme.headline1.copyWith(
+                                fontSize: 32,
+                                color: Colors.white,
+                              ),
+                        ),
                       ),
                     ),
-                  ),
-                  Text(
-                    '¿Qué idioma quieres aprender?',
-                    style: Theme.of(context).textTheme.headline2.copyWith(
-                          fontSize: 16,
-                          color: Colors.white,
-                        ),
-                  ),
-                  Expanded(
-                    child: ListView(
-                      padding: EdgeInsets.all(8),
-                      shrinkWrap: true,
-                      children: [
-                        Card(
-                          child: ListTile(
-                            title: Text('Chinanteco'),
-                            subtitle: Text('125,726 hablantes'),
-                            leading: Icon(Icons.language),
+                    Text(
+                      '¿Qué idioma quieres aprender?',
+                      style: Theme.of(context).textTheme.headline2.copyWith(
+                            fontSize: 16,
+                            color: Colors.white,
                           ),
-                        ),
-                        Card(
-                          child: ListTile(
-                            title: Text('Chocholteco'),
-                            subtitle: Text('814 hablantes'),
-                            leading: Icon(Icons.language),
-                          ),
-                        ),
-                        Card(
-                          child: ListTile(
-                              title: Text('Mazateco'),
-                              subtitle: Text('230,124 hablantes'),
-                              leading: Icon(Icons.language),
-                              onTap: () {
-                                while (Navigator.of(context).canPop()) {
-                                  Navigator.of(context).pop();
-                                }
-                              }),
-                        ),
-                        Card(
-                          child: ListTile(
-                            title: Text('Maya'),
-                            subtitle: Text('859,607 hablantes'),
-                            leading: Icon(Icons.language),
-                          ),
-                        ),
-                        Card(
-                          child: ListTile(
-                            title: Text('Mazahua'),
-                            subtitle: Text('151,897 hablantes'),
-                            leading: Icon(Icons.language),
-                          ),
-                        ),
-                        Card(
-                          child: ListTile(
-                            title: Text('Mixe'),
-                            subtitle: Text('136,736 hablantes'),
-                            leading: Icon(Icons.language),
-                          ),
-                        ),
-                        Card(
-                          child: ListTile(
-                            title: Text('Mizteco'),
-                            subtitle: Text('496,038 hablantes'),
-                            leading: Icon(Icons.language),
-                          ),
-                        ),
-                        Card(
-                          child: ListTile(
-                            title: Text('Náhuatl'),
-                            subtitle: Text('1,568,884 hablantes'),
-                            leading: Icon(Icons.language),
-                          ),
-                        ),
-                        Card(
-                          child: ListTile(
-                            title: Text('Hña Hñu'),
-                            subtitle: Text('307,928 hablantes'),
-                            leading: Icon(Icons.language),
-                          ),
-                        ),
-                        Card(
-                          child: ListTile(
-                            title: Text('Tzeltal'),
-                            subtitle: Text('476,628 hablantes'),
-                            leading: Icon(Icons.language),
-                          ),
-                        ),
-                        Card(
-                          child: ListTile(
-                            title: Text('Tzotzil'),
-                            subtitle: Text('417,462 hablantes'),
-                            leading: Icon(Icons.language),
-                          ),
-                        ),
-                        Card(
-                          child: ListTile(
-                            title: Text('Zapoteco'),
-                            subtitle: Text('460,695 hablantes'),
-                            leading: Icon(Icons.language),
-                          ),
-                        ),
-                        Card(
-                          child: ListTile(
-                            title: Text('Tutunaku'),
-                            subtitle: Text('250,252 hablantes'),
-                            leading: Icon(Icons.language),
-                          ),
-                        ),
-                      ],
                     ),
-                  ),
-                ],
+                    Expanded(
+                      child: ListView(
+                        padding: EdgeInsets.all(8),
+                        shrinkWrap: true,
+                        children: [
+                          Card(
+                            child: ListTile(
+                              title: Text('Chinanteco'),
+                              subtitle: Text('125,726 hablantes'),
+                              leading: Icon(Icons.language),
+                            ),
+                          ),
+                          Card(
+                            child: ListTile(
+                              title: Text('Chocholteco'),
+                              subtitle: Text('814 hablantes'),
+                              leading: Icon(Icons.language),
+                            ),
+                          ),
+                          Card(
+                            child: ListTile(
+                                title: Text('Mazateco'),
+                                subtitle: Text('230,124 hablantes'),
+                                leading: Icon(Icons.language),
+                                onTap: () {
+                                  while (Navigator.of(context).canPop()) {
+                                    Navigator.of(context).pop();
+                                  }
+                                }),
+                          ),
+                          Card(
+                            child: ListTile(
+                              title: Text('Maya'),
+                              subtitle: Text('859,607 hablantes'),
+                              leading: Icon(Icons.language),
+                            ),
+                          ),
+                          Card(
+                            child: ListTile(
+                              title: Text('Mazahua'),
+                              subtitle: Text('151,897 hablantes'),
+                              leading: Icon(Icons.language),
+                            ),
+                          ),
+                          Card(
+                            child: ListTile(
+                              title: Text('Mixe'),
+                              subtitle: Text('136,736 hablantes'),
+                              leading: Icon(Icons.language),
+                            ),
+                          ),
+                          Card(
+                            child: ListTile(
+                              title: Text('Mizteco'),
+                              subtitle: Text('496,038 hablantes'),
+                              leading: Icon(Icons.language),
+                            ),
+                          ),
+                          Card(
+                            child: ListTile(
+                              title: Text('Náhuatl'),
+                              subtitle: Text('1,568,884 hablantes'),
+                              leading: Icon(Icons.language),
+                            ),
+                          ),
+                          Card(
+                            child: ListTile(
+                              title: Text('Hña Hñu'),
+                              subtitle: Text('307,928 hablantes'),
+                              leading: Icon(Icons.language),
+                            ),
+                          ),
+                          Card(
+                            child: ListTile(
+                              title: Text('Tzeltal'),
+                              subtitle: Text('476,628 hablantes'),
+                              leading: Icon(Icons.language),
+                            ),
+                          ),
+                          Card(
+                            child: ListTile(
+                              title: Text('Tzotzil'),
+                              subtitle: Text('417,462 hablantes'),
+                              leading: Icon(Icons.language),
+                            ),
+                          ),
+                          Card(
+                            child: ListTile(
+                              title: Text('Zapoteco'),
+                              subtitle: Text('460,695 hablantes'),
+                              leading: Icon(Icons.language),
+                            ),
+                          ),
+                          Card(
+                            child: ListTile(
+                              title: Text('Tutunaku'),
+                              subtitle: Text('250,252 hablantes'),
+                              leading: Icon(Icons.language),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

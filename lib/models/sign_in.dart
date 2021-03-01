@@ -35,8 +35,13 @@ abstract class SignInMethods {
         FacebookAuthProvider.credential(result.token);
 
     // Once signed in, return the UserCredential
-    return await FirebaseAuth.instance
-        .signInWithCredential(facebookAuthCredential);
+    try {
+      return await FirebaseAuth.instance
+          .signInWithCredential(facebookAuthCredential);
+    } catch (e) {
+      /// On exception, return null (for instance on Huawei phones)
+      return null;
+    }
   }
 
   static Future<UserCredential> anonymous() async {

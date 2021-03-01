@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-const String dictionary_url =
-    'https://drive.google.com/uc?export=download&id=1A2_SIrvbM8P9vwHfju7ZYiN3twO9OTp4';
+const String dictionary_url = 'https://proyecto-miyotl.web.app/data.json';
 const String app_name = 'Miyotl';
 
 class AppColors {

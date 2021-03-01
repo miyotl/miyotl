@@ -329,7 +329,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                             //   },
                             // ),
                             SignInButtonBuilder(
-                              text: 'Inicio de sesión anónimo',
+                              text: 'Inicia como invitado',
                               icon: Icons.face,
                               backgroundColor: AppColors.darkBlue,
                               onPressed: () {
@@ -338,7 +338,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                                   builder: (context) => AlertDialog(
                                     title: Text('Pregunta'),
                                     content: Text(
-                                        '¿Estás seguro que quieres iniciar sesión de forma anónima? No podremos enviarte correos con actualizaciones sobre el proyecto...'),
+                                        '¿Estás seguro que quieres iniciar sesión como invitado? No podremos enviarte correos con actualizaciones sobre el proyecto...'),
                                     actions: [
                                       TextButton(
                                         child: Text('Sí, estoy seguro'),

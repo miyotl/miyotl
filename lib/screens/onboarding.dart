@@ -457,7 +457,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                     Padding(
                       padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                       child: Text(
-                        '${_name == 'Ajolote anónimo' ? '¡Listo!' : 'Listo, ' + _name.split(' ')[0]}',
+                        '${(_name == null || _name == 'Ajolote anónimo') ? '¡Listo!' : 'Listo, ' + _name.split(' ')[0]}',
                         style: GoogleFonts.fredokaOne().copyWith(
                           fontSize: 48,
                           color: AppColors.morado,

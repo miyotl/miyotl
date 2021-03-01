@@ -329,7 +329,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                             //   },
                             // ),
                             SignInButtonBuilder(
-                              text: 'Inicia como invitado',
+                              text: 'Ingresa como invitado',
                               icon: Icons.face,
                               backgroundColor: AppColors.darkBlue,
                               onPressed: () {

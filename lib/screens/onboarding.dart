@@ -70,7 +70,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
           context,
           listen: false,
         );
-        _name = await state.givenName;
+        state.givenName.then((name) => setState(() => _name = name));
         state.firebaseCredential = credential;
         nextPage();
       }

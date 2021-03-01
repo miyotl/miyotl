@@ -13,9 +13,13 @@ class DeveloperPage extends StatelessWidget {
           ElevatedButton(
             child: Text('Abrir pantalla inicial'),
             onPressed: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => OnboardingPage(),
-              ));
+              Navigator.of(context).pushNamed('/onboarding');
+            },
+          ),
+          ElevatedButton(
+            child: Text('Consultar disponibilidad de servicios de Google'),
+            onPressed: () {
+              Navigator.of(context).pushNamed('/debug/google');
             },
           ),
         ],

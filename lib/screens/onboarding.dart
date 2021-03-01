@@ -41,20 +41,48 @@ class _OnboardingPageState extends State<OnboardingPage> {
     controller.animateToPage(page: controller.currentPage + 1);
   }
 
-  Function doSignIn(BuildContext context, SignInFunction signInFunction) {
-    return () async {
-      try {
-        var credential = await signInFunction();
-        var isLogged = await FacebookAuth.instance.isLogged;
-        if (credential == null && isLogged == null) {
+  void doSignIn(BuildContext context, SignInFunction signInFunction) async {
+    try {
+      var credential = await signInFunction();
+      var isLogged = await FacebookAuth.instance.isLogged;
+      if (credential == null && isLogged == null) {
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: Text(
+              'Cancelaste el inicio de sesión',
+            ),
+            content: Text(
+              'No especificaste ninguna cuenta para iniciar sesión; vuelve a intentarlo.',
+            ),
+            actions: [
+              TextButton(
+                child: Text('De acuerdo'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          ),
+        );
+      } else {
+        AppState state = Provider.of<AppState>(
+          context,
+          listen: false,
+        );
+        _name = await state.givenName;
+        state.firebaseCredential = credential;
+        nextPage();
+      }
+    } on PlatformException catch (e) {
+      switch (e.code) {
+        case 'sign_in_failed':
           showDialog(
             context: context,
             builder: (context) => AlertDialog(
-              title: Text(
-                'Cancelaste el inicio de sesión',
-              ),
+              title: Text('Inicio de sesión fallido'),
               content: Text(
-                'No especificaste ninguna cuenta para iniciar sesión; vuelve a intentarlo.',
+                'Falló el inicio de sesión. Intenta otra vez, o utiliza otra de las opciones para iniciar sesión.',
               ),
               actions: [
                 TextButton(
@@ -66,97 +94,67 @@ class _OnboardingPageState extends State<OnboardingPage> {
               ],
             ),
           );
-        } else {
-          AppState state = Provider.of<AppState>(
-            context,
-            listen: false,
-          );
-          _name = await state.givenName;
-          state.firebaseCredential = credential;
-          nextPage();
-        }
-      } on PlatformException catch (e) {
-        switch (e.code) {
-          case 'sign_in_failed':
-            showDialog(
-              context: context,
-              builder: (context) => AlertDialog(
-                title: Text('Inicio de sesión fallido'),
-                content: Text(
-                  'Falló el inicio de sesión. Intenta otra vez, o utiliza otra de las opciones para iniciar sesión.',
-                ),
-                actions: [
-                  TextButton(
-                    child: Text('De acuerdo'),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                  ),
-                ],
+          break;
+        case 'api-not-available':
+          showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+              title: Text('No tienes servicios de Google'),
+              content: Text(
+                'Tu teléfono no cuenta con los servicios de Google, por lo que no puedes utilizar este método de inicio de sesión. Selecciona Facebook para poder iniciar sesión.',
               ),
-            );
-            break;
-          case 'api-not-available':
-            showDialog(
-              context: context,
-              builder: (context) => AlertDialog(
-                title: Text('No tienes servicios de Google'),
-                content: Text(
-                  'Tu teléfono no cuenta con los servicios de Google, por lo que no puedes utilizar este método de inicio de sesión. Selecciona Facebook para poder iniciar sesión.',
-                ),
-              ),
-            );
-            break;
-          default:
-            rethrow;
-        }
-      } on FacebookAuthException catch (e) {
-        switch (e.errorCode) {
-          case FacebookAuthErrorCode.OPERATION_IN_PROGRESS:
-            break;
-          case FacebookAuthErrorCode.CANCELLED:
-            showDialog(
-              context: context,
-              builder: (context) => AlertDialog(
-                title: Text('Cancelaste el inicio de sesión'),
-                content: Text(
-                  'Vuelve a intentar iniciar sesión, o selecciona otro método de inicio de sesión',
-                ),
-                actions: [
-                  TextButton(
-                    child: Text('De acuerdo'),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                  ),
-                ],
-              ),
-            );
-            break;
-          default:
-            showDialog(
-              context: context,
-              builder: (context) => AlertDialog(
-                title: Text('Falló el inicio de sesión con Facebook'),
-                content: Text(
-                  'Error ${e.errorCode}: ${e.message}.\nPor favor toma captura de pantalla y mándala a miyotl@googlegroups.com.',
-                ),
-              ),
-            );
-        }
-      } catch (e) {
-        /// TODO: report errors in a more automatic way
-        showDialog(
-          context: context,
-          builder: (context) => AlertDialog(
-            title: Text('Error desconocido'),
-            content: Text(
-              'Ocurrió un error desconocido. Por favor toma captura de pantalla y mándala a miyotl@googlegroups.com.\n\nEl error es:\n\n$e',
             ),
-          ),
-        );
+          );
+          break;
+        default:
+          rethrow;
       }
-    };
+    } on FacebookAuthException catch (e) {
+      switch (e.errorCode) {
+        case FacebookAuthErrorCode.OPERATION_IN_PROGRESS:
+          break;
+        case FacebookAuthErrorCode.CANCELLED:
+          showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+              title: Text('Cancelaste el inicio de sesión'),
+              content: Text(
+                'Vuelve a intentar iniciar sesión, o selecciona otro método de inicio de sesión',
+              ),
+              actions: [
+                TextButton(
+                  child: Text('De acuerdo'),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            ),
+          );
+          break;
+        default:
+          showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+              title: Text('Falló el inicio de sesión con Facebook'),
+              content: Text(
+                'Error ${e.errorCode}: ${e.message}.\nPor favor toma captura de pantalla y mándala a miyotl@googlegroups.com.',
+              ),
+            ),
+          );
+      }
+    } catch (e) {
+      /// TODO: report errors in a more automatic way
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: Text('Error desconocido'),
+          content: Text(
+            'Ocurrió un error desconocido. Por favor toma captura de pantalla y mándala a miyotl@googlegroups.com.\n\nEl error es:\n\n$e',
+          ),
+        ),
+      );
+    }
   }
 
   @override
@@ -297,7 +295,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                             SignInButton(
                               Buttons.GoogleDark,
                               text: 'Inicia sesión con Google',
-                              onPressed:
+                              onPressed: () =>
                                   doSignIn(context, SignInMethods.google),
                             ),
                             // SignInButton(
@@ -315,7 +313,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                             SignInButton(
                               Buttons.Facebook,
                               text: 'Inicia sesión con Facebook',
-                              onPressed:
+                              onPressed: () =>
                                   doSignIn(context, SignInMethods.facebook),
                             ),
                             // SignInButton(
@@ -346,8 +344,8 @@ class _OnboardingPageState extends State<OnboardingPage> {
                                         child: Text('Sí, estoy seguro'),
                                         onPressed: () {
                                           Navigator.of(context).pop();
-                                          doSignIn(context,
-                                              SignInMethods.anonymous)();
+                                          doSignIn(
+                                              context, SignInMethods.anonymous);
                                         },
                                       ),
                                       TextButton(

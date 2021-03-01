@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:http/http.dart';
 import 'constants.dart';
 import 'dictionary.dart';
@@ -20,9 +21,16 @@ String capitalize(String string) {
 class AppState extends ChangeNotifier {
   UserCredential firebaseCredential;
 
-  String get givenName =>
-      firebaseCredential?.additionalUserInfo?.profile['given_name'] ??
-      'Ajolote anónimo';
+  Future<String> get givenName async {
+    var isLogged = await FacebookAuth.instance.isLogged;
+    if (isLogged == null) {
+      return FirebaseAuth.instance?.currentUser?.displayName ??
+          'Ajolote anónimo';
+    } else {
+      var userData = await FacebookAuth.instance.getUserData();
+      return userData['name'] ?? '<error al obtener tu nombre>';
+    }
+  }
 
   /// Current language for dictionary, learning and culture
   String language = 'Mazateco';
@@ -108,4 +116,3 @@ class AppState extends ChangeNotifier {
     notifyListeners();
   }
 }
-  

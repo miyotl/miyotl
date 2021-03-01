@@ -30,6 +30,8 @@ class _OnboardingPageState extends State<OnboardingPage> {
 
   final Future<FirebaseApp> _initialization = Firebase.initializeApp();
 
+  String _name;
+
   @override
   void initState() {
     controller = LiquidController();
@@ -70,6 +72,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
             context,
             listen: false,
           );
+          _name = await state.givenName;
           state.firebaseCredential = credential;
           nextPage();
         }
@@ -385,16 +388,19 @@ class _OnboardingPageState extends State<OnboardingPage> {
                   children: [
                     // SizedBox(height: 16),
                     Consumer<AppState>(
-                      builder: (context, state, child) => Padding(
-                        padding: const EdgeInsets.all(16),
-                        child: Text(
-                          'Hola, ${state.givenName}.',
-                          style: Theme.of(context).textTheme.headline1.copyWith(
-                                fontSize: 32,
-                                color: Colors.white,
-                              ),
-                        ),
-                      ),
+                      builder: (context, state, child) {
+                        return Padding(
+                          padding: const EdgeInsets.all(16),
+                          child: Text(
+                            'Hola, $_name.',
+                            style:
+                                Theme.of(context).textTheme.headline1.copyWith(
+                                      fontSize: 32,
+                                      color: Colors.white,
+                                    ),
+                          ),
+                        );
+                      },
                     ),
                     Text(
                       '¿Qué idioma quieres aprender?',

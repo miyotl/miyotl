@@ -44,7 +44,8 @@ class _OnboardingPageState extends State<OnboardingPage> {
     return () async {
       try {
         var credential = await signInFunction();
-        if (credential == null) {
+        var isLogged = await FacebookAuth.instance.isLogged;
+        if (credential == null && isLogged == null) {
           showDialog(
             context: context,
             builder: (context) => AlertDialog(

@@ -9,9 +9,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import '../widgets/empty_state.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
 import '../models/constants.dart';
+import '../models/sign_in.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../widgets/status_bar_colors.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -37,33 +37,6 @@ class _OnboardingPageState extends State<OnboardingPage> {
 
   void nextPage() {
     controller.animateToPage(page: controller.currentPage + 1);
-  }
-
-  Future<UserCredential> signInWithGoogle() async {
-    /// https://firebase.flutter.dev/docs/auth/social/#google
-
-    // Trigger the authentication flow
-    final GoogleSignInAccount googleUser = await GoogleSignIn().signIn();
-
-    if (googleUser == null) {
-      return null;
-    }
-
-    // Obtain the auth details from the request
-    final GoogleSignInAuthentication googleAuth =
-        await googleUser.authentication;
-
-    // Create a new credential
-    final GoogleAuthCredential credential = GoogleAuthProvider.credential(
-      accessToken: googleAuth.accessToken,
-      idToken: googleAuth.idToken,
-    );
-
-    return await FirebaseAuth.instance.signInWithCredential(credential);
-  }
-
-  Future<UserCredential> signInAnonymously() async {
-    return await FirebaseAuth.instance.signInAnonymously();
   }
 
   Function doSignIn(BuildContext context, SignInFunction signInFunction) {
@@ -270,7 +243,8 @@ class _OnboardingPageState extends State<OnboardingPage> {
                             SignInButton(
                               Buttons.GoogleDark,
                               text: 'Inicia sesión con Google',
-                              onPressed: doSignIn(context, signInWithGoogle),
+                              onPressed:
+                                  doSignIn(context, SignInMethods.google),
                             ),
                             // SignInButton(
                             //   Buttons.Email,
@@ -324,8 +298,8 @@ class _OnboardingPageState extends State<OnboardingPage> {
                                         child: Text('Sí, estoy seguro'),
                                         onPressed: () {
                                           Navigator.of(context).pop();
-                                          doSignIn(
-                                              context, signInAnonymously)();
+                                          doSignIn(context,
+                                              SignInMethods.anonymous)();
                                         },
                                       ),
                                       TextButton(

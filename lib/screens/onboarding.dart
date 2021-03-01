@@ -457,7 +457,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                     Padding(
                       padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                       child: Text(
-                        'Listo, ${_name.split(' ')[0]}',
+                        '${_name == null ? '¡Listo!' : 'Listo, ' + _name.split(' ')[0]}',
                         style: GoogleFonts.fredokaOne().copyWith(
                           fontSize: 48,
                           color: AppColors.morado,
@@ -487,6 +487,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                             .copyWith(color: Colors.white),
                       ),
                       onPressed: () {
+                        /// TODO: There is no animation, one would be nice, like a round one
                         Navigator.of(context).pushAndRemoveUntil(
                           MaterialPageRoute(
                             builder: (context) => HomePage(),

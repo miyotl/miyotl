@@ -16,7 +16,6 @@ import '../models/sign_in.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../widgets/status_bar_colors.dart';
 import 'package:url_launcher/url_launcher.dart';
-// import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 
 typedef SignInFunction = Future<UserCredential> Function();
 

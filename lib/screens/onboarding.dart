@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_signin_button/button_view.dart';
 import 'package:lenguas/models/app_state.dart';
 import 'package:lenguas/screens/home.dart';
@@ -90,6 +91,15 @@ class _OnboardingPageState extends State<OnboardingPage> {
               ],
             ),
           );
+        } else if (e is FacebookAuthException) {
+          showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+              title: Text('Falló el inicio de sesión con Facebook'),
+              content: Text(
+                  'Error ${e.errorCode}: ${e.message}.\nPor favor toma captura de pantalla y mándala a miyotl@googlegroups.com.'),
+            ),
+          );
         } else {
           /// TODO: report errors in a more automatic way
           showDialog(
@@ -97,7 +107,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
             builder: (context) => AlertDialog(
               title: Text('Error desconocido'),
               content: Text(
-                  'Ocurrió un error desconocido. Por favor toma captura de pantalla y reporta con los desarrolladores.\n\nEl error es:\n\n$e'),
+                  'Ocurrió un error desconocido. Por favor toma captura de pantalla y mándala a miyotl@googlegroups.com.\n\nEl error es:\n\n$e'),
             ),
           );
         }
@@ -258,18 +268,12 @@ class _OnboardingPageState extends State<OnboardingPage> {
                             //     );
                             //   },
                             // ),
-                            // SignInButton(
-                            //   Buttons.Facebook,
-                            //   text: 'Inicia sesión con Facebook',
-                            //   onPressed: () {
-                            //     Scaffold.of(context).showSnackBar(
-                            //       SnackBar(
-                            //         content:
-                            //             Text('Funcionalidad no implementada'),
-                            //       ),
-                            //     );
-                            //   },
-                            // ),
+                            SignInButton(
+                              Buttons.Facebook,
+                              text: 'Inicia sesión con Facebook',
+                              onPressed:
+                                  doSignIn(context, SignInMethods.facebook),
+                            ),
                             // SignInButton(
                             //   Buttons.AppleDark,
                             //   text: 'Inicia sesión con Apple',

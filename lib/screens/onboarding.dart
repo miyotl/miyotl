@@ -293,7 +293,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                               ),
                             ),
                             SignInButton(
-                              Buttons.GoogleDark,
+                              Buttons.Google,
                               text: 'Inicia sesión con Google',
                               onPressed: () =>
                                   doSignIn(context, SignInMethods.google),

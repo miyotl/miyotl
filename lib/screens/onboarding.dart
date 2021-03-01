@@ -92,14 +92,37 @@ class _OnboardingPageState extends State<OnboardingPage> {
             ),
           );
         } else if (e is FacebookAuthException) {
-          showDialog(
-            context: context,
-            builder: (context) => AlertDialog(
-              title: Text('Falló el inicio de sesión con Facebook'),
-              content: Text(
-                  'Error ${e.errorCode}: ${e.message}.\nPor favor toma captura de pantalla y mándala a miyotl@googlegroups.com.'),
-            ),
-          );
+          switch (e.errorCode) {
+            case FacebookAuthErrorCode.OPERATION_IN_PROGRESS:
+              break;
+            case FacebookAuthErrorCode.CANCELLED:
+              showDialog(
+                context: context,
+                builder: (context) => AlertDialog(
+                  title: Text('Cancelaste el inicio de sesión'),
+                  content: Text(
+                      'Vuelve a intentar iniciar sesión, o selecciona otro método de inicio de sesión'),
+                  actions: [
+                    TextButton(
+                      child: Text('De acuerdo'),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                  ],
+                ),
+              );
+              break;
+            default:
+              showDialog(
+                context: context,
+                builder: (context) => AlertDialog(
+                  title: Text('Falló el inicio de sesión con Facebook'),
+                  content: Text(
+                      'Error ${e.errorCode}: ${e.message}.\nPor favor toma captura de pantalla y mándala a miyotl@googlegroups.com.'),
+                ),
+              );
+          }
         } else {
           /// TODO: report errors in a more automatic way
           showDialog(

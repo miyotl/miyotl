@@ -422,12 +422,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                                     leading: Icon(Icons.language),
                                     onTap: () {
                                       state.changeLanguage(language.name);
-                                      Navigator.of(context).pushAndRemoveUntil(
-                                        MaterialPageRoute(
-                                          builder: (context) => HomePage(),
-                                        ),
-                                        (route) => false,
-                                      );
+                                      nextPage();
                                     },
                                   ),
                                 ),
@@ -438,6 +433,71 @@ class _OnboardingPageState extends State<OnboardingPage> {
                     ),
                   ],
                 ),
+              ),
+            ),
+          ),
+
+          /// PAGE 4
+          /// Warm welcome
+
+          Theme(
+            data: new_light_theme,
+            child: LightStatusBar(
+              child: Container(
+                alignment: Alignment.center,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      'img/axolotl-hi.png',
+                      width: MediaQuery.of(context).size.width * 0.66,
+                    ),
+                    SizedBox(height: 16),
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
+                      child: Text(
+                        'Listo, ${_name.split(' ')[0]}',
+                        style: GoogleFonts.fredokaOne().copyWith(
+                          fontSize: 48,
+                          color: AppColors.morado,
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 16),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.75,
+                      child: Text(
+                        'Esperamos que disfrutes la App :)',
+                        style: GoogleFonts.rubik().copyWith(
+                          fontSize: 16,
+                          color: Colors.black,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                    SizedBox(height: 16),
+                    RaisedButton(
+                      color: AppColors.morado,
+                      child: Text(
+                        'Comenzar',
+                        style: Theme.of(context)
+                            .textTheme
+                            .button
+                            .copyWith(color: Colors.white),
+                      ),
+                      onPressed: () {
+                        Navigator.of(context).pushAndRemoveUntil(
+                          MaterialPageRoute(
+                            builder: (context) => HomePage(),
+                          ),
+                          (route) => false,
+                        );
+                      },
+                    ),
+                  ],
+                ),
+                color: Colors.white,
               ),
             ),
           ),

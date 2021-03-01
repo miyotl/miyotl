@@ -16,6 +16,7 @@ import '../models/sign_in.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../widgets/status_bar_colors.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:google_api_availability/google_api_availability.dart';
 
 typedef SignInFunction = Future<UserCredential> Function();
 
@@ -30,6 +31,8 @@ class _OnboardingPageState extends State<OnboardingPage> {
   final Future<FirebaseApp> _initialization = Firebase.initializeApp();
 
   String _name;
+
+  GooglePlayServicesAvailability googleServicesAvailability;
 
   @override
   void initState() {
@@ -211,7 +214,14 @@ class _OnboardingPageState extends State<OnboardingPage> {
                             .button
                             .copyWith(color: Colors.white),
                       ),
-                      onPressed: nextPage,
+                      onPressed: () async {
+                        googleServicesAvailability = await GoogleApiAvailability
+                            .instance
+                            .checkGooglePlayServicesAvailability();
+                        print(
+                            'Google service availability is $googleServicesAvailability');
+                        nextPage();
+                      },
                     ),
                   ],
                 ),
@@ -292,12 +302,14 @@ class _OnboardingPageState extends State<OnboardingPage> {
                                 ),
                               ),
                             ),
-                            SignInButton(
-                              Buttons.Google,
-                              text: 'Inicia sesión con Google',
-                              onPressed: () =>
-                                  doSignIn(context, SignInMethods.google),
-                            ),
+                            if (googleServicesAvailability !=
+                                GooglePlayServicesAvailability.serviceMissing)
+                              SignInButton(
+                                Buttons.Google,
+                                text: 'Inicia sesión con Google',
+                                onPressed: () =>
+                                    doSignIn(context, SignInMethods.google),
+                              ),
                             // SignInButton(
                             //   Buttons.Email,
                             //   text: 'Con correo y contraseña',
@@ -328,38 +340,40 @@ class _OnboardingPageState extends State<OnboardingPage> {
                             //     );
                             //   },
                             // ),
-                            SignInButtonBuilder(
-                              text: 'Ingresa como invitado',
-                              icon: Icons.face,
-                              backgroundColor: AppColors.darkBlue,
-                              onPressed: () {
-                                showDialog(
-                                  context: context,
-                                  builder: (context) => AlertDialog(
-                                    title: Text('Pregunta'),
-                                    content: Text(
-                                        '¿Estás seguro que quieres iniciar sesión como invitado? No podremos enviarte correos con actualizaciones sobre el proyecto...'),
-                                    actions: [
-                                      TextButton(
-                                        child: Text('Sí, estoy seguro'),
-                                        onPressed: () {
-                                          Navigator.of(context).pop();
-                                          doSignIn(
-                                              context, SignInMethods.anonymous);
-                                        },
-                                      ),
-                                      TextButton(
-                                        child: Text(
-                                            'No, déjame iniciar sesión...'),
-                                        onPressed: () {
-                                          Navigator.of(context).pop();
-                                        },
-                                      ),
-                                    ],
-                                  ),
-                                );
-                              },
-                            ),
+                            if (googleServicesAvailability !=
+                                GooglePlayServicesAvailability.serviceMissing)
+                              SignInButtonBuilder(
+                                text: 'Ingresa como invitado',
+                                icon: Icons.face,
+                                backgroundColor: AppColors.darkBlue,
+                                onPressed: () {
+                                  showDialog(
+                                    context: context,
+                                    builder: (context) => AlertDialog(
+                                      title: Text('Pregunta'),
+                                      content: Text(
+                                          '¿Estás seguro que quieres iniciar sesión como invitado? No podremos enviarte correos con actualizaciones sobre el proyecto...'),
+                                      actions: [
+                                        TextButton(
+                                          child: Text('Sí, estoy seguro'),
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                            doSignIn(context,
+                                                SignInMethods.anonymous);
+                                          },
+                                        ),
+                                        TextButton(
+                                          child: Text(
+                                              'No, déjame iniciar sesión...'),
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                },
+                              ),
                           ],
                         );
                       }

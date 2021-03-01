@@ -397,21 +397,15 @@ class _OnboardingPageState extends State<OnboardingPage> {
               child: SafeArea(
                 child: Column(
                   children: [
-                    // SizedBox(height: 16),
-                    Consumer<AppState>(
-                      builder: (context, state, child) {
-                        return Padding(
-                          padding: const EdgeInsets.all(16),
-                          child: Text(
-                            'Hola, $_name.',
-                            style:
-                                Theme.of(context).textTheme.headline1.copyWith(
-                                      fontSize: 32,
-                                      color: Colors.white,
-                                    ),
-                          ),
-                        );
-                      },
+                    Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: Text(
+                        'Hola, $_name.',
+                        style: Theme.of(context).textTheme.headline1.copyWith(
+                              fontSize: 32,
+                              color: Colors.white,
+                            ),
+                      ),
                     ),
                     Text(
                       '¿Qué idioma quieres aprender?',

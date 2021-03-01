@@ -52,7 +52,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                 'Cancelaste el inicio de sesión',
               ),
               content: Text(
-                'No especificaste ninguna cuenta de Google para iniciar sesión; vuelve a intentarlo.',
+                'No especificaste ninguna cuenta para iniciar sesión; vuelve a intentarlo.',
               ),
               actions: [
                 TextButton(

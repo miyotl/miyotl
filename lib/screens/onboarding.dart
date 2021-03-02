@@ -244,10 +244,8 @@ class _OnboardingPageState extends State<OnboardingPage> {
                   child: FutureBuilder<FirebaseApp>(
                     future: _initialization,
                     builder: (context, snapshot) {
-                      if (snapshot.hasError) {
-                        return EmptyState('${snapshot.error}');
-                      }
-                      if (snapshot.connectionState == ConnectionState.done) {
+                      if (snapshot.hasError ||
+                          snapshot.connectionState == ConnectionState.done) {
                         return Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.center,

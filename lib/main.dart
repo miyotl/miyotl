@@ -21,7 +21,7 @@ class App extends StatelessWidget {
         title: app_name,
         theme: new_light_theme,
         darkTheme: dark_theme,
-        home: DeveloperPage(),
+        home: ConditionalOnboardingPage(),
         routes: {
           '/app': (context) => HomePage(),
           '/onboarding': (context) => OnboardingPage(),

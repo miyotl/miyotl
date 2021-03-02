@@ -5,6 +5,7 @@ import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_signin_button/button_view.dart';
 import 'package:lenguas/models/app_state.dart';
 import 'package:lenguas/screens/home.dart';
+import 'package:lenguas/screens/language_select.dart';
 import 'package:liquid_swipe/liquid_swipe.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -390,62 +391,12 @@ class _OnboardingPageState extends State<OnboardingPage> {
           /// PAGE 3
           /// Language select
 
-          DarkStatusBar(
-            child: Container(
-              color: AppColors.morado,
-              alignment: Alignment.topCenter,
-              child: SafeArea(
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(16),
-                      child: Text(
-                        'Hola, $_name.',
-                        style: Theme.of(context).textTheme.headline1.copyWith(
-                              fontSize: 32,
-                              color: Colors.white,
-                            ),
-                      ),
-                    ),
-                    Text(
-                      '¿Qué idioma quieres aprender?',
-                      style: Theme.of(context).textTheme.headline2.copyWith(
-                            fontSize: 16,
-                            color: Colors.white,
-                          ),
-                    ),
-                    Expanded(
-                      child: Consumer<AppState>(
-                        builder: (context, state, child) {
-                          return ListView(
-                            padding: EdgeInsets.all(8),
-                            shrinkWrap: true,
-                            children: [
-                              for (var language in state.languages)
-                                Card(
-                                  child: ListTile(
-                                    title: Text('${language.name}'),
-                                    subtitle:
-                                        Text('${language.speakers} hablantes'),
-                                    leading: Icon(Icons.language),
-                                    onTap: () {
-                                      /// Save onboarding finished and language
-                                      state.changeLanguage(language.name);
-                                      state.setOnboardingStatus(true);
-                                      state.setDefaultLanguage(state.language);
-                                      nextPage();
-                                    },
-                                  ),
-                                ),
-                            ],
-                          );
-                        },
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
+          LanguageSelectPage(
+            title:
+                'Hola, ${(_name == 'Ajolote anónimo' || _name == null) ? _name : _name.split(' ')[0]}',
+            onLanguageSelect: (language) {
+              nextPage();
+            },
           ),
 
           /// PAGE 4

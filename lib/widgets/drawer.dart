@@ -5,6 +5,7 @@ import 'package:lenguas/screens/language_select.dart';
 import 'package:provider/provider.dart';
 import '../models/app_state.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:share/share.dart';
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({
@@ -84,6 +85,14 @@ class AppDrawer extends StatelessWidget {
               leading: Icon(Icons.settings),
               title: Text('Ajustes'),
               onTap: () {},
+            ),
+            ListTile(
+              leading: Icon(Icons.share),
+              title: Text('Compartir aplicación'),
+              onTap: () {
+                Share.share(
+                    '¿Sabías que hay una app donde puedes acercarte a nuestras lenguas indígenas? ¡Próximamente podrás aprenderlas!\n\nDescárgala en proyecto-miyotl.web.app/descarga');
+              },
             ),
             ListTile(
               leading: Icon(Icons.feedback),

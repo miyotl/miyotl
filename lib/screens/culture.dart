@@ -51,6 +51,16 @@ class CultureCard extends StatelessWidget {
                   ),
                 ),
               ),
+            if (entry.imageUrl == null)
+              Expanded(
+                child: Container(
+                  width: double.infinity,
+                  child: Image.asset(
+                    'img/banner.png',
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
             ButtonBar(
               children: [
                 Consumer<AppState>(

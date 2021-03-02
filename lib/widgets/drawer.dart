@@ -1,6 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../models/app_state.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({
@@ -14,50 +16,73 @@ class AppDrawer extends StatelessWidget {
         builder: (context, state, child) => ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
-            DrawerHeader(
-              child: Column(
-                children: <Widget>[
-                  Text(
-                    app_name,
-                    style: Theme.of(context)
-                        .textTheme
-                        .headline6
-                        .copyWith(color: Colors.white),
-                  ),
-                  SizedBox(
-                    height: 8,
-                  ),
-                  Text(
-                    '${state.languageName}',
-                    style: Theme.of(context)
-                        .textTheme
-                        .subtitle1
-                        .copyWith(color: Colors.white),
-                  ),
-                ],
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
+            UserAccountsDrawerHeader(
+              accountName: FutureBuilder(
+                future: UserAccount.displayName,
+                builder: (context, snapshot) {
+                  if (snapshot.hasError) {
+                    return Text('Error');
+                  } else if (snapshot.hasData) {
+                    return Text('${snapshot.data}');
+                  } else {
+                    return Text('Cargando nombre...');
+                  }
+                },
+              ),
+              accountEmail: FutureBuilder(
+                future: UserAccount.email,
+                builder: (context, snapshot) {
+                  if (snapshot.hasError) {
+                    return Text('Error');
+                  } else if (snapshot.hasData) {
+                    return Text('${snapshot.data}');
+                  } else {
+                    return Text('Cargando correo...');
+                  }
+                },
+              ),
+              currentAccountPicture: FutureBuilder(
+                future: UserAccount.profilePicUrl,
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return CircleAvatar(
+                      backgroundImage:
+                          CachedNetworkImageProvider(snapshot.data),
+                    );
+                  } else {
+                    return CircleAvatar(
+                        backgroundImage: AssetImage('img/icon-full-new.png'));
+                  }
+                },
               ),
               decoration: BoxDecoration(
                 color: Theme.of(context).accentColor,
               ),
             ),
-            if (state.dictionaries == null)
-              Text('Espera, sigue cargando')
-            else
-              for (var language in state.dictionaries.keys)
-                ListTile(
-                  title: Text(
-                    capitalize(language),
-                    // style: Theme.of(context).textTheme.bodyText1.copyWith(
-                    //       color: language == state.language
-                    //           ? Theme.of(context).accentColor
-                    //           : Theme.of(context).textTheme.bodyText1.color,
-                    //     ),
-                  ),
-                  selected: language == state.language,
-                  onTap: () => state.changeLanguage(language),
-                ),
+            ListTile(
+              leading: Icon(Icons.language),
+              title: Text('Cambiar idioma'),
+              onTap: () {},
+            ),
+            ListTile(
+              leading: Icon(Icons.settings),
+              title: Text('Ajustes'),
+              onTap: () {},
+            ),
+            ListTile(
+              leading: Icon(Icons.feedback),
+              title: Text('Enviar retroalimentación'),
+              onTap: () {
+                launch(
+                  'mailto:miyotl@googlegroups.com?subject=Retroalimentación sobre app',
+                );
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.info),
+              title: Text('Acerca de'),
+              onTap: () {},
+            ),
           ],
         ),
       ),

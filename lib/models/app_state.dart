@@ -9,11 +9,13 @@ import 'constants.dart';
 import 'dictionary.dart';
 import 'culture.dart';
 import 'language.dart';
+import 'user_account.dart';
 
 export 'dictionary.dart';
 export 'constants.dart';
 export 'culture.dart';
 export 'language.dart';
+export 'user_account.dart';
 
 String capitalize(String string) {
   return '${string[0].toUpperCase()}${string.substring(1)}';
@@ -40,17 +42,6 @@ class AppState extends ChangeNotifier {
   Future<void> setDefaultLanguage(String language) async {
     var prefs = await SharedPreferences.getInstance();
     prefs.setString('language', language);
-  }
-
-  Future<String> get givenName async {
-    var isLogged = await FacebookAuth.instance.isLogged;
-    if (isLogged == null) {
-      return FirebaseAuth.instance?.currentUser?.displayName ??
-          'Ajolote anónimo';
-    } else {
-      var userData = await FacebookAuth.instance.getUserData();
-      return userData['name'] ?? '<error al obtener tu nombre>';
-    }
   }
 
   /// Current language for dictionary, learning and culture

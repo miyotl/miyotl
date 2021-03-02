@@ -59,7 +59,9 @@ class LanguageSelectPage extends StatelessWidget {
                                 title: Text('${language.name}'),
                                 subtitle:
                                     Text('${language.speakers} hablantes'),
-                                leading: Icon(Icons.language),
+                                leading: CircleAvatar(
+                                  child: Text('${language.name[0]}'),
+                                ),
                                 onTap: () {
                                   /// Save onboarding finished and language
                                   state.changeLanguage(language.name);

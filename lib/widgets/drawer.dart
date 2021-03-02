@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../models/app_state.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -20,13 +21,15 @@ class AppDrawer extends StatelessWidget {
               accountName: FutureBuilder(
                 future: UserAccount.displayName,
                 builder: (context, snapshot) {
+                  String content;
                   if (snapshot.hasError) {
-                    return Text('Error');
+                    content = 'Error';
                   } else if (snapshot.hasData) {
-                    return Text('${snapshot.data}');
+                    content = '${snapshot.data}';
                   } else {
-                    return Text('Cargando nombre...');
+                    content = 'Cargando nombre...';
                   }
+                  return Text(content, style: GoogleFonts.fredokaOne());
                 },
               ),
               accountEmail: FutureBuilder(

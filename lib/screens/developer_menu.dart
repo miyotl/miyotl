@@ -31,6 +31,12 @@ class DeveloperPage extends StatelessWidget {
               state.setOnboardingStatus(false);
             },
           ),
+          ElevatedButton(
+            child: Text('Abrir interfaz de la app'),
+            onPressed: () {
+              Navigator.of(context).pushNamed('/app');
+            },
+          ),
         ],
       ),
     );

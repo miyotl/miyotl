@@ -50,6 +50,7 @@ dependencies:
   url_launcher: ^5.7.10
   flutter_facebook_auth: ^1.0.0
   google_api_availability: ^2.0.4
+  ionicons: ^0.1.1
 
 dev_dependencies:
   flutter_test:

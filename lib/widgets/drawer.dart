@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import '../models/app_state.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:share/share.dart';
+import 'package:ionicons/ionicons.dart';
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({
@@ -112,9 +113,42 @@ class AppDrawer extends StatelessWidget {
                 showAboutDialog(
                   context: context,
                   applicationIcon: CircleAvatar(
-                    backgroundImage: AssetImage('img/icon-round-new.png'),
+                    backgroundImage: AssetImage('img/icon-full-new.png'),
                     backgroundColor: Colors.white,
                   ),
+                  applicationLegalese:
+                      'Código: Gabriel Rodríguez\nDibujos: Camila Varela\nCon amor desde Chapingo ❤️',
+                  applicationVersion: 'versión inicial (beta)',
+                  children: [
+                    ListTile(
+                      leading: Icon(Icons.people),
+                      title: Text('Ver lista completa de colaboradores'),
+                      onTap: () => launch(
+                        'https://proyecto-miyotl.web.app/acerca_de',
+                        forceWebView: true,
+                      ),
+                    ),
+                    ListTile(
+                      leading: Icon(Ionicons.logo_facebook),
+                      title: Text('Síguenos en Facebook'),
+                      onTap: () => launch('https://fb.me/MiyotlApp'),
+                    ),
+                    ListTile(
+                      leading: Icon(Ionicons.logo_twitter),
+                      title: Text('Síguenos en Twitter'),
+                      onTap: () => launch('https://twitter.com/MiyotlApp'),
+                    ),
+                    ListTile(
+                      leading: Icon(Icons.email),
+                      title: Text('Mándanos un correo'),
+                      onTap: () => launch('mailto:miyotl@googlegroups.com'),
+                    ),
+                    ListTile(
+                      leading: Icon(Ionicons.logo_github),
+                      title: Text('Colabora en GitHub'),
+                      onTap: () => launch('https://github.com/miyotl/miyotl'),
+                    ),
+                  ],
                 );
               },
             ),

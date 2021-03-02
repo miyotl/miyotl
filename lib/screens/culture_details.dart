@@ -24,6 +24,7 @@ class CultureDetails extends StatelessWidget {
             subtitle: Text('Toca para abrir ${entry.titleOriginal}'),
             trailing: Icon(Icons.launch),
             onTap: () {
+              Navigator.of(context).pop();
               openDoc(context, entry.linkOriginal, entry);
             },
           ),
@@ -32,6 +33,7 @@ class CultureDetails extends StatelessWidget {
             subtitle: Text('Toca para abrir ${entry.titleTranslated}'),
             trailing: Icon(Icons.launch),
             onTap: () {
+              Navigator.of(context).pop();
               openDoc(context, entry.linkTranslated, entry);
             },
           ),

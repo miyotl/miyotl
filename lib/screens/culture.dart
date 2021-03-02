@@ -37,8 +37,6 @@ class CultureCard extends StatelessWidget {
                 },
               ),
             ),
-
-            /// TODO: arreglar overflow
             if (entry.imageUrl != null)
               Expanded(
                 child: Container(

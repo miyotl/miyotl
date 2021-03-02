@@ -30,7 +30,7 @@ dependencies:
   cupertino_icons: ^0.1.3
   http: ^0.12.1
   provider: ^4.1.1
-  shared_preferences:
+  shared_preferences: '>=0.5.12+4 <2.0.0'
   share:
   flutter_inappwebview:
   liquid_swipe: ^1.5.0

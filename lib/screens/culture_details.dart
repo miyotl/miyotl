@@ -54,7 +54,7 @@ class CultureDetails extends StatelessWidget {
           ListTile(
             title: Text('Etiquetas'),
             subtitle: Text(
-              entry.tags.join(', '),
+              '${entry.tags?.join(', ') ?? 'Ninguna'}',
             ),
           ),
         ],

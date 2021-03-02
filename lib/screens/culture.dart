@@ -40,16 +40,15 @@ class CultureCard extends StatelessWidget {
 
             /// TODO: arreglar overflow
             if (entry.imageUrl != null)
-              SizedBox(
-                width: double.infinity,
-                // height: 100,
+              Expanded(
                 child: Container(
+                  width: double.infinity,
                   child: CachedNetworkImage(
                     imageUrl: entry.imageUrl,
-                    fit: BoxFit.fitWidth,
+                    fit: BoxFit.cover,
                     errorWidget: (context, url, error) => Image.asset(
-                      'img/miyotl.png',
-                      fit: BoxFit.fitWidth,
+                      'img/banner.png',
+                      fit: BoxFit.cover,
                     ),
                   ),
                 ),

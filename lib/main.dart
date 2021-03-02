@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lenguas/screens/conditional_onboarding.dart';
 import 'screens/home.dart';
 import 'screens/onboarding.dart';
 import 'screens/developer_menu.dart';
@@ -20,7 +21,7 @@ class App extends StatelessWidget {
         title: app_name,
         theme: new_light_theme,
         darkTheme: dark_theme,
-        home: DeveloperPage(),
+        home: ConditionalOnboardingPage(),
         routes: {
           '/onboarding': (context) => OnboardingPage(),
           '/debug': (context) => DeveloperPage(),

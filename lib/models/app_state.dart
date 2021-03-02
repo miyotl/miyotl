@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:http/http.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'constants.dart';
 import 'dictionary.dart';
 import 'culture.dart';
@@ -20,6 +21,26 @@ String capitalize(String string) {
 
 class AppState extends ChangeNotifier {
   UserCredential firebaseCredential;
+
+  Future<bool> get hasFinishedOnboarding async {
+    var prefs = await SharedPreferences.getInstance();
+    return prefs.getBool('hasFinishedOnboarding') ?? false;
+  }
+
+  Future<void> setOnboardingStatus(bool hasFinishedOnboarding) async {
+    var prefs = await SharedPreferences.getInstance();
+    prefs.setBool('hasFinishedOnboarding', hasFinishedOnboarding);
+  }
+
+  Future<String> getDefaultLanguage() async {
+    var prefs = await SharedPreferences.getInstance();
+    return prefs.getString('language');
+  }
+
+  Future<void> setDefaultLanguage(String language) async {
+    var prefs = await SharedPreferences.getInstance();
+    prefs.setString('language', language);
+  }
 
   Future<String> get givenName async {
     var isLogged = await FacebookAuth.instance.isLogged;

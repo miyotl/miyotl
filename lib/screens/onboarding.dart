@@ -429,7 +429,10 @@ class _OnboardingPageState extends State<OnboardingPage> {
                                         Text('${language.speakers} hablantes'),
                                     leading: Icon(Icons.language),
                                     onTap: () {
+                                      /// Save onboarding finished and language
                                       state.changeLanguage(language.name);
+                                      state.setOnboardingStatus(true);
+                                      state.setDefaultLanguage(state.language);
                                       nextPage();
                                     },
                                   ),

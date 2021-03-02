@@ -48,8 +48,15 @@ class _OnboardingPageState extends State<OnboardingPage> {
   void doSignIn(BuildContext context, SignInFunction signInFunction) async {
     try {
       var credential = await signInFunction();
-      var isLogged = await FacebookAuth.instance.isLogged;
-      if (credential == null && isLogged == null) {
+      AccessToken isLogged;
+      try {
+        isLogged = await FacebookAuth.instance.isLogged;
+      } catch (e) {
+        isLogged = null;
+      }
+      if (signInFunction != SignInMethods.anonymous &&
+          credential == null &&
+          isLogged == null) {
         showDialog(
           context: context,
           builder: (context) => AlertDialog(
@@ -391,7 +398,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
 
           LanguageSelectPage(
             title:
-                'Hola, ${(_name == 'Ajolote anónimo' || _name == null) ? _name : _name.split(' ')[0]}',
+                'Hola, ${(_name == 'Ajolote anónimo' || _name == null) ? 'Ajolote anónimo' : _name.split(' ')[0]}',
             onLanguageSelect: (language) {
               nextPage();
             },

@@ -59,6 +59,10 @@ abstract class SignInMethods {
   }
 
   static Future<UserCredential> anonymous() async {
-    return await FirebaseAuth.instance.signInAnonymously();
+    try {
+      return await FirebaseAuth.instance.signInAnonymously();
+    } catch (e) {
+      return null;
+    }
   }
 }

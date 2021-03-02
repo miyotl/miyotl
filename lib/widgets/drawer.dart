@@ -68,12 +68,14 @@ class AppDrawer extends StatelessWidget {
               title: Text('Cambiar idioma'),
               onTap: () {
                 Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => LanguageSelectPage(
-                    title: 'Selecciona el idioma',
-                    onLanguageSelect: (language) {
-                      Navigator.of(context).pop();
-                      Navigator.of(context).pop();
-                    },
+                  builder: (context) => Scaffold(
+                    body: LanguageSelectPage(
+                      title: 'Selecciona el idioma',
+                      onLanguageSelect: (language) {
+                        Navigator.of(context).pop();
+                        Navigator.of(context).pop();
+                      },
+                    ),
                   ),
                 ));
               },

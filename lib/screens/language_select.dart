@@ -60,7 +60,10 @@ class LanguageSelectPage extends StatelessWidget {
                                 subtitle:
                                     Text('${language.speakers} hablantes'),
                                 leading: CircleAvatar(
-                                  child: Text('${language.name[0]}'),
+                                  child: Text(
+                                    '${language.name[0]}',
+                                    style: GoogleFonts.fredokaOne(),
+                                  ),
                                 ),
                                 onTap: () {
                                   /// Save onboarding finished and language

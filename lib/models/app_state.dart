@@ -70,7 +70,7 @@ class AppState extends ChangeNotifier {
   List<Language> languages = [];
 
   AppState() {
-    getData();
+    getLanguageDataFromInternet();
   }
 
   void changeLanguage(String other) {
@@ -84,14 +84,9 @@ class AppState extends ChangeNotifier {
     notifyListeners();
   }
 
-  void getData() async {
-    loading = true;
-    notifyListeners();
-    var response = await get(dictionary_url);
-    // Interpretar el archivo como UTF-8, o si no los caracteres especiales como acentos
-    // no se decodifican correctamente
+  /// Load language data (decoded from JSON)
+  void loadLanguageData(Map<String, dynamic> data) {
     // TODO: implement some exception handling
-    data = json.decode(utf8.decode(response.bodyBytes));
     sources = Sources.fromJson(data['Referencias']);
     for (var language in data['Idiomas']) {
       languages.add(Language.fromJson(language));
@@ -112,7 +107,23 @@ class AppState extends ChangeNotifier {
       cultures[cultureJson['language']].add(CultureEntry.fromJson(cultureJson));
     }
     dictionary.sort(lookupMode);
+  }
+
+  /// Get language data from the internet
+  void getLanguageDataFromInternet() async {
+    loading = true;
+    notifyListeners();
+    var response = await get(dictionary_url);
+
+    /// Interpret the response as UTF-8 so special characters can be rendered properly
+    data = json.decode(utf8.decode(response.bodyBytes));
+    loadLanguageData(data);
     loading = false;
     notifyListeners();
+  }
+
+  /// Update language data from the internet, if an update is available
+  void updateLanguageData() {
+    getLanguageDataFromInternet();
   }
 }

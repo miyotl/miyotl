@@ -49,7 +49,8 @@ class _HomePageState extends State<HomePage> {
             IconButton(
               icon: Icon(Icons.refresh),
               onPressed: () {
-                Provider.of<AppState>(context, listen: false).getData();
+                Provider.of<AppState>(context, listen: false)
+                    .updateLanguageData();
               },
               tooltip: 'Actualizar',
             ),

@@ -105,6 +105,11 @@ class AppState extends ChangeNotifier {
     notifyListeners();
   }
 
+  Future<bool> loadPrefs() async {
+    language = await getDefaultLanguage() ?? 'Mazateco';
+    return true;
+  }
+
   /// Load language data (decoded from JSON)
   void loadLanguageData(Map<String, dynamic> data) {
     // TODO: implement some exception handling

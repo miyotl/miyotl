@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'home.dart';
 import 'onboarding.dart';
 import '../widgets/empty_state.dart';
+import 'loading.dart';
 
 class ConditionalOnboardingPage extends StatelessWidget {
   @override
@@ -29,11 +30,7 @@ class ConditionalOnboardingPage extends StatelessWidget {
                     'Intenta liberar espacio en tu dispositivo. Si el error persiste, manda correo a miyotl@googlegroups.com. El error es ${snapshot.error}'),
               );
             } else {
-              return Scaffold(
-                body: Center(
-                  child: CircularProgressIndicator(),
-                ),
-              );
+              return LoadingPage();
             }
           },
         );

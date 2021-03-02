@@ -68,7 +68,6 @@ class LanguageSelectPage extends StatelessWidget {
                                 onTap: () {
                                   /// Save onboarding finished and language
                                   state.changeLanguage(language.name);
-                                  state.setOnboardingStatus(true);
                                   state.setDefaultLanguage(state.language);
                                   if (onLanguageSelect != null) {
                                     onLanguageSelect(language.name);

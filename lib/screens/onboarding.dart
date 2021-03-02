@@ -450,6 +450,8 @@ class _OnboardingPageState extends State<OnboardingPage> {
                       ),
                       onPressed: () {
                         /// TODO: There is no animation, one would be nice, like a round one
+                        Provider.of<AppState>(context, listen: false)
+                            .setOnboardingStatus(true);
                         Navigator.of(context).pushAndRemoveUntil(
                           MaterialPageRoute(
                             builder: (context) => HomePage(),

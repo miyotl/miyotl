@@ -61,7 +61,9 @@ class AppDrawer extends StatelessWidget {
                 },
               ),
               decoration: BoxDecoration(
-                color: Theme.of(context).accentColor,
+                color: Theme.of(context).brightness == Brightness.dark
+                    ? Theme.of(context).primaryColor
+                    : Theme.of(context).accentColor,
               ),
             ),
             ListTile(
@@ -106,7 +108,15 @@ class AppDrawer extends StatelessWidget {
             ListTile(
               leading: Icon(Icons.info),
               title: Text('Acerca de'),
-              onTap: () {},
+              onTap: () {
+                showAboutDialog(
+                  context: context,
+                  applicationIcon: CircleAvatar(
+                    backgroundImage: AssetImage('img/icon-round-new.png'),
+                    backgroundColor: Colors.white,
+                  ),
+                );
+              },
             ),
           ],
         ),

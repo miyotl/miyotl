@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lenguas/screens/language_select.dart';
 import 'package:provider/provider.dart';
 import '../models/app_state.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -65,7 +66,17 @@ class AppDrawer extends StatelessWidget {
             ListTile(
               leading: Icon(Icons.language),
               title: Text('Cambiar idioma'),
-              onTap: () {},
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => LanguageSelectPage(
+                    title: 'Selecciona el idioma',
+                    onLanguageSelect: (language) {
+                      Navigator.of(context).pop();
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ));
+              },
             ),
             ListTile(
               leading: Icon(Icons.settings),

@@ -27,8 +27,16 @@ class App extends StatelessWidget {
         child: Consumer<Settings>(
           builder: (context, settings, child) => MaterialApp(
             title: app_name,
-            theme: new_light_theme,
-            darkTheme: dark_theme,
+            theme: new_light_theme.copyWith(
+              platform: settings.useIOSStyle
+                  ? TargetPlatform.iOS
+                  : TargetPlatform.android,
+            ),
+            darkTheme: dark_theme.copyWith(
+              platform: settings.useIOSStyle
+                  ? TargetPlatform.iOS
+                  : TargetPlatform.android,
+            ),
             home: child,
             routes: {
               '/app': (context) => HomePage(),

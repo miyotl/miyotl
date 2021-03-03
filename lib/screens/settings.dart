@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ionicons/ionicons.dart';
 import 'package:lenguas/models/settings.dart';
 import 'package:provider/provider.dart';
 import 'package:settings_ui/settings_ui.dart';
@@ -46,8 +47,38 @@ class SettingsPage extends StatelessWidget {
                   ),
                   SettingsTile(
                     title: 'Estilo',
-                    subtitle: 'Android',
-                    leading: Icon(Icons.android),
+                    subtitle: settings.useIOSStyle ? 'iOS' : 'Android',
+                    leading: Icon(
+                      settings.useIOSStyle
+                          ? Ionicons.logo_apple
+                          : Icons.android,
+                    ),
+                    onPressed: (context) => showDialog(
+                      context: context,
+                      builder: (context) => SimpleDialog(
+                        title: Text('Estilo'),
+                        children: [
+                          RadioListTile<bool>(
+                            title: Text('iOS'),
+                            value: true,
+                            groupValue: settings.useIOSStyle,
+                            onChanged: (value) {
+                              settings.useIOSStyle = value;
+                              Navigator.of(context).pop();
+                            },
+                          ),
+                          RadioListTile<bool>(
+                            title: Text('Android'),
+                            value: false,
+                            groupValue: settings.useIOSStyle,
+                            onChanged: (value) {
+                              settings.useIOSStyle = value;
+                              Navigator.of(context).pop();
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                 ],
               ),

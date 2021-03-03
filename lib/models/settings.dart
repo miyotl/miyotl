@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -34,7 +36,8 @@ ThemeMode themeModeFromInt(int x) {
 class Settings extends ChangeNotifier {
   Settings() {
     SharedPreferences.getInstance().then((prefs) {
-      _theme = themeModeFromInt(prefs.getInt('theme'));
+      _theme = themeModeFromInt(prefs.getInt('theme') ?? 0);
+      _useIOSStyle = prefs.getBool('ios') ?? Platform.isIOS;
       notifyListeners();
     });
   }
@@ -48,6 +51,18 @@ class Settings extends ChangeNotifier {
     notifyListeners();
     SharedPreferences.getInstance().then((prefs) {
       prefs.setInt('theme', value.toInt());
+    });
+  }
+
+  bool _useIOSStyle = Platform.isIOS;
+
+  bool get useIOSStyle => _useIOSStyle;
+
+  set useIOSStyle(bool value) {
+    _useIOSStyle = value;
+    notifyListeners();
+    SharedPreferences.getInstance().then((prefs) {
+      prefs.setBool('ios', value);
     });
   }
 }

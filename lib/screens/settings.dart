@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:lenguas/models/settings.dart';
+import 'package:lenguas/screens/sign_in.dart';
 import 'package:provider/provider.dart';
 import 'package:settings_ui/settings_ui.dart';
 
@@ -84,24 +85,37 @@ class SettingsPage extends StatelessWidget {
                   ),
                 ],
               ),
-              // SettingsSection(
-              //   title: 'Cuenta',
-              //   tiles: [
-              //     SettingsTile(
-              //       title: 'Cerrar sesión',
-              //       leading: Icon(Icons.logout),
-              //       onPressed: (context) {
-              //         if (FacebookAuth.instance.isLogged != null) {
-              //           FacebookAuth.instance.logOut();
-              //         }
-              //         if (FirebaseAuth.instance.currentUser != null) {
-              //           FirebaseAuth.instance.signOut();
-              //           FirebaseAuth.instance.signInAnonymously();
-              //         }
-              //       },
-              //     ),
-              //   ],
-              // ),
+              SettingsSection(
+                title: 'Cuenta',
+                tiles: [
+                  SettingsTile(
+                    title: 'Cambiar de cuenta',
+                    leading: Icon(Icons.switch_account),
+                    onPressed: (context) {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => Scaffold(
+                            body: SignInPage(onSignIn: () {
+                              Navigator.of(context).pop();
+                            }),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ],
+              ),
+              SettingsSection(
+                title: 'Varios',
+                tiles: [
+                  SettingsTile(
+                    title: 'Opciones avanzadas y diagnósticos',
+                    leading: Icon(Icons.bug_report),
+                    onPressed: (context) =>
+                        Navigator.of(context).pushNamed('/debug'),
+                  ),
+                ],
+              ),
             ],
           ),
         ),

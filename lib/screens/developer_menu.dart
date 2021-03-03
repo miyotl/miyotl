@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:lenguas/models/app_state.dart';
 import 'package:provider/provider.dart';
-import 'onboarding.dart';
 
 class DeveloperPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Menú del programador'),
+        title: Text('Diagnósticos'),
       ),
       body: ListView(
         children: [
@@ -29,12 +28,6 @@ class DeveloperPage extends StatelessWidget {
             onPressed: () {
               AppState state = Provider.of<AppState>(context, listen: false);
               state.setOnboardingStatus(false);
-            },
-          ),
-          ElevatedButton(
-            child: Text('Abrir interfaz de la app'),
-            onPressed: () {
-              Navigator.of(context).pushNamed('/app');
             },
           ),
         ],

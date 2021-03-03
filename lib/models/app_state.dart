@@ -22,8 +22,6 @@ String capitalize(String string) {
 }
 
 class AppState extends ChangeNotifier {
-  UserCredential firebaseCredential;
-
   Future<bool> get hasFinishedOnboarding async {
     var prefs = await SharedPreferences.getInstance();
     return prefs.getBool('hasFinishedOnboarding') ?? false;
@@ -82,7 +80,16 @@ class AppState extends ChangeNotifier {
   List<Language> languages = [];
 
   AppState() {
-    getLanguageDataFromInternet();
+    init();
+  }
+
+  Future<void> init() async {
+    loading = true;
+    notifyListeners();
+    await getLanguageDataFromInternet();
+    await UserAccount.cacheUserAccount();
+    loading = false;
+    notifyListeners();
   }
 
   void changeLanguage(String other) {
@@ -127,16 +134,12 @@ class AppState extends ChangeNotifier {
   }
 
   /// Get language data from the internet
-  void getLanguageDataFromInternet() async {
-    loading = true;
-    notifyListeners();
+  Future<void> getLanguageDataFromInternet() async {
     var response = await get(dictionary_url);
 
     /// Interpret the response as UTF-8 so special characters can be rendered properly
     data = json.decode(utf8.decode(response.bodyBytes));
     loadLanguageData(data);
-    loading = false;
-    notifyListeners();
   }
 
   /// Update language data from the internet, if an update is available

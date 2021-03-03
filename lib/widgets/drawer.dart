@@ -21,45 +21,11 @@ class AppDrawer extends StatelessWidget {
           padding: EdgeInsets.zero,
           children: <Widget>[
             UserAccountsDrawerHeader(
-              accountName: FutureBuilder(
-                future: UserAccount.displayName,
-                builder: (context, snapshot) {
-                  String content;
-                  if (snapshot.hasError) {
-                    content = 'Error';
-                  } else if (snapshot.hasData) {
-                    content = '${snapshot.data}';
-                  } else {
-                    content = 'Cargando nombre...';
-                  }
-                  return Text(content, style: GoogleFonts.fredokaOne());
-                },
-              ),
-              accountEmail: FutureBuilder(
-                future: UserAccount.email,
-                builder: (context, snapshot) {
-                  if (snapshot.hasError) {
-                    return Text('Error');
-                  } else if (snapshot.hasData) {
-                    return Text('${snapshot.data}');
-                  } else {
-                    return Text('Cargando correo...');
-                  }
-                },
-              ),
-              currentAccountPicture: FutureBuilder(
-                future: UserAccount.profilePicUrl,
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    return CircleAvatar(
-                      backgroundImage:
-                          CachedNetworkImageProvider(snapshot.data),
-                    );
-                  } else {
-                    return CircleAvatar(
-                        backgroundImage: AssetImage('img/icon-full-new.png'));
-                  }
-                },
+              accountName: Text('${UserAccount.displayName ?? ''}',
+                  style: GoogleFonts.fredokaOne()),
+              accountEmail: Text('${UserAccount.email ?? ''}'),
+              currentAccountPicture: CircleAvatar(
+                backgroundImage: UserAccount.profilePic,
               ),
               decoration: BoxDecoration(
                 color: Theme.of(context).brightness == Brightness.dark

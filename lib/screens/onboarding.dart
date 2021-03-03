@@ -77,12 +77,8 @@ class _OnboardingPageState extends State<OnboardingPage> {
           ),
         );
       } else {
-        AppState state = Provider.of<AppState>(
-          context,
-          listen: false,
-        );
-        UserAccount.displayName.then((name) => setState(() => _name = name));
-        state.firebaseCredential = credential;
+        UserAccount.cacheUserAccount();
+        setState(() => _name = UserAccount.displayName);
         nextPage();
       }
     } on PlatformException catch (e) {

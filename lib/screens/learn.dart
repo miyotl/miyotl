@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:lenguas/widgets/empty_state.dart';
 
 class LearnPage extends StatelessWidget {
@@ -12,10 +13,15 @@ class LearnPage extends StatelessWidget {
             'img/axolotl-gears.gif',
             width: MediaQuery.of(context).size.width * 0.80,
           ),
-          Text(
-            'La función para aprender el idioma se agregará en una actualización futura',
-            textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.headline6,
+          Padding(
+            padding: EdgeInsets.only(left: 18, right: 18),
+            child: Text(
+              'La función para aprender el idioma se agregará en una actualización futura',
+              textAlign: TextAlign.center,
+              style: GoogleFonts.fredokaOne(
+                fontSize: 24,
+              ),
+            ),
           )
         ],
       ),

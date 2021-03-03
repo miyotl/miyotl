@@ -53,7 +53,9 @@ class AppDrawer extends StatelessWidget {
             ListTile(
               leading: Icon(Icons.settings),
               title: Text('Ajustes'),
-              onTap: () {},
+              onTap: () {
+                Navigator.of(context).pushNamed('/settings');
+              },
             ),
             ListTile(
               leading: Icon(Icons.share),

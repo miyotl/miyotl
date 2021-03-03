@@ -9,16 +9,16 @@ class LearnPage extends StatefulWidget {
 }
 
 class _LearnPageState extends State<LearnPage> {
-  VideoPlayerController _controller;
+  // VideoPlayerController _controller;
 
-  @override
-  void initState() {
-    super.initState();
-    _controller = VideoPlayerController.asset('img/axolotl-gears.mp4')
-      ..initialize().then((_) => setState(() {}))
-      ..play()
-      ..setLooping(true);
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   _controller = VideoPlayerController.asset('img/axolotl-gears.mp4')
+  //     ..initialize().then((_) => setState(() {}))
+  //     ..play()
+  //     ..setLooping(true);
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -26,15 +26,15 @@ class _LearnPageState extends State<LearnPage> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          if (_controller.value.initialized)
-            AspectRatio(
-              aspectRatio: _controller.value.aspectRatio,
-              child: VideoPlayer(_controller),
-            ),
-          // Image.asset(
-          //   'img/axolotl-gears.gif',
-          //   width: MediaQuery.of(context).size.width * 0.80,
-          // ),
+          // if (_controller.value.initialized)
+          //   AspectRatio(
+          //     aspectRatio: _controller.value.aspectRatio,
+          //     child: VideoPlayer(_controller),
+          //   ),
+          Image.asset(
+            'img/axolotl-gears.gif',
+            width: MediaQuery.of(context).size.width * 0.80,
+          ),
           Padding(
             padding: EdgeInsets.only(left: 18, right: 18),
             child: Text(

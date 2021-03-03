@@ -6,6 +6,7 @@ import 'package:lenguas/models/settings.dart';
 import 'package:lenguas/screens/sign_in.dart';
 import 'package:provider/provider.dart';
 import 'package:settings_ui/settings_ui.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SettingsPage extends StatelessWidget {
   @override
@@ -113,6 +114,26 @@ class SettingsPage extends StatelessWidget {
                     leading: Icon(Icons.bug_report),
                     onPressed: (context) =>
                         Navigator.of(context).pushNamed('/debug'),
+                  ),
+                  SettingsTile(
+                    title: 'Términos y condiciones',
+                    leading: Icon(Icons.description),
+                    onPressed: (context) {
+                      launch(
+                        'https://proyecto-miyotl.web.app/terminos',
+                        forceWebView: true,
+                      );
+                    },
+                  ),
+                  SettingsTile(
+                    title: 'Política de privacidad',
+                    leading: Icon(Icons.privacy_tip),
+                    onPressed: (context) {
+                      launch(
+                        'https://proyecto-miyotl.web.app/privacidad',
+                        forceWebView: true,
+                      );
+                    },
                   ),
                 ],
               ),

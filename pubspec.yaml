@@ -52,6 +52,7 @@ dependencies:
   google_api_availability: ^2.0.4
   ionicons: ^0.1.1
   package_info: '>=0.4.3+4 <2.0.0'
+  video_player: ^1.0.1
 
 dev_dependencies:
   flutter_test:

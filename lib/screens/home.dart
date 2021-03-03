@@ -52,9 +52,11 @@ class _HomePageState extends State<HomePage> {
                       /// This weird substraction is pretty arbitrary,
                       /// but I couldn't find a better solution for the moment
                       if (tp.maxIntrinsicWidth <= size.maxWidth - 22) {
-                        return Text('$app_name: ${state.languageName}', style: GoogleFonts.fredokaOne());
+                        return Text('$app_name: ${state.languageName}',
+                            style: GoogleFonts.fredokaOne());
                       } else {
-                        return Text('${state.languageName}', style: GoogleFonts.fredokaOne());
+                        return Text('${state.languageName}',
+                            style: GoogleFonts.fredokaOne());
                       }
                     });
                   },
@@ -79,15 +81,6 @@ class _HomePageState extends State<HomePage> {
                       },
                     ),
                   ],
-                  IconButton(
-                    icon: Icon(Icons.bug_report),
-                    tooltip: 'Menú del desarrollador',
-                    onPressed: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => DeveloperPage(),
-                      ));
-                    },
-                  ),
                 ],
               ),
               body: [LearnPage(), DictionaryPage(), CulturePage()][page],

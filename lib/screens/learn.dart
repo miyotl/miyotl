@@ -13,7 +13,7 @@ class LearnPage extends StatelessWidget {
             width: MediaQuery.of(context).size.width * 0.80,
           ),
           Text(
-            'La función para aprender el idioma se agregará en una actualización, próximamente...',
+            'La función para aprender el idioma se agregará en una actualización futura',
             textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.headline6,
           )

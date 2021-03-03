@@ -117,7 +117,10 @@ class AppDrawer extends StatelessWidget {
                     backgroundColor: Colors.white,
                   ),
                   applicationLegalese:
-                      'Código: Gabriel Rodríguez\nDibujos: Camila Varela\nCon amor desde Chapingo ❤️',
+                      '''Fundadores y mesa directiva: Emilio Álvarez (CEO), Gabriel Rodríguez (CTO), Daniela Madrigal (COO), Carter Dieguiño (CFO y abogado), 
+Código: Gabriel Rodríguez
+Dibujos y CMO: Camila Varela
+Con amor desde Chapingo ❤️''',
                   applicationVersion: 'versión inicial (beta)',
                   children: [
                     ListTile(

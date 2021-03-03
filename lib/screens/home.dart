@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:lenguas/widgets/empty_state.dart';
 import 'package:provider/provider.dart';
 import 'dictionary.dart';
@@ -51,9 +52,9 @@ class _HomePageState extends State<HomePage> {
                       /// This weird substraction is pretty arbitrary,
                       /// but I couldn't find a better solution for the moment
                       if (tp.maxIntrinsicWidth <= size.maxWidth - 22) {
-                        return Text('$app_name: ${state.languageName}');
+                        return Text('$app_name: ${state.languageName}', style: GoogleFonts.fredokaOne());
                       } else {
-                        return Text('${state.languageName}');
+                        return Text('${state.languageName}', style: GoogleFonts.fredokaOne());
                       }
                     });
                   },

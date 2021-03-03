@@ -60,6 +60,11 @@ ThemeData new_light_theme = ThemeData(
     selectedItemColor: AppColors.azulMorado,
     // backgroundColor: AppColors.amarillo,
   ),
+
+  /// Workaround https://github.com/flutter/flutter/issues/72562 by manually specifying the brightness
+  appBarTheme: AppBarTheme(
+    brightness: Brightness.dark,
+  ),
   selectedRowColor: AppColors.rosa,
   textSelectionColor: AppColors.rosa,
 );

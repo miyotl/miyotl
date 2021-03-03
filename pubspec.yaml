@@ -41,6 +41,7 @@ dependencies:
   google_fonts: ^1.1.2
   path_provider: ^1.6.27
   auto_size_text: ^2.1.0
+  settings_ui: ^0.6.0
   
   # Firebase plugins
   firebase_core: ^0.5.3

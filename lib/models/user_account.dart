@@ -62,7 +62,7 @@ class UserAccount extends ChangeNotifier {
     email = await getEmail();
     profilePicUrl = await getProfilePicUrl();
     if (profilePicUrl == null) {
-      profilePic = AssetImage('img/icon-full-new.png');
+      profilePic = AssetImage('img/icon-full-new-512.png');
     } else {
       profilePic = CachedNetworkImageProvider(profilePicUrl);
     }

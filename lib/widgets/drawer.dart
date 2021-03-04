@@ -139,7 +139,7 @@ class AppDrawer extends StatelessWidget {
                 showAboutDialog(
                   context: context,
                   applicationIcon: CircleAvatar(
-                    backgroundImage: AssetImage('img/icon-full-new.png'),
+                    backgroundImage: AssetImage('img/icon-full-new-512.png'),
                     backgroundColor: Colors.white,
                   ),
                   applicationLegalese: 'Con amor desde Chapingo ❤️',

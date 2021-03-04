@@ -46,7 +46,7 @@ class CultureCard extends StatelessWidget {
                     imageUrl: entry.imageUrl,
                     fit: BoxFit.cover,
                     errorWidget: (context, url, error) => Image.asset(
-                      'img/banner.png',
+                      'img/banner.jpg',
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -57,7 +57,7 @@ class CultureCard extends StatelessWidget {
                 child: Container(
                   width: double.infinity,
                   child: Image.asset(
-                    'img/banner.png',
+                    'img/banner.jpg',
                     fit: BoxFit.cover,
                   ),
                 ),

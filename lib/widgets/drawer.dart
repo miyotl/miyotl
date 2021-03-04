@@ -107,16 +107,16 @@ class AppDrawer extends StatelessWidget {
                     backgroundImage: AssetImage('img/icon-full-new.png'),
                     backgroundColor: Colors.white,
                   ),
-                  applicationLegalese:
-                      '''Fundadores y mesa directiva: Emilio Álvarez (CEO), Gabriel Rodríguez (CTO), Daniela Madrigal (COO), Carter Dieguiño (CFO y abogado), 
-Código: Gabriel Rodríguez
-Dibujos y CMO: Camila Varela
-Con amor desde Chapingo ❤️''',
+                  applicationLegalese: 'Con amor desde Chapingo ❤️',
+//                       '''Fundadores y mesa directiva: Emilio Álvarez (CEO), Gabriel Rodríguez (CTO), Daniela Madrigal (COO), Carter Dieguiño (CFO y abogado),
+// Código: Gabriel Rodríguez
+// Dibujos y CMO: Camila Varela
+// Con amor desde Chapingo ❤️''',
                   applicationVersion: 'versión inicial (beta)',
                   children: [
                     ListTile(
                       leading: Icon(Icons.people),
-                      title: Text('Ver lista completa de colaboradores'),
+                      title: Text('Ver créditos'),
                       onTap: () => launch(
                         'https://proyecto-miyotl.web.app/acerca_de',
                         forceWebView: true,

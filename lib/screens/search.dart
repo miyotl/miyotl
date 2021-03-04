@@ -28,6 +28,7 @@ class DictionarySearchDelegate extends SearchDelegate {
   Widget buildResults(BuildContext context) {
     AppState state = Provider.of<AppState>(context, listen: false);
     List<DictionaryEntry> searchResults = state.dictionary.search(query);
+    analytics.logSearch(searchTerm: query);
 
     return searchResults.length > 0
         ? ListView.builder(

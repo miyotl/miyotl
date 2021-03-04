@@ -45,6 +45,9 @@ class SettingsPage extends StatelessWidget {
                                 groupValue: settings.theme,
                                 onChanged: (value) {
                                   settings.theme = value;
+                                  analytics.setUserProperty(
+                                      name: 'theme',
+                                      value: '${settings.theme}');
                                   Navigator.of(context).pop();
                                 },
                               ),
@@ -71,6 +74,8 @@ class SettingsPage extends StatelessWidget {
                             value: true,
                             groupValue: settings.useIOSStyle,
                             onChanged: (value) {
+                              analytics.setUserProperty(
+                                  name: 'ux', value: 'ios');
                               settings.useIOSStyle = value;
                               Navigator.of(context).pop();
                             },
@@ -80,6 +85,8 @@ class SettingsPage extends StatelessWidget {
                             value: false,
                             groupValue: settings.useIOSStyle,
                             onChanged: (value) {
+                              analytics.setUserProperty(
+                                  name: 'ux', value: 'android');
                               settings.useIOSStyle = value;
                               Navigator.of(context).pop();
                             },
@@ -100,6 +107,7 @@ class SettingsPage extends StatelessWidget {
                         '${account.displayName == null ? 'No hay ninguna sesión iniciada' : 'Iniciaste sesión como ${account.displayName}'}',
                     leading: Icon(Icons.switch_account),
                     onPressed: (context) {
+                      analytics.logEvent(name: 'switch-user');
                       Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (context) => Scaffold(
@@ -115,6 +123,7 @@ class SettingsPage extends StatelessWidget {
                     title: 'Cerrar sesión',
                     leading: Icon(Icons.logout),
                     onPressed: (context) {
+                      analytics.logEvent(name: 'log-out');
                       account.logOut();
                     },
                   ),
@@ -127,36 +136,52 @@ class SettingsPage extends StatelessWidget {
                     title: 'Notificaciones',
                     leading: Icon(Icons.notifications),
                     onPressed: (context) {
+                      analytics.logEvent(name: 'open-notification-settings');
                       SystemSettings.appNotifications();
                     },
                   ),
                   SettingsTile(
                     title: 'Términos y condiciones',
                     leading: Icon(Icons.description),
-                    onPressed: (context) => launch(
-                      'https://proyecto-miyotl.web.app/terminos',
-                      forceWebView: true,
-                    ),
+                    onPressed: (context) {
+                      analytics.logEvent(
+                          name: 'view-terms',
+                          parameters: {'source': 'settings'});
+                      launch(
+                        'https://proyecto-miyotl.web.app/terminos',
+                        forceWebView: true,
+                      );
+                    },
                   ),
                   SettingsTile(
-                    title: 'Política de privacidad',
-                    leading: Icon(Icons.privacy_tip),
-                    onPressed: (context) => launch(
-                      'https://proyecto-miyotl.web.app/privacidad',
-                      forceWebView: true,
-                    ),
-                  ),
+                      title: 'Política de privacidad',
+                      leading: Icon(Icons.privacy_tip),
+                      onPressed: (context) {
+                        analytics.logEvent(
+                            name: 'view-privacy',
+                            parameters: {'source': 'settings'});
+                        launch(
+                          'https://proyecto-miyotl.web.app/privacidad',
+                          forceWebView: true,
+                        );
+                      }),
                   SettingsTile(
                     title: 'Enviar retroalimentación',
                     leading: Icon(Icons.feedback),
-                    onPressed: (context) => launch(
-                        'mailto:miyotl@googlegroups.com?subject=Retroalimentación sobre app'),
+                    onPressed: (context) {
+                      analytics.logEvent(
+                          name: 'contact', parameters: {'source': 'settings'});
+                      launch(
+                          'mailto:miyotl@googlegroups.com?subject=Retroalimentación sobre app');
+                    },
                   ),
                   SettingsTile(
                     title: 'Opciones avanzadas y diagnósticos',
                     leading: Icon(Icons.bug_report),
-                    onPressed: (context) =>
-                        Navigator.of(context).pushNamed('/debug'),
+                    onPressed: (context) {
+                      analytics.logEvent(name: 'open-developer-menu');
+                      Navigator.of(context).pushNamed('/debug');
+                    },
                   ),
                 ],
               ),

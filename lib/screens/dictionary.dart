@@ -57,6 +57,12 @@ class DictionaryPage extends StatelessWidget {
                     Text('${state.languageName}-Español'),
               },
               onValueChanged: (newMode) {
+                analytics.logEvent(
+                  name: 'change-dictionary-mode',
+                  parameters: {'mode': '$newMode'},
+                );
+                analytics.setUserProperty(
+                    name: 'dictionary-mode', value: '$newMode');
                 state.changeLookupMode(newMode);
               },
               groupValue: state.lookupMode,

@@ -13,6 +13,11 @@ class CultureDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     AppState state = Provider.of<AppState>(context, listen: false);
     Source source = state.sources.getSource(entry.sourceId);
+    analytics.logViewItem(
+      itemId: '${entry.titleOriginal}_${entry.titleTranslated}_details',
+      itemName: 'Detalles de ${entry.titleTranslated}',
+      itemCategory: 'document-details',
+    );
     return Scaffold(
       /// TODO: mostrar imagen como sliver appbar
       appBar: AppBar(

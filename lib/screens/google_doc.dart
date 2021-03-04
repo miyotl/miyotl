@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lenguas/models/app_state.dart';
 import '../models/culture.dart';
 import 'culture_details.dart';
 
@@ -103,6 +104,8 @@ class _GoogleDocPreviewState extends State<GoogleDocPreview> {
 
   @override
   Widget build(BuildContext context) {
+    analytics.logViewItem(
+        itemId: url, itemName: title, itemCategory: 'document');
     return Scaffold(
       appBar: AppBar(
         title: Text(

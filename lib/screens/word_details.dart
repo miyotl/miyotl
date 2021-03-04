@@ -13,6 +13,12 @@ class WordDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     AppState state = Provider.of<AppState>(context);
     Source source = state.sources.getSource(entry.sourceId);
+    analytics.logViewItem(
+        itemId:
+            '${state.language}_${entry.translatedWord}_${entry.originalWord}',
+        itemName:
+            '${state.language}: ${entry.translatedWord} / ${entry.originalWord}',
+        itemCategory: 'word');
     return Scaffold(
       appBar: AppBar(
         title: Text(

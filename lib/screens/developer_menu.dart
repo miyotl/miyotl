@@ -21,18 +21,30 @@ class DeveloperPage extends StatelessWidget {
           ElevatedButton(
             child: Text('Consultar disponibilidad de servicios de Google'),
             onPressed: () {
+              analytics.logEvent(
+                name: 'developer-option',
+                parameters: {'option': 'google-availability'},
+              );
               Navigator.of(context).pushNamed('/debug/google');
             },
           ),
           ElevatedButton(
             child: Text('Abrir pantalla inicial'),
             onPressed: () {
+              analytics.logEvent(
+                name: 'developer-option',
+                parameters: {'option': 'open-onboarding'},
+              );
               Navigator.of(context).pushNamed('/onboarding');
             },
           ),
           ElevatedButton(
             child: Text('Abrir pantalla inicial después del próximo reinicio'),
             onPressed: () {
+              analytics.logEvent(
+                name: 'developer-option',
+                parameters: {'option': 'revert-onboarding'},
+              );
               AppState state = Provider.of<AppState>(context, listen: false);
               state.setOnboardingStatus(false);
             },
@@ -40,6 +52,10 @@ class DeveloperPage extends StatelessWidget {
           ElevatedButton(
             child: Text('Ver base de datos'),
             onPressed: () {
+              analytics.logEvent(
+                name: 'developer-option',
+                parameters: {'option': 'view-data'},
+              );
               Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (context) => JsonViewerPage(
@@ -53,6 +69,10 @@ class DeveloperPage extends StatelessWidget {
           ElevatedButton(
             child: Text('Ver archivo de base de datos'),
             onPressed: () {
+              analytics.logEvent(
+                name: 'developer-option',
+                parameters: {'option': 'view-data-file'},
+              );
               Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (context) => AsyncStringViewerPage(
@@ -67,6 +87,10 @@ class DeveloperPage extends StatelessWidget {
           ElevatedButton(
             child: Text('Ver detalles de cuenta'),
             onPressed: () {
+              analytics.logEvent(
+                name: 'developer-option',
+                parameters: {'option': 'view-account'},
+              );
               Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (context) => AsyncStringViewerPage(
@@ -80,6 +104,10 @@ class DeveloperPage extends StatelessWidget {
           ElevatedButton(
             child: Text('Olvidarse de que la base de datos está actualizada'),
             onPressed: () async {
+              analytics.logEvent(
+                name: 'developer-option',
+                parameters: {'option': 'forget-data'},
+              );
               final prefs = await SharedPreferences.getInstance();
               prefs.setInt('last-update', 2001010101);
             },
@@ -87,6 +115,10 @@ class DeveloperPage extends StatelessWidget {
           ElevatedButton(
             child: Text('Hacer un error falso'),
             onPressed: () async {
+              analytics.logEvent(
+                name: 'developer-option',
+                parameters: {'option': 'test-exception'},
+              );
               try {
                 throw Exception('Test exception');
               } catch (exception, stackTrace) {

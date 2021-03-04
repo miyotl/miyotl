@@ -49,6 +49,19 @@ class DeveloperPage extends StatelessWidget {
               );
             },
           ),
+          ElevatedButton(
+            child: Text('Ver detalles de cuenta'),
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => AsyncStringViewerPage(
+                    title: 'Detalles de cuenta',
+                    string: UserAccount.instance.getDebugAccountDetails(),
+                  ),
+                ),
+              );
+            },
+          ),
         ],
       ),
     );

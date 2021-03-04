@@ -47,6 +47,16 @@ class UserAccount extends ChangeNotifier {
     }
   }
 
+  Future<String> getDebugAccountDetails() async {
+    var isLogged = await FacebookAuth.instance.isLogged;
+    if (isLogged == null) {
+      return FirebaseAuth.instance.currentUser.toString();
+    } else {
+      var userData = await FacebookAuth.instance.getUserData();
+      return userData.toString();
+    }
+  }
+
   Future<void> cacheUserAccount() async {
     displayName = await getDisplayName();
     email = await getEmail();

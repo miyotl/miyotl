@@ -22,14 +22,11 @@ class SignInPage extends StatelessWidget {
   SignInPage({@required this.onSignIn});
 
   void doSignIn(BuildContext context, SignInFunction signInFunction) async {
+    /// TODO: maybe do some separation between business logic and UI?
+
     /// Log out first
     try {
-      if (FacebookAuth.instance.isLogged != null) {
-        FacebookAuth.instance.logOut();
-      }
-      if (FirebaseAuth.instance.currentUser != null) {
-        FirebaseAuth.instance.signOut();
-      }
+      UserAccount.instance.logOut();
     } catch (e) {
       /// Don't do anything on exception, continue sign in
     }
@@ -64,8 +61,7 @@ class SignInPage extends StatelessWidget {
           ),
         );
       } else {
-        var account = Provider.of<UserAccount>(context, listen: false);
-        await account.cacheUserAccount();
+        await UserAccount.instance.cacheUserAccount();
         onSignIn();
       }
     } on PlatformException catch (e) {

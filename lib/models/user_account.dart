@@ -9,8 +9,10 @@ class UserAccount extends ChangeNotifier {
   String profilePicUrl;
   ImageProvider profilePic;
   bool loading;
+  static UserAccount _instance;
 
   UserAccount() {
+    _instance = this;
     init();
   }
 
@@ -66,12 +68,21 @@ class UserAccount extends ChangeNotifier {
   }
 
   void logOut() async {
-    if (FacebookAuth.instance.isLogged != null) {
-      FacebookAuth.instance.logOut();
-    }
-    if (FirebaseAuth.instance.currentUser != null) {
-      FirebaseAuth.instance.signOut();
-    }
+    try {
+      if (FacebookAuth.instance.isLogged != null) {
+        FacebookAuth.instance.logOut();
+      }
+    } catch (e) {}
+    try {
+      if (FirebaseAuth.instance.currentUser != null) {
+        FirebaseAuth.instance.signOut();
+      }
+    } catch (e) {}
     await cacheUserAccount();
+  }
+
+  static UserAccount get instance {
+    _instance ??= UserAccount();
+    return _instance;
   }
 }

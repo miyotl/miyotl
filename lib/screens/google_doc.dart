@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../models/culture.dart';
 import 'culture_details.dart';
 
@@ -104,7 +105,10 @@ class _GoogleDocPreviewState extends State<GoogleDocPreview> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(title),
+        title: Text(
+          title,
+          style: GoogleFonts.fredokaOne(),
+        ),
         actions: [
           IconButton(
             icon: Icon(Icons.more_horiz),

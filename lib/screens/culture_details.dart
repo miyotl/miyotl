@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../models/app_state.dart';
 import 'package:provider/provider.dart';
 import 'google_doc.dart';
@@ -15,7 +16,10 @@ class CultureDetails extends StatelessWidget {
     return Scaffold(
       /// TODO: mostrar imagen como sliver appbar
       appBar: AppBar(
-        title: Text(entry.titleOriginal),
+        title: Text(
+          entry.titleOriginal,
+          style: GoogleFonts.fredokaOne(),
+        ),
       ),
       body: ListView(
         children: <Widget>[

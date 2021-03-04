@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:lenguas/models/app_state.dart';
 import 'package:provider/provider.dart';
 
@@ -7,7 +8,10 @@ class DeveloperPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Diagnósticos'),
+        title: Text(
+          'Diagnósticos',
+          style: GoogleFonts.fredokaOne(),
+        ),
       ),
       body: ListView(
         children: [

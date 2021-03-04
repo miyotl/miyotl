@@ -28,7 +28,10 @@ class _HomePageState extends State<HomePage> {
           if (snapshot.hasError) {
             return Scaffold(
               appBar: AppBar(
-                title: Text('Error'),
+                title: Text(
+                  'Error',
+                  style: GoogleFonts.fredokaOne(),
+                ),
               ),
               body: EmptyState('Error: ${snapshot.error}'),
             );

@@ -1,19 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../models/app_state.dart';
 
 class VariantDetails extends StatelessWidget {
   final DictionaryEntry entry;
   final Variant variant;
-  VariantDetails({Key key, @required this.entry, @required this.variant}) : super(key: key);
+  VariantDetails({Key key, @required this.entry, @required this.variant})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    AppState state = Provider.of<AppState>(context); 
+    AppState state = Provider.of<AppState>(context);
     Source source = state.sources.getSource(variant.sourceId);
     return Scaffold(
       appBar: AppBar(
-        title: Text('Variante de ${entry.originalWord}'),
+        title: Text(
+          'Variante de ${entry.originalWord}',
+          style: GoogleFonts.fredokaOne(),
+        ),
       ),
       body: ListView(
         children: <Widget>[

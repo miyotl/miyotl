@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:lenguas/models/app_state.dart';
 import 'package:provider/provider.dart';
 import 'home.dart';
@@ -24,7 +25,10 @@ class ConditionalOnboardingPage extends StatelessWidget {
             } else if (snapshot.hasError) {
               return Scaffold(
                 appBar: AppBar(
-                  title: Text('Ocurrió un error'),
+                  title: Text(
+                    'Ocurrió un error',
+                    style: GoogleFonts.fredokaOne(),
+                  ),
                 ),
                 body: EmptyState(
                     'Intenta liberar espacio en tu dispositivo. Si el error persiste, manda correo a miyotl@googlegroups.com. El error es ${snapshot.error}'),

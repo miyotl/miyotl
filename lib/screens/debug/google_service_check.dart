@@ -1,5 +1,6 @@
 import 'package:google_api_availability/google_api_availability.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class GoogleApiAvailabilityPage extends StatelessWidget {
   String googleAvailabilityDescription(
@@ -30,7 +31,10 @@ class GoogleApiAvailabilityPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Servicios de Google'),
+        title: Text(
+          'Servicios de Google',
+          style: GoogleFonts.fredokaOne(),
+        ),
       ),
       body: Center(
         child: FutureBuilder<GooglePlayServicesAvailability>(

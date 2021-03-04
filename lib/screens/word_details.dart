@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../models/app_state.dart';
 import 'variant_details.dart';
@@ -14,7 +15,10 @@ class WordDetails extends StatelessWidget {
     Source source = state.sources.getSource(entry.sourceId);
     return Scaffold(
       appBar: AppBar(
-        title: Text('Detalles de ${entry.originalWord}'),
+        title: Text(
+          'Detalles de ${entry.originalWord}',
+          style: GoogleFonts.fredokaOne(),
+        ),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.share),

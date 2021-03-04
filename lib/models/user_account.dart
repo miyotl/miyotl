@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -9,6 +10,7 @@ class UserAccount extends ChangeNotifier {
   String profilePicUrl;
   ImageProvider profilePic;
   bool loading;
+  FirebaseApp firebaseApp;
   static UserAccount _instance;
 
   UserAccount() {
@@ -72,6 +74,7 @@ class UserAccount extends ChangeNotifier {
   Future<void> init() async {
     loading = true;
     notifyListeners();
+    firebaseApp = await Firebase.initializeApp();
     await cacheUserAccount();
     loading = false;
     notifyListeners();

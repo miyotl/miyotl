@@ -24,16 +24,18 @@ ListTile buildListTile(
         ),
       );
     },
-    trailing: IconButton(
-      icon: Icon(Icons.favorite_border),
-      onPressed: () {
-        Scaffold.of(context).showSnackBar(
-          SnackBar(
-            content: Text('Funcionalidad no implementada'),
-          ),
-        );
-      },
-    ),
+
+    /// TODO(devillove): Implement this functionality
+    // trailing: IconButton(
+    //   icon: Icon(Icons.favorite_border),
+    //   onPressed: () {
+    //     Scaffold.of(context).showSnackBar(
+    //       SnackBar(
+    //         content: Text('Funcionalidad no implementada'),
+    //       ),
+    //     );
+    //   },
+    // ),
   );
 }
 

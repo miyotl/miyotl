@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lenguas/widgets/empty_state.dart';
@@ -41,27 +42,11 @@ class _HomePageState extends State<HomePage> {
               appBar: AppBar(
                 title: Consumer<AppState>(
                   builder: (context, state, child) {
-                    /// For small screens, only display the  language name
-                    /// https://stackoverflow.com/questions/51114778/how-to-check-if-flutter-text-widget-was-overflowed
-                    return LayoutBuilder(builder: (context, size) {
-                      final tp = TextPainter(
-                        text: TextSpan(
-                          text: '$app_name: ${state.languageName}',
-                        ),
-                        textDirection: TextDirection.ltr,
-                      );
-                      tp.layout(maxWidth: size.maxWidth);
-
-                      /// This weird substraction is pretty arbitrary,
-                      /// but I couldn't find a better solution for the moment
-                      if (tp.maxIntrinsicWidth <= size.maxWidth - 22) {
-                        return Text('$app_name: ${state.languageName}',
-                            style: GoogleFonts.fredokaOne());
-                      } else {
-                        return Text('${state.languageName}',
-                            style: GoogleFonts.fredokaOne());
-                      }
-                    });
+                    return AutoSizeText(
+                      '$app_name: ${state.languageName}',
+                      style: GoogleFonts.fredokaOne(),
+                      maxLines: 1,
+                    );
                   },
                 ),
                 actions: <Widget>[

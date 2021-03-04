@@ -61,7 +61,13 @@ class UserAccount extends ChangeNotifier {
 
   Future<void> cacheUserAccount() async {
     displayName = await getDisplayName();
+    if (displayName == '' || displayName == null) {
+      displayName = 'Ajolote anónimo';
+    }
     email = await getEmail();
+    if (email == '' || email == null) {
+      email = 'Correo no aplicable';
+    }
     profilePicUrl = await getProfilePicUrl();
     if (profilePicUrl == null) {
       profilePic = AssetImage('img/icon-full-new-512.png');

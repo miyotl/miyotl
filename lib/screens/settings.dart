@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:lenguas/models/app_state.dart';
 import 'package:lenguas/models/settings.dart';
 import 'package:lenguas/screens/sign_in.dart';
 import 'package:provider/provider.dart';
@@ -119,6 +120,14 @@ class SettingsPage extends StatelessWidget {
                     leading: Icon(Icons.notifications),
                     onPressed: (context) {
                       SystemSettings.appNotifications();
+                    },
+                  ),
+                  SettingsTile(
+                    title: 'Forzar actualización de base de datos',
+                    leading: Icon(Icons.update),
+                    subtitle: 'Última actualización: bla bla bla',
+                    onPressed: (context) {
+                      Provider.of<AppState>(context).updateLanguageData();
                     },
                   ),
                   SettingsTile(

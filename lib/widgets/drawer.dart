@@ -51,6 +51,14 @@ class AppDrawer extends StatelessWidget {
               },
             ),
             ListTile(
+                leading: Icon(Icons.update),
+                title: Text('Actualizar base de datos'),
+                subtitle: Text('Última act.: bla bla bla'),
+                onTap: () {
+                  Provider.of<AppState>(context, listen: false)
+                      .updateLanguageData();
+                }),
+            ListTile(
               leading: Icon(Icons.settings),
               title: Text('Ajustes'),
               onTap: () {

@@ -52,14 +52,6 @@ class _HomePageState extends State<HomePage> {
                 actions: <Widget>[
                   if (page == 1) ...[
                     IconButton(
-                      icon: Icon(Icons.refresh),
-                      onPressed: () {
-                        Provider.of<AppState>(context, listen: false)
-                            .updateLanguageData();
-                      },
-                      tooltip: 'Actualizar',
-                    ),
-                    IconButton(
                       icon: Icon(Icons.search),
                       onPressed: () {
                         showSearch(

@@ -5,11 +5,13 @@ class Source {
   String author;
   String name;
   String region;
+  String profilePicUrl;
 
-  Source._(this.id, this.author, this.name, this.region);
+  Source._(this.id, this.author, this.name, this.region, this.profilePicUrl);
 
   factory Source.fromJson(dynamic json) {
-    return Source._(json['id'], json['author'], json['source'], json['region']);
+    return Source._(json['id'], json['author'], json['source'], json['region'],
+        json['profile_pic_url']);
   }
 }
 

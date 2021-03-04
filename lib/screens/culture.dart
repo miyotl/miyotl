@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:lenguas/screens/google_doc.dart';
 import 'package:lenguas/widgets/empty_state.dart';
 import 'package:provider/provider.dart';
@@ -26,7 +27,24 @@ class CultureCard extends StatelessWidget {
             ListTile(
               title: Text(entry.titleOriginal),
               subtitle: Text('${entry.titleTranslated}'),
-              leading: CircleAvatar(),
+              leading: Consumer<AppState>(
+                builder: (context, state, child) {
+                  Source source = state.sources.getSource(entry.sourceId);
+                  if (source.profilePicUrl != null) {
+                    return CircleAvatar(
+                      backgroundImage:
+                          CachedNetworkImageProvider(source.profilePicUrl),
+                    );
+                  } else {
+                    return CircleAvatar(
+                      child: Text(
+                        '${source.author[0]}',
+                        style: GoogleFonts.fredokaOne(),
+                      ),
+                    );
+                  }
+                },
+              ),
               trailing: IconButton(
                 icon: Icon(Icons.more_horiz),
                 onPressed: () {

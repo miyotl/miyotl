@@ -7,6 +7,7 @@ import 'package:lenguas/screens/sign_in.dart';
 import 'package:provider/provider.dart';
 import 'package:settings_ui/settings_ui.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:system_settings/system_settings.dart';
 
 class SettingsPage extends StatelessWidget {
   @override
@@ -110,30 +111,39 @@ class SettingsPage extends StatelessWidget {
                 title: 'Varios',
                 tiles: [
                   SettingsTile(
-                    title: 'Opciones avanzadas y diagnósticos',
-                    leading: Icon(Icons.bug_report),
-                    onPressed: (context) =>
-                        Navigator.of(context).pushNamed('/debug'),
+                    title: 'Notificaciones',
+                    leading: Icon(Icons.notifications),
+                    onPressed: (context) {
+                      SystemSettings.appNotifications();
+                    },
                   ),
                   SettingsTile(
                     title: 'Términos y condiciones',
                     leading: Icon(Icons.description),
-                    onPressed: (context) {
-                      launch(
-                        'https://proyecto-miyotl.web.app/terminos',
-                        forceWebView: true,
-                      );
-                    },
+                    onPressed: (context) => launch(
+                      'https://proyecto-miyotl.web.app/terminos',
+                      forceWebView: true,
+                    ),
                   ),
                   SettingsTile(
                     title: 'Política de privacidad',
                     leading: Icon(Icons.privacy_tip),
-                    onPressed: (context) {
-                      launch(
-                        'https://proyecto-miyotl.web.app/privacidad',
-                        forceWebView: true,
-                      );
-                    },
+                    onPressed: (context) => launch(
+                      'https://proyecto-miyotl.web.app/privacidad',
+                      forceWebView: true,
+                    ),
+                  ),
+                  SettingsTile(
+                    title: 'Enviar retroalimentación',
+                    leading: Icon(Icons.feedback),
+                    onPressed: (context) => launch(
+                        'mailto:miyotl@googlegroups.com?subject=Retroalimentación sobre app'),
+                  ),
+                  SettingsTile(
+                    title: 'Opciones avanzadas y diagnósticos',
+                    leading: Icon(Icons.bug_report),
+                    onPressed: (context) =>
+                        Navigator.of(context).pushNamed('/debug'),
                   ),
                 ],
               ),

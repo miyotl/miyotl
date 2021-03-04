@@ -1,4 +1,6 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:lenguas/screens/conditional_onboarding.dart';
 import 'package:lenguas/screens/settings.dart';
 import 'models/settings.dart';
@@ -12,6 +14,13 @@ import 'models/constants.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
 Future<void> main() async {
+  /// Add license entry for Google fonts
+  LicenseRegistry.addLicense(() async* {
+    final license = await rootBundle.loadString('google_fonts/OFL.txt');
+    yield LicenseEntryWithLineBreaks(['google_fonts'], license);
+  });
+
+  /// Run the app, sending exceptions and errors to Sentry
   SentryFlutter.init(
     (options) {
       options.dsn =

@@ -1,15 +1,12 @@
 import 'dart:convert';
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:http/http.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'constants.dart';
 import 'dictionary.dart';
 import 'culture.dart';
 import 'language.dart';
-import 'user_account.dart';
 
 export 'dictionary.dart';
 export 'constants.dart';

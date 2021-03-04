@@ -6,7 +6,6 @@ import 'package:provider/provider.dart';
 import 'dictionary.dart';
 import 'learn.dart';
 import 'culture.dart';
-import 'developer_menu.dart';
 import '../models/app_state.dart';
 import '../widgets/drawer.dart';
 import 'search.dart';

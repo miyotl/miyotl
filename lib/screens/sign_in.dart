@@ -9,7 +9,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:lenguas/models/constants.dart';
 import 'package:lenguas/models/sign_in.dart';
 import 'package:lenguas/models/user_account.dart';
-import 'package:lenguas/models/user_account.dart';
 import 'package:lenguas/screens/onboarding.dart';
 import 'package:lenguas/widgets/status_bar_colors.dart';
 import 'package:provider/provider.dart';

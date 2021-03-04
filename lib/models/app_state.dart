@@ -154,6 +154,7 @@ class AppState extends ChangeNotifier {
       cultures[cultureJson['language']].add(CultureEntry.fromJson(cultureJson));
     }
     dictionary.sort(lookupMode);
+    notifyListeners();
   }
 
   /// Get language data from the internet

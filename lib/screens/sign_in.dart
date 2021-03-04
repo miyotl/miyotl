@@ -9,8 +9,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:lenguas/models/constants.dart';
 import 'package:lenguas/models/sign_in.dart';
 import 'package:lenguas/models/user_account.dart';
+import 'package:lenguas/models/user_account.dart';
 import 'package:lenguas/screens/onboarding.dart';
 import 'package:lenguas/widgets/status_bar_colors.dart';
+import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class SignInPage extends StatelessWidget {
@@ -62,7 +64,8 @@ class SignInPage extends StatelessWidget {
           ),
         );
       } else {
-        UserAccount.cacheUserAccount();
+        var account = Provider.of<UserAccount>(context, listen: false);
+        await account.cacheUserAccount();
         onSignIn();
       }
     } on PlatformException catch (e) {

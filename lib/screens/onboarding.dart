@@ -119,7 +119,8 @@ class _OnboardingPageState extends State<OnboardingPage> {
 
           SignInPage(
             onSignIn: () {
-              setState(() => _name = UserAccount.displayName);
+              setState(() => _name =
+                  Provider.of<UserAccount>(context, listen: false).displayName);
               nextPage();
             },
           ),

@@ -21,6 +21,7 @@ class App extends StatelessWidget {
       providers: [
         ChangeNotifierProvider<AppState>(create: (context) => AppState()),
         ChangeNotifierProvider<Settings>(create: (context) => Settings()),
+        ChangeNotifierProvider<UserAccount>(create: (context) => UserAccount()),
       ],
       child: ChangeNotifierProvider<AppState>(
         create: (context) => AppState(),

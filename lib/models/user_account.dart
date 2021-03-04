@@ -3,13 +3,14 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter/material.dart';
 
-class UserAccount {
-  static String displayName;
-  static String email;
-  static String profilePicUrl;
-  static ImageProvider profilePic;
+class UserAccount extends ChangeNotifier {
+  String displayName;
+  String email;
+  String profilePicUrl;
+  ImageProvider profilePic;
+  bool loading;
 
-  static Future<String> _getDisplayName() async {
+  Future<String> getDisplayName() async {
     var isLogged = await FacebookAuth.instance.isLogged;
     if (isLogged == null) {
       return FirebaseAuth.instance?.currentUser?.displayName ??
@@ -20,7 +21,7 @@ class UserAccount {
     }
   }
 
-  static Future<String> _getEmail() async {
+  Future<String> getEmail() async {
     var isLogged = await FacebookAuth.instance.isLogged;
     if (isLogged == null) {
       return FirebaseAuth.instance.currentUser?.email ?? 'Correo no aplicable';
@@ -30,7 +31,7 @@ class UserAccount {
     }
   }
 
-  static Future<String> _getProfilePicUrl() async {
+  Future<String> getProfilePicUrl() async {
     var isLogged = await FacebookAuth.instance.isLogged;
     if (isLogged == null) {
       return FirebaseAuth.instance.currentUser?.photoURL;
@@ -40,14 +41,21 @@ class UserAccount {
     }
   }
 
-  static Future<void> cacheUserAccount() async {
-    displayName = await _getDisplayName();
-    email = await _getEmail();
-    profilePicUrl = await _getProfilePicUrl();
+  Future<void> cacheUserAccount() async {
+    displayName = await getDisplayName();
+    email = await getEmail();
+    profilePicUrl = await getProfilePicUrl();
     if (profilePicUrl == null) {
       profilePic = AssetImage('img/icon-full-new.png');
     } else {
       profilePic = CachedNetworkImageProvider(profilePicUrl);
     }
+  }
+
+  Future<void> init() async {
+    loading = true;
+    notifyListeners();
+    await cacheUserAccount();
+    notifyListeners();
   }
 }

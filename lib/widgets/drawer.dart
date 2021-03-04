@@ -20,18 +20,24 @@ class AppDrawer extends StatelessWidget {
         builder: (context, state, child) => ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
-            UserAccountsDrawerHeader(
-              accountName: Text('${UserAccount.displayName ?? ''}',
-                  style: GoogleFonts.fredokaOne()),
-              accountEmail: Text('${UserAccount.email ?? ''}'),
-              currentAccountPicture: CircleAvatar(
-                backgroundImage: UserAccount.profilePic,
-              ),
-              decoration: BoxDecoration(
-                color: Theme.of(context).brightness == Brightness.dark
-                    ? Theme.of(context).primaryColor
-                    : Theme.of(context).accentColor,
-              ),
+            Consumer<UserAccount>(
+              builder: (context, account, child) {
+                return UserAccountsDrawerHeader(
+                  accountName: Text(
+                    '${account.displayName ?? ''}',
+                    style: GoogleFonts.fredokaOne(),
+                  ),
+                  accountEmail: Text('${account.email ?? ''}'),
+                  currentAccountPicture: CircleAvatar(
+                    backgroundImage: account.profilePic,
+                  ),
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).brightness == Brightness.dark
+                        ? Theme.of(context).primaryColor
+                        : Theme.of(context).accentColor,
+                  ),
+                );
+              },
             ),
             ListTile(
               leading: Icon(Icons.language),

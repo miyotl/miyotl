@@ -87,7 +87,6 @@ class AppState extends ChangeNotifier {
     loading = true;
     notifyListeners();
     await getLanguageDataFromInternet();
-    await UserAccount.cacheUserAccount();
     loading = false;
     notifyListeners();
   }

@@ -1,20 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class EmptyState extends StatelessWidget {
   final String text;
-  
-  EmptyState(this.text);
+  final String image;
+
+  EmptyState(this.text, [this.image]);
 
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Padding(
-        padding: EdgeInsets.all(20),
-        child: Text(
-          text,
-          style: Theme.of(context).textTheme.headline6,
-          textAlign: TextAlign.center,
-        ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          if (image != null) Image.asset(image),
+          Padding(
+            padding: EdgeInsets.only(left: 20, right: 20),
+            child: Text(
+              text,
+              textAlign: TextAlign.center,
+              style: GoogleFonts.fredokaOne(
+                fontSize: 24,
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

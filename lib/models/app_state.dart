@@ -1,7 +1,10 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/widgets.dart';
+import 'package:flutter/services.dart' show rootBundle;
 import 'package:http/http.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'constants.dart';
 import 'dictionary.dart';
@@ -141,5 +144,24 @@ class AppState extends ChangeNotifier {
   /// Update language data from the internet, if an update is available
   void updateLanguageData() {
     getLanguageDataFromInternet();
+  }
+
+  Future<File> _getLanguageFile() async {
+    final directory = await getApplicationDocumentsDirectory();
+    return File('$directory/data.json');
+  }
+
+  Future<void> _saveLanguageDataToDisk(String data) async {
+    final file = await _getLanguageFile();
+    await file.writeAsString(data);
+  }
+
+  Future<String> loadLanguageDataFromDisk() async {
+    try {
+      final file = await _getLanguageFile();
+      return await file.readAsString();
+    } catch (e) {
+      return await rootBundle.loadString('img/data.json');
+    }
   }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lenguas/models/app_state.dart';
 import 'package:provider/provider.dart';
+import 'debug/string_viewer.dart';
 
 class DeveloperPage extends StatelessWidget {
   @override
@@ -32,6 +33,20 @@ class DeveloperPage extends StatelessWidget {
             onPressed: () {
               AppState state = Provider.of<AppState>(context, listen: false);
               state.setOnboardingStatus(false);
+            },
+          ),
+          ElevatedButton(
+            child: Text('Ver archivo de base de datos'),
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => AsyncStringViewerPage(
+                    title: 'Base de datos (archivo)',
+                    string: Provider.of<AppState>(context, listen: false)
+                        .loadLanguageDataFromDisk(),
+                  ),
+                ),
+              );
             },
           ),
         ],

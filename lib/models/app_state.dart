@@ -79,6 +79,21 @@ class AppState extends ChangeNotifier {
   /// List of languages
   List<Language> languages = [];
 
+  Future<String> get lastUpdate async {
+    String intToDateStr(int n) {
+      final String _string = n.toString();
+      return '${_string.substring(6, 8)}/${meses[int.parse(_string.substring(4, 6)) - 1]}/${_string.substring(0, 4)} (${int.parse(_string.substring(8, 10))})';
+    }
+
+    final prefs = await SharedPreferences.getInstance();
+    int lastUpdate = await prefs.getInt('last-update');
+    if (lastUpdate == null) {
+      return 'Nunca';
+    } else {
+      return intToDateStr(lastUpdate);
+    }
+  }
+
   AppState() {
     init();
   }
@@ -86,7 +101,7 @@ class AppState extends ChangeNotifier {
   Future<void> init() async {
     loading = true;
     notifyListeners();
-    await getLanguageDataFromInternet();
+    await loadLanguageData();
     loading = false;
     notifyListeners();
   }
@@ -107,8 +122,16 @@ class AppState extends ChangeNotifier {
     return true;
   }
 
+  Future<void> loadLanguageData() async {
+    String dataString = await loadLanguageDataFromDisk();
+    loadLanguageDataFromJson(json.decode(dataString));
+    loading = false;
+    notifyListeners();
+    await updateLanguageData();
+  }
+
   /// Load language data (decoded from JSON)
-  void loadLanguageData(Map<String, dynamic> data) {
+  void loadLanguageDataFromJson(Map<String, dynamic> data) {
     // TODO: implement some exception handling
     sources = Sources.fromJson(data['Referencias']);
     for (var language in data['Idiomas']) {
@@ -137,18 +160,28 @@ class AppState extends ChangeNotifier {
     var response = await get(dictionary_url);
 
     /// Interpret the response as UTF-8 so special characters can be rendered properly
-    data = json.decode(utf8.decode(response.bodyBytes));
-    loadLanguageData(data);
+    var dataString = utf8.decode(response.bodyBytes);
+    data = json.decode(dataString);
+    loadLanguageDataFromJson(data);
+    _saveLanguageDataToDisk(dataString);
   }
 
   /// Update language data from the internet, if an update is available
-  void updateLanguageData() {
-    getLanguageDataFromInternet();
+  Future<void> updateLanguageData() async {
+    final prefs = await SharedPreferences.getInstance();
+    int currentVersion = prefs.getInt('last-update') ?? 0;
+    var response = await get(last_update_url);
+    int latestVersion = int.parse(response.body);
+    if (latestVersion > currentVersion) {
+      await getLanguageDataFromInternet();
+      prefs.setInt('last-update', latestVersion);
+      notifyListeners();
+    }
   }
 
   Future<File> _getLanguageFile() async {
     final directory = await getApplicationDocumentsDirectory();
-    return File('$directory/data.json');
+    return File('${directory.path}/data.json');
   }
 
   Future<void> _saveLanguageDataToDisk(String data) async {

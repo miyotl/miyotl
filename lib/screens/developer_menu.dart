@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lenguas/models/app_state.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'debug/string_viewer.dart';
 
 class DeveloperPage extends StatelessWidget {
@@ -60,6 +61,13 @@ class DeveloperPage extends StatelessWidget {
                   ),
                 ),
               );
+            },
+          ),
+          ElevatedButton(
+            child: Text('Olvidarse de que la base de datos está actualizada'),
+            onPressed: () async {
+              final prefs = await SharedPreferences.getInstance();
+              prefs.setInt('last-update', 2001010101);
             },
           ),
         ],

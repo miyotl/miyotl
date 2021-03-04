@@ -55,14 +55,24 @@ class AppDrawer extends StatelessWidget {
                 ));
               },
             ),
-            ListTile(
-                leading: Icon(Icons.update),
-                title: Text('Actualizar base de datos'),
-                subtitle: Text('Última act.: bla bla bla'),
-                onTap: () {
-                  Provider.of<AppState>(context, listen: false)
-                      .updateLanguageData();
-                }),
+            Consumer<AppState>(
+              builder: (context, state, widget) => ListTile(
+                  leading: Icon(Icons.update),
+                  title: Text('Actualizar base de datos'),
+                  subtitle: FutureBuilder(
+                    future: state.lastUpdate,
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        return Text('Últ. act: ${snapshot.data}');
+                      } else {
+                        return Text('');
+                      }
+                    },
+                  ),
+                  onTap: () {
+                    state.updateLanguageData();
+                  }),
+            ),
             ListTile(
               leading: Icon(Icons.settings),
               title: Text('Ajustes'),

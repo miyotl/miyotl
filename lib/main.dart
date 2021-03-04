@@ -13,9 +13,6 @@ import 'package:provider/provider.dart';
 import 'models/app_state.dart';
 import 'models/constants.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
-import 'package:firebase_analytics/firebase_analytics.dart';
-
-FirebaseAnalytics analytics = FirebaseAnalytics();
 
 Future<void> main() async {
   /// Add license entry for Google fonts

@@ -43,6 +43,7 @@ dependencies:
   auto_size_text: ^2.1.0
   settings_ui: ^0.6.0
   system_settings: ^1.0.1
+  flutter_json_widget: ^1.0.1
   
   # Firebase plugins
   firebase_core: ^0.5.3

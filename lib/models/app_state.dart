@@ -131,8 +131,9 @@ class AppState extends ChangeNotifier {
   }
 
   /// Load language data (decoded from JSON)
-  void loadLanguageDataFromJson(Map<String, dynamic> data) {
+  void loadLanguageDataFromJson(Map<String, dynamic> _data) {
     // TODO: implement some exception handling
+    data = _data;
     sources = Sources.fromJson(data['Referencias']);
     languages = [];
     for (var language in data['Idiomas']) {

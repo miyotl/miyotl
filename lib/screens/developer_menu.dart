@@ -37,6 +37,19 @@ class DeveloperPage extends StatelessWidget {
             },
           ),
           ElevatedButton(
+            child: Text('Ver base de datos'),
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => JsonViewerPage(
+                    title: 'Base de datos',
+                    json: Provider.of<AppState>(context, listen: false).data,
+                  ),
+                ),
+              );
+            },
+          ),
+          ElevatedButton(
             child: Text('Ver archivo de base de datos'),
             onPressed: () {
               Navigator.of(context).push(

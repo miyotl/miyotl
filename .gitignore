@@ -9,6 +9,7 @@
 .history
 .svn/
 .directory
+app-release.apk
 
 # IntelliJ related
 *.iml

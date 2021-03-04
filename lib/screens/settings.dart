@@ -94,7 +94,8 @@ class SettingsPage extends StatelessWidget {
                 title: 'Cuenta',
                 tiles: [
                   SettingsTile(
-                    title: 'Cambiar de cuenta',
+                    title:
+                        '${account.displayName == null ? 'Iniciar sesión' : 'Cambiar de cuenta'}',
                     subtitle:
                         '${account.displayName == null ? 'No hay ninguna sesión iniciada' : 'Iniciaste sesión como ${account.displayName}'}',
                     leading: Icon(Icons.switch_account),

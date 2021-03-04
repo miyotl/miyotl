@@ -23,6 +23,7 @@ class SignInPage extends StatelessWidget {
   SignInPage({@required this.onSignIn});
 
   void doSignIn(BuildContext context, SignInFunction signInFunction) async {
+    /// Log out first
     try {
       if (FacebookAuth.instance.isLogged != null) {
         FacebookAuth.instance.logOut();

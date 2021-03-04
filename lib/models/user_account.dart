@@ -10,6 +10,10 @@ class UserAccount extends ChangeNotifier {
   ImageProvider profilePic;
   bool loading;
 
+  UserAccount() {
+    init();
+  }
+
   Future<String> getDisplayName() async {
     var isLogged = await FacebookAuth.instance.isLogged;
     if (isLogged == null) {
@@ -50,12 +54,24 @@ class UserAccount extends ChangeNotifier {
     } else {
       profilePic = CachedNetworkImageProvider(profilePicUrl);
     }
+    notifyListeners();
   }
 
   Future<void> init() async {
     loading = true;
     notifyListeners();
     await cacheUserAccount();
+    loading = false;
     notifyListeners();
+  }
+
+  void logOut() async {
+    if (FacebookAuth.instance.isLogged != null) {
+      FacebookAuth.instance.logOut();
+    }
+    if (FirebaseAuth.instance.currentUser != null) {
+      FirebaseAuth.instance.signOut();
+    }
+    await cacheUserAccount();
   }
 }

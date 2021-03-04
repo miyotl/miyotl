@@ -97,7 +97,8 @@ class SettingsPage extends StatelessWidget {
                 tiles: [
                   SettingsTile(
                     title: 'Cambiar de cuenta',
-                    subtitle: 'Iniciaste sesión como ${account.displayName}',
+                    subtitle:
+                        '${account.displayName == null ? 'No hay ninguna sesión iniciada' : 'Iniciaste sesión como ${account.displayName}'}',
                     leading: Icon(Icons.switch_account),
                     onPressed: (context) {
                       Navigator.of(context).push(
@@ -109,6 +110,13 @@ class SettingsPage extends StatelessWidget {
                           ),
                         ),
                       );
+                    },
+                  ),
+                  SettingsTile(
+                    title: 'Cerrar sesión',
+                    leading: Icon(Icons.logout),
+                    onPressed: (context) {
+                      account.logOut();
                     },
                   ),
                 ],

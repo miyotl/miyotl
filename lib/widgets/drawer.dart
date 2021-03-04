@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lenguas/screens/language_select.dart';
@@ -57,21 +59,54 @@ class AppDrawer extends StatelessWidget {
             ),
             Consumer<AppState>(
               builder: (context, state, widget) => ListTile(
-                  leading: Icon(Icons.update),
-                  title: Text('Actualizar base de datos'),
-                  subtitle: FutureBuilder(
-                    future: state.lastUpdate,
-                    builder: (context, snapshot) {
-                      if (snapshot.hasData) {
-                        return Text('Últ. act: ${snapshot.data}');
-                      } else {
-                        return Text('');
-                      }
-                    },
-                  ),
-                  onTap: () {
-                    state.updateLanguageData();
-                  }),
+                leading: Icon(Icons.update),
+                title: Text('Actualizar base de datos'),
+                subtitle: FutureBuilder(
+                  future: state.lastUpdate,
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return Text('Últ. act: ${snapshot.data}');
+                    } else {
+                      return Text('');
+                    }
+                  },
+                ),
+                onTap: () async {
+                  try {
+                    await state.updateLanguageData();
+                  } on SocketException catch (e) {
+                    showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          title: Text('No tienes internet'),
+                          content: Text(
+                              'No se pudo intentar actualizar la base de datos porque no tienes conexión a internet.'),
+                          actions: [
+                            TextButton(
+                              child: Text('DE ACUERDO'),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  } catch (e) {
+                    showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          title: Text('Error desconocido'),
+                          content: Text(
+                              'Ocurrió un error desconocido. Por favor toma captura de pantalla y mándala a miyotl@googlegroups.com. El error es $e'),
+                        );
+                      },
+                    );
+                  }
+                },
+              ),
             ),
             ListTile(
               leading: Icon(Icons.settings),

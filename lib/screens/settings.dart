@@ -23,8 +23,8 @@ class SettingsPage extends StatelessWidget {
       ),
       body: Padding(
         padding: EdgeInsets.all(8),
-        child: Consumer<Settings>(
-          builder: (context, settings, child) => SettingsList(
+        child: Consumer2<Settings, UserAccount>(
+          builder: (context, settings, account, child) => SettingsList(
             backgroundColor: Colors.transparent,
             sections: [
               SettingsSection(
@@ -97,6 +97,7 @@ class SettingsPage extends StatelessWidget {
                 tiles: [
                   SettingsTile(
                     title: 'Cambiar de cuenta',
+                    subtitle: 'Iniciaste sesión como ${account.displayName}',
                     leading: Icon(Icons.switch_account),
                     onPressed: (context) {
                       Navigator.of(context).push(

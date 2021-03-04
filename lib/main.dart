@@ -1,3 +1,4 @@
+import 'package:firebase_analytics/observer.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -12,6 +13,9 @@ import 'package:provider/provider.dart';
 import 'models/app_state.dart';
 import 'models/constants.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
+
+FirebaseAnalytics analytics = FirebaseAnalytics();
 
 Future<void> main() async {
   /// Add license entry for Google fonts
@@ -43,6 +47,9 @@ class App extends StatelessWidget {
         create: (context) => AppState(),
         child: Consumer<Settings>(
           builder: (context, settings, child) => MaterialApp(
+            navigatorObservers: [
+              FirebaseAnalyticsObserver(analytics: analytics),
+            ],
             title: app_name,
             theme: new_light_theme.copyWith(
               platform: settings.useIOSStyle

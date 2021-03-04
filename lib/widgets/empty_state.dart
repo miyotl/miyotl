@@ -13,7 +13,11 @@ class EmptyState extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          if (image != null) Image.asset(image),
+          if (image != null)
+            Image.asset(
+              image,
+              width: MediaQuery.of(context).size.width * 0.8,
+            ),
           Padding(
             padding: EdgeInsets.only(left: 20, right: 20),
             child: Text(

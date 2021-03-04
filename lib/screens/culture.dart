@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:lenguas/screens/google_doc.dart';
+import 'package:lenguas/widgets/empty_state.dart';
 import 'package:provider/provider.dart';
 import '../models/app_state.dart';
 import 'culture_details.dart';
@@ -95,7 +96,7 @@ class CulturePage extends StatelessWidget {
           return Center(
             child: CircularProgressIndicator(),
           );
-        } else {
+        } else if (state.culture.length > 0) {
           return GridView.count(
             primary: true,
             crossAxisCount: 1,
@@ -106,6 +107,13 @@ class CulturePage extends StatelessWidget {
               for (CultureEntry entry in state.culture)
                 CultureCard(entry: entry),
             ],
+          );
+        } else {
+          return Center(
+            child: EmptyState(
+              'Todavía no hay textos para este idioma, estáte atento...',
+              'img/axolotl-gears.gif',
+            ),
           );
         }
       },

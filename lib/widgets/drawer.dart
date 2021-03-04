@@ -74,7 +74,7 @@ class AppDrawer extends StatelessWidget {
                 onTap: () async {
                   try {
                     await state.updateLanguageData();
-                  } on SocketException catch (e) {
+                  } on SocketException {
                     showDialog(
                       context: context,
                       builder: (context) {

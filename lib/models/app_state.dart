@@ -86,7 +86,7 @@ class AppState extends ChangeNotifier {
     }
 
     final prefs = await SharedPreferences.getInstance();
-    int lastUpdate = await prefs.getInt('last-update');
+    int lastUpdate = prefs.getInt('last-update');
     if (lastUpdate == null) {
       return 'Nunca';
     } else {

@@ -131,14 +131,6 @@ class SettingsPage extends StatelessWidget {
                     },
                   ),
                   SettingsTile(
-                    title: 'Forzar actualización de base de datos',
-                    leading: Icon(Icons.update),
-                    subtitle: 'Última actualización: bla bla bla',
-                    onPressed: (context) {
-                      Provider.of<AppState>(context).updateLanguageData();
-                    },
-                  ),
-                  SettingsTile(
                     title: 'Términos y condiciones',
                     leading: Icon(Icons.description),
                     onPressed: (context) => launch(

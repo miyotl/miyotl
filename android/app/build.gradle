@@ -44,7 +44,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "proyecto.miyotl"
+        applicationId "org.miyotl"
         minSdkVersion 17 //16 // for webview
         targetSdkVersion 29
         multiDexEnabled true // Fix compile error after adding Firebase

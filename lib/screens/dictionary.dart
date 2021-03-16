@@ -62,7 +62,7 @@ class DictionaryPage extends StatelessWidget {
                   parameters: {'mode': '$newMode'},
                 );
                 analytics.setUserProperty(
-                    name: 'dictionary-mode', value: '$newMode');
+                    name: 'dictionaryMode', value: '$newMode');
                 state.changeLookupMode(newMode);
               },
               groupValue: state.lookupMode,

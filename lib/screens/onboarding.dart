@@ -185,7 +185,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                             name: 'theme', value: '${ThemeMode.system}');
                         analytics.setUserProperty(name: 'ux', value: 'android');
                         analytics.setUserProperty(
-                            name: 'dictionary-mode',
+                            name: 'dictionaryMode',
                             value: '${LookupMode.spanishToLanguage}');
                         Navigator.of(context).pushAndRemoveUntil(
                           MaterialPageRoute(

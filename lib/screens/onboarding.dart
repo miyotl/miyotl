@@ -72,7 +72,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                     SizedBox(
                       width: MediaQuery.of(context).size.width * 0.75,
                       child: Text(
-                        'Nuestras lenguas prehispánicas son hoy raíz y vuelo luminoso de unión y paz.',
+                        'Nuestras lenguas mexicanas son hoy raíz y vuelo luminoso de unión y paz.',
                         style: GoogleFonts.rubik().copyWith(
                           fontSize: 16,
                           color: Colors.black,

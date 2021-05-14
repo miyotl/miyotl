@@ -120,7 +120,10 @@ class CulturePage extends StatelessWidget {
             crossAxisCount: 1,
             crossAxisSpacing: 10,
             mainAxisSpacing: 10,
-            padding: EdgeInsets.all(10),
+            padding: EdgeInsets.symmetric(
+              vertical: 10,
+              horizontal: 0,
+            ),
             children: <Widget>[
               for (CultureEntry entry in state.culture)
                 CultureCard(entry: entry),

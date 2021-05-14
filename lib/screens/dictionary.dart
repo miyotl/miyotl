@@ -26,16 +26,16 @@ ListTile buildListTile(
     },
 
     /// TODO(devillove): Implement this functionality
-    // trailing: IconButton(
-    //   icon: Icon(Icons.favorite_border),
-    //   onPressed: () {
-    //     Scaffold.of(context).showSnackBar(
-    //       SnackBar(
-    //         content: Text('Funcionalidad no implementada'),
-    //       ),
-    //     );
-    //   },
-    // ),
+    trailing: IconButton(
+      icon: Icon(Icons.favorite_border),
+      onPressed: () {
+        Scaffold.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Funcionalidad no implementada'),
+          ),
+        );
+      },
+    ),
   );
 }
 

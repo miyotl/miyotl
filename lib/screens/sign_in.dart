@@ -261,7 +261,7 @@ class SignInPage extends StatelessWidget {
                             builder: (context) => AlertDialog(
                               title: Text('Pregunta'),
                               content: Text(
-                                  '¿Estás seguro que quieres iniciar sesión como invitado? No podremos enviarte correos con actualizaciones sobre el proyecto...'),
+                                  '¿Estás seguro que quieres iniciar sesión como invitado? No podremos enviarte correos con actualizaciones sobre el proyecto.'),
                               actions: [
                                 TextButton(
                                   child: Text('Sí, estoy seguro'),
@@ -271,7 +271,7 @@ class SignInPage extends StatelessWidget {
                                   },
                                 ),
                                 TextButton(
-                                  child: Text('No, déjame iniciar sesión...'),
+                                  child: Text('No, prefiero iniciar sesión'),
                                   onPressed: () {
                                     Navigator.of(context).pop();
                                   },

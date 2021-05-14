@@ -48,6 +48,6 @@ app.*.map.json
 
 # Private files
 android/key.properties
-android/app/google-services.json
 android/app/miyotl.jks
+android/app/google-services.json
 ios/Runner/GoogleService-Info.plist

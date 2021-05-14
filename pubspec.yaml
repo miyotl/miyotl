@@ -32,7 +32,7 @@ dependencies:
   provider: ^4.1.1
   shared_preferences: '>=0.5.12+4 <2.0.0'
   share:
-  flutter_inappwebview:
+  flutter_inappwebview: ^4.0.0 # TODO: migrate to latest version
   liquid_swipe: ^1.5.0
   cached_network_image: ^2.5.0
   flutter_signin_button: ^1.1.0

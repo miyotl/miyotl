@@ -51,6 +51,7 @@ class AppColors {
   static Color rosa = Color(0xFFCC3C74);
   static Color azulVerdoso = Color(0xFF146484);
   static Color azulClaro = Color(0xff0cc3fb);
+  static Color azulCard = Color(0x37334B);
   //static Color verdePrueba = Color(0xff3BCD95);
 }
 
@@ -58,8 +59,11 @@ class AppColors {
 ThemeData dark_theme = ThemeData(
   visualDensity: VisualDensity.adaptivePlatformDensity,
   brightness: Brightness.dark,
-  accentColor: AppColors.pink,
-  primaryColor: AppColors.teal,
+  accentColor: AppColors.azulClaro,
+  primaryColor: AppColors.lightPink,
+  primarySwatch: Colors.pink,
+
+  /// TODO: poner uno ms claro
   appBarTheme: AppBarTheme(
     iconTheme: IconThemeData(
       color: AppColors.darkBlue,
@@ -67,6 +71,7 @@ ThemeData dark_theme = ThemeData(
   ),
   scaffoldBackgroundColor: AppColors.darkBlue,
   canvasColor: AppColors.darkBlue,
+  cardColor: AppColors.azulCard,
 );
 
 ThemeData new_light_theme = ThemeData(

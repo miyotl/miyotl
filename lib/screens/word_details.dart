@@ -34,7 +34,7 @@ class WordDetails extends StatelessWidget {
 ${entry.translatedWord}
 (Fuente: ${source.author} de ${source.region})
 
-Compartido desde Miyotl. Descárgalo en proyecto-miyotl.web.app''');
+Compartido desde Miyotl. Descárgalo en miyotl.org''');
             },
           ),
         ],

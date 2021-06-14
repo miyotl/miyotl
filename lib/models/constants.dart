@@ -101,4 +101,5 @@ ThemeData new_light_theme = ThemeData(
 //   ),
 //   selectedRowColor: AppColors.lightPink,
 //   textSelectionColor: AppColors.lightPink,
+// TextSelectionThemeData.selectionColor: AppColors.rosa,
 // );

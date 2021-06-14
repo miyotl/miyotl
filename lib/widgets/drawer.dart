@@ -127,7 +127,7 @@ class AppDrawer extends StatelessWidget {
                   analytics.logShare(
                       contentType: 'invite', itemId: 'app', method: 'drawer');
                   Share.share(
-                      '¿Sabías que hay una app donde puedes acercarte a nuestras lenguas indígenas? ¡Próximamente podrás aprenderlas!\n\nDescárgala en proyecto-miyotl.web.app/descarga');
+                      '¿Sabías que hay una app donde puedes acercarte a nuestras lenguas indígenas? ¡Próximamente podrás aprenderlas!\n\nDescárgala en miyotl.org');
                 },
               ),
               ListTile(

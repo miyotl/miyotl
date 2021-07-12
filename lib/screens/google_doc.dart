@@ -33,11 +33,13 @@ class _GoogleDocPreviewState extends State<GoogleDocPreview> {
   String url = '';
   double progress = 0;
   String title = '';
+  CultureEntry entry;
   dynamic jsResult;
 
   @override
   void initState() {
     title = widget.title;
+    entry = widget.entry;
     super.initState();
   }
 
@@ -114,12 +116,11 @@ class _GoogleDocPreviewState extends State<GoogleDocPreview> {
         ),
         actions: [
           IconButton(
-            icon: Icon(Icons.more_horiz),
+            icon: Icon(Icons.info_outline_rounded),
             onPressed: () {
-              Navigator.of(context).pop();
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) => CultureDetails(entry: widget.entry),
+                  builder: (context) => CultureDetails(entry: entry),
                 ),
               );
             },

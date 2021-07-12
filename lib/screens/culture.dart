@@ -46,7 +46,7 @@ class CultureCard extends StatelessWidget {
                 },
               ),
               trailing: IconButton(
-                icon: Icon(Icons.more_horiz),
+                icon: Icon(Icons.info_outline_rounded),
                 onPressed: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(

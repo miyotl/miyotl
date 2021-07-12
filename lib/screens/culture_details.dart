@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../models/app_state.dart';
 import 'package:provider/provider.dart';
+
+import '../models/app_state.dart';
 import 'google_doc.dart';
 
 class CultureDetails extends StatelessWidget {
@@ -21,8 +22,12 @@ class CultureDetails extends StatelessWidget {
     return Scaffold(
       /// TODO: mostrar imagen como sliver appbar
       appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
         title: Text(
-          entry.titleOriginal,
+          'Información sobre el escrito',
           style: GoogleFonts.fredokaOne(),
         ),
       ),
@@ -34,7 +39,7 @@ class CultureDetails extends StatelessWidget {
             trailing: Icon(Icons.launch),
             onTap: () {
               Navigator.of(context).pop();
-              openDoc(context, entry.linkOriginal, entry);
+
             },
           ),
           ListTile(

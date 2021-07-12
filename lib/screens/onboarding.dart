@@ -39,7 +39,6 @@ class _OnboardingPageState extends State<OnboardingPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: LiquidSwipe(
-        enableSlideIcon: false,
         enableLoop: false,
         disableUserGesture: true,
         liquidController: controller,

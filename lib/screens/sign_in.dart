@@ -1,12 +1,8 @@
-import 'dart:developer';
-
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
-import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lenguas/models/constants.dart';
@@ -14,9 +10,7 @@ import 'package:lenguas/models/sign_in.dart';
 import 'package:lenguas/models/user_account.dart';
 import 'package:lenguas/screens/onboarding.dart';
 import 'package:lenguas/widgets/status_bar_colors.dart';
-import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'dart:developer' as developer;
 
 class SignInPage extends StatelessWidget {
   final VoidCallback onSignIn;
@@ -26,8 +20,6 @@ class SignInPage extends StatelessWidget {
   SignInPage({@required this.onSignIn});
 
   void doSignIn(BuildContext context, SignInFunction signInFunction) async {
-    /// TODO: maybe do some separation between business logic and UI?
-
     /// Log out first
     try {
       UserAccount.instance.logOut();
@@ -36,16 +28,18 @@ class SignInPage extends StatelessWidget {
     }
     try {
       var credential = await signInFunction();
-      AccessToken isLogged;
+      var isLogged = false;
+      var _userData = {};
       try {
-        isLogged = await FacebookAuth.instance.accessToken;
+        await FacebookAuth.instance.getUserData().then((userData) {
+          isLogged = true;
+          _userData = userData;
+        });
       } catch (e) {
         isLogged = null;
-        developer.log(e.toString());
       }
       if (signInFunction != SignInMethods.anonymous &&
-          credential == null &&
-          isLogged == null) {
+          credential == null && isLogged == null) {
         showDialog(
           context: context,
           builder: (context) => AlertDialog(
@@ -105,52 +99,6 @@ class SignInPage extends StatelessWidget {
           rethrow;
       }
     }
-      // on FacebookAuth catch (e) {
-    //   switch (e.) {
-    //     case FacebookAuthErrorCode.OPERATION_IN_PROGRESS:
-    //       break;
-    //     case FacebookAuthErrorCode.CANCELLED:
-    //       showDialog(
-    //         context: context,
-    //         builder: (context) => AlertDialog(
-    //           title: Text('Cancelaste el inicio de sesión'),
-    //           content: Text(
-    //             'Vuelve a intentar iniciar sesión, o selecciona otro método de inicio de sesión',
-    //           ),
-    //           actions: [
-    //             TextButton(
-    //               child: Text('De acuerdo'),
-    //               onPressed: () {
-    //                 Navigator.of(context).pop();
-    //               },
-    //             ),
-    //           ],
-    //         ),
-    //       );
-    //       break;
-    //     default:
-    //       showDialog(
-    //         context: context,
-    //         builder: (context) => AlertDialog(
-    //           title: Text('Falló el inicio de sesión con Facebook'),
-    //           content: Text(
-    //             'Error ${e.errorCode}: ${e.message}.\nPor favor toma captura de pantalla y mándala a miyotl@googlegroups.com.',
-    //           ),
-    //         ),
-    //       );
-    //   }
-    // } catch (e) {
-    //   /// TODO: report errors in a more automatic way
-    //   showDialog(
-    //     context: context,
-    //     builder: (context) => AlertDialog(
-    //       title: Text('Error desconocido'),
-    //       content: Text(
-    //         'Ocurrió un error desconocido. Por favor toma captura de pantalla y mándala a miyotl@googlegroups.com.\n\nEl error es:\n\n$e',
-    //       ),
-    //     ),
-    //   );
-    // }
   }
 
   @override
@@ -168,7 +116,7 @@ class SignInPage extends StatelessWidget {
                 if (snapshot.hasError ||
                     snapshot.connectionState == ConnectionState.done) {
                   return Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Padding(
@@ -195,7 +143,6 @@ class SignInPage extends StatelessWidget {
                                     TextSpan(
                                       text: 'Al iniciar sesión aceptas ',
                                     ),
-
                                     /// https://stackoverflow.com/questions/43583411/how-to-create-a-hyperlink-in-flutter-widget
                                     TextSpan(
                                       text:
@@ -227,36 +174,12 @@ class SignInPage extends StatelessWidget {
                         onPressed: () =>
                             doSignIn(context, SignInMethods.google),
                       ),
-                      // SignInButton(
-                      //   Buttons.Email,
-                      //   text: 'Con correo y contraseña',
-                      //   onPressed: () {
-                      //     Scaffold.of(context).showSnackBar(
-                      //       SnackBar(
-                      //         content:
-                      //             Text('Funcionalidad no implementada'),
-                      //       ),
-                      //     );
-                      //   },
-                      // ),
                       SignInButton(
                         Buttons.Facebook,
                         text: 'Inicia sesión con Facebook',
                         onPressed: () =>
                             doSignIn(context, SignInMethods.facebook),
                       ),
-                      // SignInButton(
-                      //   Buttons.AppleDark,
-                      //   text: 'Inicia sesión con Apple',
-                      //   onPressed: () {
-                      //     Scaffold.of(context).showSnackBar(
-                      //       SnackBar(
-                      //         content:
-                      //             Text('Funcionalidad no implementada'),
-                      //       ),
-                      //     );
-                      //   },
-                      // ),
                       SignInButtonBuilder(
                         text: 'Ingresa como invitado',
                         icon: Icons.face,

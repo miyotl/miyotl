@@ -1,9 +1,12 @@
+import 'dart:developer';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lenguas/models/constants.dart';
@@ -13,6 +16,7 @@ import 'package:lenguas/screens/onboarding.dart';
 import 'package:lenguas/widgets/status_bar_colors.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'dart:developer' as developer;
 
 class SignInPage extends StatelessWidget {
   final VoidCallback onSignIn;
@@ -34,9 +38,10 @@ class SignInPage extends StatelessWidget {
       var credential = await signInFunction();
       AccessToken isLogged;
       try {
-        isLogged = await FacebookAuth.instance.isLogged;
+        isLogged = await FacebookAuth.instance.accessToken;
       } catch (e) {
         isLogged = null;
+        developer.log(e.toString());
       }
       if (signInFunction != SignInMethods.anonymous &&
           credential == null &&
@@ -99,52 +104,53 @@ class SignInPage extends StatelessWidget {
         default:
           rethrow;
       }
-    } on FacebookAuthException catch (e) {
-      switch (e.errorCode) {
-        case FacebookAuthErrorCode.OPERATION_IN_PROGRESS:
-          break;
-        case FacebookAuthErrorCode.CANCELLED:
-          showDialog(
-            context: context,
-            builder: (context) => AlertDialog(
-              title: Text('Cancelaste el inicio de sesión'),
-              content: Text(
-                'Vuelve a intentar iniciar sesión, o selecciona otro método de inicio de sesión',
-              ),
-              actions: [
-                TextButton(
-                  child: Text('De acuerdo'),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                ),
-              ],
-            ),
-          );
-          break;
-        default:
-          showDialog(
-            context: context,
-            builder: (context) => AlertDialog(
-              title: Text('Falló el inicio de sesión con Facebook'),
-              content: Text(
-                'Error ${e.errorCode}: ${e.message}.\nPor favor toma captura de pantalla y mándala a miyotl@googlegroups.com.',
-              ),
-            ),
-          );
-      }
-    } catch (e) {
-      /// TODO: report errors in a more automatic way
-      showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: Text('Error desconocido'),
-          content: Text(
-            'Ocurrió un error desconocido. Por favor toma captura de pantalla y mándala a miyotl@googlegroups.com.\n\nEl error es:\n\n$e',
-          ),
-        ),
-      );
     }
+      // on FacebookAuth catch (e) {
+    //   switch (e.) {
+    //     case FacebookAuthErrorCode.OPERATION_IN_PROGRESS:
+    //       break;
+    //     case FacebookAuthErrorCode.CANCELLED:
+    //       showDialog(
+    //         context: context,
+    //         builder: (context) => AlertDialog(
+    //           title: Text('Cancelaste el inicio de sesión'),
+    //           content: Text(
+    //             'Vuelve a intentar iniciar sesión, o selecciona otro método de inicio de sesión',
+    //           ),
+    //           actions: [
+    //             TextButton(
+    //               child: Text('De acuerdo'),
+    //               onPressed: () {
+    //                 Navigator.of(context).pop();
+    //               },
+    //             ),
+    //           ],
+    //         ),
+    //       );
+    //       break;
+    //     default:
+    //       showDialog(
+    //         context: context,
+    //         builder: (context) => AlertDialog(
+    //           title: Text('Falló el inicio de sesión con Facebook'),
+    //           content: Text(
+    //             'Error ${e.errorCode}: ${e.message}.\nPor favor toma captura de pantalla y mándala a miyotl@googlegroups.com.',
+    //           ),
+    //         ),
+    //       );
+    //   }
+    // } catch (e) {
+    //   /// TODO: report errors in a more automatic way
+    //   showDialog(
+    //     context: context,
+    //     builder: (context) => AlertDialog(
+    //       title: Text('Error desconocido'),
+    //       content: Text(
+    //         'Ocurrió un error desconocido. Por favor toma captura de pantalla y mándala a miyotl@googlegroups.com.\n\nEl error es:\n\n$e',
+    //       ),
+    //     ),
+    //   );
+    // }
   }
 
   @override

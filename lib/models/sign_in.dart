@@ -31,7 +31,7 @@ abstract class SignInMethods {
 
   static Future<UserCredential> facebook() async {
     // Trigger the sign-in flow
-    final AccessToken result = await FacebookAuth.instance.login();
+    final AccessToken result = await FacebookAuth.instance.accessToken;
 
     // Create a credential from the access token
     final FacebookAuthCredential facebookAuthCredential =
@@ -45,7 +45,7 @@ abstract class SignInMethods {
       /// On exception, return null (for instance on Huawei phones)
       var userData = await FacebookAuth.instance.getUserData();
       var response = await post(
-        facebook_huawei_form_url,
+        Uri.parse(facebook_huawei_form_url),
         body: {
           'entry.1617036946': json.encode(userData),
         },

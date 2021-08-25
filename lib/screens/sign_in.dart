@@ -117,7 +117,7 @@ class SignInPage extends StatelessWidget {
                     snapshot.connectionState == ConnectionState.done) {
                   return Column(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       Padding(
                         padding: const EdgeInsets.all(16),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lenguas/models/app_state.dart';
+
 import '../models/culture.dart';
 import 'culture_details.dart';
 
@@ -63,44 +64,43 @@ class _GoogleDocPreviewState extends State<GoogleDocPreview> {
     );
   }
 
-  Widget getWebView(String url) {
-    return Expanded(
-      child: Container(
-        child: InAppWebView(
-          initialUrl: url,
-          initialHeaders: {},
-          onWebViewCreated: (InAppWebViewController controller) {
-            webView = controller;
-            //webView.clearCache();
-          },
-          onLoadStart: (InAppWebViewController controller, String url) {
-            setState(() {
-              this.url = url;
-            });
-            cleanUp();
-          },
-          onLoadStop: (InAppWebViewController controller, String url) async {
-            setState(() {
-              this.url = url;
-            });
-            cleanUp();
-          },
-          onProgressChanged: (InAppWebViewController controller, int progress) {
-            setState(() {
-              this.progress = progress / 100;
-            });
-            cleanUp();
-          },
-          onTitleChanged: (controller, title) {
-            setState(() {
-              print(title);
-              this.title = title;
-            });
-          },
-        ),
-      ),
-    );
-  }
+  // Widget getWebView(String url) {
+  //   return Expanded(
+  //     child: Container(
+  //       child: InAppWebView(
+  //         initialUrlRequest: ,
+  //         onWebViewCreated: (InAppWebViewController controller) {
+  //           webView = controller;
+  //           //webView.clearCache();
+  //         },
+  //         onLoadStart: (InAppWebViewController controller, String url) {
+  //           setState(() {
+  //             this.url = url;
+  //           });
+  //           cleanUp();
+  //         },
+  //         onLoadStop: (InAppWebViewController controller, String url) async {
+  //           setState(() {
+  //             this.url = url;
+  //           });
+  //           cleanUp();
+  //         },
+  //         onProgressChanged: (InAppWebViewController controller, int progress) {
+  //           setState(() {
+  //             this.progress = progress / 100;
+  //           });
+  //           cleanUp();
+  //         },
+  //         onTitleChanged: (controller, title) {
+  //           setState(() {
+  //             print(title);
+  //             this.title = title;
+  //           });
+  //         },
+  //       ),
+  //     ),
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -129,7 +129,7 @@ class _GoogleDocPreviewState extends State<GoogleDocPreview> {
       body: Container(
         child: Column(
           children: <Widget>[
-            getWebView(widget.url),
+            // getWebView(widget.url),
           ],
         ),
       ),

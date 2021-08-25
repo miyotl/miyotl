@@ -1,4 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -39,7 +40,8 @@ class SignInPage extends StatelessWidget {
         isLogged = null;
       }
       if (signInFunction != SignInMethods.anonymous &&
-          credential == null && isLogged == null) {
+          credential == null &&
+          isLogged == null) {
         showDialog(
           context: context,
           builder: (context) => AlertDialog(
@@ -122,7 +124,7 @@ class SignInPage extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.all(16),
                         child: SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.75,
+                          width: MediaQuery.of(context).size.width * 1.75,
                           child: Column(
                             children: [
                               Text(
@@ -143,6 +145,7 @@ class SignInPage extends StatelessWidget {
                                     TextSpan(
                                       text: 'Al iniciar sesión aceptas ',
                                     ),
+
                                     /// https://stackoverflow.com/questions/43583411/how-to-create-a-hyperlink-in-flutter-widget
                                     TextSpan(
                                       text:
@@ -168,18 +171,22 @@ class SignInPage extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SignInButton(
-                        Buttons.Google,
-                        text: 'Inicia sesión con Google',
-                        onPressed: () =>
-                            doSignIn(context, SignInMethods.google),
-                      ),
-                      SignInButton(
-                        Buttons.Facebook,
-                        text: 'Inicia sesión con Facebook',
-                        onPressed: () =>
-                            doSignIn(context, SignInMethods.facebook),
-                      ),
+                      Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          child: SignInButton(
+                            Buttons.Google,
+                            text: 'Inicia sesión con Google',
+                            onPressed: () =>
+                                doSignIn(context, SignInMethods.google),
+                          )),
+                      Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          child: SignInButton(
+                            Buttons.Facebook,
+                            text: 'Inicia sesión con Facebook',
+                            onPressed: () =>
+                                doSignIn(context, SignInMethods.facebook),
+                          )),
                       SignInButtonBuilder(
                         text: 'Ingresa como invitado',
                         icon: Icons.face,

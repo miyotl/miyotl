@@ -64,43 +64,44 @@ class _GoogleDocPreviewState extends State<GoogleDocPreview> {
     );
   }
 
-  // Widget getWebView(String url) {
-  //   return Expanded(
-  //     child: Container(
-  //       child: InAppWebView(
-  //         initialUrlRequest: ,
-  //         onWebViewCreated: (InAppWebViewController controller) {
-  //           webView = controller;
-  //           //webView.clearCache();
-  //         },
-  //         onLoadStart: (InAppWebViewController controller, String url) {
-  //           setState(() {
-  //             this.url = url;
-  //           });
-  //           cleanUp();
-  //         },
-  //         onLoadStop: (InAppWebViewController controller, String url) async {
-  //           setState(() {
-  //             this.url = url;
-  //           });
-  //           cleanUp();
-  //         },
-  //         onProgressChanged: (InAppWebViewController controller, int progress) {
-  //           setState(() {
-  //             this.progress = progress / 100;
-  //           });
-  //           cleanUp();
-  //         },
-  //         onTitleChanged: (controller, title) {
-  //           setState(() {
-  //             print(title);
-  //             this.title = title;
-  //           });
-  //         },
-  //       ),
-  //     ),
-  //   );
-  // }
+  Widget getWebView(String url) {
+    return Expanded(
+      child: Container(
+        child: InAppWebView(
+          initialUrlRequest: URLRequest(url: Uri.parse(url)),
+          onWebViewCreated: (InAppWebViewController controller) {
+            webView = controller;
+            //webView.clearCache();
+          },
+          onLoadStart: (controller, url) {
+            setState(() {
+              this.url = url.toString();
+              //urlController.text = this.url;
+            });
+            cleanUp();
+          },
+          onLoadStop: (controller, url) async {
+            setState(() {
+              this.url = url.toString();
+            });
+            cleanUp();
+          },
+          onProgressChanged: (InAppWebViewController controller, int progress) {
+            setState(() {
+              this.progress = progress / 100;
+            });
+            cleanUp();
+          },
+          onTitleChanged: (controller, title) {
+            setState(() {
+              print(title);
+              this.title = title;
+            });
+          },
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -129,7 +130,7 @@ class _GoogleDocPreviewState extends State<GoogleDocPreview> {
       body: Container(
         child: Column(
           children: <Widget>[
-            // getWebView(widget.url),
+            getWebView(widget.url),
           ],
         ),
       ),

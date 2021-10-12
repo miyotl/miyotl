@@ -44,6 +44,7 @@ class UserAccount extends ChangeNotifier {
     if (isLogged == null) {
       return FirebaseAuth.instance.currentUser?.photoURL;
     } else {
+      // TODO this doesn't make sense :/
       var userData = await FacebookAuth.instance.getUserData();
       return userData['picture']['data']['url'];
     }
@@ -70,7 +71,7 @@ class UserAccount extends ChangeNotifier {
     }
     profilePicUrl = await getProfilePicUrl();
     if (profilePicUrl == null) {
-      profilePic = AssetImage('img/icon-full-new.png');
+      profilePic = AssetImage('img/icon-round-new-outline.png');
     } else {
       profilePic = CachedNetworkImageProvider(profilePicUrl);
     }

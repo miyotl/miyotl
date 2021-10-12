@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lenguas/models/constants.dart';
@@ -29,19 +28,7 @@ class SignInPage extends StatelessWidget {
     }
     try {
       var credential = await signInFunction();
-      var isLogged = false;
-      var _userData = {};
-      try {
-        await FacebookAuth.instance.getUserData().then((userData) {
-          isLogged = true;
-          _userData = userData;
-        });
-      } catch (e) {
-        isLogged = null;
-      }
-      if (signInFunction != SignInMethods.anonymous &&
-          credential == null &&
-          isLogged == null) {
+      if (credential == null) {
         showDialog(
           context: context,
           builder: (context) => AlertDialog(

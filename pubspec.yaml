@@ -41,8 +41,8 @@ dependencies:
   google_fonts: ^2.1.0
   path_provider: ^2.0.2
   auto_size_text: ^2.1.0
-  settings_ui: ^1.0.0
-  system_settings: ^2.0.0
+#  settings_ui: ^1.0.0  TODO update or remove for good
+#  system_settings: ^2.0.0 TODO update for good settings
   flutter_json_widget: ^1.0.1
   sentry_flutter: ^5.1.0
   

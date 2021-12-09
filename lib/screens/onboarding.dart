@@ -6,7 +6,7 @@ import 'package:lenguas/screens/sign_in.dart';
 import 'package:liquid_swipe/liquid_swipe.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
-import '../models/constants.dart';
+import '../src/core/utils/constants.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../widgets/status_bar_colors.dart';
 import 'package:google_api_availability/google_api_availability.dart';

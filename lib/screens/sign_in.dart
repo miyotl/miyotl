@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:lenguas/models/constants.dart';
+import 'package:lenguas/src/core/utils/constants.dart';
 import 'package:lenguas/models/sign_in.dart';
 import 'package:lenguas/models/user_account.dart';
 import 'package:lenguas/screens/onboarding.dart';

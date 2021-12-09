@@ -11,7 +11,7 @@ import 'screens/developer_menu.dart';
 import 'screens/debug/google_service_check.dart';
 import 'package:provider/provider.dart';
 import 'models/app_state.dart';
-import 'models/constants.dart';
+import 'src/core/utils/constants.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
 Future<void> main() async {

@@ -8,7 +8,7 @@ import '../models/app_state.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:share/share.dart';
 import 'package:ionicons/ionicons.dart';
-import 'package:lenguas/models/constants.dart';
+import 'package:lenguas/src/core/utils/constants.dart';
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({

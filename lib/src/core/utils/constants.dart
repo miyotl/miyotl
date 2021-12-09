@@ -23,7 +23,7 @@ const meses = <String>[
   'nov',
   'dic'
 ];
-
+// TODO clean after structure
 class AppColors {
   // From dark illustration
   static Color darkBlue = Color(0xFF05001E);

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:lenguas/models/app_state.dart';
 import 'package:provider/provider.dart';
 import 'home.dart';
+import 'models/app_state.dart';
 import 'onboarding.dart';
 import '../widgets/empty_state.dart';
 import 'loading.dart';
@@ -16,7 +16,8 @@ class ConditionalOnboardingPage extends StatelessWidget {
           future: state.hasFinishedOnboarding,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              bool hasFinishedOnboarding = snapshot.data;
+              // TODO check this logic
+              final bool hasFinishedOnboarding = snapshot.data != null;
               if (hasFinishedOnboarding) {
                 return HomePage();
               } else {

@@ -4,16 +4,14 @@ import 'dart:io';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:http/http.dart';
+import 'package:lenguas/src/core/utils/constants.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../src/core/utils/constants.dart';
-import 'dictionary.dart';
 import 'culture.dart';
+import 'dictionary.dart';
 import 'language.dart';
 
 export 'dictionary.dart';
-export '../src/core/utils/constants.dart';
-export 'culture.dart';
 export 'language.dart';
 export 'user_account.dart';
 

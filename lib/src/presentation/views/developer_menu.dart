@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:lenguas/models/app_state.dart';
+import 'package:lenguas/src/core/utils/constants.dart';
 import 'package:provider/provider.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 import 'debug/string_viewer.dart';
+import 'models/app_state.dart';
 
 class DeveloperPage extends StatelessWidget {
   @override

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:lenguas/src/core/utils/constants.dart';
+import 'package:lenguas/src/presentation/widgets/empty_state.dart';
 import 'package:provider/provider.dart';
-import '../models/app_state.dart';
-import '../widgets/empty_state.dart';
+
 import 'dictionary.dart';
+import 'models/app_state.dart';
 
 class DictionarySearchDelegate extends SearchDelegate {
   DictionarySearchDelegate()
@@ -30,7 +32,7 @@ class DictionarySearchDelegate extends SearchDelegate {
     List<DictionaryEntry> searchResults = state.dictionary.search(query);
     analytics.logSearch(searchTerm: query);
 
-    return searchResults.length > 0
+    return searchResults.isNotEmpty
         ? ListView.builder(
             itemCount: searchResults.length,
             itemBuilder: (context, index) => buildListTile(

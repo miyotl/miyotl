@@ -1,15 +1,15 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:lenguas/widgets/empty_state.dart';
+import 'package:lenguas/src/core/utils/constants.dart';
+import 'package:lenguas/src/presentation/views/search.dart';
+import 'package:lenguas/src/presentation/widgets/drawer.dart';
+import 'package:lenguas/src/presentation/widgets/empty_state.dart';
 import 'package:provider/provider.dart';
 import 'dictionary.dart';
 import 'learn.dart';
-import 'culture.dart';
-import '../models/app_state.dart';
-import '../widgets/drawer.dart';
-import 'search.dart';
 import 'loading.dart';
+import 'models/app_state.dart';
 
 class HomePage extends StatefulWidget {
   @override

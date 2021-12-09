@@ -1,15 +1,16 @@
-import 'package:flutter/material.dart';
-import 'package:lenguas/models/app_state.dart';
-import 'package:lenguas/screens/home.dart';
-import 'package:lenguas/screens/language_select.dart';
-import 'package:lenguas/screens/sign_in.dart';
-import 'package:liquid_swipe/liquid_swipe.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:provider/provider.dart';
-import '../src/core/utils/constants.dart';
-import 'package:google_fonts/google_fonts.dart';
-import '../widgets/status_bar_colors.dart';
+import 'package:flutter/material.dart';
 import 'package:google_api_availability/google_api_availability.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:lenguas/src/presentation/views/home.dart';
+import 'package:lenguas/src/presentation/views/sign_in.dart';
+import 'package:lenguas/src/presentation/widgets/status_bar_colors.dart';
+import 'package:liquid_swipe/liquid_swipe.dart';
+import 'package:provider/provider.dart';
+
+import '../../core/utils/constants.dart';
+import 'language_select.dart';
+import 'models/app_state.dart';
 
 typedef SignInFunction = Future<UserCredential> Function();
 

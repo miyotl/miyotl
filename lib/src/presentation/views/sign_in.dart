@@ -1,16 +1,16 @@
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lenguas/src/core/utils/constants.dart';
-import 'package:lenguas/models/sign_in.dart';
-import 'package:lenguas/models/user_account.dart';
-import 'package:lenguas/screens/onboarding.dart';
-import 'package:lenguas/widgets/status_bar_colors.dart';
+import 'package:lenguas/src/presentation/views/onboarding.dart';
+import 'package:lenguas/src/presentation/widgets/status_bar_colors.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import 'models/app_state.dart';
+import 'models/sign_in.dart';
 
 class SignInPage extends StatelessWidget {
   final VoidCallback onSignIn;

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lenguas/widgets/empty_state.dart';
+import 'package:lenguas/src/presentation/widgets/empty_state.dart';
 
 class LearnPage extends StatefulWidget {
   @override

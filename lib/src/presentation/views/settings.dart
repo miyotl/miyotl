@@ -1,11 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:ionicons/ionicons.dart';
-import 'package:lenguas/models/app_state.dart';
-import 'package:lenguas/models/settings.dart';
-import 'package:lenguas/screens/sign_in.dart';
 import 'package:provider/provider.dart';
-import 'package:url_launcher/url_launcher.dart';
+
+import 'models/app_state.dart';
 // TODO update to better settings
 
 class SettingsPage extends StatelessWidget {

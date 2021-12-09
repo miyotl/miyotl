@@ -2,13 +2,13 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:lenguas/screens/language_select.dart';
-import 'package:provider/provider.dart';
-import '../models/app_state.dart';
-import 'package:url_launcher/url_launcher.dart';
-import 'package:share/share.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:lenguas/src/core/utils/constants.dart';
+import 'package:lenguas/src/presentation/views/language_select.dart';
+import 'package:lenguas/src/presentation/views/models/app_state.dart';
+import 'package:provider/provider.dart';
+import 'package:share/share.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({

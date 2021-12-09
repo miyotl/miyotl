@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:lenguas/src/core/utils/constants.dart';
 import 'package:provider/provider.dart';
-import '../models/app_state.dart';
+
+import 'models/app_state.dart';
 import 'word_details.dart';
 
 ListTile buildListTile(

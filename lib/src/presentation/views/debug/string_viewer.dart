@@ -92,7 +92,7 @@ class AsyncJsonViewerPage extends StatelessWidget {
         } else if (snapshot.hasData) {
           return JsonViewerPage(
             title: title,
-            json: snapshot.data,
+            json: {title: snapshot.data},
           );
         } else {
           return Scaffold(

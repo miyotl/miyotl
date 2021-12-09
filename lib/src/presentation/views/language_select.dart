@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:lenguas/models/app_state.dart';
-import 'package:lenguas/widgets/status_bar_colors.dart';
+import 'package:lenguas/src/core/utils/constants.dart';
+import 'package:lenguas/src/presentation/widgets/status_bar_colors.dart';
 import 'package:provider/provider.dart';
+
+import 'models/app_state.dart';
 
 typedef LanguageSelectFunction = void Function(String);
 

@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lenguas/src/core/utils/constants.dart';
 import 'package:provider/provider.dart';
-import '../models/app_state.dart';
-import 'variant_details.dart';
 import 'package:share/share.dart';
+import 'models/app_state.dart';
+import 'variant_details.dart';
 
 class WordDetails extends StatelessWidget {
   final DictionaryEntry entry;
+
   WordDetails({Key key, @required this.entry}) : super(key: key);
 
   @override

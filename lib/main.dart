@@ -1,18 +1,18 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_analytics/observer.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:lenguas/screens/conditional_onboarding.dart';
-import 'package:lenguas/screens/settings.dart';
-import 'models/settings.dart';
-import 'screens/home.dart';
-import 'screens/onboarding.dart';
-import 'screens/developer_menu.dart';
-import 'screens/debug/google_service_check.dart';
+import 'package:lenguas/src/core/utils/constants.dart';
+import 'package:lenguas/src/presentation/views/conditional_onboarding.dart';
+import 'package:lenguas/src/presentation/views/debug/google_service_check.dart';
+import 'package:lenguas/src/presentation/views/developer_menu.dart';
+import 'package:lenguas/src/presentation/views/models/app_state.dart';
+import 'package:lenguas/src/presentation/views/settings.dart';
 import 'package:provider/provider.dart';
-import 'models/app_state.dart';
-import 'src/core/utils/constants.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
+import 'src/presentation/views/home.dart';
+import 'src/presentation/views/onboarding.dart';
 
 Future<void> main() async {
   /// Add license entry for Google fonts

@@ -62,7 +62,8 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ],
               ),
-              body: [LearnPage(), DictionaryPage(), CulturePage()][page],
+              // [LearnPage(), DictionaryPage(), CulturePage()][page]
+              body: LearnPage(),
               bottomNavigationBar: BottomNavigationBar(
                 items: [
                   BottomNavigationBarItem(

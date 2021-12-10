@@ -37,7 +37,7 @@ class App extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<AppState>(create: (context) => AppState()),
-        ChangeNotifierProvider<Settings>(create: (context) => Settings()),
+        //ChangeNotifierProvider<Settings>(create: (context) => Settings()),
         ChangeNotifierProvider<UserAccount>(create: (context) => UserAccount()),
       ],
       child: ChangeNotifierProvider<AppState>(
@@ -49,14 +49,17 @@ class App extends StatelessWidget {
             ],
             title: app_name,
             theme: new_light_theme.copyWith(
-              platform: settings.useIOSStyle
-                  ? TargetPlatform.iOS
-                  : TargetPlatform.android,
+              platform: TargetPlatform.android
+                  // TODO make settings
+              // settings.useIOSStyle
+              //     ? TargetPlatform.iOS
+              //     : TargetPlatform.android,
             ),
             darkTheme: dark_theme.copyWith(
-              platform: settings.useIOSStyle
-                  ? TargetPlatform.iOS
-                  : TargetPlatform.android,
+              platform: TargetPlatform.android
+              // settings.useIOSStyle
+              //    ? TargetPlatform.iOS
+                //  : TargetPlatform.android,
             ),
             home: child,
             routes: {
@@ -67,7 +70,7 @@ class App extends StatelessWidget {
               '/debug/google': (context) => GoogleApiAvailabilityPage(),
             },
             debugShowCheckedModeBanner: false,
-            themeMode: settings.theme,
+            //themeMode: settings.theme,
           ),
           child: ConditionalOnboardingPage(),
         ),

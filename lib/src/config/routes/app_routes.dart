@@ -10,13 +10,14 @@ class AppRoutes {
   static const dictionary = 'dictionary';
   static const language = 'language';
 
-  Route onGenerateRoutes(RouteSettings settings) {
+  static Route onGenerateRoutes(RouteSettings settings) {
     switch (settings.name) {
+      case '/':
+        return _materialRoute(const Scaffold());
       case home:
         return _materialRoute(const Scaffold());
       case signUp:
         return _materialRoute(const Scaffold());
-
       case login:
         return _materialRoute(const Scaffold());
 

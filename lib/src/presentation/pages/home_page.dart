@@ -1,8 +1,9 @@
 import 'package:ant_icons/ant_icons.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:lenguas/src/presentation/widgets/dictionary.dart';
 import 'package:lenguas/src/presentation/widgets/culture.dart';
+import 'package:lenguas/src/presentation/widgets/dictionary.dart';
 import 'package:lenguas/src/presentation/widgets/settings.dart';
 
 import '../blocs/home_bloc.dart';
@@ -18,14 +19,11 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
 
-  int _selectedIndex = 0;
-  String _page_title = "Diccionario";
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<HomeBloc, HomeState>(
       builder: (context, state) => Scaffold(
-        appBar: MyAppBar(_page_title),
+        appBar: MyAppBar(title: resolveTitle(state.selectedIndex)),
         body: _getScreenFromIndex(state.selectedIndex),
         bottomNavigationBar: BottomNavBar(
           selectedIndex: state.selectedIndex,
@@ -51,6 +49,19 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
     );
+  }
+
+  String resolveTitle(int index) {
+    switch (index) {
+      case 0:
+        return 'Diccionario';
+      case 1:
+        return 'Cultura';
+      case 2:
+        return 'Settings';
+      default:
+        return 'Miyotl';
+    }
   }
 
   Widget _getScreenFromIndex(int selectedIndex) {

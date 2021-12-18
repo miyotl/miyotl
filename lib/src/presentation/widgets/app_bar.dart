@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
 class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const MyAppBar({Key? key}) : super(key: key);
+
+  final String title;
+
+  const MyAppBar({Key? key, required this.title}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -10,11 +13,11 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
         child: Container(
           alignment: Alignment.center,
           child: Text(
-            'Rick and Morty Universe',
+            title,
             style: Theme.of(context)
                 .textTheme
                 .headline6!
-                .copyWith(color: Colors.lightBlue),
+                .copyWith(color: Colors.deepPurple),
           ),
         ),
       ),
@@ -27,7 +30,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
         boxShadow: [
           const BoxShadow(
             color: Colors.black12,
-            blurRadius: 0,
+            blurRadius: 2,
           ),
         ],
       ),

@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
-import 'src/config/routes/app_routes.dart';
-import 'src/config/themes/app_theme.dart';
 import 'src/core/injection/injection.dart';
-import 'src/core/utils/constants.dart';
-
+import 'src/presentation/blocs/home_bloc.dart';
+import 'src/presentation/pages/home_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,13 +22,16 @@ Future<void> main() async {
 }
 
 class MiyotlApp extends StatelessWidget {
+  const MiyotlApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: app_name,
-      onGenerateRoute: AppRoutes.onGenerateRoutes,
-      theme: AppTheme.light,
+      home: BlocProvider<HomeBloc>(
+        create: (_) => getIt(),
+        child: HomePage(),
+      ),
     );
   }
 }

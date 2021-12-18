@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AppRoutes {
+  String className = "";
   static const home = 'home';
   static const signUp = 'signUp';
   static const login = 'login';
@@ -31,7 +32,7 @@ class AppRoutes {
         return _materialRoute(const Scaffold());
 
       default:
-        return null;
+        return _materialRoute(const Scaffold()); // home or something
     }
   }
 

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class DarkStatusBar extends StatelessWidget {
-  DarkStatusBar({this.child});
+  DarkStatusBar({required this.child});
 
   final Widget child;
 
@@ -16,7 +16,7 @@ class DarkStatusBar extends StatelessWidget {
 }
 
 class LightStatusBar extends StatelessWidget {
-  LightStatusBar({this.child});
+  LightStatusBar({required this.child});
 
   final Widget child;
 

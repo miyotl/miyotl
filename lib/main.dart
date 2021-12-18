@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:lenguas/src/config/routes/app_routes.dart';
-import 'package:lenguas/src/config/themes/app_theme.dart';
-import 'package:lenguas/src/core/utils/constants.dart';
-import 'package:lenguas/src/injector.dart';
+import 'package:injectable/injectable.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
+
+import 'src/config/routes/app_routes.dart';
+import 'src/config/themes/app_theme.dart';
+import 'src/core/injection/injection.dart';
+import 'src/core/utils/constants.dart';
 
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await initializeDependencies();
+  await configureInjection(Environment.prod);
 
   /// Run the app, sending exceptions and errors to Sentry
   SentryFlutter.init(

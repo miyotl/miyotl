@@ -2,13 +2,13 @@ import 'package:ant_icons/ant_icons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:lenguas/src/presentation/widgets/culture.dart';
-import 'package:lenguas/src/presentation/widgets/dictionary.dart';
-import 'package:lenguas/src/presentation/widgets/settings.dart';
 
 import '../blocs/home_bloc.dart';
 import '../widgets/app_bar.dart';
 import '../widgets/bottom_nav_bar.dart';
+import '../widgets/culture.dart';
+import '../widgets/dictionary.dart';
+import '../widgets/settings.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -18,7 +18,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<HomeBloc, HomeState>(

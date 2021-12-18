@@ -25,6 +25,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   final GetCharactersUseCase _getCharacter;
   final GetEpisodesUseCase _getEpisodes;
   final GetLocationsUseCase _getLocations;
+  LookupMode mode = LookupMode.originalLanguage;
 
   @override
   Stream<HomeState> mapEventToState(
@@ -71,4 +72,15 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       return UnknownException();
     }
   }
+
+  Future<void> updateDisplayMode(LookupMode newMode) async {
+    mode = newMode;
+  }
+
+  LookupMode displayMode() {
+    return mode;
+  }
 }
+
+// used to define how to display the values for the dictionary
+enum LookupMode { originalLanguage, targetLanguage }

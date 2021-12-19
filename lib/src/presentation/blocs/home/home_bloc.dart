@@ -28,15 +28,11 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   LookupMode mode = LookupMode.originalLanguage;
 
   @override
-  void onEvent(HomeEvent event) {
-    HomeState.navigationScreenChanged(event.currentScreenIndex);
+  Stream<HomeState> mapEventToState(
+    HomeEvent event,
+  ) async* {
+    yield HomeState.navigationScreenChanged(event.currentScreenIndex);
   }
-  // @override
-  // Stream<HomeState> mapEventToState(
-  //   HomeEvent event,
-  // ) async* {
-  //   yield  HomeState.navigationScreenChanged(event.currentScreenIndex);
-  // }
 
   Future<List<Character>> getCharactersInPage(int offset) async {
     final page = _getPageFromOffset(offset);

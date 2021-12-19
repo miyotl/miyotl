@@ -1,6 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -27,15 +30,18 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
   Stream<SignInState> mapEventToState(SignInEvent event) async* {
     switch (event.provider) {
       case AppConstants.emailProvider:
-         var result = await _googleSignInProcess();
-         yield state.copyWith(userLoggedIn: result.success);
+        var result = await _googleSignInProcess();
+        _storeUserData(result.data);
+        yield state.copyWith(userLoggedIn: result.success);
         break;
       case AppConstants.facebookProvider:
         var result = await _facebookSignInProcess();
+        _storeUserData(result.data);
         yield state.copyWith(userLoggedIn: result.success);
         break;
       case AppConstants.googleProvider:
         var result = await _googleSignInProcess();
+        _storeUserData(result.data);
         yield state.copyWith(userLoggedIn: result.success);
         break;
     }
@@ -122,5 +128,37 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
         msg: authResult.status.toString(),
         backgroundColor: Colors.blue,
         textColor: Colors.white);
+  }
+
+  void _storeUserData(UserAuthModel? data) async {
+    if (data == null) return;
+    // Create storage
+    final storage = FlutterSecureStorage();
+    // Write value
+    await storage.write(
+        key: KeyConstants.userData, value: data.toJson().toString());
+  }
+
+  Future<bool> userLoggedIn() async {
+    final storage = FlutterSecureStorage();
+    // Read value
+    var result = await storage.read(key: KeyConstants.userData);
+    if (result == null) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  Future<UserAuthModel?> userData() async {
+    final storage = FlutterSecureStorage();
+    // Read value
+    var result = await storage.read(key: KeyConstants.userData);
+    if (result == null) {
+      return null;
+    } else {
+      Map<String, dynamic> user = jsonDecode(result);
+      return UserAuthModel.fromJson(user);
+    }
   }
 }

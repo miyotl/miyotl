@@ -10,4 +10,5 @@ class KeyConstants {
   static const String nameKey = 'name';
   static const String pictureKey = 'picture';
   static const String birthdayKey = 'birthday';
+  static const String userData ="user_data";
 }

@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
@@ -7,6 +5,10 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:injectable/injectable.dart';
+import '../../../domain/entities/user_auth_model.dart';
+import '../../../domain/usecases/is_user_logged_in_usecase.dart';
+import '../../../domain/usecases/read_user_auth_usecase.dart';
+import '../../../domain/usecases/store_user_auth_usecase.dart';
 
 import '../../model/SignInResult.dart';
 import '../../utils/constants/app_constants.dart';
@@ -22,24 +24,30 @@ part 'sign_in_state.dart';
 
 @injectable
 class SignInBloc extends Bloc<SignInEvent, SignInState> {
-  SignInBloc() : super(SignInState.loginResult());
+  SignInBloc(this._isUserLoggedInUseCase, this._storeUserAuthUseCase,
+      this._readUserAuthUseCase)
+      : super(SignInState.loginResult());
+
+  final IsUserLoggedInUseCase _isUserLoggedInUseCase;
+  final StoreUserAuthUseCase _storeUserAuthUseCase;
+  final ReadUserAuthUseCase _readUserAuthUseCase;
 
   @override
   Stream<SignInState> mapEventToState(SignInEvent event) async* {
     switch (event.provider) {
       case AppConstants.emailProvider:
         var result = await _googleSignInProcess();
-        _storeUserData(result.data);
+        _storeUserAuthUseCase(result.data);
         yield state.copyWith(userLoggedIn: result.success);
         break;
       case AppConstants.facebookProvider:
         var result = await _facebookSignInProcess();
-        _storeUserData(result.data);
+        _storeUserAuthUseCase(result.data);
         yield state.copyWith(userLoggedIn: result.success);
         break;
       case AppConstants.googleProvider:
         var result = await _googleSignInProcess();
-        _storeUserData(result.data);
+        _storeUserAuthUseCase(result.data);
         yield state.copyWith(userLoggedIn: result.success);
         break;
     }

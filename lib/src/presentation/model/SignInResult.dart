@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import '../../domain/entities/user_auth_model.dart';
 
-import '../../domain/entities/res_google_signin_model.dart';
 part 'SignInResult.freezed.dart';
 
 @freezed

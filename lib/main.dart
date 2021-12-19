@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:lenguas/src/presentation/pages/home_page.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
 import 'src/core/injection/injection.dart';

@@ -4,7 +4,7 @@ class AppTheme {
   var appversion = 23;
 
   // Sign in
-  static const Color purpleColor = Color(0xff3A559F);
+  static const Color facebookBlue = Color(0xff3A559F);
   static const Color whiteColor = Color(0Xffffffff);
 
   // From dark illustration

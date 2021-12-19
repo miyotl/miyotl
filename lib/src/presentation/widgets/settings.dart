@@ -16,7 +16,23 @@ class Settings extends StatelessWidget {
     return BlocBuilder<HomeBloc, HomeState>(
       builder: (context, state) => ListView(
         padding: const EdgeInsets.all(8),
-        children: [profileInfo(context), aboutUs(context), privacy(context)],
+        children: [
+          profileInfo(context),
+          aboutUs(context),
+          SizedBox(
+              width: double.infinity,
+              child: Padding(
+                padding: EdgeInsets.all(16),
+                child: Text('Legal',
+                    textAlign: TextAlign.start,
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline6!
+                        .copyWith(color: Colors.blue)),
+              )),
+          privacy(context, TextAlign.start,
+              EdgeInsets.only(left: 16, top: 30, bottom: 40, right: 16))
+        ],
       ),
     );
   }
@@ -141,39 +157,39 @@ class Settings extends StatelessWidget {
     ]);
   }
 
-  Widget privacy(BuildContext context) {
+  /// @param textAlign allows to align the text provided
+  /// @param EdgeInsets is used to give padding in the top,bottom for the first and last elements, left|right to all
+  Widget privacy(
+      BuildContext context, TextAlign textAlign, EdgeInsets properties) {
     final termsUrl = 'https://proyecto-miyotl.web.app/terminos';
     final privacyPolicy = 'https://proyecto-miyotl.web.app/privacidad';
 
     return Column(children: [
-      SizedBox(
-          width: double.infinity,
-          child: Padding(
-            padding: EdgeInsets.all(16),
-            child: Text('Legal',
-                textAlign: TextAlign.start,
-                style: Theme.of(context)
-                    .textTheme
-                    .headline6!
-                    .copyWith(color: Colors.blue)),
-          )),
       Padding(
-          padding: EdgeInsets.only(left: 16, bottom: 4),
-          child: SizedBox(
-            width: double.infinity,
-            child: InkWell(
-                onTap: () => launch(termsUrl),
-                child: createHyperlinkText('', 'Política de privacidad',
-                    privacyPolicy, TextAlign.start)),
-          )),
-      Padding(
-          padding: EdgeInsets.only(left: 16, top: 4, bottom: 40),
+          padding: EdgeInsets.only(
+              left: properties.left,
+              top: properties.top,
+              bottom: 4,
+              right: properties.right),
           child: SizedBox(
             width: double.infinity,
             child: InkWell(
                 onTap: () => launch(termsUrl),
                 child: createHyperlinkText(
-                    '', 'Términos y Condiciones', termsUrl, TextAlign.start)),
+                    '', 'Política de privacidad', privacyPolicy, textAlign)),
+          )),
+      Padding(
+          padding: EdgeInsets.only(
+              left: properties.left,
+              top: 4,
+              bottom: properties.bottom,
+              right: properties.right),
+          child: SizedBox(
+            width: double.infinity,
+            child: InkWell(
+                onTap: () => launch(termsUrl),
+                child: createHyperlinkText(
+                    '', 'Términos y Condiciones', termsUrl, textAlign)),
           ))
     ]);
   }

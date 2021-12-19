@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pagination_view/pagination_view.dart';
 
 import '../../domain/entities/episode.dart';
-import '../blocs/home_bloc.dart';
+import '../blocs/home/home_bloc.dart';
 import 'status_empty.dart';
 import 'status_error.dart';
 

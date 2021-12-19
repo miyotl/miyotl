@@ -1,11 +1,11 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
 import 'src/core/injection/injection.dart';
-import 'src/presentation/blocs/home_bloc.dart';
+import 'src/presentation/blocs/home/home_bloc.dart';
+import 'src/presentation/blocs/signin/sign_in_bloc.dart';
 import 'src/presentation/pages/sign_in.dart';
 
 Future<void> main() async {
@@ -34,12 +34,14 @@ class MiyotlApp extends StatelessWidget {
           DefaultMaterialLocalizations.delegate,
         ],
         child: MaterialApp(
-          debugShowCheckedModeBanner: false,
-          home: BlocProvider<HomeBloc>(
-            create: (_) => getIt(),
-            child: SocialSignInScreen(),
-          )
-        ));
+            debugShowCheckedModeBanner: false,
+            home: MultiBlocProvider(
+              providers: [
+                BlocProvider<HomeBloc>(create: (_) => getIt()),
+                BlocProvider<SignInBloc>(create: (_) => getIt())
+              ],
+              child: SocialSignInScreen(),
+            )));
   }
 }
 // class App extends StatelessWidget {

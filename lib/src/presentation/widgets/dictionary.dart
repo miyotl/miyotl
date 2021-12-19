@@ -7,7 +7,7 @@ import 'package:pagination_view/pagination_view.dart';
 import '../../config/themes/app_theme.dart';
 import '../../core/types/vital_status.dart';
 import '../../domain/entities/character.dart';
-import '../blocs/home_bloc.dart';
+import '../blocs/home/home_bloc.dart';
 import 'status_empty.dart';
 import 'status_error.dart';
 

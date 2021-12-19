@@ -2,14 +2,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../core/network/error/exceptions.dart';
-import '../../core/network/error/failures.dart';
-import '../../domain/entities/character.dart';
-import '../../domain/entities/episode.dart';
-import '../../domain/entities/location.dart';
-import '../../domain/usecases/get_characters_usecase.dart';
-import '../../domain/usecases/get_episodes_usecase.dart';
-import '../../domain/usecases/get_locations_usecase.dart';
+import '../../../core/network/error/exceptions.dart';
+import '../../../core/network/error/failures.dart';
+import '../../../domain/entities/character.dart';
+import '../../../domain/entities/episode.dart';
+import '../../../domain/entities/location.dart';
+import '../../../domain/usecases/get_characters_usecase.dart';
+import '../../../domain/usecases/get_episodes_usecase.dart';
+import '../../../domain/usecases/get_locations_usecase.dart';
 
 part 'home_bloc.freezed.dart';
 
@@ -28,11 +28,15 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   LookupMode mode = LookupMode.originalLanguage;
 
   @override
-  Stream<HomeState> mapEventToState(
-    HomeEvent event,
-  ) async* {
-    yield HomeState.navigationScreenChanged(event.currentScreenIndex);
+  void onEvent(HomeEvent event) {
+    HomeState.navigationScreenChanged(event.currentScreenIndex);
   }
+  // @override
+  // Stream<HomeState> mapEventToState(
+  //   HomeEvent event,
+  // ) async* {
+  //   yield  HomeState.navigationScreenChanged(event.currentScreenIndex);
+  // }
 
   Future<List<Character>> getCharactersInPage(int offset) async {
     final page = _getPageFromOffset(offset);

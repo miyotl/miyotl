@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../blocs/home_bloc.dart';
+import '../blocs/home/home_bloc.dart';
 
 class Settings extends StatelessWidget {
   Settings({Key? key}) : super(key: key);

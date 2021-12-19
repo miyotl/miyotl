@@ -1,9 +1,8 @@
 import 'package:ant_icons/ant_icons.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../blocs/home_bloc.dart';
+import '../blocs/home/home_bloc.dart';
 import '../widgets/app_bar.dart';
 import '../widgets/bottom_nav_bar.dart';
 import '../widgets/culture.dart';

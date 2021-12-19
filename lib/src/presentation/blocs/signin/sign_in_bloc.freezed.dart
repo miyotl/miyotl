@@ -17,7 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$SignInEventTearOff {
   const _$SignInEventTearOff();
 
-  _SignInEvent call({required String provider}) {
+  _SignInEvent signInWithProvider({required String provider}) {
     return _SignInEvent(
       provider: provider,
     );
@@ -30,6 +30,39 @@ const $SignInEvent = _$SignInEventTearOff();
 /// @nodoc
 mixin _$SignInEvent {
   String get provider => throw _privateConstructorUsedError;
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String provider) signInWithProvider,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(String provider)? signInWithProvider,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String provider)? signInWithProvider,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_SignInEvent value) signInWithProvider,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_SignInEvent value)? signInWithProvider,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_SignInEvent value)? signInWithProvider,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SignInEventCopyWith<SignInEvent> get copyWith =>
@@ -108,7 +141,7 @@ class _$_SignInEvent implements _SignInEvent {
 
   @override
   String toString() {
-    return 'SignInEvent(provider: $provider)';
+    return 'SignInEvent.signInWithProvider(provider: $provider)';
   }
 
   @override
@@ -127,6 +160,62 @@ class _$_SignInEvent implements _SignInEvent {
   @override
   _$SignInEventCopyWith<_SignInEvent> get copyWith =>
       __$SignInEventCopyWithImpl<_SignInEvent>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String provider) signInWithProvider,
+  }) {
+    return signInWithProvider(provider);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(String provider)? signInWithProvider,
+  }) {
+    return signInWithProvider?.call(provider);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String provider)? signInWithProvider,
+    required TResult orElse(),
+  }) {
+    if (signInWithProvider != null) {
+      return signInWithProvider(provider);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_SignInEvent value) signInWithProvider,
+  }) {
+    return signInWithProvider(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_SignInEvent value)? signInWithProvider,
+  }) {
+    return signInWithProvider?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_SignInEvent value)? signInWithProvider,
+    required TResult orElse(),
+  }) {
+    if (signInWithProvider != null) {
+      return signInWithProvider(this);
+    }
+    return orElse();
+  }
 }
 
 abstract class _SignInEvent implements SignInEvent {
@@ -144,9 +233,11 @@ abstract class _SignInEvent implements SignInEvent {
 class _$SignInStateTearOff {
   const _$SignInStateTearOff();
 
-  _SignInState call({bool userLoggedIn = true}) {
+  _SignInState loginResult(
+      {bool userLoggedIn = false, UserAuthModel? userData}) {
     return _SignInState(
       userLoggedIn: userLoggedIn,
+      userData: userData,
     );
   }
 }
@@ -157,6 +248,41 @@ const $SignInState = _$SignInStateTearOff();
 /// @nodoc
 mixin _$SignInState {
   bool get userLoggedIn => throw _privateConstructorUsedError;
+  UserAuthModel? get userData => throw _privateConstructorUsedError;
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(bool userLoggedIn, UserAuthModel? userData)
+        loginResult,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(bool userLoggedIn, UserAuthModel? userData)? loginResult,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(bool userLoggedIn, UserAuthModel? userData)? loginResult,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_SignInState value) loginResult,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_SignInState value)? loginResult,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_SignInState value)? loginResult,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SignInStateCopyWith<SignInState> get copyWith =>
@@ -168,7 +294,7 @@ abstract class $SignInStateCopyWith<$Res> {
   factory $SignInStateCopyWith(
           SignInState value, $Res Function(SignInState) then) =
       _$SignInStateCopyWithImpl<$Res>;
-  $Res call({bool userLoggedIn});
+  $Res call({bool userLoggedIn, UserAuthModel? userData});
 }
 
 /// @nodoc
@@ -182,12 +308,17 @@ class _$SignInStateCopyWithImpl<$Res> implements $SignInStateCopyWith<$Res> {
   @override
   $Res call({
     Object? userLoggedIn = freezed,
+    Object? userData = freezed,
   }) {
     return _then(_value.copyWith(
       userLoggedIn: userLoggedIn == freezed
           ? _value.userLoggedIn
           : userLoggedIn // ignore: cast_nullable_to_non_nullable
               as bool,
+      userData: userData == freezed
+          ? _value.userData
+          : userData // ignore: cast_nullable_to_non_nullable
+              as UserAuthModel?,
     ));
   }
 }
@@ -199,7 +330,7 @@ abstract class _$SignInStateCopyWith<$Res>
           _SignInState value, $Res Function(_SignInState) then) =
       __$SignInStateCopyWithImpl<$Res>;
   @override
-  $Res call({bool userLoggedIn});
+  $Res call({bool userLoggedIn, UserAuthModel? userData});
 }
 
 /// @nodoc
@@ -215,12 +346,17 @@ class __$SignInStateCopyWithImpl<$Res> extends _$SignInStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? userLoggedIn = freezed,
+    Object? userData = freezed,
   }) {
     return _then(_SignInState(
       userLoggedIn: userLoggedIn == freezed
           ? _value.userLoggedIn
           : userLoggedIn // ignore: cast_nullable_to_non_nullable
               as bool,
+      userData: userData == freezed
+          ? _value.userData
+          : userData // ignore: cast_nullable_to_non_nullable
+              as UserAuthModel?,
     ));
   }
 }
@@ -228,15 +364,17 @@ class __$SignInStateCopyWithImpl<$Res> extends _$SignInStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_SignInState implements _SignInState {
-  const _$_SignInState({this.userLoggedIn = true});
+  const _$_SignInState({this.userLoggedIn = false, this.userData});
 
   @JsonKey()
   @override
   final bool userLoggedIn;
+  @override
+  final UserAuthModel? userData;
 
   @override
   String toString() {
-    return 'SignInState(userLoggedIn: $userLoggedIn)';
+    return 'SignInState.loginResult(userLoggedIn: $userLoggedIn, userData: $userData)';
   }
 
   @override
@@ -245,24 +383,87 @@ class _$_SignInState implements _SignInState {
         (other.runtimeType == runtimeType &&
             other is _SignInState &&
             const DeepCollectionEquality()
-                .equals(other.userLoggedIn, userLoggedIn));
+                .equals(other.userLoggedIn, userLoggedIn) &&
+            const DeepCollectionEquality().equals(other.userData, userData));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(userLoggedIn));
+      runtimeType,
+      const DeepCollectionEquality().hash(userLoggedIn),
+      const DeepCollectionEquality().hash(userData));
 
   @JsonKey(ignore: true)
   @override
   _$SignInStateCopyWith<_SignInState> get copyWith =>
       __$SignInStateCopyWithImpl<_SignInState>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(bool userLoggedIn, UserAuthModel? userData)
+        loginResult,
+  }) {
+    return loginResult(userLoggedIn, userData);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(bool userLoggedIn, UserAuthModel? userData)? loginResult,
+  }) {
+    return loginResult?.call(userLoggedIn, userData);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(bool userLoggedIn, UserAuthModel? userData)? loginResult,
+    required TResult orElse(),
+  }) {
+    if (loginResult != null) {
+      return loginResult(userLoggedIn, userData);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_SignInState value) loginResult,
+  }) {
+    return loginResult(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_SignInState value)? loginResult,
+  }) {
+    return loginResult?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_SignInState value)? loginResult,
+    required TResult orElse(),
+  }) {
+    if (loginResult != null) {
+      return loginResult(this);
+    }
+    return orElse();
+  }
 }
 
 abstract class _SignInState implements SignInState {
-  const factory _SignInState({bool userLoggedIn}) = _$_SignInState;
+  const factory _SignInState({bool userLoggedIn, UserAuthModel? userData}) =
+      _$_SignInState;
 
   @override
   bool get userLoggedIn;
+  @override
+  UserAuthModel? get userData;
   @override
   @JsonKey(ignore: true)
   _$SignInStateCopyWith<_SignInState> get copyWith =>

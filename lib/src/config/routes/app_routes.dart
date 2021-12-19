@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:lenguas/src/presentation/pages/home_page.dart';
+import 'package:lenguas/src/presentation/pages/sign_in.dart';
 
 class AppRoutes {
   String className = "";
@@ -14,9 +16,9 @@ class AppRoutes {
   static Route onGenerateRoutes(RouteSettings settings) {
     switch (settings.name) {
       case '/':
-        return _materialRoute(const Scaffold());
+        return _materialRoute(SocialSignInScreen());
       case home:
-        return _materialRoute(const Scaffold());
+        return _materialRoute(HomePage());
       case signUp:
         return _materialRoute(const Scaffold());
       case login:

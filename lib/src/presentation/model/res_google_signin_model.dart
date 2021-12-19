@@ -1,16 +1,16 @@
 import '../utils/constants/key_constants.dart';
 
-class ResGoogleSignInModel {
+class UserAuthModel {
   String? displayName;
   String? email;
   String? id;
   String? photoUrl;
   String? token;
 
-  ResGoogleSignInModel(
+  UserAuthModel(
       {this.displayName, this.email, this.id, this.photoUrl, this.token});
 
-  ResGoogleSignInModel.fromJson(Map<String, dynamic> json) {
+  UserAuthModel.fromJson(Map<String, dynamic> json) {
     displayName = json[KeyConstants.googleDisplayName];
     email = json[KeyConstants.googleEmail];
     id = json[KeyConstants.googleId];

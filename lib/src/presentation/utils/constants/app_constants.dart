@@ -1,6 +1,7 @@
 class AppConstants {
   static const String googleProvider = "Google";
   static const String facebookProvider = "Facebook";
+  static const String emailProvider = "Email";
   static const String dictionary_url =
       'https://proyecto-miyotl.web.app/data.json';
   static const String last_update_url =

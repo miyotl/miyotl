@@ -7,4 +7,7 @@ class KeyConstants {
   static const String facebookUserDataFields =
       "name,email,picture.width(200),birthday,friends,gender,link";
   static const String emailKey = 'email';
+  static const String nameKey = 'name';
+  static const String pictureKey = 'picture';
+  static const String birthdayKey = 'birthday';
 }

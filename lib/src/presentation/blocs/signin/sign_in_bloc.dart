@@ -6,6 +6,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:injectable/injectable.dart';
 
+import '../../model/SignInResult.dart';
 import '../../model/res_google_signin_model.dart';
 import '../../utils/constants/app_constants.dart';
 import '../../utils/constants/key_constants.dart';
@@ -20,61 +21,80 @@ part 'sign_in_state.dart';
 
 @injectable
 class SignInBloc extends Bloc<SignInEvent, SignInState> {
-  SignInBloc() : super(SignInState());
+  SignInBloc() : super(SignInState.loginResult());
 
   @override
-  void onEvent(SignInEvent event) {
-    super.onEvent(event);
+  Stream<SignInState> mapEventToState(SignInEvent event) async* {
+    switch (event.provider) {
+      case AppConstants.emailProvider:
+         var result = await _googleSignInProcess();
+         yield state.copyWith(userLoggedIn: result.success);
+        break;
+      case AppConstants.facebookProvider:
+        var result = await _facebookSignInProcess();
+        yield state.copyWith(userLoggedIn: result.success);
+        break;
+      case AppConstants.googleProvider:
+        var result = await _googleSignInProcess();
+        yield state.copyWith(userLoggedIn: result.success);
+        break;
+    }
   }
 
-  //Google SignIn Process
-  void _googleSignInProcess(BuildContext context) async {
+//Google SignIn Process
+  Future<SignInResult> _googleSignInProcess() async {
     var _googleSignIn = GoogleSignIn();
     var googleUser = await _googleSignIn.signIn();
     var googleAuth = await googleUser?.authentication;
     var token = googleAuth?.idToken;
-    var _socialGoogleUser = ResGoogleSignInModel(
+    var _socialGoogleUser = UserAuthModel(
         displayName: googleUser?.displayName,
         email: googleUser?.email,
         photoUrl: googleUser?.photoUrl,
         id: googleUser?.id,
         token: token);
-    Fluttertoast.showToast(
-        msg: googleUser!.email,
-        backgroundColor: Colors.blue,
-        textColor: Colors.white);
-    LogUtils.showLog("${_socialGoogleUser.toJson()}");
+    return SignInResult(success: true, data: _socialGoogleUser);
   }
 
 //Facebook SignIn Process
-  void _facebookSignInProcess(BuildContext context) async {
+  Future<SignInResult> _facebookSignInProcess() async {
     var result = await FacebookAuth.instance.login();
-    ProgressDialogUtils.showProgressDialog(context);
     if (result.status == LoginStatus.success) {
       var accessToken = result.accessToken!;
       var userData = await FacebookAuth.i.getUserData(
         fields: KeyConstants.facebookUserDataFields,
       );
-      ProgressDialogUtils.dismissProgressDialog();
       Fluttertoast.showToast(
           msg: userData[KeyConstants.emailKey],
           backgroundColor: Colors.blue,
           textColor: Colors.white);
       LogUtils.showLog("${accessToken.userId}");
       LogUtils.showLog("$userData");
+      return SignInResult(
+          success: true, data: mapToAuthModel(userData, accessToken));
     } else {
-      ProgressDialogUtils.dismissProgressDialog();
       _showFailureResult(result);
+      return SignInResult(success: false);
     }
   }
 
+  UserAuthModel mapToAuthModel(
+      Map<String, dynamic> userData, AccessToken accessToken) {
+    return UserAuthModel(
+        displayName: userData[KeyConstants.nameKey],
+        email: userData[KeyConstants.emailKey],
+        id: accessToken.userId,
+        photoUrl: userData[KeyConstants.pictureKey],
+        token: accessToken.toString());
+  }
+
 //Combine Social Authentication
-  Future initiateSocialLogin(BuildContext context, String provider) async {
+  Future initiateSocialLogin(String provider) async {
     try {
       if (provider == AppConstants.googleProvider) {
-        _googleSignInProcess(context);
+        _googleSignInProcess();
       } else if (provider == AppConstants.facebookProvider) {
-        _facebookSignInProcess(context);
+        _facebookSignInProcess();
       }
     } on Exception catch (e) {
       LogUtils.showLog("$e");
@@ -104,6 +124,3 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
         textColor: Colors.white);
   }
 }
-
-// used to define how to display the values for the dictionary
-enum LookupMode { originalLanguage, targetLanguage }

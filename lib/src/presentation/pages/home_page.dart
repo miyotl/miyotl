@@ -1,6 +1,7 @@
 import 'package:ant_icons/ant_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../core/injection/injection.dart';
 
 import '../blocs/home/home_bloc.dart';
 import '../widgets/app_bar.dart';
@@ -19,34 +20,38 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<HomeBloc, HomeState>(
-      builder: (context, state) => Scaffold(
-        appBar: MyAppBar(title: resolveTitle(state.selectedIndex)),
-        body: _getScreenFromIndex(state.selectedIndex),
-        bottomNavigationBar: BottomNavBar(
-          selectedIndex: state.selectedIndex,
-          onItemSelected: (index) =>
-              context.read<HomeBloc>().add(HomeEvent.itemSelected(index)),
-          items: [
-            BottomNavBarItem(
-              textAlign: TextAlign.center,
-              icon: Icon(AntIcons.book_outline),
-              title: Text('Diccionario'),
-            ),
-            BottomNavBarItem(
-              textAlign: TextAlign.center,
-              icon: Icon(AntIcons.read_outline),
-              title: Text('Cultura'),
-            ),
-            BottomNavBarItem(
-              textAlign: TextAlign.center,
-              icon: Icon(AntIcons.setting_outline),
-              title: Text('Settings'),
-            ),
-          ],
-        ),
-      ),
-    );
+    return MultiBlocProvider(
+        providers: [
+          BlocProvider<HomeBloc>(create: (context) => getIt()),
+        ],
+        child: BlocBuilder<HomeBloc, HomeState>(
+            builder: (context, state) => Scaffold(
+                  appBar: MyAppBar(title: resolveTitle(state.selectedIndex)),
+                  body: _getScreenFromIndex(state.selectedIndex),
+                  bottomNavigationBar: BottomNavBar(
+                    selectedIndex: state.selectedIndex,
+                    onItemSelected: (index) => context
+                        .read<HomeBloc>()
+                        .add(HomeEvent.itemSelected(index)),
+                    items: [
+                      BottomNavBarItem(
+                        textAlign: TextAlign.center,
+                        icon: Icon(AntIcons.book_outline),
+                        title: Text('Diccionario'),
+                      ),
+                      BottomNavBarItem(
+                        textAlign: TextAlign.center,
+                        icon: Icon(AntIcons.read_outline),
+                        title: Text('Cultura'),
+                      ),
+                      BottomNavBarItem(
+                        textAlign: TextAlign.center,
+                        icon: Icon(AntIcons.setting_outline),
+                        title: Text('Settings'),
+                      ),
+                    ],
+                  ),
+                )));
   }
 
   String resolveTitle(int index) {

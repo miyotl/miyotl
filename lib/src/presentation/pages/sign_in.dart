@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../config/routes/app_routes.dart';
 
 import '../../config/themes/app_theme.dart';
 import '../blocs/signin/sign_in_bloc.dart';
@@ -23,7 +24,7 @@ class SocialSignInScreenState extends State<SocialSignInScreen> {
       body: SafeArea(
           child: BlocListener<SignInBloc, SignInState>(
               listener: (context, state) => {
-                    // TODO do the navidation
+                    if (state.userLoggedIn) {_onSignInSuccess(context)}
                   },
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -38,8 +39,9 @@ class SocialSignInScreenState extends State<SocialSignInScreen> {
                           width: SizeConstants.signInLogoSize)),
                   SocialButton(
                     onPressed: () {
-                      context.read<SignInBloc>().initiateSocialLogin(
-                          context, AppConstants.googleProvider);
+                      context.read<SignInBloc>().add(
+                          SignInEvent.signInWithProvider(
+                              provider: AppConstants.googleProvider));
                     },
                     providerName: FileConstants.icGoogle,
                     buttonColor: AppTheme.whiteColor,
@@ -49,8 +51,9 @@ class SocialSignInScreenState extends State<SocialSignInScreen> {
                   ),
                   SocialButton(
                     onPressed: () {
-                      context.read<SignInBloc>().initiateSocialLogin(
-                          context, AppConstants.facebookProvider);
+                      context.read<SignInBloc>().add(
+                          SignInEvent.signInWithProvider(
+                              provider: AppConstants.facebookProvider));
                     },
                     providerName: FileConstants.icFacebook,
                     buttonColor: AppTheme.facebookBlue,
@@ -60,8 +63,9 @@ class SocialSignInScreenState extends State<SocialSignInScreen> {
                   ),
                   SocialButton(
                     onPressed: () {
-                      context.read<SignInBloc>().initiateSocialLogin(
-                          context, AppConstants.facebookProvider);
+                      context.read<SignInBloc>().add(
+                          SignInEvent.signInWithProvider(
+                              provider: AppConstants.emailProvider));
                     },
                     providerName: FileConstants.icEmail,
                     buttonColor: AppTheme.whiteColor,
@@ -74,5 +78,9 @@ class SocialSignInScreenState extends State<SocialSignInScreen> {
                 ],
               ))),
     );
+  }
+
+  void _onSignInSuccess(BuildContext context) {
+    Navigator.pushNamed(context, AppRoutes.home);
   }
 }

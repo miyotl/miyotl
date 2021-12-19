@@ -3,6 +3,10 @@ import 'package:flutter/material.dart';
 class AppTheme {
   var appversion = 23;
 
+  // Sign in
+  static const Color purpleColor = Color(0xff3A559F);
+  static const Color whiteColor = Color(0Xffffffff);
+
   // From dark illustration
   static Color darkBlue = const Color(0xFF05001E);
   static Color pink = const Color(0xFFEC1C58);

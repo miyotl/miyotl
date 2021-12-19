@@ -5,7 +5,7 @@ import 'package:sentry_flutter/sentry_flutter.dart';
 
 import 'src/core/injection/injection.dart';
 import 'src/presentation/blocs/home_bloc.dart';
-import 'src/presentation/pages/home_page.dart';
+import 'src/presentation/pages/sign_in.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -30,8 +30,13 @@ class MiyotlApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: BlocProvider<HomeBloc>(
         create: (_) => getIt(),
-        child: HomePage(),
+        child: SocialSignInScreen(),
       ),
+      localizationsDelegates: [
+        DefaultMaterialLocalizations.delegate,
+        DefaultWidgetsLocalizations.delegate
+      ],
+      supportedLocales: [const Locale('en', '')],
     );
   }
 }

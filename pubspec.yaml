@@ -19,8 +19,6 @@ dependencies:
   #  flutter_inappwebview: ^5.3.2 # TODO: migrate to latest version
   ##  liquid_swipe: ^2.1.0
   #  cached_network_image: ^3.1.0
-  flutter_signin_button: ^2.0.0
-  #  google_sign_in: ^5.0.7
   #  uuid: ^3.0.4
   #  google_fonts: ^2.1.0
   #  path_provider: ^2.0.2
@@ -28,19 +26,23 @@ dependencies:
   ##  settings_ui: ^1.0.0  TODO update or remove for good
   ##  system_settings: ^2.0.0 TODO update for good settings
   #  flutter_json_widget: ^1.0.1
-  sentry_flutter: ^6.2.0
+  #  google_api_availability: ^3.0.1
+  #  ionicons: ^0.1.1
+  #  package_info: ^2.0.2
+  ##  video_player: ^2.1.14
+
   #  # Firebase plugins
   firebase_core: ^1.5.0
   #  firebase_analytics: ^8.3.0
   firebase_auth: ^3.0.2
   #  cloud_firestore: ^2.5.0
   url_launcher: ^6.0.9
-  flutter_facebook_auth: ^3.5.1
-  #  google_api_availability: ^3.0.1
-  #  ionicons: ^0.1.1
-  #  package_info: ^2.0.2
-  ##  video_player: ^2.1.14
+  sentry_flutter: ^6.2.0
+  # Authentication
 
+  flutter_facebook_auth: ^3.5.1
+  flutter_signin_button: ^2.0.0
+  google_sign_in: ^5.0.7
   # -----------------------------------------
   # UI
   pagination_view: ^2.0.0

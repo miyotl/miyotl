@@ -56,9 +56,9 @@ class SocialSignInScreenState extends State<SocialSignInScreen> {
                   initiateSocialLogin(context, AppConstants.facebookProvider);
                 },
                 providerName: FileConstants.icEmail,
-                buttonColor: AppTheme.facebookBlue,
+                buttonColor: AppTheme.whiteColor,
                 buttonText: "Login with Email",
-                buttonTextColor: AppTheme.whiteColor,
+                buttonTextColor: AppTheme.facebookBlue,
                 height: SizeConstants.socialButtonSize,
               ),
               Settings().privacy(context, TextAlign.center,

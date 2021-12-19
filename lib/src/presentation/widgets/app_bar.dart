@@ -17,7 +17,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
             style: Theme.of(context)
                 .textTheme
                 .headline6!
-                .copyWith(color: Colors.deepPurple),
+                .copyWith(color: Colors.blue),
           ),
         ),
       ),

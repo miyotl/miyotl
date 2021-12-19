@@ -46,6 +46,7 @@ void _facebookSignInProcess(BuildContext context) async {
     LogUtils.showLog("$userData");
   } else {
     ProgressDialogUtils.dismissProgressDialog();
+    _showFailureResult(result);
   }
 }
 
@@ -73,4 +74,16 @@ Future initiateSocialLogout(BuildContext context, String provider) async {
   } on Exception catch (e) {
     LogUtils.showLog("$e");
   }
+}
+
+
+
+//Common Failure Result Method
+void _showFailureResult(LoginResult authResult) {
+  ProgressDialogUtils.dismissProgressDialog();
+  LogUtils.showLog("${authResult.status}");
+  Fluttertoast.showToast(
+      msg: authResult.status.toString(),
+      backgroundColor: Colors.blue,
+      textColor: Colors.white);
 }

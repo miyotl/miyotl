@@ -1,7 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:lenguas/src/presentation/pages/home_page.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
 import 'src/core/injection/injection.dart';
@@ -27,18 +27,19 @@ class MiyotlApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: BlocProvider<HomeBloc>(
-        create: (_) => getIt(),
-        child: SocialSignInScreen(),
-      ),
-      localizationsDelegates: [
-        DefaultMaterialLocalizations.delegate,
-        DefaultWidgetsLocalizations.delegate
-      ],
-      supportedLocales: [const Locale('en', '')],
-    );
+    return Localizations(
+        locale: const Locale('en', 'US'),
+        delegates: <LocalizationsDelegate<dynamic>>[
+          DefaultWidgetsLocalizations.delegate,
+          DefaultMaterialLocalizations.delegate,
+        ],
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          home: BlocProvider<HomeBloc>(
+            create: (_) => getIt(),
+            child: SocialSignInScreen(),
+          )
+        ));
   }
 }
 // class App extends StatelessWidget {

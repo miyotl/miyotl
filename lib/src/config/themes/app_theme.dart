@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AppTheme {
-  var appversion = 23;
+  int appversion = 23;
 
   // Sign in
   static const Color facebookBlue = Color(0xff3A559F);
@@ -48,4 +48,12 @@ class AppTheme {
       ),
     );
   }
+
+   static bigTitleStyle(context){
+    return Theme.of(context)
+        .textTheme
+        .headline2!
+        .copyWith(color: Colors.white, fontFamily: 'FredokaOne');
+  }
+
 }

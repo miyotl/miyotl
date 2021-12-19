@@ -6,8 +6,6 @@ import 'package:intl/intl.dart';
 import 'localization_en.dart';
 
 class MyLocalizationsDelegate extends LocalizationsDelegate<Localization> {
-  const MyLocalizationsDelegate();
-
   @override
   bool isSupported(Locale locale) => [
         'en',
@@ -17,10 +15,9 @@ class MyLocalizationsDelegate extends LocalizationsDelegate<Localization> {
   Future<Localization> load(Locale locale) => _load(locale);
 
   static Future<Localization> _load(Locale locale) async {
-    final name =
-        ((locale.countryCode == null || locale.countryCode!.isEmpty)
-            ? locale.languageCode
-            : locale) as String?;
+    final name = ((locale.countryCode == null || locale.countryCode!.isEmpty)
+        ? locale.languageCode
+        : locale) as String?;
     final localeName = Intl.canonicalizedLocale(name);
     Intl.defaultLocale = localeName;
     return LocalizationEN();
@@ -39,7 +36,7 @@ abstract class Localization {
 
   String get facebookSignInLabel;
 
-  String get twitterSignInLabel;
+  String get emailSignInLabel;
 
   String get appBarLabel;
 }

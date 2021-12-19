@@ -1,4 +1,4 @@
-import '../utils/constants/key_constants.dart';
+import '../../presentation/utils/constants/key_constants.dart';
 
 class UserAuthModel {
   String? displayName;

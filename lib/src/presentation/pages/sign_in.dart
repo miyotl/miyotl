@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lenguas/src/presentation/blocs/home/home_bloc.dart';
 
 import '../../config/routes/app_routes.dart';
 import '../../config/themes/app_theme.dart';
@@ -12,6 +13,7 @@ import '../widgets/social_button.dart';
 // https://medium.com/flutter-community/social-authentication-in-customized-flutter-applications-5c972bff17f3
 
 class SocialSignInScreen extends StatefulWidget {
+  var isLoogedIn = SignInBloc
   @override
   State createState() => SocialSignInScreenState();
 }

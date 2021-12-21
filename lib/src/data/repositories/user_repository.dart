@@ -37,7 +37,7 @@ class UserRepository extends UserRepositoryContract {
     try {
       // Read value
       var result = await secureStorage.read(key: KeyConstants.userData);
-      return Right(result == null);
+      return Right(result != null);
     } on PlatformException {
       return Left(ReadUserDataFailure());
     }

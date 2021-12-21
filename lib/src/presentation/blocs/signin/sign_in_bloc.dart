@@ -37,17 +37,17 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     switch (event.provider) {
       case AppConstants.emailProvider:
         var result = await _googleSignInProcess();
-        _storeUserAuthUseCase(result.data);
+        await _storeUserAuthUseCase(result.data);
         yield state.copyWith(userLoggedIn: result.success);
         break;
       case AppConstants.facebookProvider:
         var result = await _facebookSignInProcess();
-        _storeUserAuthUseCase(result.data);
+        await _storeUserAuthUseCase(result.data);
         yield state.copyWith(userLoggedIn: result.success);
         break;
       case AppConstants.googleProvider:
         var result = await _googleSignInProcess();
-        _storeUserAuthUseCase(result.data);
+        await _storeUserAuthUseCase(result.data);
         yield state.copyWith(userLoggedIn: result.success);
         break;
     }
@@ -98,19 +98,6 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
         id: accessToken.userId,
         photoUrl: userData[KeyConstants.pictureKey],
         token: accessToken.toString());
-  }
-
-//Combine Social Authentication
-  Future initiateSocialLogin(String provider) async {
-    try {
-      if (provider == AppConstants.googleProvider) {
-        _googleSignInProcess();
-      } else if (provider == AppConstants.facebookProvider) {
-        _facebookSignInProcess();
-      }
-    } on Exception catch (e) {
-      LogUtils.showLog("$e");
-    }
   }
 
 //Combine Social Logout

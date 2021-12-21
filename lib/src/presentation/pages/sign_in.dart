@@ -24,7 +24,10 @@ class SocialSignInScreenState extends State<SocialSignInScreen> {
       body: SafeArea(
           child: BlocListener<SignInBloc, SignInState>(
               listener: (context, state) => {
-                    if (state.userLoggedIn) {_onSignInSuccess(context)}
+                    if (state.userLoggedIn)
+                      {
+                        _onSignInSuccess(context)
+                      }
                   },
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -61,18 +64,18 @@ class SocialSignInScreenState extends State<SocialSignInScreen> {
                     buttonTextColor: AppTheme.whiteColor,
                     height: SizeConstants.socialButtonSize,
                   ),
-                  SocialButton(
-                    onPressed: () {
-                      context.read<SignInBloc>().add(
-                          SignInEvent.signInWithProvider(
-                              provider: AppConstants.emailProvider));
-                    },
-                    providerName: FileConstants.icEmail,
-                    buttonColor: AppTheme.whiteColor,
-                    buttonText: "Login with Email",
-                    buttonTextColor: AppTheme.facebookBlue,
-                    height: SizeConstants.socialButtonSize,
-                  ),
+                  // SocialButton(
+                  //   onPressed: () {
+                  //     context.read<SignInBloc>().add(
+                  //         SignInEvent.signInWithProvider(
+                  //             provider: AppConstants.emailProvider));
+                  //   },
+                  //   providerName: FileConstants.icEmail,
+                  //   buttonColor: AppTheme.whiteColor,
+                  //   buttonText: "Login with Email",
+                  //   buttonTextColor: AppTheme.facebookBlue,
+                  //   height: SizeConstants.socialButtonSize,
+                  // ),
                   Settings().privacy(context, TextAlign.center,
                       EdgeInsets.only(left: 16, top: 30, bottom: 40, right: 16))
                 ],

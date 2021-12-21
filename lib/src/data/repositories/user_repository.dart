@@ -12,12 +12,15 @@ import '../../presentation/utils/constants/key_constants.dart';
 
 @LazySingleton(as: UserRepositoryContract)
 class UserRepository extends UserRepositoryContract {
+  UserRepository(this.secureStorage);
+
+  final FlutterSecureStorage secureStorage;
+
   @override
   Future<Either<Failure, UserAuthModel>> getUserData() async {
     try {
-      final storage = FlutterSecureStorage();
       // Read value
-      var result = await storage.read(key: KeyConstants.userData);
+      var result = await secureStorage.read(key: KeyConstants.userData);
       if (result == null) {
         return Left(NoUserDataFailure());
       } else {
@@ -32,9 +35,8 @@ class UserRepository extends UserRepositoryContract {
   @override
   Future<Either<Failure, bool>> isUserLoggedIn() async {
     try {
-      final storage = FlutterSecureStorage();
       // Read value
-      var result = await storage.read(key: KeyConstants.userData);
+      var result = await secureStorage.read(key: KeyConstants.userData);
       return Right(result == null);
     } on PlatformException {
       return Left(ReadUserDataFailure());
@@ -45,10 +47,8 @@ class UserRepository extends UserRepositoryContract {
   Future<Either<Failure, bool>> storeUserData(UserAuthModel? data) async {
     if (data == null) return Left(NullUserDataFailure());
     try {
-      // Create storage
-      final storage = FlutterSecureStorage();
       // Write value
-      await storage.write(
+      await secureStorage.write(
           key: KeyConstants.userData, value: data.toJson().toString());
       // assuming everything was fine
       return Right(true);

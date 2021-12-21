@@ -1,3 +1,4 @@
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:hive/hive.dart';
 import 'package:injectable/injectable.dart';
@@ -23,4 +24,7 @@ abstract class RegisterModule {
     Hive.init(appDocumentDir.path);
     return Hive.openBox<String>('miyotl');
   }
+
+  @lazySingleton
+  FlutterSecureStorage get secureStorage => FlutterSecureStorage();
 }

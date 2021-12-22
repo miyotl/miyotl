@@ -7,13 +7,13 @@ import '../entities/user_auth_model.dart';
 import '../repositories/user_repository_contract.dart';
 
 @lazySingleton
-class StoreUserAuthUseCase extends UseCase<bool, UserAuthModel?> {
+class StoreUserAuthUseCase extends UseCase<bool, UserAuthModel> {
   StoreUserAuthUseCase(this.repository);
 
   final UserRepositoryContract repository;
 
   @override
-  Future<Either<Failure, bool>> call(UserAuthModel? params) {
+  Future<Either<Failure, bool>> call(UserAuthModel params) {
     return repository.storeUserData(params);
   }
 }

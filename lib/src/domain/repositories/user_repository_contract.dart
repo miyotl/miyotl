@@ -8,5 +8,5 @@ abstract class UserRepositoryContract {
 
   Future<Either<Failure, UserAuthModel>> getUserData();
 
-  Future<Either<Failure, bool>> storeUserData(UserAuthModel? data);
+  Future<Either<Failure, bool>> storeUserData(UserAuthModel data);
 }

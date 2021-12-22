@@ -5,11 +5,11 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:injectable/injectable.dart';
+
 import '../../../domain/entities/user_auth_model.dart';
 import '../../../domain/usecases/is_user_logged_in_usecase.dart';
 import '../../../domain/usecases/read_user_auth_usecase.dart';
 import '../../../domain/usecases/store_user_auth_usecase.dart';
-
 import '../../model/SignInResult.dart';
 import '../../utils/constants/app_constants.dart';
 import '../../utils/constants/key_constants.dart';
@@ -35,21 +35,22 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
   @override
   Stream<SignInState> mapEventToState(SignInEvent event) async* {
     switch (event.provider) {
-      case AppConstants.emailProvider:
-        var result = await _googleSignInProcess();
-        await _storeUserAuthUseCase(result.data);
-        yield state.copyWith(userLoggedIn: result.success);
-        break;
       case AppConstants.facebookProvider:
         var result = await _facebookSignInProcess();
-        await _storeUserAuthUseCase(result.data);
+        _storeUserData(result.data);
         yield state.copyWith(userLoggedIn: result.success);
         break;
       case AppConstants.googleProvider:
         var result = await _googleSignInProcess();
-        await _storeUserAuthUseCase(result.data);
+        _storeUserData(result.data);
         yield state.copyWith(userLoggedIn: result.success);
         break;
+    }
+  }
+
+  Future<void> _storeUserData(UserAuthModel? data) async {
+    if (data?.token != null) {
+      await _storeUserAuthUseCase(data!);
     }
   }
 
@@ -65,7 +66,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
         photoUrl: googleUser?.photoUrl,
         id: googleUser?.id,
         token: token);
-    return SignInResult(success: true, data: _socialGoogleUser);
+    return SignInResult(success: token != null, data: _socialGoogleUser);
   }
 
 //Facebook SignIn Process

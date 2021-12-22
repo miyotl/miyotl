@@ -44,8 +44,7 @@ class UserRepository extends UserRepositoryContract {
   }
 
   @override
-  Future<Either<Failure, bool>> storeUserData(UserAuthModel? data) async {
-    if (data == null) return Left(NullUserDataFailure());
+  Future<Either<Failure, bool>> storeUserData(UserAuthModel data) async {
     try {
       // Write value
       await secureStorage.write(

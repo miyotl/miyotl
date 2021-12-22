@@ -77,7 +77,7 @@ class SocialSignInScreenState extends State<SocialSignInScreen> {
                   //   height: SizeConstants.socialButtonSize,
                   // ),
                   Settings().privacy(context, TextAlign.center,
-                      EdgeInsets.only(left: 16, top: 30, bottom: 40, right: 16))
+                      EdgeInsets.only(left: 16, top: 30, bottom: 31, right: 16))
                 ],
               ))),
     );

@@ -7,8 +7,6 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../domain/entities/user_auth_model.dart';
-import '../../../domain/usecases/is_user_logged_in_usecase.dart';
-import '../../../domain/usecases/read_user_auth_usecase.dart';
 import '../../../domain/usecases/store_user_auth_usecase.dart';
 import '../../model/SignInResult.dart';
 import '../../utils/constants/app_constants.dart';
@@ -24,13 +22,9 @@ part 'sign_in_state.dart';
 
 @injectable
 class SignInBloc extends Bloc<SignInEvent, SignInState> {
-  SignInBloc(this._isUserLoggedInUseCase, this._storeUserAuthUseCase,
-      this._readUserAuthUseCase)
-      : super(SignInState.loginResult());
+  SignInBloc(this._storeUserAuthUseCase) : super(SignInState.loginResult());
 
-  final IsUserLoggedInUseCase _isUserLoggedInUseCase;
   final StoreUserAuthUseCase _storeUserAuthUseCase;
-  final ReadUserAuthUseCase _readUserAuthUseCase;
 
   @override
   Stream<SignInState> mapEventToState(SignInEvent event) async* {

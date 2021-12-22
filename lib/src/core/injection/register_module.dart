@@ -4,6 +4,7 @@ import 'package:hive/hive.dart';
 import 'package:injectable/injectable.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 @module
 abstract class RegisterModule {
@@ -26,5 +27,5 @@ abstract class RegisterModule {
   }
 
   @lazySingleton
-  FlutterSecureStorage get secureStorage => FlutterSecureStorage();
+  Future<SharedPreferences> get localPreferences => SharedPreferences.getInstance();
 }

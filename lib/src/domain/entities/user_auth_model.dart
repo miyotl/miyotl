@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import '../../presentation/utils/constants/key_constants.dart';
 
 class UserAuthModel {
@@ -20,11 +22,16 @@ class UserAuthModel {
 
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
-    data[KeyConstants.googleDisplayName] = this.displayName;
-    data[KeyConstants.googleEmail] = this.email;
-    data[KeyConstants.googleId] = this.id;
-    data[KeyConstants.googlePhotoUrl] = this.photoUrl;
-    data[KeyConstants.googleToken] = this.token;
+    data[KeyConstants.googleDisplayName] = "$displayName";
+    data[KeyConstants.googleEmail] = "$email";
+    data[KeyConstants.googleId] = "$id";
+    data[KeyConstants.googlePhotoUrl] = "$photoUrl";
+    data[KeyConstants.googleToken] = "$token";
     return data;
+  }
+
+  String toString() {
+    var str = json.encode(toJson());
+    return str;
   }
 }

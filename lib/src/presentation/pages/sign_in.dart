@@ -48,7 +48,7 @@ class SocialSignInScreenState extends State<SocialSignInScreen> {
                     },
                     providerName: FileConstants.icGoogle,
                     buttonColor: AppTheme.whiteColor,
-                    buttonText: AppConstants.googleProvider,
+                    buttonText: AppConstants.loginWithGoogle,
                     buttonTextColor: AppTheme.facebookBlue,
                     height: SizeConstants.socialButtonSize,
                   ),
@@ -80,7 +80,8 @@ class SocialSignInScreenState extends State<SocialSignInScreen> {
     final isLoggedIn = (prefs.getBool(AppConstants.isUserLoggedInKey) ?? false);
     if (userData?.token != null) {
       setState(() {
-        prefs.setString(AppConstants.userProfileKey, userData?.toString() ?? '');
+        prefs.setString(
+            AppConstants.userProfileKey, userData?.toString() ?? '');
         prefs.setBool(AppConstants.isUserLoggedInKey, true).then((success) {
           return isLoggedIn;
         });

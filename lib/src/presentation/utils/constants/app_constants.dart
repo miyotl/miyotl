@@ -21,4 +21,5 @@ class AppConstants {
   // Strings
   static const String loginWithGoogle = 'Login with Google';
   static const String loginWithFacebook = 'Login with Facebook';
+  static const String legalTitle = 'Legal';
 }

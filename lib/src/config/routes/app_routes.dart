@@ -22,7 +22,7 @@ class AppRoutes {
       case signUp:
         return _materialRoute(const Scaffold());
       case login:
-        return _materialRoute(const Scaffold());
+        return _materialRoute(SocialSignInScreen());
 
       case culture:
         return _materialRoute(const Scaffold());

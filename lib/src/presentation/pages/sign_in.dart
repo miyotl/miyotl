@@ -34,7 +34,7 @@ class SocialSignInScreenState extends State<SocialSignInScreen> {
                 children: [
                   Padding(
                       padding: EdgeInsets.only(bottom: 36),
-                      child: Text('Miyotl',
+                      child: Text(AppConstants.app_name,
                           style: AppTheme.bigTitleStyle(context))),
                   Padding(
                       padding: EdgeInsets.only(bottom: 26),
@@ -48,7 +48,7 @@ class SocialSignInScreenState extends State<SocialSignInScreen> {
                     },
                     providerName: FileConstants.icGoogle,
                     buttonColor: AppTheme.whiteColor,
-                    buttonText: "Login with Google",
+                    buttonText: AppConstants.googleProvider,
                     buttonTextColor: AppTheme.facebookBlue,
                     height: SizeConstants.socialButtonSize,
                   ),
@@ -60,7 +60,7 @@ class SocialSignInScreenState extends State<SocialSignInScreen> {
                     },
                     providerName: FileConstants.icFacebook,
                     buttonColor: AppTheme.facebookBlue,
-                    buttonText: "Login with Facebook",
+                    buttonText: AppConstants.loginWithFacebook,
                     buttonTextColor: AppTheme.whiteColor,
                     height: SizeConstants.socialButtonSize,
                   ),
@@ -77,10 +77,11 @@ class SocialSignInScreenState extends State<SocialSignInScreen> {
 
   Future<void> _saveUserData(UserAuthModel? userData) async {
     final prefs = await SharedPreferences.getInstance();
-    final isLoggedIn = (prefs.getBool('isLoggedIn') ?? false);
+    final isLoggedIn = (prefs.getBool(AppConstants.isUserLoggedInKey) ?? false);
     if (userData?.token != null) {
       setState(() {
-        prefs.setBool('isLoggedIn', true).then((success) {
+        prefs.setString(AppConstants.userProfileKey, userData?.toString() ?? '');
+        prefs.setBool(AppConstants.isUserLoggedInKey, true).then((success) {
           return isLoggedIn;
         });
       });

@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:lenguas/src/presentation/pages/home_page.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'src/config/routes/app_routes.dart';
 import 'src/core/injection/injection.dart';
 import 'src/presentation/blocs/signin/sign_in_bloc.dart';
+import 'src/presentation/pages/home_page.dart';
 import 'src/presentation/pages/sign_in.dart';
+import 'src/presentation/utils/constants/app_constants.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await configureInjection(Environment.prod);
   var _prefs = await SharedPreferences.getInstance();
-  var _isLoggedIn = _prefs.getBool("isLoggedIn") ?? false;
+  var _isLoggedIn = _prefs.getBool(AppConstants.isUserLoggedInKey) ?? false;
 
   /// Run the app, sending exceptions and errors to Sentry
   SentryFlutter.init(

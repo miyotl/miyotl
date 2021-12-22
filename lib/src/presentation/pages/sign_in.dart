@@ -64,18 +64,6 @@ class SocialSignInScreenState extends State<SocialSignInScreen> {
                     buttonTextColor: AppTheme.whiteColor,
                     height: SizeConstants.socialButtonSize,
                   ),
-                  // SocialButton(
-                  //   onPressed: () {
-                  //     context.read<SignInBloc>().add(
-                  //         SignInEvent.signInWithProvider(
-                  //             provider: AppConstants.emailProvider));
-                  //   },
-                  //   providerName: FileConstants.icEmail,
-                  //   buttonColor: AppTheme.whiteColor,
-                  //   buttonText: "Login with Email",
-                  //   buttonTextColor: AppTheme.facebookBlue,
-                  //   height: SizeConstants.socialButtonSize,
-                  // ),
                   Settings().privacy(context, TextAlign.center,
                       EdgeInsets.only(left: 16, top: 30, bottom: 31, right: 16))
                 ],

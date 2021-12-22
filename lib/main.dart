@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:lenguas/src/config/routes/app_routes.dart';
-import 'package:lenguas/src/presentation/pages/home_page.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
+import 'src/config/routes/app_routes.dart';
 import 'src/core/injection/injection.dart';
-import 'src/presentation/blocs/home/home_bloc.dart';
 import 'src/presentation/blocs/signin/sign_in_bloc.dart';
 import 'src/presentation/pages/sign_in.dart';
 
@@ -39,57 +37,8 @@ class MiyotlApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             onGenerateRoute: AppRoutes.onGenerateRoutes,
             home: MultiBlocProvider(
-              providers: [
-                BlocProvider<SignInBloc>(create: (_) => getIt())
-              ],
-               child: SocialSignInScreen(),
+              providers: [BlocProvider<SignInBloc>(create: (_) => getIt())],
+              child: SocialSignInScreen(),
             )));
   }
 }
-// class App extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return MultiProvider(
-//       providers: [
-//         ChangeNotifierProvider<AppState>(create: (context) => AppState()),
-//         //ChangeNotifierProvider<Settings>(create: (context) => Settings()),
-//         ChangeNotifierProvider<UserAccount>(create: (context) => UserAccount()),
-//       ],
-//       child: ChangeNotifierProvider<AppState>(
-//         create: (context) => AppState(),
-//         child: Consumer<Settings>(
-//           builder: (context, settings, child) => MaterialApp(
-//             navigatorObservers: [
-//               FirebaseAnalyticsObserver(analytics: analytics),
-//             ],
-//             title: app_name,
-//             theme: new_light_theme.copyWith(
-//               platform: TargetPlatform.android
-//                   // TODO make settings
-//               // settings.useIOSStyle
-//               //     ? TargetPlatform.iOS
-//               //     : TargetPlatform.android,
-//             ),
-//             darkTheme: dark_theme.copyWith(
-//               platform: TargetPlatform.android
-//               // settings.useIOSStyle
-//               //    ? TargetPlatform.iOS
-//                 //  : TargetPlatform.android,
-//             ),
-//             home: child,
-//             routes: {
-//               '/app': (context) => HomePage(),
-//               '/settings': (context) => SettingsPage(),
-//               '/onboarding': (context) => OnboardingPage(),
-//               '/debug': (context) => DeveloperPage(),
-//               '/debug/google': (context) => GoogleApiAvailabilityPage(),
-//             },
-//             debugShowCheckedModeBanner: false,
-//             //themeMode: settings.theme,
-//           ),
-//           child: ConditionalOnboardingPage(),
-//         ),
-//       ),
-//     );
-//   }
-// }

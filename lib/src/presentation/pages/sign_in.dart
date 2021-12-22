@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lenguas/src/domain/entities/user_auth_model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../config/routes/app_routes.dart';
 import '../../config/themes/app_theme.dart';
@@ -25,9 +27,7 @@ class SocialSignInScreenState extends State<SocialSignInScreen> {
           child: BlocListener<SignInBloc, SignInState>(
               listener: (context, state) => {
                     if (state.userLoggedIn)
-                      {
-                        _onSignInSuccess(context)
-                      }
+                      {_saveUserData(state.userData), _onSignInSuccess(context)}
                   },
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -73,5 +73,17 @@ class SocialSignInScreenState extends State<SocialSignInScreen> {
 
   void _onSignInSuccess(BuildContext context) {
     Navigator.pushNamed(context, AppRoutes.home);
+  }
+
+  Future<void> _saveUserData(UserAuthModel? userData) async {
+    final prefs = await SharedPreferences.getInstance();
+    final isLoggedIn = (prefs.getBool('isLoggedIn') ?? false);
+    if (userData?.token != null) {
+      setState(() {
+        prefs.setBool('isLoggedIn', true).then((success) {
+          return isLoggedIn;
+        });
+      });
+    }
   }
 }

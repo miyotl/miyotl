@@ -38,12 +38,14 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
       case AppConstants.facebookProvider:
         var result = await _facebookSignInProcess();
         _storeUserData(result.data);
-        yield state.copyWith(userLoggedIn: result.success);
+        yield state.copyWith(
+            userLoggedIn: result.success, userData: result.data);
         break;
       case AppConstants.googleProvider:
         var result = await _googleSignInProcess();
         _storeUserData(result.data);
-        yield state.copyWith(userLoggedIn: result.success);
+        yield state.copyWith(
+            userLoggedIn: result.success, userData: result.data);
         break;
     }
   }

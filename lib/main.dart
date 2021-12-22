@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:lenguas/src/presentation/pages/home_page.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'src/config/routes/app_routes.dart';
 import 'src/core/injection/injection.dart';
@@ -11,6 +13,8 @@ import 'src/presentation/pages/sign_in.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await configureInjection(Environment.prod);
+  var _prefs = await SharedPreferences.getInstance();
+  var _isLoggedIn = _prefs.getBool("isLoggedIn") ?? false;
 
   /// Run the app, sending exceptions and errors to Sentry
   SentryFlutter.init(
@@ -18,12 +22,17 @@ Future<void> main() async {
       options.dsn =
           'https://10b347756b75470d9de103b5fc93392b@o542451.ingest.sentry.io/5662242';
     },
-    appRunner: () => runApp(MiyotlApp()),
+    appRunner: () => runApp(MiyotlApp(isLoggedIn: _isLoggedIn)),
   );
 }
 
 class MiyotlApp extends StatelessWidget {
-  const MiyotlApp({Key? key}) : super(key: key);
+  const MiyotlApp({
+    Key? key,
+    required this.isLoggedIn,
+  }) : super(key: key);
+
+  final bool isLoggedIn;
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +47,7 @@ class MiyotlApp extends StatelessWidget {
             onGenerateRoute: AppRoutes.onGenerateRoutes,
             home: MultiBlocProvider(
               providers: [BlocProvider<SignInBloc>(create: (_) => getIt())],
-              child: SocialSignInScreen(),
+              child: isLoggedIn ? HomePage() : SocialSignInScreen(),
             )));
   }
 }

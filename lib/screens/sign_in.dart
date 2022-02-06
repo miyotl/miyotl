@@ -1,9 +1,8 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lenguas/models/constants.dart';
@@ -11,7 +10,6 @@ import 'package:lenguas/models/sign_in.dart';
 import 'package:lenguas/models/user_account.dart';
 import 'package:lenguas/screens/onboarding.dart';
 import 'package:lenguas/widgets/status_bar_colors.dart';
-import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class SignInPage extends StatelessWidget {
@@ -22,8 +20,6 @@ class SignInPage extends StatelessWidget {
   SignInPage({@required this.onSignIn});
 
   void doSignIn(BuildContext context, SignInFunction signInFunction) async {
-    /// TODO: maybe do some separation between business logic and UI?
-
     /// Log out first
     try {
       UserAccount.instance.logOut();
@@ -32,15 +28,7 @@ class SignInPage extends StatelessWidget {
     }
     try {
       var credential = await signInFunction();
-      AccessToken isLogged;
-      try {
-        isLogged = await FacebookAuth.instance.isLogged;
-      } catch (e) {
-        isLogged = null;
-      }
-      if (signInFunction != SignInMethods.anonymous &&
-          credential == null &&
-          isLogged == null) {
+      if (credential == null) {
         showDialog(
           context: context,
           builder: (context) => AlertDialog(
@@ -99,51 +87,6 @@ class SignInPage extends StatelessWidget {
         default:
           rethrow;
       }
-    } on FacebookAuthException catch (e) {
-      switch (e.errorCode) {
-        case FacebookAuthErrorCode.OPERATION_IN_PROGRESS:
-          break;
-        case FacebookAuthErrorCode.CANCELLED:
-          showDialog(
-            context: context,
-            builder: (context) => AlertDialog(
-              title: Text('Cancelaste el inicio de sesión'),
-              content: Text(
-                'Vuelve a intentar iniciar sesión, o selecciona otro método de inicio de sesión',
-              ),
-              actions: [
-                TextButton(
-                  child: Text('De acuerdo'),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                ),
-              ],
-            ),
-          );
-          break;
-        default:
-          showDialog(
-            context: context,
-            builder: (context) => AlertDialog(
-              title: Text('Falló el inicio de sesión con Facebook'),
-              content: Text(
-                'Error ${e.errorCode}: ${e.message}.\nPor favor toma captura de pantalla y mándala a miyotl@googlegroups.com.',
-              ),
-            ),
-          );
-      }
-    } catch (e) {
-      /// TODO: report errors in a more automatic way
-      showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: Text('Error desconocido'),
-          content: Text(
-            'Ocurrió un error desconocido. Por favor toma captura de pantalla y mándala a miyotl@googlegroups.com.\n\nEl error es:\n\n$e',
-          ),
-        ),
-      );
     }
   }
 
@@ -162,13 +105,13 @@ class SignInPage extends StatelessWidget {
                 if (snapshot.hasError ||
                     snapshot.connectionState == ConnectionState.done) {
                   return Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       Padding(
                         padding: const EdgeInsets.all(16),
                         child: SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.75,
+                          width: MediaQuery.of(context).size.width * 1.75,
                           child: Column(
                             children: [
                               Text(
@@ -215,42 +158,22 @@ class SignInPage extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SignInButton(
-                        Buttons.Google,
-                        text: 'Inicia sesión con Google',
-                        onPressed: () =>
-                            doSignIn(context, SignInMethods.google),
-                      ),
-                      // SignInButton(
-                      //   Buttons.Email,
-                      //   text: 'Con correo y contraseña',
-                      //   onPressed: () {
-                      //     Scaffold.of(context).showSnackBar(
-                      //       SnackBar(
-                      //         content:
-                      //             Text('Funcionalidad no implementada'),
-                      //       ),
-                      //     );
-                      //   },
-                      // ),
-                      SignInButton(
-                        Buttons.Facebook,
-                        text: 'Inicia sesión con Facebook',
-                        onPressed: () =>
-                            doSignIn(context, SignInMethods.facebook),
-                      ),
-                      // SignInButton(
-                      //   Buttons.AppleDark,
-                      //   text: 'Inicia sesión con Apple',
-                      //   onPressed: () {
-                      //     Scaffold.of(context).showSnackBar(
-                      //       SnackBar(
-                      //         content:
-                      //             Text('Funcionalidad no implementada'),
-                      //       ),
-                      //     );
-                      //   },
-                      // ),
+                      Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          child: SignInButton(
+                            Buttons.Google,
+                            text: 'Inicia sesión con Google',
+                            onPressed: () =>
+                                doSignIn(context, SignInMethods.google),
+                          )),
+                      Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          child: SignInButton(
+                            Buttons.Facebook,
+                            text: 'Inicia sesión con Facebook',
+                            onPressed: () =>
+                                doSignIn(context, SignInMethods.facebook),
+                          )),
                       SignInButtonBuilder(
                         text: 'Ingresa como invitado',
                         icon: Icons.face,

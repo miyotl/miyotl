@@ -160,7 +160,7 @@ class AppState extends ChangeNotifier {
 
   /// Get language data from the internet
   Future<void> getLanguageDataFromInternet() async {
-    var response = await get(dictionary_url);
+    var response = await get(Uri.parse(dictionary_url));
 
     /// Interpret the response as UTF-8 so special characters can be rendered properly
     var dataString = utf8.decode(response.bodyBytes);
@@ -173,7 +173,7 @@ class AppState extends ChangeNotifier {
   Future<void> updateLanguageData() async {
     final prefs = await SharedPreferences.getInstance();
     int currentVersion = prefs.getInt('last-update') ?? 0;
-    var response = await get(last_update_url);
+    var response = await get(Uri.parse(last_update_url));
     int latestVersion = int.parse(response.body);
     if (latestVersion > currentVersion) {
       await getLanguageDataFromInternet();

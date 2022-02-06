@@ -19,7 +19,7 @@ class UserAccount extends ChangeNotifier {
   }
 
   Future<String> getDisplayName() async {
-    var isLogged = await FacebookAuth.instance.isLogged;
+    var isLogged = await FacebookAuth.instance.accessToken;
     if (isLogged == null) {
       return FirebaseAuth.instance?.currentUser?.displayName ??
           'Ajolote anónimo';
@@ -30,7 +30,7 @@ class UserAccount extends ChangeNotifier {
   }
 
   Future<String> getEmail() async {
-    var isLogged = await FacebookAuth.instance.isLogged;
+    var isLogged = await FacebookAuth.instance.accessToken;
     if (isLogged == null) {
       return FirebaseAuth.instance.currentUser?.email ?? 'Correo no aplicable';
     } else {
@@ -40,17 +40,18 @@ class UserAccount extends ChangeNotifier {
   }
 
   Future<String> getProfilePicUrl() async {
-    var isLogged = await FacebookAuth.instance.isLogged;
+    var isLogged = await FacebookAuth.instance.accessToken;
     if (isLogged == null) {
       return FirebaseAuth.instance.currentUser?.photoURL;
     } else {
+      // TODO this doesn't make sense :/
       var userData = await FacebookAuth.instance.getUserData();
       return userData['picture']['data']['url'];
     }
   }
 
   Future<String> getDebugAccountDetails() async {
-    var isLogged = await FacebookAuth.instance.isLogged;
+    var isLogged = await FacebookAuth.instance.accessToken;
     if (isLogged == null) {
       return FirebaseAuth.instance.currentUser.toString();
     } else {
@@ -70,7 +71,7 @@ class UserAccount extends ChangeNotifier {
     }
     profilePicUrl = await getProfilePicUrl();
     if (profilePicUrl == null) {
-      profilePic = AssetImage('img/icon-full-new.png');
+      profilePic = AssetImage('img/icon-round-new-outline.png');
     } else {
       profilePic = CachedNetworkImageProvider(profilePicUrl);
     }
@@ -88,7 +89,7 @@ class UserAccount extends ChangeNotifier {
 
   void logOut() async {
     try {
-      if (FacebookAuth.instance.isLogged != null) {
+      if (FacebookAuth.instance.accessToken != null) {
         FacebookAuth.instance.logOut();
       }
     } catch (e) {}

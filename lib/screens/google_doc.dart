@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lenguas/models/app_state.dart';
+
 import '../models/culture.dart';
 import 'culture_details.dart';
 
@@ -67,21 +68,21 @@ class _GoogleDocPreviewState extends State<GoogleDocPreview> {
     return Expanded(
       child: Container(
         child: InAppWebView(
-          initialUrl: url,
-          initialHeaders: {},
+          initialUrlRequest: URLRequest(url: Uri.parse(url)),
           onWebViewCreated: (InAppWebViewController controller) {
             webView = controller;
             //webView.clearCache();
           },
-          onLoadStart: (InAppWebViewController controller, String url) {
+          onLoadStart: (controller, url) {
             setState(() {
-              this.url = url;
+              this.url = url.toString();
+              //urlController.text = this.url;
             });
             cleanUp();
           },
-          onLoadStop: (InAppWebViewController controller, String url) async {
+          onLoadStop: (controller, url) async {
             setState(() {
-              this.url = url;
+              this.url = url.toString();
             });
             cleanUp();
           },

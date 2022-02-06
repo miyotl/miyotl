@@ -3,4 +3,5 @@
     <string name="app_name">Miyotl</string>
     <string name="facebook_app_id">2554704008157000</string>
     <string name="fb_login_protocol_scheme">fb2554704008157000</string>
+    <string name="facebook_client_token">1e29c0edde9939e895e28dc2e2c8802b</string>
 </resources>

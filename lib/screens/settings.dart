@@ -29,6 +29,9 @@ class SettingsPage extends StatelessWidget {
         padding: const EdgeInsets.all(8),
         child: Consumer2<Settings, UserAccount>(
           builder: (context, settings, account, child) => SettingsList(
+            darkTheme: SettingsThemeData(
+              settingsListBackground: AppColors.darkBlue
+            ),
             sections: [
               SettingsSection(
                 title: const Text('Apariencia'),

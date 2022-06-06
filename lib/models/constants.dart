@@ -55,7 +55,7 @@ class AppColors {
   static Color azulVerdoso = Color(0xFF146484);
   static Color azulClaro = Color(0xff0cc3fb);
   static Color azulCard = Color(0x37334B);
-  //static Color verdePrueba = Color(0xff3BCD95);
+//static Color verdePrueba = Color(0xff3BCD95);
 }
 
 /// TODO: constant
@@ -71,6 +71,12 @@ ThemeData dark_theme = ThemeData(
     iconTheme: IconThemeData(
       color: AppColors.darkBlue,
     ),
+    titleTextStyle: TextStyle(
+      color: AppColors.darkBlue,
+      /// TODO: figure out what's going on -- if size is not specified text becomes smaller
+      fontSize: 18,
+    ),
+    backgroundColor: AppColors.lightPink,
   ),
   scaffoldBackgroundColor: AppColors.darkBlue,
   canvasColor: AppColors.darkBlue,
@@ -86,7 +92,6 @@ ThemeData new_light_theme = ThemeData(
     selectedItemColor: AppColors.azulMorado,
     // backgroundColor: AppColors.amarillo,
   ),
-
   selectedRowColor: AppColors.rosa,
   textSelectionColor: AppColors.rosa,
 );

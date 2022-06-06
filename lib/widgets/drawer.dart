@@ -138,8 +138,8 @@ class AppDrawer extends StatelessWidget {
                 onTap: () {
                   // analytics.logEvent(
                   //     name: 'contact', parameters: {'source': 'drawer'});
-                  launch(
-                    'mailto:miyotl@googlegroups.com?subject=Retroalimentación sobre app',
+                  launchUrl(
+                    Uri.parse('mailto:miyotl@googlegroups.com?subject=Retroalimentación sobre app'),
                   );
                 },
               ),
@@ -167,9 +167,9 @@ class AppDrawer extends StatelessWidget {
                         title: Text('Ver créditos'),
                         onTap: () {
                           // analytics.logEvent(name: 'view-credits');
-                          launch(
-                            'https://proyecto-miyotl.web.app/acerca_de',
-                            forceWebView: true,
+                          launchUrl(
+                            Uri.parse('https://proyecto-miyotl.web.app/acerca_de'),
+                            mode: LaunchMode.inAppWebView,
                           );
                         },
                       ),
@@ -178,7 +178,7 @@ class AppDrawer extends StatelessWidget {
                         title: Text('Síguenos en Facebook'),
                         onTap: () {
                           // analytics.logEvent(name: 'view-facebook');
-                          launch('https://fb.me/MiyotlApp');
+                          launchUrl(Uri.parse('https://fb.me/MiyotlApp'));
                         },
                       ),
                       ListTile(
@@ -186,7 +186,7 @@ class AppDrawer extends StatelessWidget {
                         title: Text('Síguenos en Twitter'),
                         onTap: () {
                           // analytics.logEvent(name: 'view-twitter');
-                          launch('https://twitter.com/MiyotlApp');
+                          launchUrl(Uri.parse('https://twitter.com/MiyotlApp'));
                         },
                       ),
                       ListTile(
@@ -195,7 +195,7 @@ class AppDrawer extends StatelessWidget {
                         onTap: () {
                           // analytics.logEvent(
                           //     name: 'contact', parameters: {'source': 'about'});
-                          launch('mailto:miyotl@googlegroups.com');
+                          launchUrl(Uri.parse('mailto:miyotl@googlegroups.com'));
                         },
                       ),
                       ListTile(
@@ -203,7 +203,7 @@ class AppDrawer extends StatelessWidget {
                         title: Text('Colabora en GitHub'),
                         onTap: () {
                           // analytics.logEvent(name: 'view-github');
-                          launch('https://github.com/miyotl/miyotl');
+                          launchUrl(Uri.parse('https://github.com/miyotl/miyotl'));
                         },
                       ),
                     ],

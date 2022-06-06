@@ -144,9 +144,9 @@ class SignInPage extends StatelessWidget {
                                         fontWeight: FontWeight.bold,
                                       ),
                                       recognizer: TapGestureRecognizer()
-                                        ..onTap = () => launch(
-                                              'https://proyecto-miyotl.web.app/privacidad/',
-                                              forceWebView: true,
+                                        ..onTap = () => launchUrl(
+                                              Uri.parse('https://proyecto-miyotl.web.app/privacidad/'),
+                                              mode: LaunchMode.inAppWebView,
                                             ),
                                     ),
                                     TextSpan(

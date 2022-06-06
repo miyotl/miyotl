@@ -1,8 +1,8 @@
-name: lenguas
-description: A new Flutter project.
+name: miyotl
+description: Miyotl
 
 # The following line prevents the package from being accidentally published to
-# pub.dev using `pub publish`. This is preferred for private packages.
+# pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
 # The following defines the version and build number for your application.
@@ -15,11 +15,17 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.0.3+4005
+version: 1.0.4+4006
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: ">=2.11.0 <3.0.0"
 
+# Dependencies specify other packages that your package needs in order to work.
+# To automatically upgrade your package dependencies to the latest versions
+# consider running `flutter pub upgrade --major-versions`. Alternatively,
+# dependencies can be manually updated by changing the version numbers below to
+# the latest version available on pub.dev. To see which dependencies have newer
+# versions available, run `flutter pub outdated`.
 dependencies:
   flutter:
     sdk: flutter
@@ -27,54 +33,50 @@ dependencies:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.3
-  http: ^0.13.3
-  provider: ^5.0.0
-  shared_preferences: ^2.0.7
-  share:
-  flutter_inappwebview: ^5.3.2 # TODO: migrate to latest version
-  liquid_swipe: ^2.1.0
-  cached_network_image: ^3.1.0
+  cupertino_icons: ^1.0.2
+  http: ^0.13.4
+  provider: ^6.0.3
+  share_plus: ^4.0.5
+  shared_preferences: ^2.0.15
+  flutter_inappwebview: ^5.4.3+7
+  liquid_swipe: ^2.1.1
+  cached_network_image: ^3.2.1
   flutter_signin_button: ^2.0.0
-  google_sign_in: ^5.0.7
-  uuid: ^3.0.4
-  google_fonts: ^2.1.0
-  path_provider: ^2.0.2
-  auto_size_text: ^2.1.0
-  settings_ui: ^1.0.0
-  system_settings: ^2.0.0
-  flutter_json_widget: ^1.0.1
-  sentry_flutter: ^5.1.0
-  
-  # Firebase plugins
-  firebase_core: ^1.5.0
-  firebase_analytics: ^8.3.0
-  firebase_auth: ^3.0.2
-  cloud_firestore: ^2.5.0
-  url_launcher: ^6.0.9
-  flutter_facebook_auth: ^3.5.1
+  google_sign_in: ^5.3.2
+  uuid: ^3.0.6
+  google_fonts: ^3.0.1
+  path_provider: ^2.0.10
+  auto_size_text: ^3.0.0
+  settings_ui: ^2.0.2
+  flutter_json_widget: ^1.0.2
+  #sentry_flutter: ^4.0.6
+  firebase_core: ^1.17.1
+  firebase_analytics: ^9.1.9
+  firebase_auth: ^3.3.19
+  cloud_firestore: ^3.1.17
+  url_launcher: ^6.1.2
+  flutter_facebook_auth: ^4.3.4
   google_api_availability: ^3.0.1
-  ionicons: ^0.1.1
-  package_info: ^2.0.2
-  video_player: ^2.1.14
+  ionicons: ^0.1.2
+  video_player: ^2.4.2
+  system_settings: ^2.1.0
+  package_info_plus: ^1.4.2
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_launcher_icons: ^0.9.2
 
-flutter_icons:
-  android: true
-  ios: true
-  image_path_android: "img/icon-round-new-trimmed.png"
-  image_path_ios: "img/icon-full-new.png"
-  adaptive_icon_background: "img/icon-bg-padded.png"
-  adaptive_icon_foreground: "img/icon-fg-new-padded.png"
+  # The "flutter_lints" package below contains a set of recommended lints to
+  # encourage good coding practices. The lint set provided by the package is
+  # activated in the `analysis_options.yaml` file located at the root of your
+  # package. See that file for information about deactivating specific lint
+  # rules and activating additional ones.
+  flutter_lints: ^2.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
-# The following section is specific to Flutter.
+# The following section is specific to Flutter packages.
 flutter:
 
   # The following line ensures that the Material Icons font is
@@ -84,13 +86,11 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - img/
-    - google_fonts/
-    
-  #   - images/a_dot_ham.jpeg
+     - img/
+     - google_fonts/
 
   # An image asset can refer to one or more resolution-specific "variants", see
-  # https://flutter.dev/assets-and-images/#resolution-aware.
+  # https://flutter.dev/assets-and-images/#resolution-aware
 
   # For details regarding adding assets from package dependencies, see
   # https://flutter.dev/assets-and-images/#from-packages

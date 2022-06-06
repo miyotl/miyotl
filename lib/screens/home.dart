@@ -1,7 +1,9 @@
+// @dart=2.9
+
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:lenguas/widgets/empty_state.dart';
+import 'package:miyotl/widgets/empty_state.dart';
 import 'package:provider/provider.dart';
 import 'dictionary.dart';
 import 'learn.dart';

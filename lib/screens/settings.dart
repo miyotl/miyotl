@@ -1,9 +1,11 @@
+// @dart=2.9
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ionicons/ionicons.dart';
-import 'package:lenguas/models/app_state.dart';
-import 'package:lenguas/models/settings.dart';
-import 'package:lenguas/screens/sign_in.dart';
+import 'package:miyotl/models/app_state.dart';
+import 'package:miyotl/models/settings.dart';
+import 'package:miyotl/screens/sign_in.dart';
 import 'package:provider/provider.dart';
 import 'package:settings_ui/settings_ui.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -20,7 +22,7 @@ class SettingsPage extends StatelessWidget {
         ),
       ),
       body: Padding(
-        padding: EdgeInsets.all(8),
+        /*padding: EdgeInsets.all(8),
         child: Consumer2<Settings, UserAccount>(
           builder: (context, settings, account, child) => SettingsList(
             backgroundColor: Colors.transparent,
@@ -188,7 +190,7 @@ class SettingsPage extends StatelessWidget {
             ],
           ),
         ),
-      ),
+      */),
     );
   }
 }

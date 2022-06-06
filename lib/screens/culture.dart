@@ -1,8 +1,10 @@
+// @dart=2.9
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:lenguas/screens/google_doc.dart';
-import 'package:lenguas/widgets/empty_state.dart';
+import 'package:miyotl/screens/google_doc.dart';
+import 'package:miyotl/widgets/empty_state.dart';
 import 'package:provider/provider.dart';
 
 import '../models/app_state.dart';

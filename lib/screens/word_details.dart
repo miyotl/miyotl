@@ -1,9 +1,11 @@
+// @dart=2.9
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../models/app_state.dart';
 import 'variant_details.dart';
-import 'package:share/share.dart';
+import 'package:share_plus/share_plus.dart';
 
 class WordDetails extends StatelessWidget {
   final DictionaryEntry entry;
@@ -13,12 +15,12 @@ class WordDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     AppState state = Provider.of<AppState>(context);
     Source source = state.sources.getSource(entry.sourceId);
-    analytics.logViewItem(
-        itemId:
-            '${state.language}_${entry.translatedWord}_${entry.originalWord}',
-        itemName:
-            '${state.language}: ${entry.translatedWord} / ${entry.originalWord}',
-        itemCategory: 'word');
+    // analytics.logViewItem(
+    //     itemId:
+    //         '${state.language}_${entry.translatedWord}_${entry.originalWord}',
+    //     itemName:
+    //         '${state.language}: ${entry.translatedWord} / ${entry.originalWord}',
+    //     itemCategory: 'word');
     return Scaffold(
       appBar: AppBar(
         title: Text(

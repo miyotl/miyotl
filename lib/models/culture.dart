@@ -1,3 +1,5 @@
+// @dart=2.9
+
 class CultureEntry {
   final String titleOriginal;
   final String titleTranslated;

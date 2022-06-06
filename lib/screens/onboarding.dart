@@ -1,8 +1,10 @@
+// @dart=2.9
+
 import 'package:flutter/material.dart';
-import 'package:lenguas/models/app_state.dart';
-import 'package:lenguas/screens/home.dart';
-import 'package:lenguas/screens/language_select.dart';
-import 'package:lenguas/screens/sign_in.dart';
+import 'package:miyotl/models/app_state.dart';
+import 'package:miyotl/screens/home.dart';
+import 'package:miyotl/screens/language_select.dart';
+import 'package:miyotl/screens/sign_in.dart';
 import 'package:liquid_swipe/liquid_swipe.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
@@ -180,12 +182,12 @@ class _OnboardingPageState extends State<OnboardingPage> {
                         /// TODO: There is no animation, one would be nice, like a round one
                         Provider.of<AppState>(context, listen: false)
                             .setOnboardingStatus(true);
-                        analytics.setUserProperty(
-                            name: 'theme', value: '${ThemeMode.system}');
-                        analytics.setUserProperty(name: 'ux', value: 'android');
-                        analytics.setUserProperty(
-                            name: 'dictionaryMode',
-                            value: '${LookupMode.spanishToLanguage}');
+                        // analytics.setUserProperty(
+                        //     name: 'theme', value: '${ThemeMode.system}');
+                        // analytics.setUserProperty(name: 'ux', value: 'android');
+                        // analytics.setUserProperty(
+                        //     name: 'dictionaryMode',
+                        //     value: '${LookupMode.spanishToLanguage}');
                         Navigator.of(context).pushAndRemoveUntil(
                           MaterialPageRoute(
                             builder: (context) => HomePage(),

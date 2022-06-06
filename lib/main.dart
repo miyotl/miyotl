@@ -1,9 +1,11 @@
+// @dart=2.9
+
 import 'package:firebase_analytics/observer.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:lenguas/screens/conditional_onboarding.dart';
-import 'package:lenguas/screens/settings.dart';
+import 'package:miyotl/screens/conditional_onboarding.dart';
+import 'package:miyotl/screens/settings.dart';
 import 'models/settings.dart';
 import 'screens/home.dart';
 import 'screens/onboarding.dart';
@@ -12,7 +14,9 @@ import 'screens/debug/google_service_check.dart';
 import 'package:provider/provider.dart';
 import 'models/app_state.dart';
 import 'models/constants.dart';
-import 'package:sentry_flutter/sentry_flutter.dart';
+//import 'package:sentry_flutter/sentry_flutter.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
 Future<void> main() async {
   /// Add license entry for Google fonts
@@ -21,14 +25,21 @@ Future<void> main() async {
     yield LicenseEntryWithLineBreaks(['google_fonts'], license);
   });
 
-  /// Run the app, sending exceptions and errors to Sentry
-  SentryFlutter.init(
-    (options) {
-      options.dsn =
-          'https://10b347756b75470d9de103b5fc93392b@o542451.ingest.sentry.io/5662242';
-    },
-    appRunner: () => runApp(App()),
+  /// Initialize Firebase
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  /// Run the app, sending exceptions and errors to Sentry
+  runApp(App());
+  // SentryFlutter.init(
+  //   (options) {
+  //     options.dsn =
+  //         'https://10b347756b75470d9de103b5fc93392b@o542451.ingest.sentry.io/5662242';
+  //   },
+  //   appRunner: () => runApp(App()),
+  // );
 }
 
 class App extends StatelessWidget {
@@ -45,7 +56,7 @@ class App extends StatelessWidget {
         child: Consumer<Settings>(
           builder: (context, settings, child) => MaterialApp(
             navigatorObservers: [
-              FirebaseAnalyticsObserver(analytics: analytics),
+              //FirebaseAnalyticsObserver(analytics: analytics),
             ],
             title: app_name,
             theme: new_light_theme.copyWith(

@@ -1,7 +1,9 @@
+// @dart=2.9
+
 import 'package:flutter/material.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 
-FirebaseAnalytics analytics = FirebaseAnalytics();
+//FirebaseAnalytics analytics = FirebaseAnalytics();
 
 const String dictionary_url = 'https://proyecto-miyotl.web.app/data.json';
 const String last_update_url = 'https://proyecto-miyotl.web.app/upd.txt';

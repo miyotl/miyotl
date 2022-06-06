@@ -1,6 +1,8 @@
+// @dart=2.9
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:lenguas/models/app_state.dart';
+import 'package:miyotl/models/app_state.dart';
 import 'package:provider/provider.dart';
 import 'home.dart';
 import 'onboarding.dart';

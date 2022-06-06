@@ -1,7 +1,9 @@
+// @dart=2.9
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:lenguas/models/app_state.dart';
-import 'package:lenguas/widgets/status_bar_colors.dart';
+import 'package:miyotl/models/app_state.dart';
+import 'package:miyotl/widgets/status_bar_colors.dart';
 import 'package:provider/provider.dart';
 
 typedef LanguageSelectFunction = void Function(String);
@@ -67,8 +69,8 @@ class LanguageSelectPage extends StatelessWidget {
                                 ),
                                 onTap: () {
                                   /// Save onboarding finished and language
-                                  analytics.setUserProperty(
-                                      name: 'language', value: language.name);
+                                  // analytics.setUserProperty(
+                                  //     name: 'language', value: language.name);
                                   state.changeLanguage(language.name);
                                   state.setDefaultLanguage(state.language);
                                   if (onLanguageSelect != null) {

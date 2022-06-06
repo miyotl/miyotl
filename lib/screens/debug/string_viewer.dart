@@ -1,3 +1,5 @@
+// @dart=2.9
+
 import 'package:flutter/material.dart';
 import 'package:flutter_json_widget/flutter_json_widget.dart';
 import 'package:google_fonts/google_fonts.dart';

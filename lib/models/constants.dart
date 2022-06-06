@@ -79,7 +79,7 @@ ThemeData dark_theme = ThemeData(
 
 ThemeData new_light_theme = ThemeData(
   visualDensity: VisualDensity.adaptivePlatformDensity,
-  primarySwatch: Colors.indigo,
+  primarySwatch: Colors.pink,
   primaryColor: AppColors.rosa,
   accentColor: AppColors.azulMorado,
   bottomNavigationBarTheme: BottomNavigationBarThemeData(
@@ -87,10 +87,6 @@ ThemeData new_light_theme = ThemeData(
     // backgroundColor: AppColors.amarillo,
   ),
 
-  /// Workaround https://github.com/flutter/flutter/issues/72562 by manually specifying the brightness
-  appBarTheme: AppBarTheme(
-    brightness: Brightness.dark,
-  ),
   selectedRowColor: AppColors.rosa,
   textSelectionColor: AppColors.rosa,
 );
@@ -104,5 +100,4 @@ ThemeData new_light_theme = ThemeData(
 //   ),
 //   selectedRowColor: AppColors.lightPink,
 //   textSelectionColor: AppColors.lightPink,
-// TextSelectionThemeData.selectionColor: AppColors.rosa,
 // );

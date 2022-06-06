@@ -151,7 +151,8 @@ class AppDrawer extends StatelessWidget {
                   showAboutDialog(
                     context: context,
                     applicationIcon: CircleAvatar(
-                      backgroundImage: AssetImage('img/icon-full-new.png'),
+                      /// TODO: use icon-new-full.png, but https://docs.flutter.dev/development/ui/assets-and-images#resolution-aware does not seem to work anymore?
+                      backgroundImage: AssetImage('img/icon-round-new-outline.png'),
                       backgroundColor: Colors.white,
                     ),
                     applicationLegalese: 'Con amor desde Chapingo ❤️',
@@ -159,7 +160,7 @@ class AppDrawer extends StatelessWidget {
 // Código: Gabriel Rodríguez
 // Dibujos y CMO: Camila Varela
 // Con amor desde Chapingo ❤️''',
-                    applicationVersion: 'versión inicial (beta)',
+                    applicationVersion: 'versión inicial',
                     children: [
                       ListTile(
                         leading: Icon(Icons.people),

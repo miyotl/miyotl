@@ -73,6 +73,7 @@ ThemeData dark_theme = ThemeData(
     ),
     titleTextStyle: TextStyle(
       color: AppColors.darkBlue,
+
       /// TODO: figure out what's going on -- if size is not specified text becomes smaller
       fontSize: 18,
     ),
@@ -93,7 +94,6 @@ ThemeData new_light_theme = ThemeData(
     // backgroundColor: AppColors.amarillo,
   ),
   selectedRowColor: AppColors.rosa,
-  textSelectionColor: AppColors.rosa,
 );
 // ThemeData light_theme = ThemeData(
 //   visualDensity: VisualDensity.adaptivePlatformDensity,

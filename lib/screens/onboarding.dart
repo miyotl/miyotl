@@ -169,8 +169,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                       ),
                     ),
                     SizedBox(height: 16),
-                    RaisedButton(
-                      color: AppColors.morado,
+                    ElevatedButton(
                       child: Text(
                         'Comenzar',
                         style: Theme.of(context)

@@ -29,9 +29,8 @@ class SettingsPage extends StatelessWidget {
         padding: const EdgeInsets.all(8),
         child: Consumer2<Settings, UserAccount>(
           builder: (context, settings, account, child) => SettingsList(
-            darkTheme: SettingsThemeData(
-              settingsListBackground: AppColors.darkBlue
-            ),
+            darkTheme:
+                SettingsThemeData(settingsListBackground: AppColors.darkBlue),
             sections: [
               SettingsSection(
                 title: const Text('Apariencia'),
@@ -153,7 +152,7 @@ class SettingsPage extends StatelessWidget {
               SettingsSection(
                 title: const Text('Varios'),
                 tiles: [
-                  SettingsTile(
+                  SettingsTile.navigation(
                     title: const Text('Notificaciones'),
                     leading: const Icon(Icons.notifications),
                     onPressed: (context) {
@@ -199,7 +198,7 @@ class SettingsPage extends StatelessWidget {
                       );
                     },
                   ),
-                  SettingsTile(
+                  SettingsTile.navigation(
                     title: const Text('Opciones avanzadas y diagnósticos'),
                     leading: const Icon(Icons.bug_report),
                     onPressed: (context) {

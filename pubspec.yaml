@@ -48,7 +48,7 @@ dependencies:
   path_provider: ^2.0.10
   auto_size_text: ^3.0.0
   settings_ui: ^2.0.2
-  flutter_json_widget: ^1.0.2
+  flutter_json_viewer: ^1.0.1
   #sentry_flutter: ^4.0.6
   firebase_core: ^1.17.1
   firebase_analytics: ^9.1.9

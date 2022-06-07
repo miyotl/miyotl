@@ -1,7 +1,7 @@
 // @dart=2.9
 
 import 'package:flutter/material.dart';
-import 'package:flutter_json_widget/flutter_json_widget.dart';
+import 'package:flutter_json_viewer/flutter_json_viewer.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class StringViewerPage extends StatelessWidget {
@@ -36,7 +36,7 @@ class JsonViewerPage extends StatelessWidget {
         title: Text('$title', style: GoogleFonts.fredokaOne()),
       ),
       body: SingleChildScrollView(
-        child: JsonViewerWidget(json),
+        child: JsonViewer(json),
       ),
     );
   }

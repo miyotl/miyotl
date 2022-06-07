@@ -19,7 +19,7 @@ class SignInPage extends StatelessWidget {
 
   final Future<FirebaseApp> _initialization = Firebase.initializeApp();
 
-  SignInPage({@required this.onSignIn});
+  SignInPage({Key key, @required this.onSignIn}) : super(key: key);
 
   void doSignIn(BuildContext context, SignInFunction signInFunction) async {
     /// Log out first
@@ -34,15 +34,15 @@ class SignInPage extends StatelessWidget {
         showDialog(
           context: context,
           builder: (context) => AlertDialog(
-            title: Text(
+            title: const Text(
               'Cancelaste el inicio de sesión',
             ),
-            content: Text(
+            content: const Text(
               'No especificaste ninguna cuenta para iniciar sesión; vuelve a intentarlo.',
             ),
             actions: [
               TextButton(
-                child: Text('De acuerdo'),
+                child: const Text('De acuerdo'),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
@@ -60,13 +60,13 @@ class SignInPage extends StatelessWidget {
           showDialog(
             context: context,
             builder: (context) => AlertDialog(
-              title: Text('Inicio de sesión fallido'),
-              content: Text(
+              title: const Text('Inicio de sesión fallido'),
+              content: const Text(
                 'Falló el inicio de sesión. Intenta otra vez, o utiliza otra de las opciones para iniciar sesión.',
               ),
               actions: [
                 TextButton(
-                  child: Text('De acuerdo'),
+                  child: const Text('De acuerdo'),
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
@@ -78,7 +78,7 @@ class SignInPage extends StatelessWidget {
         case 'api-not-available':
           showDialog(
             context: context,
-            builder: (context) => AlertDialog(
+            builder: (context) => const AlertDialog(
               title: Text('No tienes servicios de Google'),
               content: Text(
                 'Tu teléfono no cuenta con los servicios de Google, por lo que no puedes utilizar este método de inicio de sesión. Selecciona Facebook para poder iniciar sesión.',
@@ -124,14 +124,14 @@ class SignInPage extends StatelessWidget {
                                 ),
                                 textAlign: TextAlign.center,
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 8,
                               ),
                               RichText(
                                 text: TextSpan(
                                   style: Theme.of(context).textTheme.caption,
                                   children: [
-                                    TextSpan(
+                                    const TextSpan(
                                       text: 'Al iniciar sesión aceptas ',
                                     ),
 
@@ -139,7 +139,7 @@ class SignInPage extends StatelessWidget {
                                     TextSpan(
                                       text:
                                           'nuestros términos y condiciones y política de privacidad',
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         color: Colors.blue,
                                         fontWeight: FontWeight.bold,
                                       ),
@@ -149,7 +149,7 @@ class SignInPage extends StatelessWidget {
                                               mode: LaunchMode.inAppWebView,
                                             ),
                                     ),
-                                    TextSpan(
+                                    const TextSpan(
                                         text:
                                             ', y aceptas recibir correos electrónicos con actualizaciones sobre el proyecto.'),
                                   ],
@@ -184,19 +184,19 @@ class SignInPage extends StatelessWidget {
                           showDialog(
                             context: context,
                             builder: (context) => AlertDialog(
-                              title: Text('Pregunta'),
-                              content: Text(
+                              title: const Text('Pregunta'),
+                              content: const Text(
                                   '¿Estás seguro que quieres iniciar sesión como invitado? No podremos enviarte correos con actualizaciones sobre el proyecto.'),
                               actions: [
                                 TextButton(
-                                  child: Text('Sí, estoy seguro'),
+                                  child: const Text('Sí, estoy seguro'),
                                   onPressed: () {
                                     Navigator.of(context).pop();
                                     doSignIn(context, SignInMethods.anonymous);
                                   },
                                 ),
                                 TextButton(
-                                  child: Text('No, prefiero iniciar sesión'),
+                                  child: const Text('No, prefiero iniciar sesión'),
                                   onPressed: () {
                                     Navigator.of(context).pop();
                                   },
@@ -209,7 +209,7 @@ class SignInPage extends StatelessWidget {
                     ],
                   );
                 }
-                return Center(
+                return const Center(
                   child: CircularProgressIndicator(),
                 );
               },

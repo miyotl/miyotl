@@ -61,6 +61,8 @@ dependencies:
   video_player: ^2.4.2
   system_settings: ^2.1.0
   package_info_plus: ^1.4.2
+  the_apple_sign_in: ^1.1.1
+  sign_in_with_apple: ^4.0.0
 
 dev_dependencies:
   flutter_test:

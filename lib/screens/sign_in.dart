@@ -145,7 +145,8 @@ class SignInPage extends StatelessWidget {
                                       ),
                                       recognizer: TapGestureRecognizer()
                                         ..onTap = () => launchUrl(
-                                              Uri.parse('https://proyecto-miyotl.web.app/privacidad/'),
+                                              Uri.parse(
+                                                  'https://proyecto-miyotl.web.app/privacidad/'),
                                               mode: LaunchMode.inAppWebView,
                                             ),
                                     ),
@@ -161,21 +162,32 @@ class SignInPage extends StatelessWidget {
                         ),
                       ),
                       Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16),
-                          child: SignInButton(
-                            Buttons.Google,
-                            text: 'Inicia sesión con Google',
-                            onPressed: () =>
-                                doSignIn(context, SignInMethods.google),
-                          )),
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        child: SignInButton(
+                          Buttons.Apple,
+                          text: 'Inicia sesión con Apple',
+                          onPressed: () =>
+                              doSignIn(context, SignInMethods.apple),
+                        ),
+                      ),
                       Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16),
-                          child: SignInButton(
-                            Buttons.Facebook,
-                            text: 'Inicia sesión con Facebook',
-                            onPressed: () =>
-                                doSignIn(context, SignInMethods.facebook),
-                          )),
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        child: SignInButton(
+                          Buttons.Google,
+                          text: 'Inicia sesión con Google',
+                          onPressed: () =>
+                              doSignIn(context, SignInMethods.google),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        child: SignInButton(
+                          Buttons.Facebook,
+                          text: 'Inicia sesión con Facebook',
+                          onPressed: () =>
+                              doSignIn(context, SignInMethods.facebook),
+                        ),
+                      ),
                       SignInButtonBuilder(
                         text: 'Ingresa como invitado',
                         icon: Icons.face,
@@ -196,7 +208,8 @@ class SignInPage extends StatelessWidget {
                                   },
                                 ),
                                 TextButton(
-                                  child: const Text('No, prefiero iniciar sesión'),
+                                  child:
+                                      const Text('No, prefiero iniciar sesión'),
                                   onPressed: () {
                                     Navigator.of(context).pop();
                                   },

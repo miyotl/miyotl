@@ -56,6 +56,8 @@ class Settings extends ChangeNotifier {
     });
   }
 
+  /// TODO: flutter_platform_widgets + Platform.isIOS + settings provider, make all consistent...
+
   bool _useIOSStyle = Platform.isIOS;
 
   bool get useIOSStyle => _useIOSStyle;

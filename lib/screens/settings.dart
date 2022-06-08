@@ -2,6 +2,7 @@
 
 import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ionicons/ionicons.dart';
@@ -12,6 +13,7 @@ import 'package:provider/provider.dart';
 import 'package:settings_ui/settings_ui.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:system_settings/system_settings.dart';
+import 'package:cupertino_icons/cupertino_icons.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({Key key}) : super(key: key);
@@ -38,7 +40,9 @@ class SettingsPage extends StatelessWidget {
                   SettingsTile(
                     title: const Text('Tema'),
                     value: Text(settings.theme.string()),
-                    leading: const Icon(Icons.lightbulb),
+                    leading: Icon(settings.useIOSStyle
+                        ? CupertinoIcons.lightbulb_fill
+                        : Icons.lightbulb),
                     onPressed: (BuildContext context) {
                       showDialog(
                         context: context,
@@ -125,7 +129,9 @@ class SettingsPage extends StatelessWidget {
                                 ? account.displayName
                                 : 'Iniciaste sesión como ${account.displayName}',
                         overflow: TextOverflow.fade),
-                    leading: const Icon(Icons.switch_account),
+                    leading: Icon(settings.useIOSStyle
+                        ? CupertinoIcons.person_alt_circle
+                        : Icons.switch_account),
                     onPressed: (context) {
                       // analytics.logEvent(name: 'switch-user');
                       Navigator.of(context).push(
@@ -141,7 +147,9 @@ class SettingsPage extends StatelessWidget {
                   ),
                   SettingsTile(
                     title: const Text('Cerrar sesión'),
-                    leading: const Icon(Icons.logout),
+                    leading: Icon(settings.useIOSStyle
+                        ? CupertinoIcons.person_crop_circle_badge_xmark
+                        : Icons.logout),
                     onPressed: (context) {
                       // analytics.logEvent(name: 'log-out');
                       account.logOut();
@@ -154,7 +162,9 @@ class SettingsPage extends StatelessWidget {
                 tiles: [
                   SettingsTile.navigation(
                     title: const Text('Notificaciones'),
-                    leading: const Icon(Icons.notifications),
+                    leading: Icon(settings.useIOSStyle
+                        ? CupertinoIcons.bell_solid
+                        : Icons.notifications),
                     onPressed: (context) {
                       // analytics.logEvent(name: 'open-notification-settings');
                       SystemSettings.appNotifications();
@@ -162,7 +172,9 @@ class SettingsPage extends StatelessWidget {
                   ),
                   SettingsTile(
                     title: const Text('Términos y condiciones'),
-                    leading: const Icon(Icons.description),
+                    leading: Icon(settings.useIOSStyle
+                        ? CupertinoIcons.square_favorites_alt_fill
+                        : Icons.description),
                     onPressed: (context) {
                       // analytics.logEvent(
                       //     name: 'view-terms',
@@ -175,7 +187,9 @@ class SettingsPage extends StatelessWidget {
                   ),
                   SettingsTile(
                       title: const Text('Política de privacidad'),
-                      leading: const Icon(Icons.privacy_tip),
+                      leading: Icon(settings.useIOSStyle
+                          ? CupertinoIcons.shield_lefthalf_fill
+                          : Icons.privacy_tip),
                       onPressed: (context) {
                         // analytics.logEvent(
                         //     name: 'view-privacy',
@@ -188,7 +202,9 @@ class SettingsPage extends StatelessWidget {
                       }),
                   SettingsTile(
                     title: const Text('Enviar retroalimentación'),
-                    leading: const Icon(Icons.feedback),
+                    leading: Icon(settings.useIOSStyle
+                        ? CupertinoIcons.exclamationmark_bubble_fill
+                        : Icons.feedback),
                     onPressed: (context) {
                       // analytics.logEvent(
                       //     name: 'contact', parameters: {'source': 'settings'});
@@ -200,7 +216,9 @@ class SettingsPage extends StatelessWidget {
                   ),
                   SettingsTile.navigation(
                     title: const Text('Opciones avanzadas y diagnósticos'),
-                    leading: const Icon(Icons.bug_report),
+                    leading: Icon(settings.useIOSStyle
+                        ? CupertinoIcons.ant_fill
+                        : Icons.bug_report),
                     onPressed: (context) {
                       // analytics.logEvent(name: 'open-developer-menu');
                       Navigator.of(context).pushNamed('/debug');

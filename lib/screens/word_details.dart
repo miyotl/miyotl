@@ -1,6 +1,7 @@
 // @dart=2.9
 
 import 'package:flutter/material.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../models/app_state.dart';
@@ -29,7 +30,7 @@ class WordDetails extends StatelessWidget {
         ),
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.share),
+            icon: Icon(PlatformIcons(context).share),
             tooltip: 'Compartir',
             onPressed: () {
               Share.share('''*${entry.originalWord} (en ${state.language})*

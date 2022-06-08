@@ -2,7 +2,9 @@
 
 import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:miyotl/screens/language_select.dart';
 import 'package:provider/provider.dart';
@@ -11,6 +13,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:miyotl/models/constants.dart';
+import 'package:cupertino_icons/cupertino_icons.dart';
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({
@@ -46,7 +49,8 @@ class AppDrawer extends StatelessWidget {
                 },
               ),
               ListTile(
-                leading: Icon(Icons.language),
+                leading: Icon(
+                    Platform.isIOS ? CupertinoIcons.globe : Icons.language),
                 title: Text('Cambiar idioma'),
                 onTap: () {
                   Navigator.of(context).push(MaterialPageRoute(
@@ -64,7 +68,8 @@ class AppDrawer extends StatelessWidget {
               ),
               Consumer<AppState>(
                 builder: (context, state, widget) => ListTile(
-                  leading: Icon(Icons.update),
+                  leading: Icon(
+                      Platform.isIOS ? CupertinoIcons.refresh : Icons.update),
                   title: Text('Actualizar base de datos'),
                   subtitle: FutureBuilder(
                     future: state.lastUpdate,
@@ -115,7 +120,7 @@ class AppDrawer extends StatelessWidget {
                 ),
               ),
               ListTile(
-                leading: Icon(Icons.settings),
+                leading: Icon(PlatformIcons(context).settings),
                 title: Text('Ajustes'),
                 onTap: () {
                   // analytics.logEvent(name: 'open-settings');
@@ -123,7 +128,7 @@ class AppDrawer extends StatelessWidget {
                 },
               ),
               ListTile(
-                leading: Icon(Icons.share),
+                leading: Icon(PlatformIcons(context).share),
                 title: Text('Compartir aplicación'),
                 onTap: () {
                   // analytics.logShare(
@@ -133,18 +138,21 @@ class AppDrawer extends StatelessWidget {
                 },
               ),
               ListTile(
-                leading: Icon(Icons.feedback),
+                leading: Icon(Platform.isIOS
+                    ? CupertinoIcons.exclamationmark_bubble
+                    : Icons.feedback),
                 title: Text('Enviar retroalimentación'),
                 onTap: () {
                   // analytics.logEvent(
                   //     name: 'contact', parameters: {'source': 'drawer'});
                   launchUrl(
-                    Uri.parse('mailto:miyotl@googlegroups.com?subject=Retroalimentación sobre app'),
+                    Uri.parse(
+                        'mailto:miyotl@googlegroups.com?subject=Retroalimentación sobre app'),
                   );
                 },
               ),
               ListTile(
-                leading: Icon(Icons.info),
+                leading: Icon(PlatformIcons(context).info),
                 title: Text('Acerca de'),
                 onTap: () {
                   // analytics.logEvent(name: 'open-about');
@@ -167,7 +175,8 @@ class AppDrawer extends StatelessWidget {
                         onTap: () {
                           // analytics.logEvent(name: 'view-credits');
                           launchUrl(
-                            Uri.parse('https://proyecto-miyotl.web.app/acerca_de'),
+                            Uri.parse(
+                                'https://proyecto-miyotl.web.app/acerca_de'),
                             mode: LaunchMode.inAppWebView,
                           );
                         },
@@ -194,7 +203,8 @@ class AppDrawer extends StatelessWidget {
                         onTap: () {
                           // analytics.logEvent(
                           //     name: 'contact', parameters: {'source': 'about'});
-                          launchUrl(Uri.parse('mailto:miyotl@googlegroups.com'));
+                          launchUrl(
+                              Uri.parse('mailto:miyotl@googlegroups.com'));
                         },
                       ),
                       ListTile(
@@ -202,7 +212,8 @@ class AppDrawer extends StatelessWidget {
                         title: Text('Colabora en GitHub'),
                         onTap: () {
                           // analytics.logEvent(name: 'view-github');
-                          launchUrl(Uri.parse('https://github.com/miyotl/miyotl'));
+                          launchUrl(
+                              Uri.parse('https://github.com/miyotl/miyotl'));
                         },
                       ),
                     ],

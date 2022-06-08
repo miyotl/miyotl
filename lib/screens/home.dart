@@ -2,6 +2,7 @@
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:miyotl/widgets/empty_state.dart';
 import 'package:provider/provider.dart';
@@ -53,7 +54,7 @@ class _HomePageState extends State<HomePage> {
                 actions: <Widget>[
                   if (page == 1) ...[
                     IconButton(
-                      icon: Icon(Icons.search),
+                      icon: Icon(PlatformIcons(context).search),
                       onPressed: () {
                         showSearch(
                           context: context,

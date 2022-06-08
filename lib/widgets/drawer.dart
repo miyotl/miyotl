@@ -14,6 +14,7 @@ import 'package:share_plus/share_plus.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:miyotl/models/constants.dart';
 import 'package:cupertino_icons/cupertino_icons.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({
@@ -38,23 +39,22 @@ class AppDrawer extends StatelessWidget {
                     ),
                     accountEmail: Text('${account.email ?? ''}'),
                     currentAccountPicture: CircleAvatar(
-                      backgroundImage: account.profilePic,
+                      foregroundImage: account.profilePic,
                       // TODO: edit Theme directly for this and don't hardcode
                       backgroundColor:
                           Theme.of(context).brightness == Brightness.light
                               ? null
                               : AppColors.rosa, // pick better color?
-                      child: account.profilePic != null
-                          ? null
-                          : Text(
-                              '${account?.displayName?.split(' ')?.elementAt(0)[0] ?? ''}${account?.displayName?.split(' ')?.elementAt(1)[0] ?? ''}',
+                      child: AutoSizeText(
+                        account.getInitials(),
 
-                              /// TODO: make it nicer-looking, probably like the Apple one
-                              style: GoogleFonts.fredokaOne(
-                                color: Colors.white,
-                                fontSize: 30,
-                              ),
-                            ),
+                        /// TODO: make it nicer-looking, probably like the Apple one
+                        style: GoogleFonts.fredokaOne(
+                          color: Colors.white,
+                          fontSize: 30,
+                        ),
+                        wrapWords: false,
+                      ),
                     ),
                     decoration: BoxDecoration(
                       color: Theme.of(context).brightness == Brightness.dark

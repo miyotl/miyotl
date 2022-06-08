@@ -73,6 +73,16 @@ class UserAccount extends ChangeNotifier {
     }
   }
 
+  /// Returns initials for display on profile picture
+  /// For instance if displayName is 'Gabriel Rodríguez' it returns 'GR'
+  /// or if displayName is 'José de Jesús' it returns 'JdJ'
+  String getInitials() {
+    return (displayName ?? '')
+        .split(' ')
+        .map((name) => name.isEmpty ? '' : name[0])
+        .join();
+  }
+
   Future<String> getDebugAccountDetails() async {
     var isLogged = await FacebookAuth.instance.accessToken;
     if (isLogged == null) {

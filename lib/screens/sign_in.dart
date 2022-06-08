@@ -1,5 +1,6 @@
 // @dart=2.9
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
@@ -14,6 +15,7 @@ import 'package:miyotl/screens/onboarding.dart';
 import 'package:miyotl/widgets/status_bar_colors.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SignInPage extends StatelessWidget {
   final VoidCallback onSignIn;
@@ -42,7 +44,7 @@ class SignInPage extends StatelessWidget {
               'No especificaste ninguna cuenta para iniciar sesión; vuelve a intentarlo.',
             ),
             actions: [
-              PlatformTextButton(
+              PlatformDialogAction(
                 child: const Text('De acuerdo'),
                 onPressed: () {
                   Navigator.of(context).pop();
@@ -66,7 +68,7 @@ class SignInPage extends StatelessWidget {
                 'Falló el inicio de sesión. Intenta otra vez, o utiliza otra de las opciones para iniciar sesión.',
               ),
               actions: [
-                PlatformTextButton(
+                PlatformDialogAction(
                   child: const Text('De acuerdo'),
                   onPressed: () {
                     Navigator.of(context).pop();
@@ -87,9 +89,56 @@ class SignInPage extends StatelessWidget {
             ),
           );
           break;
+        // case 'account-exists-with-different-credential':
+        //   showPlatformDialog(
+        //     context: context,
+        //     builder: (context) => PlatformAlertDialog(
+        //       title: const Text('Ya tienes una cuenta'),
+        //       content: const Text(
+        //           'Ya tienes una cuenta con tu correo electrónico registrada en otro método de inicio de sesión. Intenta con otro método de inicio de sesión. (Próximamente se vincularán automáticamente...)'),
+        //     ),
+        //   );
+        //   break;
+        default:
+          showPlatformDialog(
+            context: context,
+            builder: (context) => PlatformAlertDialog(
+              title: Text(e.code),
+              content: Text(e.message),
+            ),
+          );
+          rethrow;
+      }
+    } on FirebaseAuthException catch (e) {
+      switch (e.code) {
+
+        /// TODO: link accounts.
+        case 'account-exists-with-different-credential':
+          // Pretend nothing happened
+          await UserAccount.instance.cacheUserAccount();
+          onSignIn();
+          break;
         default:
           rethrow;
       }
+    } on Exception catch (e) {
+      showPlatformDialog(
+        context: context,
+        builder: (context) => PlatformAlertDialog(
+          title: const Text('Error desconocido'),
+          content: Text(e.toString()),
+          actions: [
+            PlatformDialogAction(
+              child: const Text('Reportar error'),
+              onPressed: () {
+                launchUrl(Uri.parse(
+                    'mailto:miyotl@googlegroups.com?subject=Error al iniciar sesión&body=$e'));
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        ),
+      );
     }
   }
 
@@ -201,14 +250,14 @@ class SignInPage extends StatelessWidget {
                               content: const Text(
                                   '¿Estás seguro que quieres iniciar sesión como invitado? No podremos enviarte correos con actualizaciones sobre el proyecto.'),
                               actions: [
-                                PlatformTextButton(
+                                PlatformDialogAction(
                                   child: const Text('Sí, estoy seguro'),
                                   onPressed: () {
                                     Navigator.of(context).pop();
                                     doSignIn(context, SignInMethods.anonymous);
                                   },
                                 ),
-                                PlatformTextButton(
+                                PlatformDialogAction(
                                   child:
                                       const Text('No, prefiero iniciar sesión'),
                                   onPressed: () {

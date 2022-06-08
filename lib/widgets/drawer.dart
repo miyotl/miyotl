@@ -94,7 +94,7 @@ class AppDrawer extends StatelessWidget {
                             content: const Text(
                                 'No se pudo intentar actualizar la base de datos porque no tienes conexión a internet.'),
                             actions: [
-                              PlatformTextButton(
+                              PlatformDialogAction(
                                 child: PlatformText('De acuerdo'),
                                 onPressed: () {
                                   Navigator.of(context).pop();
@@ -108,10 +108,19 @@ class AppDrawer extends StatelessWidget {
                       showDialog(
                         context: context,
                         builder: (context) {
-                          return AlertDialog(
-                            title: Text('Error desconocido'),
-                            content: Text(
-                                'Ocurrió un error desconocido. Por favor toma captura de pantalla y mándala a miyotl@googlegroups.com. El error es $e'),
+                          return PlatformAlertDialog(
+                            title: const Text('Error desconocido'),
+                            content: Text(e.toString()),
+                            actions: [
+                              PlatformDialogAction(
+                                child: const Text('Reportar error'),
+                                onPressed: () {
+                                  launchUrl(Uri.parse(
+                                      'mailto:miyotl@googlegroups.com?subject=Error al actualizar base de datos&body=$e'));
+                                  Navigator.of(context).pop();
+                                },
+                              ),
+                            ],
                           );
                         },
                       );

@@ -13,6 +13,7 @@ import 'package:miyotl/models/sign_in.dart';
 import 'package:miyotl/models/user_account.dart';
 import 'package:miyotl/screens/onboarding.dart';
 import 'package:miyotl/widgets/status_bar_colors.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -108,6 +109,34 @@ class SignInPage extends StatelessWidget {
           await UserAccount.instance.cacheUserAccount();
           onSignIn();
           break;
+        default:
+          rethrow;
+      }
+    } on SignInWithAppleAuthorizationException catch (e) {
+      switch (e.code) {
+        case AuthorizationErrorCode.canceled:
+          showPlatformDialog(
+            context: context,
+            builder: (context) => PlatformAlertDialog(
+              title: const Text(
+                'Cancelaste el inicio de sesión de Apple',
+              ),
+              content: const Text(
+                'No especificaste ninguna cuenta para iniciar sesión; vuelve a intentarlo.',
+              ),
+              actions: [
+                PlatformDialogAction(
+                  child: const Text('De acuerdo'),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            ),
+          );
+          break;
+
+        // TODO: handle the rest of cases?
         default:
           rethrow;
       }

@@ -86,16 +86,16 @@ class AppDrawer extends StatelessWidget {
                     try {
                       await state.updateLanguageData();
                     } on SocketException {
-                      showDialog(
+                      showPlatformDialog(
                         context: context,
                         builder: (context) {
-                          return AlertDialog(
-                            title: Text('No tienes internet'),
-                            content: Text(
+                          return PlatformAlertDialog(
+                            title: const Text('No tienes internet'),
+                            content: const Text(
                                 'No se pudo intentar actualizar la base de datos porque no tienes conexión a internet.'),
                             actions: [
-                              TextButton(
-                                child: Text('DE ACUERDO'),
+                              PlatformTextButton(
+                                child: PlatformText('De acuerdo'),
                                 onPressed: () {
                                   Navigator.of(context).pop();
                                 },

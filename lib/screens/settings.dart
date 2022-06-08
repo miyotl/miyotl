@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:miyotl/models/app_state.dart';
@@ -44,25 +45,31 @@ class SettingsPage extends StatelessWidget {
                         ? CupertinoIcons.lightbulb_fill
                         : Icons.lightbulb),
                     onPressed: (BuildContext context) {
-                      showDialog(
+                      showPlatformDialog(
                         context: context,
-                        builder: (context) => SimpleDialog(
+                        builder: (context) => PlatformAlertDialog(
                           title: const Text('Tema'),
-                          children: [
-                            for (var value in ThemeMode.values)
-                              RadioListTile<ThemeMode>(
-                                title: Text(value.string()),
-                                value: value,
-                                groupValue: settings.theme,
-                                onChanged: (value) {
-                                  settings.theme = value;
-                                  // analytics.setUserProperty(
-                                  //     name: 'theme',
-                                  //     value: '${settings.theme}');
-                                  Navigator.of(context).pop();
-                                },
-                              ),
-                          ],
+                          content: Material(
+                            color: Colors.transparent,
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                for (var value in ThemeMode.values)
+                                  RadioListTile<ThemeMode>(
+                                    title: Text(value.string()),
+                                    value: value,
+                                    groupValue: settings.theme,
+                                    onChanged: (value) {
+                                      settings.theme = value;
+                                      // analytics.setUserProperty(
+                                      //     name: 'theme',
+                                      //     value: '${settings.theme}');
+                                      Navigator.of(context).pop();
+                                    },
+                                  ),
+                              ],
+                            ),
+                          ),
                         ),
                       );
                     },
@@ -78,34 +85,40 @@ class SettingsPage extends StatelessWidget {
                             ? Ionicons.logo_apple
                             : Icons.android,
                       ),
-                      onPressed: (context) => showDialog(
+                      onPressed: (context) => showPlatformDialog(
                         context: context,
-                        builder: (context) => SimpleDialog(
+                        builder: (context) => PlatformAlertDialog(
                           title: const Text('Estilo'),
-                          children: [
-                            RadioListTile<bool>(
-                              title: const Text('iOS'),
-                              value: true,
-                              groupValue: settings.useIOSStyle,
-                              onChanged: (value) {
-                                // analytics.setUserProperty(
-                                //     name: 'ux', value: 'ios');
-                                settings.useIOSStyle = value;
-                                Navigator.of(context).pop();
-                              },
+                          content: Material(
+                            color: Colors.transparent,
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                RadioListTile<bool>(
+                                  title: const Text('iOS'),
+                                  value: true,
+                                  groupValue: settings.useIOSStyle,
+                                  onChanged: (value) {
+                                    // analytics.setUserProperty(
+                                    //     name: 'ux', value: 'ios');
+                                    settings.useIOSStyle = value;
+                                    Navigator.of(context).pop();
+                                  },
+                                ),
+                                RadioListTile<bool>(
+                                  title: const Text('Android'),
+                                  value: false,
+                                  groupValue: settings.useIOSStyle,
+                                  onChanged: (value) {
+                                    // analytics.setUserProperty(
+                                    //     name: 'ux', value: 'android');
+                                    settings.useIOSStyle = value;
+                                    Navigator.of(context).pop();
+                                  },
+                                ),
+                              ],
                             ),
-                            RadioListTile<bool>(
-                              title: const Text('Android'),
-                              value: false,
-                              groupValue: settings.useIOSStyle,
-                              onChanged: (value) {
-                                // analytics.setUserProperty(
-                                //     name: 'ux', value: 'android');
-                                settings.useIOSStyle = value;
-                                Navigator.of(context).pop();
-                              },
-                            ),
-                          ],
+                          ),
                         ),
                       ),
                     ),

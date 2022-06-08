@@ -13,6 +13,7 @@ import 'package:miyotl/models/user_account.dart';
 import 'package:miyotl/screens/onboarding.dart';
 import 'package:miyotl/widgets/status_bar_colors.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class SignInPage extends StatelessWidget {
   final VoidCallback onSignIn;
@@ -31,9 +32,9 @@ class SignInPage extends StatelessWidget {
     try {
       var credential = await signInFunction();
       if (credential == null) {
-        showDialog(
+        showPlatformDialog(
           context: context,
-          builder: (context) => AlertDialog(
+          builder: (context) => PlatformAlertDialog(
             title: const Text(
               'Cancelaste el inicio de sesión',
             ),
@@ -41,7 +42,7 @@ class SignInPage extends StatelessWidget {
               'No especificaste ninguna cuenta para iniciar sesión; vuelve a intentarlo.',
             ),
             actions: [
-              TextButton(
+              PlatformTextButton(
                 child: const Text('De acuerdo'),
                 onPressed: () {
                   Navigator.of(context).pop();
@@ -57,15 +58,15 @@ class SignInPage extends StatelessWidget {
     } on PlatformException catch (e) {
       switch (e.code) {
         case 'sign_in_failed':
-          showDialog(
+          showPlatformDialog(
             context: context,
-            builder: (context) => AlertDialog(
+            builder: (context) => PlatformAlertDialog(
               title: const Text('Inicio de sesión fallido'),
               content: const Text(
                 'Falló el inicio de sesión. Intenta otra vez, o utiliza otra de las opciones para iniciar sesión.',
               ),
               actions: [
-                TextButton(
+                PlatformTextButton(
                   child: const Text('De acuerdo'),
                   onPressed: () {
                     Navigator.of(context).pop();
@@ -76,11 +77,11 @@ class SignInPage extends StatelessWidget {
           );
           break;
         case 'api-not-available':
-          showDialog(
+          showPlatformDialog(
             context: context,
-            builder: (context) => const AlertDialog(
-              title: Text('No tienes servicios de Google'),
-              content: Text(
+            builder: (context) => PlatformAlertDialog(
+              title: const Text('No tienes servicios de Google'),
+              content: const Text(
                 'Tu teléfono no cuenta con los servicios de Google, por lo que no puedes utilizar este método de inicio de sesión. Selecciona Facebook para poder iniciar sesión.',
               ),
             ),
@@ -193,21 +194,21 @@ class SignInPage extends StatelessWidget {
                         icon: Icons.face,
                         backgroundColor: AppColors.darkBlue,
                         onPressed: () {
-                          showDialog(
+                          showPlatformDialog(
                             context: context,
-                            builder: (context) => AlertDialog(
+                            builder: (context) => PlatformAlertDialog(
                               title: const Text('Pregunta'),
                               content: const Text(
                                   '¿Estás seguro que quieres iniciar sesión como invitado? No podremos enviarte correos con actualizaciones sobre el proyecto.'),
                               actions: [
-                                TextButton(
+                                PlatformTextButton(
                                   child: const Text('Sí, estoy seguro'),
                                   onPressed: () {
                                     Navigator.of(context).pop();
                                     doSignIn(context, SignInMethods.anonymous);
                                   },
                                 ),
-                                TextButton(
+                                PlatformTextButton(
                                   child:
                                       const Text('No, prefiero iniciar sesión'),
                                   onPressed: () {

@@ -89,16 +89,6 @@ class SignInPage extends StatelessWidget {
             ),
           );
           break;
-        // case 'account-exists-with-different-credential':
-        //   showPlatformDialog(
-        //     context: context,
-        //     builder: (context) => PlatformAlertDialog(
-        //       title: const Text('Ya tienes una cuenta'),
-        //       content: const Text(
-        //           'Ya tienes una cuenta con tu correo electrónico registrada en otro método de inicio de sesión. Intenta con otro método de inicio de sesión. (Próximamente se vincularán automáticamente...)'),
-        //     ),
-        //   );
-        //   break;
         default:
           showPlatformDialog(
             context: context,

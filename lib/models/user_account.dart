@@ -34,7 +34,12 @@ class UserAccount extends ChangeNotifier {
   Future<String> getEmail() async {
     var isLogged = await FacebookAuth.instance.accessToken;
     if (isLogged == null) {
-      return FirebaseAuth.instance.currentUser?.email ?? 'Correo no aplicable';
+      /// TODO: use providerData?[0] after migrating to null-safety
+      return FirebaseAuth.instance.currentUser?.providerData
+              ?.elementAt(0)
+              ?.email ??
+          FirebaseAuth.instance.currentUser?.email ??
+          'Correo no aplicable';
     } else {
       var userData = await FacebookAuth.instance.getUserData();
       return userData['email'];

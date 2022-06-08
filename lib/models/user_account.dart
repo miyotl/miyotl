@@ -25,10 +25,12 @@ class UserAccount extends ChangeNotifier {
     var isLogged = await FacebookAuth.instance.accessToken;
     if (isLogged == null) {
       // Use saved name if Apple.
-      if (FirebaseAuth.instance.currentUser?.providerData
-              ?.elementAt(0)
-              ?.providerId ==
-          'apple.com') {
+      if ((FirebaseAuth.instance.currentUser?.providerData?.isNotEmpty ??
+              false) &&
+          FirebaseAuth.instance.currentUser?.providerData
+                  ?.elementAt(0)
+                  ?.providerId ==
+              'apple.com') {
         final prefs = await SharedPreferences.getInstance();
         return prefs.getString('apple-name');
       } else {
@@ -45,11 +47,15 @@ class UserAccount extends ChangeNotifier {
     var isLogged = await FacebookAuth.instance.accessToken;
     if (isLogged == null) {
       /// TODO: use providerData?[0] after migrating to null-safety
-      return FirebaseAuth.instance.currentUser?.providerData
-              ?.elementAt(0)
-              ?.email ??
-          FirebaseAuth.instance.currentUser?.email ??
-          'Correo no aplicable';
+      if (FirebaseAuth.instance.currentUser?.providerData?.isNotEmpty ??
+          false) {
+        return FirebaseAuth.instance.currentUser?.providerData
+            ?.elementAt(0)
+            ?.email;
+      } else {
+        return FirebaseAuth.instance.currentUser?.email ??
+            'Correo no aplicable';
+      }
     } else {
       var userData = await FacebookAuth.instance.getUserData();
       return userData['email'];
@@ -87,10 +93,12 @@ class UserAccount extends ChangeNotifier {
       email = 'Correo no aplicable';
     }
     profilePicUrl = await getProfilePicUrl();
-    if (profilePicUrl == null) {
-      profilePic = AssetImage('img/icon-round-new-outline.png');
-    } else {
+    if (profilePicUrl == null && displayName == 'Ajolote anónimo') {
+      profilePic = const AssetImage('img/icon-full-new.png');
+    } else if (profilePicUrl != null) {
       profilePic = CachedNetworkImageProvider(profilePicUrl);
+    } else {
+      profilePic = null;
     }
     notifyListeners();
   }

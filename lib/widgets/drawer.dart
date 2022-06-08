@@ -39,6 +39,22 @@ class AppDrawer extends StatelessWidget {
                     accountEmail: Text('${account.email ?? ''}'),
                     currentAccountPicture: CircleAvatar(
                       backgroundImage: account.profilePic,
+                      // TODO: edit Theme directly for this and don't hardcode
+                      backgroundColor:
+                          Theme.of(context).brightness == Brightness.light
+                              ? null
+                              : AppColors.rosa, // pick better color?
+                      child: account.profilePic != null
+                          ? null
+                          : Text(
+                              '${account?.displayName?.split(' ')?.elementAt(0)[0] ?? ''}${account?.displayName?.split(' ')?.elementAt(1)[0] ?? ''}',
+
+                              /// TODO: make it nicer-looking, probably like the Apple one
+                              style: GoogleFonts.fredokaOne(
+                                color: Colors.white,
+                                fontSize: 30,
+                              ),
+                            ),
                     ),
                     decoration: BoxDecoration(
                       color: Theme.of(context).brightness == Brightness.dark

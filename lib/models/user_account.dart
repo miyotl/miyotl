@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class UserAccount extends ChangeNotifier {
   String displayName;
@@ -23,8 +24,17 @@ class UserAccount extends ChangeNotifier {
   Future<String> getDisplayName() async {
     var isLogged = await FacebookAuth.instance.accessToken;
     if (isLogged == null) {
-      return FirebaseAuth.instance?.currentUser?.displayName ??
-          'Ajolote anónimo';
+      // Use saved name if Apple.
+      if (FirebaseAuth.instance.currentUser?.providerData
+              ?.elementAt(0)
+              ?.providerId ==
+          'apple.com') {
+        final prefs = await SharedPreferences.getInstance();
+        return prefs.getString('apple-name');
+      } else {
+        return FirebaseAuth.instance?.currentUser?.displayName ??
+            'Ajolote anónimo';
+      }
     } else {
       var userData = await FacebookAuth.instance.getUserData();
       return userData['name'] ?? '<error al obtener tu nombre>';

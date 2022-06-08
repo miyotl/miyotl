@@ -8,6 +8,7 @@ import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:crypto/crypto.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 /// The following methods are helpers for Apple sign-in
 /// From https://firebase.flutter.dev/docs/auth/social/#apple
@@ -93,6 +94,20 @@ abstract class SignInMethods {
             'https://radical-foil-hortensia.glitch.me/callbacks/sign_in_with_apple'),
       ),
     );
+
+    // To get name, you need it from the appleCredential itself.
+    // This will work only on first login, but it's an upstream issue
+    // See https://github.com/firebase/firebase-ios-sdk/issues/4393
+    // TODO: once user-provided content is possible, save the name on some backend
+    if (appleCredential.givenName != null ||
+        appleCredential.familyName != null) {
+      final displayName =
+          '${appleCredential.givenName ?? ''} ${appleCredential.familyName ?? ''}';
+
+      // Make it persist
+      final prefs = await SharedPreferences.getInstance();
+      prefs.setString('apple-name', displayName);
+    }
 
     // Create an `OAuthCredential` from the credential returned by Apple.
     final oauthCredential = OAuthProvider("apple.com").credential(

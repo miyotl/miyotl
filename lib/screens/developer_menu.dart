@@ -1,6 +1,7 @@
 // @dart=2.9
 
 import 'package:flutter/material.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:miyotl/models/app_state.dart';
 import 'package:provider/provider.dart';
@@ -20,7 +21,7 @@ class DeveloperPage extends StatelessWidget {
       ),
       body: ListView(
         children: [
-          ElevatedButton(
+          OutlinedButton(
             child: Text('Consultar disponibilidad de servicios de Google'),
             onPressed: () {
               // analytics.logEvent(
@@ -30,7 +31,7 @@ class DeveloperPage extends StatelessWidget {
               Navigator.of(context).pushNamed('/debug/google');
             },
           ),
-          ElevatedButton(
+          OutlinedButton(
             child: Text('Abrir pantalla inicial'),
             onPressed: () {
               // analytics.logEvent(
@@ -40,7 +41,7 @@ class DeveloperPage extends StatelessWidget {
               Navigator.of(context).pushNamed('/onboarding');
             },
           ),
-          ElevatedButton(
+          OutlinedButton(
             child: Text('Abrir pantalla inicial después del próximo reinicio'),
             onPressed: () {
               // analytics.logEvent(
@@ -51,7 +52,7 @@ class DeveloperPage extends StatelessWidget {
               state.setOnboardingStatus(false);
             },
           ),
-          ElevatedButton(
+          OutlinedButton(
             child: Text('Ver base de datos'),
             onPressed: () {
               // analytics.logEvent(
@@ -68,7 +69,7 @@ class DeveloperPage extends StatelessWidget {
               );
             },
           ),
-          ElevatedButton(
+          OutlinedButton(
             child: Text('Ver archivo de base de datos'),
             onPressed: () {
               // analytics.logEvent(
@@ -86,7 +87,7 @@ class DeveloperPage extends StatelessWidget {
               );
             },
           ),
-          ElevatedButton(
+          OutlinedButton(
             child: Text('Ver detalles de cuenta'),
             onPressed: () {
               // analytics.logEvent(
@@ -103,7 +104,7 @@ class DeveloperPage extends StatelessWidget {
               );
             },
           ),
-          ElevatedButton(
+          OutlinedButton(
             child: Text('Olvidarse de que la base de datos está actualizada'),
             onPressed: () async {
               // analytics.logEvent(
@@ -114,7 +115,7 @@ class DeveloperPage extends StatelessWidget {
               prefs.setInt('last-update', 2001010101);
             },
           ),
-          ElevatedButton(
+          OutlinedButton(
             child: Text('Hacer un error falso'),
             onPressed: () async {
               // analytics.logEvent(

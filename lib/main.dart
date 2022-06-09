@@ -1,5 +1,6 @@
 // @dart=2.9
 
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_analytics/observer.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -56,7 +57,7 @@ class App extends StatelessWidget {
         child: Consumer<Settings>(
           builder: (context, settings, child) => MaterialApp(
             navigatorObservers: [
-              //FirebaseAnalyticsObserver(analytics: analytics),
+              FirebaseAnalyticsObserver(analytics: analytics),
             ],
             title: app_name,
             theme: new_light_theme.copyWith(

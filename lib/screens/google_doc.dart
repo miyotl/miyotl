@@ -1,5 +1,6 @@
 // @dart=2.9
 
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -107,8 +108,15 @@ class _GoogleDocPreviewState extends State<GoogleDocPreview> {
 
   @override
   Widget build(BuildContext context) {
-    // analytics.logViewItem(
-    //     itemId: url, itemName: title, itemCategory: 'document');
+    analytics.logViewItem(
+      items: [
+        AnalyticsEventItem(
+          itemId: url,
+          itemName: title,
+          itemCategory: 'document',
+        ),
+      ],
+    );
     return Scaffold(
       appBar: AppBar(
         title: Text(

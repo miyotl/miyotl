@@ -61,9 +61,9 @@ class SettingsPage extends StatelessWidget {
                                     groupValue: settings.theme,
                                     onChanged: (value) {
                                       settings.theme = value;
-                                      // analytics.setUserProperty(
-                                      //     name: 'theme',
-                                      //     value: '${settings.theme}');
+                                      analytics.setUserProperty(
+                                          name: 'theme',
+                                          value: '${settings.theme}');
                                       Navigator.of(context).pop();
                                     },
                                   ),
@@ -99,8 +99,8 @@ class SettingsPage extends StatelessWidget {
                                   value: true,
                                   groupValue: settings.useIOSStyle,
                                   onChanged: (value) {
-                                    // analytics.setUserProperty(
-                                    //     name: 'ux', value: 'ios');
+                                    analytics.setUserProperty(
+                                        name: 'ux', value: 'ios');
                                     settings.useIOSStyle = value;
                                     Navigator.of(context).pop();
                                   },
@@ -110,8 +110,8 @@ class SettingsPage extends StatelessWidget {
                                   value: false,
                                   groupValue: settings.useIOSStyle,
                                   onChanged: (value) {
-                                    // analytics.setUserProperty(
-                                    //     name: 'ux', value: 'android');
+                                    analytics.setUserProperty(
+                                        name: 'ux', value: 'android');
                                     settings.useIOSStyle = value;
                                     Navigator.of(context).pop();
                                   },
@@ -146,7 +146,7 @@ class SettingsPage extends StatelessWidget {
                         ? CupertinoIcons.person_alt_circle
                         : Icons.switch_account),
                     onPressed: (context) {
-                      // analytics.logEvent(name: 'switch-user');
+                      analytics.logEvent(name: 'switch-user');
                       Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (context) => Scaffold(
@@ -164,7 +164,7 @@ class SettingsPage extends StatelessWidget {
                         ? CupertinoIcons.person_crop_circle_badge_xmark
                         : Icons.logout),
                     onPressed: (context) {
-                      // analytics.logEvent(name: 'log-out');
+                      analytics.logEvent(name: 'log-out');
                       account.logOut();
                     },
                   ),
@@ -179,7 +179,7 @@ class SettingsPage extends StatelessWidget {
                         ? CupertinoIcons.bell_solid
                         : Icons.notifications),
                     onPressed: (context) {
-                      // analytics.logEvent(name: 'open-notification-settings');
+                      analytics.logEvent(name: 'open-notification-settings');
                       SystemSettings.appNotifications();
                     },
                   ),
@@ -189,9 +189,9 @@ class SettingsPage extends StatelessWidget {
                         ? CupertinoIcons.square_favorites_alt_fill
                         : Icons.description),
                     onPressed: (context) {
-                      // analytics.logEvent(
-                      //     name: 'view-terms',
-                      //     parameters: {'source': 'settings'});
+                      analytics.logEvent(
+                          name: 'view-terms',
+                          parameters: {'source': 'settings'});
                       launchUrl(
                         Uri.parse('https://proyecto-miyotl.web.app/terminos'),
                         mode: LaunchMode.inAppWebView,
@@ -204,9 +204,9 @@ class SettingsPage extends StatelessWidget {
                           ? CupertinoIcons.shield_lefthalf_fill
                           : Icons.privacy_tip),
                       onPressed: (context) {
-                        // analytics.logEvent(
-                        //     name: 'view-privacy',
-                        //     parameters: {'source': 'settings'});
+                        analytics.logEvent(
+                            name: 'view-privacy',
+                            parameters: {'source': 'settings'});
                         launchUrl(
                           Uri.parse(
                               'https://proyecto-miyotl.web.app/privacidad'),
@@ -219,8 +219,8 @@ class SettingsPage extends StatelessWidget {
                         ? CupertinoIcons.exclamationmark_bubble_fill
                         : Icons.feedback),
                     onPressed: (context) {
-                      // analytics.logEvent(
-                      //     name: 'contact', parameters: {'source': 'settings'});
+                      analytics.logEvent(
+                          name: 'contact', parameters: {'source': 'settings'});
                       launchUrl(
                         Uri.parse(
                             'mailto:miyotl@googlegroups.com?subject=Retroalimentación sobre app'),
@@ -233,7 +233,7 @@ class SettingsPage extends StatelessWidget {
                         ? CupertinoIcons.ant_fill
                         : Icons.bug_report),
                     onPressed: (context) {
-                      // analytics.logEvent(name: 'open-developer-menu');
+                      analytics.logEvent(name: 'open-developer-menu');
                       Navigator.of(context).pushNamed('/debug');
                     },
                   ),

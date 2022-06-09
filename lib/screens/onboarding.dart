@@ -181,12 +181,12 @@ class _OnboardingPageState extends State<OnboardingPage> {
                         /// TODO: There is no animation, one would be nice, like a round one
                         Provider.of<AppState>(context, listen: false)
                             .setOnboardingStatus(true);
-                        // analytics.setUserProperty(
-                        //     name: 'theme', value: '${ThemeMode.system}');
-                        // analytics.setUserProperty(name: 'ux', value: 'android');
-                        // analytics.setUserProperty(
-                        //     name: 'dictionaryMode',
-                        //     value: '${LookupMode.spanishToLanguage}');
+                        analytics.setUserProperty(
+                            name: 'theme', value: '${ThemeMode.system}');
+                        analytics.setUserProperty(name: 'ux', value: 'android');
+                        analytics.setUserProperty(
+                            name: 'dictionaryMode',
+                            value: '${LookupMode.spanishToLanguage}');
                         Navigator.of(context).pushAndRemoveUntil(
                           MaterialPageRoute(
                             builder: (context) => HomePage(),

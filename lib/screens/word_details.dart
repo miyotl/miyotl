@@ -1,5 +1,6 @@
 // @dart=2.9
 
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -16,12 +17,16 @@ class WordDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     AppState state = Provider.of<AppState>(context);
     Source source = state.sources.getSource(entry.sourceId);
-    // analytics.logViewItem(
-    //     itemId:
-    //         '${state.language}_${entry.translatedWord}_${entry.originalWord}',
-    //     itemName:
-    //         '${state.language}: ${entry.translatedWord} / ${entry.originalWord}',
-    //     itemCategory: 'word');
+    analytics.logViewItem(
+      items: [
+        AnalyticsEventItem(
+            itemId:
+                '${state.language}_${entry.translatedWord}_${entry.originalWord}',
+            itemName:
+                '${state.language}: ${entry.translatedWord} / ${entry.originalWord}',
+            itemCategory: 'word')
+      ],
+    );
     return Scaffold(
       appBar: AppBar(
         title: Text(

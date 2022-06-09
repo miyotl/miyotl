@@ -2,6 +2,7 @@
 
 import 'dart:io';
 
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
@@ -26,7 +27,7 @@ class AppDrawer extends StatelessWidget {
     return Drawer(
       child: Consumer<AppState>(
         builder: (context, state, child) {
-          // analytics.logEvent(name: 'open-drawer');
+          analytics.logEvent(name: 'open-drawer');
           return ListView(
             padding: EdgeInsets.zero,
             children: <Widget>[
@@ -98,7 +99,7 @@ class AppDrawer extends StatelessWidget {
                     },
                   ),
                   onTap: () async {
-                    //analytics.logEvent(name: 'manual-refresh');
+                    analytics.logEvent(name: 'manual-refresh');
                     try {
                       await state.updateLanguageData();
                     } on SocketException {
@@ -148,7 +149,7 @@ class AppDrawer extends StatelessWidget {
                 leading: Icon(PlatformIcons(context).settings),
                 title: Text('Ajustes'),
                 onTap: () {
-                  // analytics.logEvent(name: 'open-settings');
+                  analytics.logEvent(name: 'open-settings');
                   Navigator.of(context).pushNamed('/settings');
                 },
               ),
@@ -156,8 +157,8 @@ class AppDrawer extends StatelessWidget {
                 leading: Icon(PlatformIcons(context).share),
                 title: Text('Compartir aplicación'),
                 onTap: () {
-                  // analytics.logShare(
-                  //     contentType: 'invite', itemId: 'app', method: 'drawer');
+                  analytics.logShare(
+                      contentType: 'invite', itemId: 'app', method: 'drawer');
                   Share.share(
                       '¿Sabías que hay una app donde puedes acercarte a nuestras lenguas indígenas? ¡Próximamente podrás aprenderlas!\n\nDescárgala en miyotl.org');
                 },
@@ -168,8 +169,8 @@ class AppDrawer extends StatelessWidget {
                     : Icons.feedback),
                 title: Text('Enviar retroalimentación'),
                 onTap: () {
-                  // analytics.logEvent(
-                  //     name: 'contact', parameters: {'source': 'drawer'});
+                  analytics.logEvent(
+                      name: 'contact', parameters: {'source': 'drawer'});
                   launchUrl(
                     Uri.parse(
                         'mailto:miyotl@googlegroups.com?subject=Retroalimentación sobre app'),
@@ -180,7 +181,7 @@ class AppDrawer extends StatelessWidget {
                 leading: Icon(PlatformIcons(context).info),
                 title: Text('Acerca de'),
                 onTap: () {
-                  // analytics.logEvent(name: 'open-about');
+                  analytics.logEvent(name: 'open-about');
                   showAboutDialog(
                     context: context,
                     applicationIcon: CircleAvatar(
@@ -198,7 +199,7 @@ class AppDrawer extends StatelessWidget {
                         leading: Icon(Icons.people),
                         title: Text('Ver créditos'),
                         onTap: () {
-                          // analytics.logEvent(name: 'view-credits');
+                          analytics.logEvent(name: 'view-credits');
                           launchUrl(
                             Uri.parse(
                                 'https://proyecto-miyotl.web.app/acerca_de'),
@@ -210,7 +211,7 @@ class AppDrawer extends StatelessWidget {
                         leading: Icon(Ionicons.logo_facebook),
                         title: Text('Síguenos en Facebook'),
                         onTap: () {
-                          // analytics.logEvent(name: 'view-facebook');
+                          analytics.logEvent(name: 'view-facebook');
                           launchUrl(Uri.parse('https://fb.me/MiyotlApp'));
                         },
                       ),
@@ -218,7 +219,7 @@ class AppDrawer extends StatelessWidget {
                         leading: Icon(Ionicons.logo_twitter),
                         title: Text('Síguenos en Twitter'),
                         onTap: () {
-                          // analytics.logEvent(name: 'view-twitter');
+                          analytics.logEvent(name: 'view-twitter');
                           launchUrl(Uri.parse('https://twitter.com/MiyotlApp'));
                         },
                       ),
@@ -226,8 +227,8 @@ class AppDrawer extends StatelessWidget {
                         leading: Icon(Icons.email),
                         title: Text('Mándanos un correo'),
                         onTap: () {
-                          // analytics.logEvent(
-                          //     name: 'contact', parameters: {'source': 'about'});
+                          analytics.logEvent(
+                              name: 'contact', parameters: {'source': 'about'});
                           launchUrl(
                               Uri.parse('mailto:miyotl@googlegroups.com'));
                         },
@@ -236,7 +237,7 @@ class AppDrawer extends StatelessWidget {
                         leading: Icon(Ionicons.logo_github),
                         title: Text('Colabora en GitHub'),
                         onTap: () {
-                          // analytics.logEvent(name: 'view-github');
+                          analytics.logEvent(name: 'view-github');
                           launchUrl(
                               Uri.parse('https://github.com/miyotl/miyotl'));
                         },

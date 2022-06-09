@@ -69,8 +69,8 @@ class LanguageSelectPage extends StatelessWidget {
                                 ),
                                 onTap: () {
                                   /// Save onboarding finished and language
-                                  // analytics.setUserProperty(
-                                  //     name: 'language', value: language.name);
+                                  analytics.setUserProperty(
+                                      name: 'language', value: language.name);
                                   state.changeLanguage(language.name);
                                   state.setDefaultLanguage(state.language);
                                   if (onLanguageSelect != null) {

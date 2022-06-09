@@ -1,5 +1,6 @@
 // @dart=2.9
 
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -15,11 +16,15 @@ class VariantDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     AppState state = Provider.of<AppState>(context);
     Source source = state.sources.getSource(variant.sourceId);
-    // analytics.logViewItem(
-    //     itemId: '${state.language}_${variant.word}_${entry.originalWord}',
-    //     itemName:
-    //         '${state.language}: ${variant.word} como variante para ${entry.translatedWord}',
-    //     itemCategory: 'variant');
+    analytics.logViewItem(
+      items: [
+        AnalyticsEventItem(
+            itemId: '${state.language}_${variant.word}_${entry.originalWord}',
+            itemName:
+                '${state.language}: ${variant.word} como variante para ${entry.translatedWord}',
+            itemCategory: 'variant'),
+      ],
+    );
     return Scaffold(
       appBar: AppBar(
         title: Text(

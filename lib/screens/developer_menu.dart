@@ -25,7 +25,7 @@ class DeveloperPage extends StatelessWidget {
             child: Text('Consultar disponibilidad de servicios de Google'),
             onPressed: () {
               analytics.logEvent(
-                name: 'developer-option',
+                name: 'developer_option',
                 parameters: {'option': 'google-availability'},
               );
               Navigator.of(context).pushNamed('/debug/google');
@@ -35,7 +35,7 @@ class DeveloperPage extends StatelessWidget {
             child: Text('Abrir pantalla inicial'),
             onPressed: () {
               analytics.logEvent(
-                name: 'developer-option',
+                name: 'developer_option',
                 parameters: {'option': 'open-onboarding'},
               );
               Navigator.of(context).pushNamed('/onboarding');
@@ -45,7 +45,7 @@ class DeveloperPage extends StatelessWidget {
             child: Text('Abrir pantalla inicial después del próximo reinicio'),
             onPressed: () {
               analytics.logEvent(
-                name: 'developer-option',
+                name: 'developer_option',
                 parameters: {'option': 'revert-onboarding'},
               );
               AppState state = Provider.of<AppState>(context, listen: false);
@@ -56,8 +56,8 @@ class DeveloperPage extends StatelessWidget {
             child: Text('Ver base de datos'),
             onPressed: () {
               analytics.logEvent(
-                name: 'developer-option',
-                parameters: {'option': 'view-data'},
+                name: 'developer_option',
+                parameters: {'option': 'view_data'},
               );
               Navigator.of(context).push(
                 MaterialPageRoute(
@@ -73,8 +73,8 @@ class DeveloperPage extends StatelessWidget {
             child: Text('Ver archivo de base de datos'),
             onPressed: () {
               analytics.logEvent(
-                name: 'developer-option',
-                parameters: {'option': 'view-data-file'},
+                name: 'developer_option',
+                parameters: {'option': 'view_data_file'},
               );
               Navigator.of(context).push(
                 MaterialPageRoute(
@@ -91,8 +91,8 @@ class DeveloperPage extends StatelessWidget {
             child: Text('Ver detalles de cuenta'),
             onPressed: () {
               analytics.logEvent(
-                name: 'developer-option',
-                parameters: {'option': 'view-account'},
+                name: 'developer_option',
+                parameters: {'option': 'view_account'},
               );
               Navigator.of(context).push(
                 MaterialPageRoute(
@@ -108,8 +108,8 @@ class DeveloperPage extends StatelessWidget {
             child: Text('Olvidarse de que la base de datos está actualizada'),
             onPressed: () async {
               analytics.logEvent(
-                name: 'developer-option',
-                parameters: {'option': 'forget-data'},
+                name: 'developer_option',
+                parameters: {'option': 'forget_data'},
               );
               final prefs = await SharedPreferences.getInstance();
               prefs.setInt('last-update', 2001010101);
@@ -119,8 +119,8 @@ class DeveloperPage extends StatelessWidget {
             child: Text('Hacer un error falso'),
             onPressed: () async {
               analytics.logEvent(
-                name: 'developer-option',
-                parameters: {'option': 'test-exception'},
+                name: 'developer_option',
+                parameters: {'option': 'test_exception'},
               );
               try {
                 throw Exception('Test exception');

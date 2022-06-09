@@ -60,7 +60,7 @@ class DictionaryPage extends StatelessWidget {
               },
               onValueChanged: (newMode) {
                 analytics.logEvent(
-                  name: 'change-dictionary-mode',
+                  name: 'change_dictionary_mode',
                   parameters: {'mode': '$newMode'},
                 );
                 analytics.setUserProperty(

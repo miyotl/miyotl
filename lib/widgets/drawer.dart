@@ -27,7 +27,7 @@ class AppDrawer extends StatelessWidget {
     return Drawer(
       child: Consumer<AppState>(
         builder: (context, state, child) {
-          analytics.logEvent(name: 'open-drawer');
+          analytics.logEvent(name: 'open_drawer');
           return ListView(
             padding: EdgeInsets.zero,
             children: <Widget>[
@@ -99,7 +99,7 @@ class AppDrawer extends StatelessWidget {
                     },
                   ),
                   onTap: () async {
-                    analytics.logEvent(name: 'manual-refresh');
+                    analytics.logEvent(name: 'manual_refresh');
                     try {
                       await state.updateLanguageData();
                     } on SocketException {
@@ -149,7 +149,7 @@ class AppDrawer extends StatelessWidget {
                 leading: Icon(PlatformIcons(context).settings),
                 title: Text('Ajustes'),
                 onTap: () {
-                  analytics.logEvent(name: 'open-settings');
+                  analytics.logEvent(name: 'open_settings');
                   Navigator.of(context).pushNamed('/settings');
                 },
               ),
@@ -181,7 +181,7 @@ class AppDrawer extends StatelessWidget {
                 leading: Icon(PlatformIcons(context).info),
                 title: Text('Acerca de'),
                 onTap: () {
-                  analytics.logEvent(name: 'open-about');
+                  analytics.logEvent(name: 'open_about');
                   showAboutDialog(
                     context: context,
                     applicationIcon: CircleAvatar(
@@ -199,7 +199,7 @@ class AppDrawer extends StatelessWidget {
                         leading: Icon(Icons.people),
                         title: Text('Ver créditos'),
                         onTap: () {
-                          analytics.logEvent(name: 'view-credits');
+                          analytics.logEvent(name: 'view_credits');
                           launchUrl(
                             Uri.parse(
                                 'https://proyecto-miyotl.web.app/acerca_de'),
@@ -211,7 +211,7 @@ class AppDrawer extends StatelessWidget {
                         leading: Icon(Ionicons.logo_facebook),
                         title: Text('Síguenos en Facebook'),
                         onTap: () {
-                          analytics.logEvent(name: 'view-facebook');
+                          analytics.logEvent(name: 'view_facebook');
                           launchUrl(Uri.parse('https://fb.me/MiyotlApp'));
                         },
                       ),
@@ -219,7 +219,7 @@ class AppDrawer extends StatelessWidget {
                         leading: Icon(Ionicons.logo_twitter),
                         title: Text('Síguenos en Twitter'),
                         onTap: () {
-                          analytics.logEvent(name: 'view-twitter');
+                          analytics.logEvent(name: 'view_twitter');
                           launchUrl(Uri.parse('https://twitter.com/MiyotlApp'));
                         },
                       ),
@@ -237,7 +237,7 @@ class AppDrawer extends StatelessWidget {
                         leading: Icon(Ionicons.logo_github),
                         title: Text('Colabora en GitHub'),
                         onTap: () {
-                          analytics.logEvent(name: 'view-github');
+                          analytics.logEvent(name: 'view_github');
                           launchUrl(
                               Uri.parse('https://github.com/miyotl/miyotl'));
                         },

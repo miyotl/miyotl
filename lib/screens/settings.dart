@@ -146,7 +146,7 @@ class SettingsPage extends StatelessWidget {
                         ? CupertinoIcons.person_alt_circle
                         : Icons.switch_account),
                     onPressed: (context) {
-                      analytics.logEvent(name: 'switch-user');
+                      analytics.logEvent(name: 'switch_user');
                       Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (context) => Scaffold(
@@ -164,7 +164,7 @@ class SettingsPage extends StatelessWidget {
                         ? CupertinoIcons.person_crop_circle_badge_xmark
                         : Icons.logout),
                     onPressed: (context) {
-                      analytics.logEvent(name: 'log-out');
+                      analytics.logEvent(name: 'log_out');
                       account.logOut();
                     },
                   ),
@@ -179,7 +179,7 @@ class SettingsPage extends StatelessWidget {
                         ? CupertinoIcons.bell_solid
                         : Icons.notifications),
                     onPressed: (context) {
-                      analytics.logEvent(name: 'open-notification-settings');
+                      analytics.logEvent(name: 'open_notification_settings');
                       SystemSettings.appNotifications();
                     },
                   ),
@@ -190,7 +190,7 @@ class SettingsPage extends StatelessWidget {
                         : Icons.description),
                     onPressed: (context) {
                       analytics.logEvent(
-                          name: 'view-terms',
+                          name: 'view_terms',
                           parameters: {'source': 'settings'});
                       launchUrl(
                         Uri.parse('https://proyecto-miyotl.web.app/terminos'),
@@ -205,7 +205,7 @@ class SettingsPage extends StatelessWidget {
                           : Icons.privacy_tip),
                       onPressed: (context) {
                         analytics.logEvent(
-                            name: 'view-privacy',
+                            name: 'view_privacy',
                             parameters: {'source': 'settings'});
                         launchUrl(
                           Uri.parse(
@@ -233,7 +233,7 @@ class SettingsPage extends StatelessWidget {
                         ? CupertinoIcons.ant_fill
                         : Icons.bug_report),
                     onPressed: (context) {
-                      analytics.logEvent(name: 'open-developer-menu');
+                      analytics.logEvent(name: 'open_developer_menu');
                       Navigator.of(context).pushNamed('/debug');
                     },
                   ),

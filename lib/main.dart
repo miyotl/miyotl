@@ -15,7 +15,7 @@ import 'screens/debug/google_service_check.dart';
 import 'package:provider/provider.dart';
 import 'models/app_state.dart';
 import 'models/constants.dart';
-//import 'package:sentry_flutter/sentry_flutter.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
@@ -33,14 +33,13 @@ Future<void> main() async {
   );
 
   /// Run the app, sending exceptions and errors to Sentry
-  runApp(App());
-  // SentryFlutter.init(
-  //   (options) {
-  //     options.dsn =
-  //         'https://10b347756b75470d9de103b5fc93392b@o542451.ingest.sentry.io/5662242';
-  //   },
-  //   appRunner: () => runApp(App()),
-  // );
+  SentryFlutter.init(
+    (options) {
+      options.dsn =
+          'https://10b347756b75470d9de103b5fc93392b@o542451.ingest.sentry.io/5662242';
+    },
+    appRunner: () => runApp(App()),
+  );
 }
 
 class App extends StatelessWidget {
@@ -58,6 +57,7 @@ class App extends StatelessWidget {
           builder: (context, settings, child) => MaterialApp(
             navigatorObservers: [
               FirebaseAnalyticsObserver(analytics: analytics),
+              SentryNavigatorObserver()
             ],
             title: app_name,
             theme: new_light_theme.copyWith(

@@ -5,7 +5,7 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:miyotl/models/app_state.dart';
 import 'package:provider/provider.dart';
-//import 'package:sentry_flutter/sentry_flutter.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'debug/string_viewer.dart';
 
@@ -125,8 +125,8 @@ class DeveloperPage extends StatelessWidget {
               try {
                 throw Exception('Test exception');
               } catch (exception, stackTrace) {
-                // await Sentry.captureException(exception,
-                //     stackTrace: stackTrace);
+                await Sentry.captureException(exception,
+                    stackTrace: stackTrace);
               }
             },
           ),

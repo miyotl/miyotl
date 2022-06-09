@@ -16,6 +16,7 @@ import 'package:ionicons/ionicons.dart';
 import 'package:miyotl/models/constants.dart';
 import 'package:cupertino_icons/cupertino_icons.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:sentry/sentry.dart';
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({
@@ -121,7 +122,7 @@ class AppDrawer extends StatelessWidget {
                           );
                         },
                       );
-                    } catch (e) {
+                    } catch (e, stackTrace) {
                       showDialog(
                         context: context,
                         builder: (context) {
@@ -141,6 +142,7 @@ class AppDrawer extends StatelessWidget {
                           );
                         },
                       );
+                      Sentry.captureException(e, stackTrace: stackTrace);
                     }
                   },
                 ),

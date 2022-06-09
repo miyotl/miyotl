@@ -17,6 +17,7 @@ import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:sentry/sentry.dart';
 
 class SignInPage extends StatelessWidget {
   final VoidCallback onSignIn;
@@ -140,7 +141,7 @@ class SignInPage extends StatelessWidget {
         default:
           rethrow;
       }
-    } on Exception catch (e) {
+    } on Exception catch (e, stackTrace) {
       showPlatformDialog(
         context: context,
         builder: (context) => PlatformAlertDialog(
@@ -150,14 +151,19 @@ class SignInPage extends StatelessWidget {
             PlatformDialogAction(
               child: const Text('Reportar error'),
               onPressed: () {
-                launchUrl(Uri.parse(
-                    'mailto:miyotl@googlegroups.com?subject=Error al iniciar sesión&body=$e'));
+                launchUrl(
+                  Uri.parse(
+                      'mailto:miyotl@googlegroups.com?subject=Error al iniciar sesión&body=$e'),
+                );
                 Navigator.of(context).pop();
               },
             ),
           ],
         ),
       );
+
+      /// TODO: double reporting?
+      Sentry.captureException(e, stackTrace: stackTrace);
     }
   }
 

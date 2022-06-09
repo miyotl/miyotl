@@ -18,6 +18,7 @@ import 'models/constants.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 Future<void> main() async {
   /// Add license entry for Google fonts
@@ -31,6 +32,10 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  /// Ask for notification permission and set up Firebase messaging
+  FirebaseMessaging messaging = FirebaseMessaging.instance;
+  NotificationSettings settings = await messaging.requestPermission();
 
   /// Run the app, sending exceptions and errors to Sentry
   SentryFlutter.init(

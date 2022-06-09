@@ -1,6 +1,6 @@
 # Key
 *.jks
-AuthKey_P964J86LJ7.p8
+AuthKey_*.p8
 
 # Firebase
 /android/app/google-services.json

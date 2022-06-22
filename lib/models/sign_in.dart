@@ -113,6 +113,7 @@ abstract class SignInMethods {
     final oauthCredential = OAuthProvider("apple.com").credential(
       idToken: appleCredential.identityToken,
       rawNonce: rawNonce,
+      accessToken: 'miyotl',
     );
 
     // I am supposing all the backend stuff from the package sample is unnecessary

@@ -58,7 +58,7 @@ https://appgallery.cloud.huawei.com/ag/n/app/C103942713?channelId=website&referr
 _Apple AppStore_ 🍎
 
 ```
-not found
+https://apps.apple.com/mx/app/miyotl/id1628244716
 ```
 
 ## Instalation for PC 🖱

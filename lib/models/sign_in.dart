@@ -1,5 +1,3 @@
-// @dart=2.9
-
 import 'dart:convert';
 import 'dart:math';
 
@@ -33,9 +31,9 @@ String sha256ofString(String input) {
 abstract class SignInMethods {
   /// Social sign ins methods from https://firebase.flutter.dev/docs/auth/social/
 
-  static Future<UserCredential> google() async {
+  static Future<UserCredential?> google() async {
     // Trigger the authentication flow
-    final GoogleSignInAccount googleUser = await GoogleSignIn().signIn();
+    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
 
     if (googleUser == null) {
       return null;
@@ -46,7 +44,7 @@ abstract class SignInMethods {
         await googleUser.authentication;
 
     // Create a new credential
-    final GoogleAuthCredential credential = GoogleAuthProvider.credential(
+    final OAuthCredential credential = GoogleAuthProvider.credential(
       accessToken: googleAuth.accessToken,
       idToken: googleAuth.idToken,
     );
@@ -54,17 +52,17 @@ abstract class SignInMethods {
     return await FirebaseAuth.instance.signInWithCredential(credential);
   }
 
-  static Future<UserCredential> facebook() async {
+  static Future<UserCredential?> facebook() async {
     final LoginResult result = await FacebookAuth.instance
         .login(); // by default we request the email and the public profile
     // or FacebookAuth.i.login()
     if (result.status == LoginStatus.success) {
       // you are logged
-      final AccessToken accessToken = result.accessToken;
+      final AccessToken? accessToken = result.accessToken;
 
       // Create a credential from the access token
-      final FacebookAuthCredential facebookAuthCredential =
-          FacebookAuthProvider.credential(accessToken.token);
+      final OAuthCredential facebookAuthCredential =
+          FacebookAuthProvider.credential(accessToken!.token);
       return await FirebaseAuth.instance
           .signInWithCredential(facebookAuthCredential);
     }
@@ -124,7 +122,7 @@ abstract class SignInMethods {
     return await FirebaseAuth.instance.signInWithCredential(oauthCredential);
   }
 
-  static Future<UserCredential> anonymous() async {
+  static Future<UserCredential?> anonymous() async {
     try {
       return await FirebaseAuth.instance.signInAnonymously();
     } catch (e) {

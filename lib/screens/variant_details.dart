@@ -1,5 +1,3 @@
-// @dart=2.9
-
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -9,13 +7,12 @@ import '../models/app_state.dart';
 class VariantDetails extends StatelessWidget {
   final DictionaryEntry entry;
   final Variant variant;
-  VariantDetails({Key key, @required this.entry, @required this.variant})
-      : super(key: key);
+  const VariantDetails({super.key, required this.entry, required this.variant});
 
   @override
   Widget build(BuildContext context) {
     AppState state = Provider.of<AppState>(context);
-    Source source = state.sources.getSource(variant.sourceId);
+    Source? source = state.sources.getSource(variant.sourceId);
     analytics.logViewItem(
       items: [
         AnalyticsEventItem(
@@ -29,33 +26,35 @@ class VariantDetails extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           'Variante de ${entry.originalWord}',
-          style: GoogleFonts.fredokaOne(),
+          style: const TextStyle(
+                      fontFamily: 'FredokaOne'
+                    )
         ),
       ),
       body: ListView(
         children: <Widget>[
           ListTile(
-            title: Text('Palabra original'),
+            title: const Text('Palabra original'),
             subtitle: Text('${entry.originalWord}'),
           ),
           ListTile(
-            title: Text('Traducción al español'),
+            title: const Text('Traducción al español'),
             subtitle: Text('${entry.translatedWord}'),
           ),
           ListTile(
-            title: Text('Variante'),
+            title: const Text('Variante'),
             subtitle: Text('${variant.word}'),
           ),
           ListTile(
-            title: Text('Autor'),
+            title: const Text('Autor'),
             subtitle: Text(source?.author ?? 'Desconocido'),
           ),
           ListTile(
-            title: Text('Fuente'),
+            title: const Text('Fuente'),
             subtitle: Text(source?.name ?? 'Desconocida'),
           ),
           ListTile(
-            title: Text('Región'),
+            title: const Text('Región'),
             subtitle: Text(source?.region ?? 'Desconocida'),
           ),
         ],

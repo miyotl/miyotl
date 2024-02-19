@@ -1,5 +1,3 @@
-// @dart=2.9
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:miyotl/models/app_state.dart';
@@ -15,7 +13,8 @@ class LanguageSelectPage extends StatelessWidget {
   /// If not null, this will be run after changing the language
   final LanguageSelectFunction onLanguageSelect;
 
-  LanguageSelectPage({this.title, this.onLanguageSelect});
+  const LanguageSelectPage(
+      {super.key, required this.title, required this.onLanguageSelect});
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +33,8 @@ class LanguageSelectPage extends StatelessWidget {
                     padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
                     child: Text(
                       title,
-                      style: GoogleFonts.fredokaOne(
+                      style: const TextStyle(
+                        fontFamily: 'FredokaOne',
                         fontSize: 32,
                         color: Colors.white,
                       ),
@@ -42,7 +42,7 @@ class LanguageSelectPage extends StatelessWidget {
                   ),
                 Text(
                   '¿Qué idioma quieres aprender?',
-                  style: Theme.of(context).textTheme.headline2.copyWith(
+                  style: Theme.of(context).textTheme.displayMedium?.copyWith(
                         fontSize: 16,
                         color: Colors.white,
                       ),
@@ -58,14 +58,13 @@ class LanguageSelectPage extends StatelessWidget {
                             Card(
                               // color: Colors.white,
                               child: ListTile(
-                                title: Text('${language.name}'),
+                                title: Text(language.name),
                                 subtitle:
                                     Text('${language.speakers} hablantes'),
                                 leading: CircleAvatar(
-                                  child: Text(
-                                    '${language.name[0]}',
-                                    style: GoogleFonts.fredokaOne(),
-                                  ),
+                                  child: Text(language.name[0],
+                                      style:
+                                          TextStyle(fontFamily: 'FredokaOne')),
                                 ),
                                 onTap: () {
                                   /// Save onboarding finished and language

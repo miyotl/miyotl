@@ -1,5 +1,3 @@
-// @dart=2.9
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -13,7 +11,7 @@ import 'culture_details.dart';
 class CultureCard extends StatelessWidget {
   final CultureEntry entry;
 
-  CultureCard({this.entry});
+  const CultureCard({super.key, required this.entry});
 
   @override
   Widget build(BuildContext context) {
@@ -29,27 +27,25 @@ class CultureCard extends StatelessWidget {
           children: <Widget>[
             ListTile(
               title: Text(entry.titleOriginal),
-              subtitle: Text('${entry.titleTranslated}'),
+              subtitle: Text(entry.titleTranslated),
               leading: Consumer<AppState>(
                 builder: (context, state, child) {
-                  Source source = state.sources.getSource(entry.sourceId);
-                  if (source.profilePicUrl != null) {
+                  Source? source = state.sources.getSource(entry.sourceId);
+                  if (source?.profilePicUrl != null) {
                     return CircleAvatar(
                       backgroundImage:
-                          CachedNetworkImageProvider(source.profilePicUrl),
+                          CachedNetworkImageProvider(source!.profilePicUrl),
                     );
                   } else {
                     return CircleAvatar(
-                      child: Text(
-                        '${source.author[0]}',
-                        style: GoogleFonts.fredokaOne(),
-                      ),
+                      child: Text(source!.author[0],
+                          style: const TextStyle(fontFamily: 'FredokaOne')),
                     );
                   }
                 },
               ),
               trailing: IconButton(
-                icon: Icon(Icons.more_horiz),
+                icon: const Icon(Icons.more_horiz),
                 onPressed: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
@@ -94,7 +90,7 @@ class CultureCard extends StatelessWidget {
                   ),
                 ),
                 TextButton(
-                  child: Text('Leer en español'),
+                  child: const Text('Leer en español'),
                   onPressed: () {
                     openDoc(context, entry.linkTranslated, entry);
                   },
@@ -114,21 +110,21 @@ class CulturePage extends StatelessWidget {
     return Consumer<AppState>(
       builder: (context, state, child) {
         if (state.loading) {
-          return Center(
+          return const Center(
             child: CircularProgressIndicator(),
           );
-        } else if (state.culture.length > 0) {
+        } else if (state.culture!.isNotEmpty) {
           return GridView.count(
             primary: true,
             crossAxisCount: 1,
             crossAxisSpacing: 10,
             mainAxisSpacing: 10,
-            padding: EdgeInsets.symmetric(
+            padding: const EdgeInsets.symmetric(
               vertical: 10,
               horizontal: 0,
             ),
             children: <Widget>[
-              for (CultureEntry entry in state.culture)
+              for (CultureEntry entry in state.culture!)
                 CultureCard(entry: entry),
             ],
           );

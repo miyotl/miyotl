@@ -1,5 +1,3 @@
-// @dart=2.9
-
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -14,15 +12,17 @@ class DeveloperPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Diagnósticos',
-          style: GoogleFonts.fredokaOne(),
+          style: TextStyle(
+                      fontFamily: 'FredokaOne'
+                    )
         ),
       ),
       body: ListView(
         children: [
           OutlinedButton(
-            child: Text('Consultar disponibilidad de servicios de Google'),
+            child: const Text('Consultar disponibilidad de servicios de Google'),
             onPressed: () {
               analytics.logEvent(
                 name: 'developer_option',
@@ -32,7 +32,7 @@ class DeveloperPage extends StatelessWidget {
             },
           ),
           OutlinedButton(
-            child: Text('Abrir pantalla inicial'),
+            child: const Text('Abrir pantalla inicial'),
             onPressed: () {
               analytics.logEvent(
                 name: 'developer_option',
@@ -42,7 +42,7 @@ class DeveloperPage extends StatelessWidget {
             },
           ),
           OutlinedButton(
-            child: Text('Abrir pantalla inicial después del próximo reinicio'),
+            child: const Text('Abrir pantalla inicial después del próximo reinicio'),
             onPressed: () {
               analytics.logEvent(
                 name: 'developer_option',
@@ -53,7 +53,7 @@ class DeveloperPage extends StatelessWidget {
             },
           ),
           OutlinedButton(
-            child: Text('Ver base de datos'),
+            child: const Text('Ver base de datos'),
             onPressed: () {
               analytics.logEvent(
                 name: 'developer_option',
@@ -70,7 +70,7 @@ class DeveloperPage extends StatelessWidget {
             },
           ),
           OutlinedButton(
-            child: Text('Ver archivo de base de datos'),
+            child: const Text('Ver archivo de base de datos'),
             onPressed: () {
               analytics.logEvent(
                 name: 'developer_option',
@@ -88,7 +88,7 @@ class DeveloperPage extends StatelessWidget {
             },
           ),
           OutlinedButton(
-            child: Text('Ver detalles de cuenta'),
+            child: const Text('Ver detalles de cuenta'),
             onPressed: () {
               analytics.logEvent(
                 name: 'developer_option',
@@ -98,14 +98,14 @@ class DeveloperPage extends StatelessWidget {
                 MaterialPageRoute(
                   builder: (context) => AsyncStringViewerPage(
                     title: 'Detalles de cuenta',
-                    string: UserAccount.instance.getDebugAccountDetails(),
+                    string: UserAccount.instance!.getDebugAccountDetails(),
                   ),
                 ),
               );
             },
           ),
           OutlinedButton(
-            child: Text('Olvidarse de que la base de datos está actualizada'),
+            child: const Text('Olvidarse de que la base de datos está actualizada'),
             onPressed: () async {
               analytics.logEvent(
                 name: 'developer_option',
@@ -116,7 +116,7 @@ class DeveloperPage extends StatelessWidget {
             },
           ),
           OutlinedButton(
-            child: Text('Hacer un error falso'),
+            child: const Text('Hacer un error falso'),
             onPressed: () async {
               analytics.logEvent(
                 name: 'developer_option',

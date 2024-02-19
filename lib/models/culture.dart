@@ -1,5 +1,3 @@
-// @dart=2.9
-
 class CultureEntry {
   final String titleOriginal;
   final String titleTranslated;
@@ -11,14 +9,14 @@ class CultureEntry {
   final List<String> tags;
 
   const CultureEntry({
-    this.titleOriginal,
-    this.titleTranslated,
-    this.linkOriginal,
-    this.linkTranslated,
-    this.sourceId,
-    this.imageUrl,
-    this.category,
-    this.tags,
+    required this.titleOriginal,
+    required this.titleTranslated,
+    required this.linkOriginal,
+    required this.linkTranslated,
+    required this.sourceId,
+    required this.imageUrl,
+    required this.category,
+    required this.tags,
   });
 
   factory CultureEntry.fromJson(Map<String, dynamic> json) {

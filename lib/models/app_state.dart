@@ -1,8 +1,7 @@
-// @dart=2.9
+// ignore_for_file: no_leading_underscores_for_local_identifiers
 
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:flutter/widgets.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:http/http.dart';
@@ -34,7 +33,7 @@ class AppState extends ChangeNotifier {
     prefs.setBool('hasFinishedOnboarding', hasFinishedOnboarding);
   }
 
-  Future<String> getDefaultLanguage() async {
+  Future<String?> getDefaultLanguage() async {
     var prefs = await SharedPreferences.getInstance();
     return prefs.getString('language');
   }
@@ -54,29 +53,29 @@ class AppState extends ChangeNotifier {
   bool loading = true;
 
   /// The decoded JSON information
-  Map<String, dynamic> data;
+  late Map<String, dynamic> data;
 
   /// The sources of information (author, location, etc)
-  Sources sources;
+  late Sources sources;
 
   /// All dictionaries for all languages
   /// TODO: only the current language(s) should be downloaded
-  Map<String, Dictionary> dictionaries;
+  late Map<String, Dictionary> dictionaries;
 
   /// Cultures for each language
   Map<String, List<CultureEntry>> cultures = {};
 
   /// The culture for the current language
-  List<CultureEntry> get culture => cultures[language];
+  List<CultureEntry>? get culture => cultures[language];
 
   /// The dictionary for the current language
-  Dictionary get dictionary => dictionaries[language];
+  Dictionary? get dictionary => dictionaries[language];
 
   /// The name of the current language, where the first letter is a capital
   String get languageName => capitalize(language);
 
   /// Favorite words
-  List<DictionaryEntry> favorites;
+  late List<DictionaryEntry> favorites;
 
   /// List of languages
   List<Language> languages = [];
@@ -88,7 +87,7 @@ class AppState extends ChangeNotifier {
     }
 
     final prefs = await SharedPreferences.getInstance();
-    int lastUpdate = prefs.getInt('last-update');
+    int? lastUpdate = prefs.getInt('last-update');
     if (lastUpdate == null) {
       return 'Nunca';
     } else {
@@ -115,12 +114,12 @@ class AppState extends ChangeNotifier {
 
   void changeLookupMode(LookupMode _lookupMode) {
     lookupMode = _lookupMode;
-    dictionary.sort(_lookupMode);
+    dictionary?.sort(_lookupMode);
     notifyListeners();
   }
 
   Future<bool> loadPrefs() async {
-    language = await getDefaultLanguage() ?? 'Mazateco';
+    language = (await getDefaultLanguage())!;
     return true;
   }
 
@@ -154,9 +153,9 @@ class AppState extends ChangeNotifier {
       dictionaries[entry.key] = Dictionary.fromJson(entry.value);
     }
     for (Map<String, dynamic> cultureJson in data['Cultura']) {
-      cultures[cultureJson['language']].add(CultureEntry.fromJson(cultureJson));
+      cultures[cultureJson['language']]?.add(CultureEntry.fromJson(cultureJson));
     }
-    dictionary.sort(lookupMode);
+    dictionary?.sort(lookupMode);
     notifyListeners();
   }
 

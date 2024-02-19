@@ -1,5 +1,3 @@
-// @dart=2.9
-
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -10,12 +8,12 @@ import 'google_doc.dart';
 class CultureDetails extends StatelessWidget {
   final CultureEntry entry;
 
-  CultureDetails({this.entry});
+  const CultureDetails({super.key, required this.entry});
 
   @override
   Widget build(BuildContext context) {
     AppState state = Provider.of<AppState>(context, listen: false);
-    Source source = state.sources.getSource(entry.sourceId);
+    Source? source = state.sources.getSource(entry.sourceId);
     analytics.logViewItem(
       items: [
         AnalyticsEventItem(
@@ -30,7 +28,9 @@ class CultureDetails extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           entry.titleOriginal,
-          style: GoogleFonts.fredokaOne(),
+          style: const TextStyle(
+                      fontFamily: 'FredokaOne'
+                    )
         ),
       ),
       body: ListView(
@@ -38,41 +38,41 @@ class CultureDetails extends StatelessWidget {
           ListTile(
             title: Text('Texto en ${state.language}'),
             subtitle: Text('Toca para abrir ${entry.titleOriginal}'),
-            trailing: Icon(Icons.launch),
+            trailing: const Icon(Icons.launch),
             onTap: () {
               Navigator.of(context).pop();
               openDoc(context, entry.linkOriginal, entry);
             },
           ),
           ListTile(
-            title: Text('Traducción al español'),
+            title: const Text('Traducción al español'),
             subtitle: Text('Toca para abrir ${entry.titleTranslated}'),
-            trailing: Icon(Icons.launch),
+            trailing: const Icon(Icons.launch),
             onTap: () {
               Navigator.of(context).pop();
               openDoc(context, entry.linkTranslated, entry);
             },
           ),
           ListTile(
-            title: Text('Categoría'),
-            subtitle: Text(entry?.category ?? 'Ninguna'),
+            title: const Text('Categoría'),
+            subtitle: Text(entry.category),
           ),
           ListTile(
-            title: Text('Autor'),
+            title: const Text('Autor'),
             subtitle: Text(source?.author ?? 'Desconocido'),
           ),
           ListTile(
-            title: Text('Fuente'),
+            title: const Text('Fuente'),
             subtitle: Text(source?.name ?? 'Desconocida'),
           ),
           ListTile(
-            title: Text('Región'),
+            title: const Text('Región'),
             subtitle: Text(source?.region ?? 'Desconocida'),
           ),
           ListTile(
-            title: Text('Etiquetas'),
+            title: const Text('Etiquetas'),
             subtitle: Text(
-              '${entry.tags?.join(', ') ?? 'Ninguna'}',
+              entry.tags.join(', '),
             ),
           ),
         ],

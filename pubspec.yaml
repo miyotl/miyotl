@@ -1,6 +1,5 @@
 name: miyotl
-description: Miyotl
-
+description: "A new Flutter project."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
@@ -12,13 +11,15 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # build by specifying --build-name and --build-number, respectively.
 # In Android, build-name is used as versionName while build-number used as versionCode.
 # Read more about Android versioning at https://developer.android.com/studio/publish/versioning
-# In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
+# In iOS, build-name is used as CFBundleShortVersionString while build-number is used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.0.7+4009
+# In Windows, build-name is used as the major, minor, and patch parts
+# of the product and file versions while build-number is used as the build suffix.
+version: 1.0.0+1
 
 environment:
-  sdk: ">=2.11.0 <3.0.0"
+  sdk: '>=3.3.0 <4.0.0'
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -34,37 +35,37 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
-  http: ^0.13.4
+  http: ^1.2.1
   provider: ^6.0.3
-  share_plus: ^4.0.5
+  share_plus: ^7.2.2
   shared_preferences: ^2.0.15
-  flutter_inappwebview: ^5.4.3+7
-  liquid_swipe: ^2.1.1
+  flutter_inappwebview: ^6.0.0
+  liquid_swipe: ^3.1.0
   cached_network_image: ^3.2.1
   flutter_signin_button: ^2.0.0
-  google_sign_in: ^5.3.2
-  uuid: ^3.0.6
-  google_fonts: ^3.0.1
+  google_sign_in: ^6.2.1
+  uuid: ^4.3.3
+  google_fonts: ^6.1.0
   path_provider: ^2.0.10
   auto_size_text: ^3.0.0
   settings_ui: ^2.0.2
   flutter_json_viewer: ^1.0.1
-  sentry_flutter: ^6.5.1
-  firebase_core: ^1.17.1
-  firebase_analytics: ^9.1.9
-  firebase_auth: ^3.3.19
+  sentry_flutter: ^7.16.1
+  firebase_core: ^2.24.2
+  firebase_analytics: ^10.8.0
+  firebase_auth: ^4.16.0
   #cloud_firestore: ^3.1.17
   url_launcher: ^6.1.2
-  flutter_facebook_auth: ^4.3.4
-  google_api_availability: ^3.0.1
-  ionicons: ^0.1.2
+  flutter_facebook_auth: ^6.1.0
+  google_api_availability: ^5.0.0
+  ionicons: ^0.2.2
   video_player: ^2.4.2
   system_settings: ^2.1.0
-  package_info_plus: ^1.4.2
-  sign_in_with_apple: ^4.0.0
+  package_info_plus: ^4.2.0
+  sign_in_with_apple: ^5.0.0
   crypto: ^3.0.1
-  flutter_platform_widgets: ^1.20.0
-  firebase_messaging: ^11.4.1
+  flutter_platform_widgets: ^6.1.0
+  firebase_messaging: ^14.7.10
 
 dev_dependencies:
   flutter_test:
@@ -75,7 +76,7 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^2.0.0
+  flutter_lints: ^3.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

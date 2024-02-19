@@ -1,7 +1,4 @@
-// @dart=2.9
-
 import 'dart:io';
-
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +17,7 @@ import 'package:sentry/sentry.dart';
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({
-    Key key,
+    key,
   }) : super(key: key);
 
   @override
@@ -36,10 +33,10 @@ class AppDrawer extends StatelessWidget {
                 builder: (context, account, child) {
                   return UserAccountsDrawerHeader(
                     accountName: Text(
-                      '${account.displayName ?? ''}',
-                      style: GoogleFonts.fredokaOne(),
+                      account.displayName ?? '',
+                      style: const TextStyle(fontFamily: 'FredokaOne'),
                     ),
-                    accountEmail: Text('${account.email ?? ''}'),
+                    accountEmail: Text(account.email ?? ''),
                     currentAccountPicture: CircleAvatar(
                       foregroundImage: account.profilePic,
                       // TODO: edit Theme directly for this and don't hardcode
@@ -51,17 +48,17 @@ class AppDrawer extends StatelessWidget {
                         account.getInitials(),
 
                         /// TODO: make it nicer-looking, probably like the Apple one
-                        style: GoogleFonts.fredokaOne(
-                          color: Colors.white,
-                          fontSize: 30,
-                        ),
+                        style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 30,
+                            fontFamily: 'FredokaOne'),
                         wrapWords: false,
                       ),
                     ),
                     decoration: BoxDecoration(
                       color: Theme.of(context).brightness == Brightness.dark
                           ? Theme.of(context).primaryColor
-                          : Theme.of(context).accentColor,
+                          : Theme.of(context).colorScheme.secondary,
                     ),
                   );
                 },
@@ -69,7 +66,7 @@ class AppDrawer extends StatelessWidget {
               ListTile(
                 leading: Icon(
                     Platform.isIOS ? CupertinoIcons.globe : Icons.language),
-                title: Text('Cambiar idioma'),
+                title: const Text('Cambiar idioma'),
                 onTap: () {
                   Navigator.of(context).push(MaterialPageRoute(
                     builder: (context) => Scaffold(
@@ -88,14 +85,14 @@ class AppDrawer extends StatelessWidget {
                 builder: (context, state, widget) => ListTile(
                   leading: Icon(
                       Platform.isIOS ? CupertinoIcons.refresh : Icons.update),
-                  title: Text('Actualizar base de datos'),
+                  title: const Text('Actualizar base de datos'),
                   subtitle: FutureBuilder(
                     future: state.lastUpdate,
                     builder: (context, snapshot) {
                       if (snapshot.hasData) {
                         return Text('Últ. act: ${snapshot.data}');
                       } else {
-                        return Text('');
+                        return const Text('');
                       }
                     },
                   ),
@@ -149,7 +146,7 @@ class AppDrawer extends StatelessWidget {
               ),
               ListTile(
                 leading: Icon(PlatformIcons(context).settings),
-                title: Text('Ajustes'),
+                title: const Text('Ajustes'),
                 onTap: () {
                   analytics.logEvent(name: 'open_settings');
                   Navigator.of(context).pushNamed('/settings');
@@ -157,7 +154,7 @@ class AppDrawer extends StatelessWidget {
               ),
               ListTile(
                 leading: Icon(PlatformIcons(context).share),
-                title: Text('Compartir aplicación'),
+                title: const Text('Compartir aplicación'),
                 onTap: () {
                   analytics.logShare(
                       contentType: 'invite', itemId: 'app', method: 'drawer');
@@ -169,7 +166,7 @@ class AppDrawer extends StatelessWidget {
                 leading: Icon(Platform.isIOS
                     ? CupertinoIcons.exclamationmark_bubble
                     : Icons.feedback),
-                title: Text('Enviar retroalimentación'),
+                title: const Text('Enviar retroalimentación'),
                 onTap: () {
                   analytics.logEvent(
                       name: 'contact', parameters: {'source': 'drawer'});
@@ -181,12 +178,12 @@ class AppDrawer extends StatelessWidget {
               ),
               ListTile(
                 leading: Icon(PlatformIcons(context).info),
-                title: Text('Acerca de'),
+                title: const Text('Acerca de'),
                 onTap: () {
                   analytics.logEvent(name: 'open_about');
                   showAboutDialog(
                     context: context,
-                    applicationIcon: CircleAvatar(
+                    applicationIcon: const CircleAvatar(
                       backgroundImage: AssetImage('img/icon-full-new.png'),
                       backgroundColor: Colors.white,
                     ),
@@ -198,8 +195,8 @@ class AppDrawer extends StatelessWidget {
                     applicationVersion: 'versión inicial',
                     children: [
                       ListTile(
-                        leading: Icon(Icons.people),
-                        title: Text('Ver créditos'),
+                        leading: const Icon(Icons.people),
+                        title: const Text('Ver créditos'),
                         onTap: () {
                           analytics.logEvent(name: 'view_credits');
                           launchUrl(
@@ -210,24 +207,24 @@ class AppDrawer extends StatelessWidget {
                         },
                       ),
                       ListTile(
-                        leading: Icon(Ionicons.logo_facebook),
-                        title: Text('Síguenos en Facebook'),
+                        leading: const Icon(Ionicons.logo_facebook),
+                        title: const Text('Síguenos en Facebook'),
                         onTap: () {
                           analytics.logEvent(name: 'view_facebook');
                           launchUrl(Uri.parse('https://fb.me/MiyotlApp'));
                         },
                       ),
                       ListTile(
-                        leading: Icon(Ionicons.logo_twitter),
-                        title: Text('Síguenos en Twitter'),
+                        leading: const Icon(Ionicons.logo_twitter),
+                        title: const Text('Síguenos en Twitter'),
                         onTap: () {
                           analytics.logEvent(name: 'view_twitter');
                           launchUrl(Uri.parse('https://twitter.com/MiyotlApp'));
                         },
                       ),
                       ListTile(
-                        leading: Icon(Icons.email),
-                        title: Text('Mándanos un correo'),
+                        leading: const Icon(Icons.email),
+                        title: const Text('Mándanos un correo'),
                         onTap: () {
                           analytics.logEvent(
                               name: 'contact', parameters: {'source': 'about'});
@@ -236,8 +233,8 @@ class AppDrawer extends StatelessWidget {
                         },
                       ),
                       ListTile(
-                        leading: Icon(Ionicons.logo_github),
-                        title: Text('Colabora en GitHub'),
+                        leading: const Icon(Ionicons.logo_github),
+                        title: const Text('Colabora en GitHub'),
                         onTap: () {
                           analytics.logEvent(name: 'view_github');
                           launchUrl(

@@ -1,5 +1,3 @@
-// @dart=2.9
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -7,14 +5,14 @@ import '../models/app_state.dart';
 import 'word_details.dart';
 
 ListTile buildListTile(
-    {DictionaryEntry entry, LookupMode mode, BuildContext context}) {
+    {required DictionaryEntry entry, required LookupMode mode, required BuildContext context}) {
   String title, subtitle;
   if (mode == LookupMode.languageToSpanish) {
-    title = '${entry.originalWord}';
-    subtitle = '${entry.translatedWord}';
+    title = entry.originalWord;
+    subtitle = entry.translatedWord;
   } else {
-    title = '${entry.translatedWord}';
-    subtitle = '${entry.originalWord}';
+    title = entry.translatedWord;
+    subtitle = entry.originalWord;
   }
   return ListTile(
     title: Text(title),
@@ -48,7 +46,7 @@ class DictionaryPage extends StatelessWidget {
       children: <Widget>[
         Container(
           width: double.infinity,
-          padding: EdgeInsets.all(14),
+          padding: const EdgeInsets.all(14),
           child: Consumer<AppState>(
             builder: (context, state, child) =>
                 CupertinoSlidingSegmentedControl<LookupMode>(
@@ -65,7 +63,7 @@ class DictionaryPage extends StatelessWidget {
                 );
                 analytics.setUserProperty(
                     name: 'dictionaryMode', value: '$newMode');
-                state.changeLookupMode(newMode);
+                state.changeLookupMode(newMode!);
               },
               groupValue: state.lookupMode,
             ),
@@ -74,14 +72,14 @@ class DictionaryPage extends StatelessWidget {
         Consumer<AppState>(
           builder: (context, state, child) => Expanded(
             child: state.loading
-                ? Center(
+                ? const Center(
                     child: CircularProgressIndicator(),
                   )
                 : WordList(
-                    itemCount: state.dictionary.entries.length,
+                    itemCount: state.dictionary!.entries.length,
                     itemBuilder: (context, index) {
                       return buildListTile(
-                        entry: state.dictionary.entries[index],
+                        entry: state.dictionary!.entries[index],
                         mode: state.lookupMode,
                         context: context,
                       );
@@ -98,14 +96,14 @@ class WordList extends StatelessWidget {
   final IndexedWidgetBuilder itemBuilder;
 
   const WordList({
-    this.itemCount,
-    this.itemBuilder,
+    required this.itemCount,
+    required this.itemBuilder,
   });
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      padding: EdgeInsets.only(
+      padding: const EdgeInsets.only(
         left: 14,
         right: 14,
         bottom: 14,

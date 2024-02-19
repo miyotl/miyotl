@@ -1,4 +1,4 @@
-// @dart=2.9
+// ignore_for_file: unnecessary_null_comparison
 
 import 'dart:io';
 
@@ -17,15 +17,17 @@ import 'package:system_settings/system_settings.dart';
 import 'package:cupertino_icons/cupertino_icons.dart';
 
 class SettingsPage extends StatelessWidget {
-  const SettingsPage({Key key}) : super(key: key);
+  const SettingsPage({required key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Ajustes',
-          style: GoogleFonts.fredokaOne(),
+          style: TextStyle(
+                      fontFamily: 'FredokaOne'
+                    )
         ),
       ),
       body: Padding(
@@ -60,7 +62,7 @@ class SettingsPage extends StatelessWidget {
                                     value: value,
                                     groupValue: settings.theme,
                                     onChanged: (value) {
-                                      settings.theme = value;
+                                      settings.theme = value!;
                                       analytics.setUserProperty(
                                           name: 'theme',
                                           value: '${settings.theme}');
@@ -101,7 +103,7 @@ class SettingsPage extends StatelessWidget {
                                   onChanged: (value) {
                                     analytics.setUserProperty(
                                         name: 'ux', value: 'ios');
-                                    settings.useIOSStyle = value;
+                                    settings.useIOSStyle = value!;
                                     Navigator.of(context).pop();
                                   },
                                 ),
@@ -112,7 +114,7 @@ class SettingsPage extends StatelessWidget {
                                   onChanged: (value) {
                                     analytics.setUserProperty(
                                         name: 'ux', value: 'android');
-                                    settings.useIOSStyle = value;
+                                    settings.useIOSStyle = value!;
                                     Navigator.of(context).pop();
                                   },
                                 ),
@@ -152,7 +154,7 @@ class SettingsPage extends StatelessWidget {
                           builder: (context) => Scaffold(
                             body: SignInPage(onSignIn: () {
                               Navigator.of(context).pop();
-                            }),
+                            },),
                           ),
                         ),
                       );

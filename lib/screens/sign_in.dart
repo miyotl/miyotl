@@ -1,5 +1,3 @@
-// @dart=2.9
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
@@ -16,7 +14,6 @@ import 'package:miyotl/widgets/status_bar_colors.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:sentry/sentry.dart';
 
 class SignInPage extends StatelessWidget {
@@ -24,12 +21,12 @@ class SignInPage extends StatelessWidget {
 
   final Future<FirebaseApp> _initialization = Firebase.initializeApp();
 
-  SignInPage({Key key, @required this.onSignIn}) : super(key: key);
+  SignInPage({super.key, required this.onSignIn,});
 
   void doSignIn(BuildContext context, SignInFunction signInFunction) async {
     /// Log out first
     try {
-      UserAccount.instance.logOut();
+      UserAccount.instance?.logOut();
     } catch (e) {
       /// Don't do anything on exception, continue sign in
     }
@@ -56,7 +53,7 @@ class SignInPage extends StatelessWidget {
           ),
         );
       } else {
-        await UserAccount.instance.cacheUserAccount();
+        await UserAccount.instance?.cacheUserAccount();
         onSignIn();
       }
     } on PlatformException catch (e) {
@@ -96,18 +93,17 @@ class SignInPage extends StatelessWidget {
             context: context,
             builder: (context) => PlatformAlertDialog(
               title: Text(e.code),
-              content: Text(e.message),
+              content: Text(e.message!),
             ),
           );
           rethrow;
       }
     } on FirebaseAuthException catch (e) {
       switch (e.code) {
-
         /// TODO: link accounts.
         case 'account-exists-with-different-credential':
           // Pretend nothing happened
-          await UserAccount.instance.cacheUserAccount();
+          await UserAccount.instance?.cacheUserAccount();
           onSignIn();
           break;
         default:
@@ -191,11 +187,12 @@ class SignInPage extends StatelessWidget {
                           width: MediaQuery.of(context).size.width * 1.75,
                           child: Column(
                             children: [
-                              Text(
+                              const Text(
                                 'Inicia sesión o crea una cuenta',
-                                style: GoogleFonts.fredokaOne().copyWith(
+                                style: TextStyle(
                                   fontSize: 32,
                                   color: Colors.white,
+                                  fontFamily: 'FredokaOne'
                                 ),
                                 textAlign: TextAlign.center,
                               ),
@@ -251,7 +248,7 @@ class SignInPage extends StatelessWidget {
                           Buttons.Google,
                           text: 'Inicia sesión con Google',
                           onPressed: () =>
-                              doSignIn(context, SignInMethods.google),
+                              doSignIn(context, SignInMethods.google() as SignInFunction),
                         ),
                       ),
                       Padding(
@@ -260,7 +257,7 @@ class SignInPage extends StatelessWidget {
                           Buttons.Facebook,
                           text: 'Inicia sesión con Facebook',
                           onPressed: () =>
-                              doSignIn(context, SignInMethods.facebook),
+                              doSignIn(context, SignInMethods.facebook() as SignInFunction),
                         ),
                       ),
                       SignInButtonBuilder(
@@ -279,7 +276,7 @@ class SignInPage extends StatelessWidget {
                                   child: const Text('Sí, estoy seguro'),
                                   onPressed: () {
                                     Navigator.of(context).pop();
-                                    doSignIn(context, SignInMethods.anonymous);
+                                    doSignIn(context, SignInMethods.anonymous() as SignInFunction );
                                   },
                                 ),
                                 PlatformDialogAction(

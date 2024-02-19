@@ -1,5 +1,3 @@
-// @dart=2.9
-
 import 'package:google_api_availability/google_api_availability.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -33,9 +31,11 @@ class GoogleApiAvailabilityPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Servicios de Google',
-          style: GoogleFonts.fredokaOne(),
+          style: TextStyle(
+                      fontFamily: 'FredokaOne'
+                    )
         ),
       ),
       body: Center(
@@ -50,9 +50,9 @@ class GoogleApiAvailabilityPage extends StatelessWidget {
                 children: [
                   Text(
                     '$availability',
-                    style: Theme.of(context).textTheme.headline6,
+                    style: Theme.of(context).textTheme.titleLarge,
                   ),
-                  Text(googleAvailabilityDescription(availability)),
+                  Text(googleAvailabilityDescription(availability!)),
                 ],
               );
             } else if (snapshot.hasError) {

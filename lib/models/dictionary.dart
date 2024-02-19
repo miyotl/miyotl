@@ -1,5 +1,3 @@
-// @dart=2.9
-
 enum LookupMode { languageToSpanish, spanishToLanguage }
 
 class Source {
@@ -27,14 +25,14 @@ class Sources {
     }
   }
 
-  Source getSource(String id) => _sources[id];
+  Source? getSource(String id) => _sources[id];
 }
 
 class Variant {
   final String word;
   final String sourceId;
 
-  const Variant({this.word, this.sourceId});
+  const Variant({required this.word, required this.sourceId});
 }
 
 class DictionaryEntry {
@@ -54,15 +52,15 @@ class DictionaryEntry {
   static const max_variants = 4;
 
   const DictionaryEntry({
-    this.sourceId,
-    this.originalWord,
-    this.translatedWord,
-    this.partOfSpeech,
-    this.category,
-    this.originalExample,
-    this.translatedExample,
-    this.ipa,
-    this.variants,
+    required this.sourceId,
+    required this.originalWord,
+    required this.translatedWord,
+    required this.partOfSpeech,
+    required this.category,
+    required this.originalExample,
+    required this.translatedExample,
+    required this.ipa,
+    required this.variants,
   });
 
   factory DictionaryEntry.fromJson(dynamic json) {

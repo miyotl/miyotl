@@ -1,5 +1,3 @@
-// @dart=2.9
-
 import 'package:flutter/material.dart';
 import 'package:miyotl/models/app_state.dart';
 import 'package:miyotl/screens/home.dart';
@@ -21,11 +19,11 @@ class OnboardingPage extends StatefulWidget {
 }
 
 class _OnboardingPageState extends State<OnboardingPage> {
-  LiquidController controller;
+  late LiquidController controller;
 
-  String _name;
+  late String _name;
 
-  GooglePlayServicesAvailability googleServicesAvailability;
+  late GooglePlayServicesAvailability googleServicesAvailability;
 
   @override
   void initState() {
@@ -53,6 +51,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
             child: LightStatusBar(
               child: Container(
                 alignment: Alignment.center,
+                color: Colors.white,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -61,15 +60,16 @@ class _OnboardingPageState extends State<OnboardingPage> {
                       'img/icon-round-new-outline.png',
                       width: MediaQuery.of(context).size.width * 0.66,
                     ),
-                    SizedBox(height: 16),
+                    const SizedBox(height: 16),
                     Text(
                       'Miyotl',
-                      style: GoogleFonts.fredokaOne().copyWith(
+                      style: TextStyle(
+                        fontFamily: 'FredokaOne',
                         fontSize: 64,
                         color: AppColors.azulMorado,
                       ),
                     ),
-                    SizedBox(height: 16),
+                    const SizedBox(height: 16),
                     SizedBox(
                       width: MediaQuery.of(context).size.width * 0.75,
                       child: Text(
@@ -81,14 +81,14 @@ class _OnboardingPageState extends State<OnboardingPage> {
                         textAlign: TextAlign.center,
                       ),
                     ),
-                    SizedBox(height: 16),
+                    const SizedBox(height: 16),
                     ElevatedButton(
                       child: Text(
                         'Empieza ahora',
                         style: Theme.of(context)
                             .textTheme
-                            .button
-                            .copyWith(color: Colors.white),
+                            .labelLarge
+                            ?.copyWith(color: Colors.white),
                       ),
                       onPressed: () async {
                         googleServicesAvailability = await GoogleApiAvailability
@@ -101,7 +101,6 @@ class _OnboardingPageState extends State<OnboardingPage> {
                     ),
                   ],
                 ),
-                color: Colors.white,
               ),
             ),
           ),
@@ -112,7 +111,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
           SignInPage(
             onSignIn: () {
               setState(() {
-                _name = UserAccount.instance.displayName;
+                _name = UserAccount.instance!.displayName;
               });
               nextPage();
             },
@@ -137,6 +136,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
             child: LightStatusBar(
               child: Container(
                 alignment: Alignment.center,
+                color: Colors.white,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -145,18 +145,19 @@ class _OnboardingPageState extends State<OnboardingPage> {
                       'img/axolotl-hi.png',
                       width: MediaQuery.of(context).size.width * 0.66,
                     ),
-                    SizedBox(height: 16),
+                    const SizedBox(height: 16),
                     Padding(
-                      padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
+                      padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
                       child: Text(
                         '${(_name == null || _name == 'Ajolote anónimo') ? '¡Listo!' : 'Listo, ' + _name.split(' ')[0]}',
-                        style: GoogleFonts.fredokaOne().copyWith(
+                        style: TextStyle(
                           fontSize: 48,
                           color: AppColors.morado,
+                          fontFamily: 'FredokaOne'
                         ),
                       ),
                     ),
-                    SizedBox(height: 16),
+                    const SizedBox(height: 16),
                     SizedBox(
                       width: MediaQuery.of(context).size.width * 0.75,
                       child: Text(
@@ -168,14 +169,14 @@ class _OnboardingPageState extends State<OnboardingPage> {
                         textAlign: TextAlign.center,
                       ),
                     ),
-                    SizedBox(height: 16),
+                    const SizedBox(height: 16),
                     ElevatedButton(
                       child: Text(
                         'Comenzar',
                         style: Theme.of(context)
                             .textTheme
-                            .button
-                            .copyWith(color: Colors.white),
+                            .labelLarge
+                            ?.copyWith(color: Colors.white),
                       ),
                       onPressed: () {
                         /// TODO: There is no animation, one would be nice, like a round one
@@ -197,7 +198,6 @@ class _OnboardingPageState extends State<OnboardingPage> {
                     ),
                   ],
                 ),
-                color: Colors.white,
               ),
             ),
           ),

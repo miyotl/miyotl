@@ -1,5 +1,3 @@
-// @dart=2.9
-
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
@@ -63,7 +61,7 @@ class AppColors {
 ThemeData dark_theme = ThemeData(
   visualDensity: VisualDensity.adaptivePlatformDensity,
   brightness: Brightness.dark,
-  accentColor: AppColors.azulClaro,
+  hintColor: AppColors.azulClaro,
   primaryColor: AppColors.lightPink,
   primarySwatch: Colors.pink,
 
@@ -89,12 +87,11 @@ ThemeData new_light_theme = ThemeData(
   visualDensity: VisualDensity.adaptivePlatformDensity,
   primarySwatch: Colors.pink,
   primaryColor: AppColors.rosa,
-  accentColor: AppColors.azulMorado,
+  hintColor: AppColors.azulMorado,
   bottomNavigationBarTheme: BottomNavigationBarThemeData(
     selectedItemColor: AppColors.azulMorado,
     // backgroundColor: AppColors.amarillo,
   ),
-  selectedRowColor: AppColors.rosa,
 );
 // ThemeData light_theme = ThemeData(
 //   visualDensity: VisualDensity.adaptivePlatformDensity,

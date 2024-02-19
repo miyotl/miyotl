@@ -1,5 +1,3 @@
-// @dart=2.9
-
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
@@ -26,14 +24,14 @@ class GoogleDocPreview extends StatefulWidget {
   final String title;
   final CultureEntry entry;
 
-  GoogleDocPreview({this.url, this.title, this.entry});
+  const GoogleDocPreview({super.key, required this.url, required this.title, required this.entry});
 
   @override
   _GoogleDocPreviewState createState() => _GoogleDocPreviewState();
 }
 
 class _GoogleDocPreviewState extends State<GoogleDocPreview> {
-  InAppWebViewController webView;
+  late InAppWebViewController webView;
   String url = '';
   double progress = 0;
   String title = '';
@@ -71,7 +69,7 @@ class _GoogleDocPreviewState extends State<GoogleDocPreview> {
     return Expanded(
       child: Container(
         child: InAppWebView(
-          initialUrlRequest: URLRequest(url: Uri.parse(url)),
+          initialUrlRequest: URLRequest(url: WebUri(url)),
           onWebViewCreated: (InAppWebViewController controller) {
             webView = controller;
             //webView.clearCache();
@@ -98,7 +96,7 @@ class _GoogleDocPreviewState extends State<GoogleDocPreview> {
           onTitleChanged: (controller, title) {
             setState(() {
               print(title);
-              this.title = title;
+              this.title = title!;
             });
           },
         ),
@@ -121,11 +119,13 @@ class _GoogleDocPreviewState extends State<GoogleDocPreview> {
       appBar: AppBar(
         title: Text(
           title,
-          style: GoogleFonts.fredokaOne(),
+          style: const TextStyle(
+                      fontFamily: 'FredokaOne'
+                    )
         ),
         actions: [
           IconButton(
-            icon: Icon(Icons.more_horiz),
+            icon: const Icon(Icons.more_horiz),
             onPressed: () {
               Navigator.of(context).pop();
               Navigator.of(context).push(

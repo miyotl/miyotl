@@ -1,5 +1,3 @@
-// @dart=2.9
-
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
@@ -31,22 +29,23 @@ class _HomePageState extends State<HomePage> {
           if (snapshot.hasError) {
             return Scaffold(
               appBar: AppBar(
-                title: Text(
-                  'Error',
-                  style: GoogleFonts.fredokaOne(),
-                ),
+                title: const Text('Error',
+                    style: TextStyle(fontFamily: 'FredokaOne')),
               ),
-              body: EmptyState('Error: ${snapshot.error}'),
+              body: EmptyState(
+                'Error: ${snapshot.error}',
+                'img/axolotl-gears.gif',
+              ),
             );
           } else if (snapshot.hasData) {
             return Scaffold(
-              drawer: AppDrawer(),
+              drawer: const AppDrawer(),
               appBar: AppBar(
                 title: Consumer<AppState>(
                   builder: (context, state, child) {
                     return AutoSizeText(
                       '$app_name: ${state.languageName}',
-                      style: GoogleFonts.fredokaOne(),
+                      style: const TextStyle(fontFamily: 'FredokaOne'),
                       maxLines: 1,
                     );
                   },
@@ -67,7 +66,7 @@ class _HomePageState extends State<HomePage> {
               ),
               body: [LearnPage(), DictionaryPage(), CulturePage()][page],
               bottomNavigationBar: BottomNavigationBar(
-                items: [
+                items: const [
                   BottomNavigationBarItem(
                     icon: Icon(Icons.school),
                     label: 'Aprende',

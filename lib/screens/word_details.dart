@@ -1,5 +1,3 @@
-// @dart=2.9
-
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
@@ -11,12 +9,12 @@ import 'package:share_plus/share_plus.dart';
 
 class WordDetails extends StatelessWidget {
   final DictionaryEntry entry;
-  WordDetails({Key key, @required this.entry}) : super(key: key);
+  const WordDetails({required this.entry});
 
   @override
   Widget build(BuildContext context) {
     AppState state = Provider.of<AppState>(context);
-    Source source = state.sources.getSource(entry.sourceId);
+    Source? source = state.sources.getSource(entry.sourceId);
     analytics.logViewItem(
       items: [
         AnalyticsEventItem(
@@ -31,7 +29,9 @@ class WordDetails extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           'Detalles de ${entry.originalWord}',
-          style: GoogleFonts.fredokaOne(),
+          style: const TextStyle(
+                      fontFamily: 'FredokaOne'
+                    )
         ),
         actions: <Widget>[
           IconButton(
@@ -40,7 +40,7 @@ class WordDetails extends StatelessWidget {
             onPressed: () {
               Share.share('''*${entry.originalWord} (en ${state.language})*
 ${entry.translatedWord}
-(Fuente: ${source.author} de ${source.region})
+(Fuente: ${source?.author} de ${source?.region})
 
 Compartido desde Miyotl. Descárgalo en miyotl.org''');
             },
@@ -52,31 +52,31 @@ Compartido desde Miyotl. Descárgalo en miyotl.org''');
           ListTile(
             title:
                 Text('Palabra en ${Provider.of<AppState>(context).language}'),
-            subtitle: Text('${entry.originalWord}'),
+            subtitle: Text(entry.originalWord),
           ),
           ListTile(
-            title: Text('Palabra en español'),
-            subtitle: Text('${entry.translatedWord}'),
+            title: const Text('Palabra en español'),
+            subtitle: Text(entry.translatedWord),
           ),
           if (entry.ipa != null)
             ListTile(
-              title: Text('Pronunciación'),
+              title: const Text('Pronunciación'),
               subtitle: Text(entry.ipa),
             ),
           if (entry.originalExample != null)
             ListTile(
-                title: Text('Ejemplo'), subtitle: Text(entry.originalExample)),
+                title: const Text('Ejemplo'), subtitle: Text(entry.originalExample)),
           if (entry.translatedExample != null)
             ListTile(
-              title: Text('Traducción del ejemplo'),
+              title: const Text('Traducción del ejemplo'),
               subtitle: Text(entry.translatedExample),
             ),
           for (Variant variant in entry.variants)
             ListTile(
               title: Text('Variante: ${variant.word}'),
               subtitle:
-                  Text('${state.sources.getSource(variant.sourceId).region}'),
-              trailing: Icon(Icons.keyboard_arrow_right),
+                  Text('${state.sources.getSource(variant.sourceId)?.region}'),
+              trailing: const Icon(Icons.keyboard_arrow_right),
               onTap: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(
@@ -89,15 +89,15 @@ Compartido desde Miyotl. Descárgalo en miyotl.org''');
               },
             ),
           ListTile(
-            title: Text('Autor'),
+            title: const Text('Autor'),
             subtitle: Text(source?.author ?? 'Desconocido'),
           ),
           ListTile(
-            title: Text('Fuente'),
+            title: const Text('Fuente'),
             subtitle: Text(source?.name ?? 'Desconocida'),
           ),
           ListTile(
-            title: Text('Región'),
+            title: const Text('Región'),
             subtitle: Text(source?.region ?? 'Desconocida'),
           ),
         ],
